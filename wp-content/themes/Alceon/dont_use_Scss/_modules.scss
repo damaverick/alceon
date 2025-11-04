@@ -1,0 +1,147 @@
+
+
+.author-info {
+display: flex;
+align-items: flex-start;
+font-style: normal;
+font-weight: 400;
+font-size: .8rem;
+justify-content: center;
+}
+
+
+.border {
+border-right: 2px solid #111;
+margin: 0 10px;
+}
+
+
+.author-name {
+font-weight: bold;
+border-right: 1px solid #111;
+padding-right: 20px;
+color: #333;
+}
+
+
+
+ 
+
+
+.playbook-sidebar.sticky-top {
+   top:100px; 
+}
+
+
+
+.caprito-1 {
+    background: url(../img/recipe-1.png) center center no-repeat;
+}
+
+.caprito-2 {
+    background: url(../img/recipe-2.png) center center no-repeat;
+}
+
+.caprito-3 {
+    background: url(../img/recipe-3.png) center center no-repeat;
+}
+
+div[class*="caprito-"] {
+  background-size: cover;
+
+    @media (max-width:1200px) {
+        width:100%!Important;
+        // min-height:500px;
+
+        & + div {
+        width:100%!important;
+    } 
+
+
+   @media (max-width:1024px) {
+        min-height:500px;
+    } 
+        
+    }
+
+
+     @media (max-width:600px) {
+        min-height:350px;
+    }
+
+
+    
+}
+
+.main-menu {
+        max-width:780px;
+    width:100%;
+ 
+    margin:auto;
+
+ 
+    // @media (min-width:768px) {
+    //     li#menu-item-24 {
+    //     padding-right: 25px;
+    //     border-right: 1px solid #ffffff45;
+    //     }
+    // }
+
+
+
+
+
+  > ul  {
+            display:flex;
+    justify-content: space-between;
+        width:100%;
+
+    }
+.dropdown-menu {
+       @media (max-width:767px) {
+              background-color:transparent;
+           border:none;
+           }
+}
+ .dropdown-item.active, 
+    .dropdown-item:active {
+    color: #111;
+    background-color:transparent;
+}
+
+   > ul ul li {
+            display:flex;
+    justify-content: space-between;
+        width:100%;
+
+       a {
+           color:#111;
+            text-align:center;
+
+           @media (max-width:767px) {
+               color:#ccc;
+               text-align:center;
+               padding:0;
+           }
+       }
+    }
+
+
+ a {
+        color:#fff;
+        text-transform:uppercase;
+        letter-spacing:1.5px;
+        font-size:.8rem;
+
+        @media (max-width:767px) {
+            // font-size:1rem;
+            padding:1rem;
+            
+        }
+    }
+}
+
+
+.owl-theme .owl-nav {
+    display: none;
+}

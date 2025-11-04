@@ -1,0 +1,26 @@
+.actions {
+  border-top: 2px solid $lightGrey !important;
+
+  .action-row {
+    border-bottom: 2px solid $lightGrey !important;
+    padding-bottom: 2rem;
+    padding-bottom: 2rem;
+    padding-top: 1.5rem;
+  }
+  h3 {
+    color: $primaryColor;
+    margin-top: 0;
+  }
+
+  .btn {
+    color: $brightBlue;
+    border-color: $brightBlue;
+    min-width: rem(120);
+    text-decoration: none;
+
+    &:hover {
+      background: $brightBlue;
+      color: #fff;
+    }
+  }
+}

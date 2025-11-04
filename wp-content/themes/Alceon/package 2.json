@@ -1,0 +1,31 @@
+{
+  "name": "foundation-5.5.2-project",
+  "version": "1.0.0",
+  "description": "Foundation 5.5.2 project with Gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp": "gulp watch"
+  },
+  "keywords": [
+    "foundation",
+    "gulp",
+    "sass"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "responsive-video-poster": "^3.0.1",
+    "uuid": "^9.0.1"
+  },
+  "dependencies": {
+    "sass": "^1.72.0"
+  }
+}

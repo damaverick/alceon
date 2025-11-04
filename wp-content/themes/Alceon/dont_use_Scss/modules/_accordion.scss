@@ -1,0 +1,66 @@
+// ACCORDION
+
+ul.accordion {
+    margin-left: 0;
+    border-top: 1px solid $lGrey;
+
+}
+
+.accordion .accordion-navigation>a,
+.accordion dd>a {
+    position: relative;
+    padding-left: 45px;
+    /* Make space for the arrow */
+    background-color: #fff;
+    border-bottom: 1px solid $mGrey;
+    padding: .45rem 2rem .35rem;
+    font-family: $bodyCopy;
+    font-weight: 800;
+    font-size: 0.875rem;
+    background-color: #fff;
+
+    &::after {
+        // color: red;
+        position: absolute;
+        font-family: "FontAwesome";
+        top: 5px;
+        left: 15px;
+        content: "\f105";
+        font-size: 1.2em;
+    }
+
+
+
+    &:hover {
+        background-color: #fff;
+    }
+
+}
+
+.accordion dd.active a::after {
+    font-family: "FontAwesome";
+    top: 8px;
+    left: 12px;
+    content: "\f107";
+    font-size: 1.2em;
+
+
+}
+
+
+
+.accordion .accordion-navigation>.content.active,
+.accordion dd>.content.active {
+    background: $lGrey;
+    display: block;
+    font-size: 0.875rem;
+
+}
+
+
+
+
+.accordion .accordion-navigation.active>a,
+.accordion dd.active>a {
+    background-color: #fff;
+}

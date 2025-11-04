@@ -1,0 +1,78 @@
+/* Sass function for rem conversion
+  (You likely already have this in _helpers.scss or _variables.scss)
+
+  @function rem($pixels) {
+    @return ($pixels / 16) + rem;
+  }
+*/
+
+/* BLOCK: .section-feature
+  This is the main component container.
+*/
+.section-feature {
+  padding-top: 8rem;
+  padding-bottom: 4rem; // Default padding
+  position: relative;
+
+  /* BACKGROUND MODIFIER: --gradient
+  */
+  // &--gradient {
+  //   background:
+  //     linear-gradient(
+  //       278.74deg,
+  //       rgba(21, 92, 213, 0.8) 0%,
+  //       #155cd5 29.55%,
+  //       #155cd5 100%;
+  //     ),
+  //     linear-gradient(
+  //       93.66deg,
+  //       rgba(0, 55, 99, 0.42) 0%,
+  //       rgba(0, 55, 99, 0) 44.28%
+  //     );
+  // }
+
+  /* BACKGROUND MODIFIER: --flat-blue
+  */
+  &--flat-blue {
+    background-color: #005599; // Example flat color
+  }
+
+  /* LAYOUT MODIFIER: --overlap-bottom
+    This modifier adds padding and styles the child image.
+  */
+  &--overlap-bottom {
+    // Add extra padding to the *section* to make room
+    padding-bottom: 6rem; // rem(70) + extra space
+
+    &__img-wrap {
+      margin-bottom: -#{rem(180)};
+      @media (max-width:1200px) {
+        margin-bottom:0;
+      }
+    }
+    // When the section has this modifier, style the image element
+    .section-feature__image {
+      // Border radius: rem(50)
+      border-top-right-radius: rem(50);
+
+      // Overlap: rem(70)
+
+      // Stacking
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  /* ELEMENT: __image
+  */
+  &__image {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  /* ELEMENT: __content
+  */
+  &__content {
+    // Global styles for the content area
+  }
+}

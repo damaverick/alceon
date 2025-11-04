@@ -1,0 +1,126 @@
+.accordion--custom {
+  --accordion-icon-size: 18px;
+  --accordion-icon-color: #155cd5; // brand color
+
+  .accordion-item:first-of-type {
+    border-top: 2px solid rgba(17, 17, 17, 0.1);
+    margin-top: 3rem;
+    border-radius: 0;
+  }
+  .accordion-item,
+  .accordion-item:last-child {
+    border: none;
+    background: transparent;
+    margin-bottom: 0;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(17, 17, 17, 0.1);
+    padding:.5rem 0;
+
+    // Optional: remove the last divider if you don't want one at the bottom
+
+    .h4 {
+      margin-bottom: 0;
+      color: $primaryColor;
+      font-size: rem(30);
+    }
+
+    .accordion-header {
+      border: none; // remove Bootstrap default
+    }
+
+    .accordion-button {
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 1.5rem 0;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: inherit;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &:after {
+        display: none;
+      }
+
+      .accordion-icon {
+        position: relative;
+        width: var(--accordion-icon-size);
+        height: var(--accordion-icon-size);
+        flex-shrink: 0;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          background-color: var(--accordion-icon-color);
+          transition:
+            transform 0.25s ease,
+            background-color 0.25s ease;
+        }
+
+        &::before {
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          transform: translateY(-50%);
+        }
+
+        &::after {
+          top: 0;
+          left: 50%;
+          width: 2px;
+          height: 100%;
+          transform: translateX(-50%);
+        }
+      }
+
+      &[aria-expanded="true"] .accordion-icon::after {
+        transform: translateX(-50%) scaleY(0);
+      }
+
+      &:hover {
+        color: var(--accordion-icon-color);
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .accordion-body {
+      padding: 1rem 0 2rem 0;
+      // margin:.5rem 0 0 0;
+
+      .accordion-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      ul {
+        margin:1.5rem 0 2rem;
+      }
+
+      .accordion-text {
+        flex: 1 1 auto;
+
+        p {
+          font-size: 1rem;
+        
+          margin-bottom: 1.25rem;
+        }
+      }
+
+      .accordion-logo img {
+        max-width: 170px;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

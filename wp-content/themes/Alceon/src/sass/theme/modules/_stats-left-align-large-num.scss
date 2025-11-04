@@ -1,0 +1,43 @@
+.section--stats {
+  background: linear-gradient(135deg, #00457c 0%, #155cd5 50%, #0a2e5a 100%);
+  color: #fff;
+
+  .stat-item {
+    text-align: left;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+
+    &__number {
+      font-size: rem(62);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 0;
+      color: #fff;
+    }
+
+    &__text {
+      font-size: rem(18);
+      line-height: 1.5;
+      max-width: 260px;
+      color: #fff;
+      opacity: 0.9;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .stat-item {
+      margin-bottom: 2rem;
+
+      &__number {
+        font-size: rem(48);
+      }
+
+      &__text {
+        font-size: rem(16);
+      }
+    }
+  }
+}

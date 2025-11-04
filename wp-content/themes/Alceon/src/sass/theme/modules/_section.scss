@@ -1,0 +1,143 @@
+/* ============================================
+   Global section spacing
+   Targets any element with class starting with .section--
+   ============================================ */
+[class^="section--"],
+[class*=" section--"] {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+
+  > *:first-child {
+    margin-top: 0; // prevent double top space
+  }
+  > *:last-child {
+    margin-bottom: 0; // prevent double bottom space
+  }
+
+  [class*="col-"] {
+    > :first-child {
+      margin-top: 0 !important;
+    }
+    > :last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  @media (max-width: 1199.98px) {
+    // lg and below
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  @media (max-width: 991.98px) {
+    // md and below
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  @media (max-width: 767.98px) {
+    // sm and below
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  @media (max-width: 575.98px) {
+    // xs
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* ==========================================
+   Image Section (BEM)
+   ========================================== */
+
+.image-section {
+  position: relative;
+  width: 100%;
+  min-height: 60vh; // adjust as needed
+  overflow: hidden;
+
+  &__background {
+    position: absolute;
+    inset: 0;
+    background-image: url("../img/home-fw-banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+  }
+
+  &--full {
+    min-height: 100vh; // full viewport height
+  }
+
+  &--half {
+    min-height: rem(520); // full viewport height
+  }
+}
+
+.section--dark-blue {
+  background-color: $primaryColor;
+  color: #fff;
+}
+
+.section--gradient {
+  background:
+    linear-gradient(
+      278.74deg,
+      rgba(21, 92, 213, 0.8) 0,
+      #155cd5 29.55%,
+      #155cd5 100%
+    ),
+    linear-gradient(
+      93.66deg,
+      rgba(0, 55, 99, 0.42) 0,
+      rgba(0, 55, 99, 0) 44.28%
+    );
+}
+.img-txt-section {
+  p {
+    // max-width:425px;
+  }
+}
+.section--grey {
+  background: $greyBg;
+
+  .border-top {
+    border-color: $lightGrey !important;
+  }
+}
+
+.section--gradient-purple {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  h2 {
+    margin-bottom: 1rem;
+    max-width: unset;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+  background:
+    linear-gradient(0deg, #6961ff, #6961ff),
+    linear-gradient(273.55deg, rgba(0, 0, 0, 0) 46.82%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.section-feature--overlap-bottom + .section--white + .section--white {
+  margin-top: rem(-50);
+}
+
+.section--white + .section--white {
+  padding-top: 0 !important;
+}
+
+.section {
+  &--blog-hero {
+    // min-height: rem(350);
+    padding-top: 0 !important;
+    overflow:visible;
+       padding-bottom: 0 !important;
+  }
+}

@@ -1,0 +1,82 @@
+
+
+.navbar-logo {
+  height: 4.5rem; // ~40px
+  width: auto;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: #0d6efd; // Bootstrap primary blue or your brand color
+}
+
+/* Last menu item as a pill button */
+
+@media (min-width: 992px) {
+  body   .navbar-nav > li:last-child > a {
+    margin-left: 3rem; // ~48px separation
+    padding: 0.425rem 2rem; // 10px x 20px
+    background-color: $brightBlue;
+    color: #fff !important;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    text-transform: uppercase;
+    font-size: rem(14);
+
+    &:hover {
+      background-color: $primaryColor !important;
+    }
+  }
+}
+
+#menu-menu-1 {
+  background: rgb(9 12 14 / 15%);
+  background-blend-mode: multiply;
+  min-width:rem(800);
+
+  background-blend-mode: multiply;
+
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+}
+@media (min-width: 992px) {
+  body  .navbar-nav {
+    .nav-link {
+      font-size: 1rem;
+      font-weight: 500;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+      color: #fff;
+      margin: 0;
+      transition: color 0.3s ease;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: rem(100);
+      display: block;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        color: $white;
+        text-decoration: none;
+      }
+    }
+
+    > li:last-child > a:hover {
+      background-color: #0b5ed7;
+    }
+  }
+}
+body li.nav-item {
+  margin-bottom: 0 !important;
+  margin-right:rem(10);
+  &:last-child {
+    margin-right:0;
+    @media (max-width:991px) {
+      margin-left:0!important
+    }
+  }
+}

@@ -1,0 +1,170 @@
+.section--carousel {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(
+    (100vw - var(--bs-container-max-width, 1320px)) / -2 +
+      (var(--bs-gutter-x) * 0.5)
+  );
+  overflow: hidden;
+
+  .swiper {
+    width: 100%; 
+    overflow: hidden; // ✅ hide overflow slides
+    padding-left: calc((100vw - var(--bs-container-max-width, 1320px)) / 2);
+    padding-bottom: 3rem;
+  }
+
+  .swiper-wrapper {
+    display: flex;
+    flex-wrap: nowrap; // ✅ ensure slides stay in one row
+    padding-left: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+  }
+
+  .swiper-slide {
+    flex-shrink: 0; // ✅ prevent shrinking or wrapping
+    width: auto; // Swiper manages width automatically
+    max-width: 365px;
+    box-sizing: border-box;
+  }
+
+  .team-card {
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: none;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  .carousel-nav {
+    .carousel-button-prev,
+    .carousel-button-next {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #155cd5;
+      border-radius: 50%;
+      background: transparent;
+      color: #155cd5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #155cd5;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.team-card {
+  border: 1.75px solid hsla(0, 0%, 90%, 1);
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .card-img-top {
+    width: 100%;
+    height: 274px;
+    object-fit: cover;
+    border-bottom: 1.75px solid hsla(0, 0%, 90%, 1);
+    border-radius: 0;
+  }
+
+  .card-body {
+    padding: 1.5rem 0 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .card-title {
+      font-weight: 600;
+      font-style: SemiBold;
+      font-size: rem(18);
+      leading-trim: NONE;
+      line-height: rem(22);
+      letter-spacing: 0%;
+      color: $primaryColor;
+      padding-bottom: 0.125rem;
+    }
+
+    .card-text {
+      font-size:rem(18); 
+      color: $textColor;
+
+      margin-bottom: 1rem;
+    }
+
+    .card-more {
+      font-size: rem(18);
+      color: $textColor;
+      margin-bottom: 0.75rem;
+    }
+
+    .read-more-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid hsla(0, 0%, 90%, 1);
+      color: $textColor;
+      font-weight: 400;
+      padding: 0.75rem 0;
+      font-size:rem(18);
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+      margin-top: auto;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: darken(#155cd5, 10%);
+      }
+
+      .read-more-icon {
+        position: relative;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+
+        color: $primaryColor;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          background-color: $brightBlue;
+          transition: transform 0.25s ease;
+        }
+
+        &::before {
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          transform: translateY(-50%);
+        }
+
+        &::after {
+          top: 0;
+          left: 50%;
+          width: 2px;
+          height: 100%;
+          transform: translateX(-50%);
+        }
+      }
+
+      &[aria-expanded="true"] .read-more-icon::after {
+        transform: translateX(-50%) scaleY(0); // minus state
+      }
+    }
+  }
+}

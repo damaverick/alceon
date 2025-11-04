@@ -1,0 +1,88 @@
+
+
+ 
+
+
+.footer-logo {
+    width:240px;
+  
+
+    @media (max-width:767px) {
+      display:block;
+        margin: 0 auto 20px;
+        max-width:200px;
+    }
+    
+    img {
+    width:100%;
+    display:block;
+        max-width:250px;
+        display:block;
+    }
+
+    
+}
+
+.row>* {
+  
+    padding-right: 15px;
+    padding-left: 15px;
+ 
+}
+
+@media (max-width: 1024px) { /* Adjust breakpoint as needed */
+    .w-50-responsive-full { /* Give your specific element a unique class */
+        width: 100% !important;
+    }
+}
+
+ 
+ 
+
+.image-container {
+    position: relative; /* Needed for absolute positioning of the image */
+    overflow: hidden; /* Ensures the image doesn't overflow its container */
+}
+
+.bg-light.bg-img {
+    background-color: #ececec !important;
+
+        @media (max-width: 1024px) {
+        min-height: 550px;
+        }
+
+        @media (max-width: 1024px) {
+            min-height: 550px;
+        }
+        
+
+        @media (max-width: 767px) {
+         min-height: 450px;
+        }
+
+         @media (max-width: 650px) {
+         min-height: 350px;
+        }
+
+         @media (max-width: 450px) {
+         min-height: 300px;
+        }
+} 
+
+.page-template-template-wholesale {
+     .hero {
+           @media (max-width: 1024px) {
+            margin-top:-10px
+        }
+     }
+}
+
+.product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This is the key property! */
+    font-family: 'object-fit: cover;'; /* Fallback for IE (though not widely supported now) */
+}

@@ -1,0 +1,50 @@
+.section--performance-table {
+  .performance-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid $primaryColor;
+    margin-top: 2rem;
+
+    th,
+    td {
+      padding: 1rem 1.25rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    thead th {
+      font-weight: 600;
+      color: $primaryColor;
+      border-bottom: 2px solid $medGrey;
+      white-space: nowrap;
+      line-height:rem(22)
+    }
+
+    tbody tr {
+      border-bottom: 2px solid $medGrey;
+    }
+
+    tbody th {
+      text-align: left;
+      font-weight: 500;
+      color: #111;
+    }
+
+    tbody td {
+      font-size: 1rem;
+      color: #333;
+    }
+
+    @media (max-width: 767.98px) {
+      th,
+      td {
+        font-size: 0.875rem;
+        padding: 0.75rem;
+      }
+
+      thead th {
+        white-space: normal;
+      }
+    }
+  }
+}

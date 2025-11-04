@@ -1,0 +1,71 @@
+.section--icon-widgets {
+  .icon-widget {
+    position: relative;
+    display: flex;
+    justify-content: space-between; // text left, icon right
+    align-items: center; // vertically centered
+    padding: 2rem;
+    border-top-right-radius: 3.125rem; // rem(50)
+    color: #fff;
+    overflow: hidden;
+
+    // Text
+    &__text {
+      flex: 1;
+      color: #fff;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
+      max-width: 80%;
+    }
+
+    // Icon
+    &__icon {
+      flex-shrink: 0;
+      margin-left: 1.5rem;
+
+      img {
+        // width: 56px;
+        height: rem(57);
+        width:auto;
+        filter: brightness(0) invert(1); // ensures icon is white
+      }
+    }
+
+    // Background variants
+    &--blue {
+      background-color: #00457c;
+    }
+    &--lightblue {
+      background-color: #155cd5;
+    }
+    &--purple {
+      background-color: #6961ff;
+    }
+    &--violet {
+      background-color: #7049a7;
+    }
+    &--pac-blue {
+      background-color: #009de6;
+    }
+
+    &--bronze {
+      background-color: #b07d3d;
+    }
+
+    // Responsive
+    @media (max-width: 767.98px) {
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 1.5rem;
+
+      &__text {
+        max-width: 100%;
+      }
+
+      &__icon img {
+        width: 48px;
+      }
+    }
+  }
+}

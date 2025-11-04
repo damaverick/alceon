@@ -1,0 +1,33 @@
+$primaryColor: #AEB29F;
+$mBlue: #1F538D;
+$lBrown: rgb(192, 144, 87);
+$mBrown: #A17137;
+$dBrown: #A96F28;
+$lGrey: #F3F4F5;
+$mGrey:#ECEDEE;
+$heading-font: "kepler-std-display", serif;
+$body-font: "ff-din-paneuropean", sans-serif;
+
+
+.medium-font {
+font-family: "ff-din-paneuropean", sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+
+
+
+
+ 
+body,
+html {
+    font-size: 16px;
+    height: 100%;
+    font-family:$body-font, sans-serif;
+}
+
+
+.section--bg-txt-50 .bg-light,
+.section--bg-txt-50 .d-flex {
+display: flex;
+}

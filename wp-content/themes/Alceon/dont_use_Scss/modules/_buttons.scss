@@ -1,0 +1,57 @@
+body {
+
+
+    .widget_title, 
+    .btn__primary, 
+    .pagination a,
+    #url   {
+    font-family: "poleno", sans-serif!Important;
+    font-weight: 400!Important;
+    font-style: normal!Important;
+
+    }
+
+    .nf-form-content .listselect-wrap .nf-field-element div, 
+    .nf-form-content input.ninja-forms-field, 
+    .nf-form-content select.ninja-forms-field:not([multiple]) {
+    height: unset;
+}
+
+.nf-form-content button, 
+.nf-form-content input[type=button], 
+.nf-form-content input[type=submit] {
+    min-width: 100%;
+    padding:12px!important;
+    line-height: auto;
+    height: unset;
+}
+
+
+.btn {
+   display: inline-block;
+    padding: 13px 25px;
+    max-width: 170px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95em;
+    letter-spacing: 0.115em;
+    color: #fff !important;
+    background: #000;
+    transition: all 0.5s ease;
+    line-height: 1.6;
+    border-radius: 0;
+    border: 0;
+    outline: 0;
+    cursor: pointer; 
+
+    &:hover {
+        background-color: $primaryColor;
+    }
+}
+
+}
+
+
+

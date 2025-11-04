@@ -1,0 +1,118 @@
+
+.internal-hero  {
+  
+
+&:after {
+  /* --- Required to create the pseudo-element --- */
+  content: '';
+  
+  /* --- Position it to cover the entire header --- */
+  /* This works because #wrapper-navbar has position: relative */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* --- Your new SVG background lines --- */
+  /* !IMPORTANT: Update this path to your 6000px SVG file */
+  background-image: url('../img/lines-wide.svg');
+
+  /* --- This is the positioning you wanted --- */
+  background-position: top -530px center ;
+  margin-left:-190px;
+  background-repeat: no-repeat;
+  
+  /* --- This is the sizing you wanted --- */
+  /* It will be 6000px wide and scale its height proportionally */
+  background-size: 6000px auto;
+
+  /* * --- Stacking Order (The Magic) ---
+   * Your header's bg.jpg is at z-index: 0 (default).
+   * Your hero content is at z-index: 2.
+   * Your nav is at z-index: 3.
+   * By setting this to z-index: 1, it sits perfectly 
+   * *on top* of the bg.jpg but *behind* all your content.
+   */
+  z-index: 1;
+
+  /* Prevents the overlay from interfering with mouse clicks */
+  pointer-events: none;
+}
+}
+
+.single .internal-hero,
+.page-template-template-terms  .internal-hero{
+
+   min-height: 25vh;
+}
+ 
+.internal-hero {
+  position: relative;
+  background-color: $primaryColor;
+  color: #fff;
+  min-height: 65vh;
+  overflow: hidden;
+  display:none;
+
+
+
+
+  
+  &__bg-left,
+  &__bg-right {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+    svg {
+      width: 100%;
+      height: 100%;
+      display:none!important;
+    }
+  }
+
+  &__bg-left {
+    left: 0;
+    width: 55%; // ends near the right edge of col-5
+
+    background: url(../img/left-line.svg) bottom 40px right 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  &__bg-right {
+    right: 0;
+    width:70%; // starts roughly at start of col-7
+  }
+
+  &__title {
+    font-size: rem(50);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+  }
+
+  &__excerpt {
+   color:#fff;
+    font-size:rem(40);
+  }
+
+  &__bottom-svg {
+    right: 0;
+    bottom: 0;
+    width: 70%;  
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    &__bg-left,
+    &__bg-right {
+      width: 100%; // full width on mobile for simplicity
+      opacity: 0.3;
+    }
+  }
+}

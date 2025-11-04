@@ -1,0 +1,39 @@
+.terms-modal {
+  max-width: 817px;
+
+  .modal-content {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+    border-radius: rem(5);
+  }
+
+  h2 {
+    font-size: rem(40);
+    font-weight: 300;
+    color: $primaryColor;
+  }
+
+  .terms-content {
+    max-height: 50vh;
+    overflow-y: auto;
+    font-size: rem(16);
+    line-height: 1.6;
+    color: #333;
+  }
+
+  #acceptTermsBtn {
+ display: inline-block; // ✅ ensures it only takes up what it needs
+  width: auto;
+  min-width: unset;
+  transition: background-color 0.3s ease;
+  
+  }
+}
+
+/* ✅ Dimmed background overlay */
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px); // Optional subtle blur
+}

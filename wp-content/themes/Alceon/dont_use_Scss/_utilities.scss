@@ -1,0 +1,40 @@
+
+.mobile-only {
+
+    display: none;
+    @media (max-width: 768px) {
+        display: block!Important;
+    }
+}
+
+
+
+
+
+.blk {
+    font-weight: bold;
+}
+
+
+
+.mobile-only-lg {
+
+    display: none;
+    @media (max-width: 992px) {
+        display: block!Important;
+    }
+}
+
+
+
+.desktop-only-lg {
+
+  
+    @media (max-width: 992px) {
+        display: none!Important;
+    }
+}
+
+
+
+

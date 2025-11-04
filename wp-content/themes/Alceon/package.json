@@ -1,0 +1,33 @@
+{
+  "name": "understrap-child-gulp",
+  "version": "1.0.0",
+  "description": "Understrap Child Theme using Gulp for Sass compilation and BrowserSync",
+  "main": "index.js",
+  "scripts": {
+    "gulp": "node --max-old-space-size=4096 ./node_modules/.bin/gulp",
+    "start": "npm run gulp"
+  },
+  "keywords": [
+    "understrap",
+    "wordpress",
+    "gulp",
+    "sass"
+  ],
+  "author": "Your Name",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "gulp": "^5.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^2.1.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-util": "^3.0.8",
+    "sass": "^1.93.2"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.13.1"
+  }
+}

@@ -1,0 +1,55 @@
+
+.button,
+.wp-element-button {
+    display: inline-block;
+    // padding: 13px 25px;
+    min-width: 170px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85em;
+    letter-spacing: 0.115em;
+    color: #fff !important;
+    background: #000;
+    transition: all 0.5s ease;
+    border-radius: 0!important;
+        padding: 10px 20px;
+
+    &:hover {
+        transition: all 0.95s ease;
+        background: #454545;
+    }  
+
+    &--teal {
+        background: #81a5a9;
+
+        &:hover {
+            background: #719093;
+        }
+    }
+
+    &--outline-white {
+        background: transparent;
+        outline: 1px solid #fff;
+        color: #fff;
+
+        &:hover {
+            background: #fff;
+            color: #000 !important;
+            outline-color: #fff;
+        }
+    }
+
+    &--outline-black {
+        background: transparent;
+        outline: 1px solid #000 !important;
+        color: #000 !important;
+
+        &:hover {
+            background: #000;
+            color: #fff !important;
+            outline-color: #000 !important;
+        }
+    }
+}

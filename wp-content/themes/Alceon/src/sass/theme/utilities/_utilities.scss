@@ -1,0 +1,17 @@
+.section-divider {
+  border-top: 2px solid $medGrey;
+  margin-top: rem(60);
+  margin-bottom: rem(60);
+  opacity: 0.9;
+}
+
+.section-divider--white {
+  border-top: 2px solid #fff;
+  margin-top: rem(60);
+  margin-bottom: rem(60);
+  opacity: 0.9;
+}
+
+.border-top {
+    border-color:#CCC;
+}

@@ -1,0 +1,80 @@
+// Base style shared by all buttons
+.btn-base {
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.35rem 1.25rem;
+  border-radius: 50rem; // Bootstrap’s rounded-pill equivalent
+  transition: all 0.25s ease;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// -------------------------------------
+// SOLID BUTTONS
+// -------------------------------------
+
+// Solid primary (for light backgrounds)
+.btn-solid-primary {
+  @extend .btn-base;
+  background-color: $brightBlue;
+  color: $white;
+  border: 1px solid $brightBlue;
+
+  &:hover,
+  &:focus {
+    background-color: darken($primaryColor, 8%);
+    border-color: darken($primaryColor, 8%);
+    color: $white;
+  }
+}
+
+// Solid white (for dark backgrounds)
+.btn-solid-white {
+  @extend .btn-base;
+  background-color: $white;
+  color: $primaryColor;
+  border: 2px solid $white;
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    color: $white;
+    border-color: $white;
+  }
+}
+
+// -------------------------------------
+// OUTLINE BUTTONS
+// -------------------------------------
+
+// Outline primary (for light backgrounds)
+.btn-outline-primary {
+  @extend .btn-base;
+  color: $brightBlue;
+  border: 2px solid $brightBlue;
+  background-color: transparent;
+  font-weight: 600;
+
+  &:hover,
+  &:focus {
+    background-color: $brightBlue;
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+// Outline white (for dark backgrounds)
+.btn-outline-white {
+  @extend .btn-base;
+  color: $white;
+  border: 2px solid $white;
+  background-color: transparent;
+
+  &:hover,
+  &:focus {
+    background-color: darken($primaryColor, 5%);
+    color: $white !important;
+    border-color: darken($primaryColor, 5%);
+  }
+}

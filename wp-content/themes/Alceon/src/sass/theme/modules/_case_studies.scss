@@ -1,0 +1,97 @@
+.section--case-studies {
+  background-color: #f7f7f7;
+
+  .section-subtitle {
+    font-size: rem(26);
+    font-weight: 400;
+    color: #555;
+  }
+
+  // Shared spacing between image & text columns
+  .case-row {
+    margin-right: 0;
+    margin-left: 0;
+    // Alternate (even-numbered) row modifier
+    &--alt {
+      .case-img-wrapper {
+        .case-stats {
+          background-image: url("../img/curved-brand-shape-2.svg");
+          background-position: left top; // maintain left curve visibility
+        }
+      }
+    }
+  }
+
+  .case-img-wrapper {
+    position: relative;
+    overflow: hidden;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+    }
+
+    // Stats block overlayed on the image
+    .case-stats {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 551px;
+      height: 167px;
+      background-image: url("../img/curved-brand-shape.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: left top;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding-left: 7%;
+
+      // optional color filter for the SVG background
+      filter: var(--case-shape-filter, none);
+
+      &__inner {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        gap: 3rem;
+      }
+
+      .case-stat__number {
+        font-size: rem(62);
+        line-height: 1;
+        font-weight: 300;
+        font-style: Light;
+        letter-spacing: -0.04em;
+      }
+
+      .case-stat__label {
+        font-size: rem(18);
+        margin-top: 0.25rem;
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 991.98px) {
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        padding: 1.5rem 1rem;
+        flex-direction: column;
+
+        &__inner {
+          flex-direction: row;
+          gap: 2rem;
+        }
+      }
+    }
+  }
+
+  .case-subtitle {
+    font-size: rem(26);
+    font-weight: 400;
+    color: $primaryColor;
+  }
+}

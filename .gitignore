@@ -1,48 +1,77 @@
-# Wordpress - ignore core, configuration, examples, uploads and logs.
-# https://github.com/github/gitignore/blob/main/WordPress.gitignore
-
-# Core
-#
-# Note: if you want to stage/commit WP core files
-# you can delete this whole section/until Configuration.
+# ---------------------------------
+# WordPress Core (ignore completely)
+# ---------------------------------
 /wp-admin/
-/wp-content/index.php
-/wp-content/languages
-/wp-content/plugins/index.php
-/wp-content/themes/index.php
 /wp-includes/
-/index.php
-/license.txt
-/readme.html
 /wp-*.php
 /xmlrpc.php
+/license.txt
+/readme.html
+/index.php
 
-# Configuration
+# Config
 wp-config.php
 
-# Example themes
-/wp-content/themes/twenty*/
+# ---------------------------------
+# wp-content rules
+# ---------------------------------
 
-# Example plugin
-/wp-content/plugins/hello.php
+# Block everything in wp-content except allowed files
+wp-content/*
+!wp-content/themes/
+!wp-content/mu-plugins/
 
-# Uploads
-/wp-content/uploads/
+# Ignore plugins folder entirely
+wp-content/plugins/
 
-# Log files
+# Ignore uploads & generated files
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/languages/
+wp-content/updraft/
+
+# ---------------------------------
+# Theme Handling — ALLOW ONLY YOUR THEME
+# ---------------------------------
+# Deny all themes by default
+wp-content/themes/*
+
+# ✅ Replace "your-theme-name" with your actual theme folder
+!wp-content/themes/Alceon/
+
+# ---------------------------------
+# Misc
+# ---------------------------------
 *.log
+*.sql
+*.sql.gz
+.DS_Store
+.env
+/vendor/
+node_modules/
 
-# htaccess
-/.htaccess
 
-# All plugins
-#
-# Note: If you wish to whitelist plugins,
-# uncomment the next line
-#/wp-content/plugins
+# System
+.DS_Store
 
-# All themes
-#
-# Note: If you wish to whitelist themes,
-# uncomment the next line
-#/wp-content/themes
+# IDE
+*.sublime-workspace
+*.sublime-project
+.vscode/
+.idea/
+
+# Node
+node_modules/
+
+# Build outputs
+wp-content/themes/*/css/
+wp-content/themes/*/js/
+*.map
+
+# Zip archives
+*.zip
+
+# Understrap core (if using child theme)
+wp-content/themes/understrap/
+wp-content/themes/Child_Theme/

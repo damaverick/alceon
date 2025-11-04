@@ -1,0 +1,186 @@
+/* ========================================================================
+   Custom HubSpot Form Styles
+   ======================================================================== */
+
+// --- 1. Gradient Background Variant ---
+// Styles for the form when it's inside a .section--gradient
+body .section--gradient {
+  .custom-hubspot-form {
+    // Button override for gradient sections
+    .hs-button,
+    input[type='submit'] {
+      background-color: transparent !important;
+      color: $white !important;
+      border: 2px solid $white !important;
+      font-weight: 500;
+      font-size: 1rem;
+
+      &:hover {
+        background-color: $primaryColor !important;
+        border-color: $primaryColor !important;
+      }
+    }
+  }
+}
+
+// --- 2. Base Form Styles ---
+// Default styles (assumes a dark/themed background)
+.custom-hubspot-form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: -1rem;
+
+  .hbspt-form {
+    width: 100%;
+    max-width: 670px;
+  }
+
+  // Hide labels in favor of placeholders
+  label {
+    display: none;
+  }
+
+  .hs-form.stacked {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.75rem;
+    width: 100%;
+    max-width: 670px;
+  }
+
+  // --- Fields (Base) ---
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: rem(16);
+    border: none !important;
+    border-radius: rem(100);
+    background: #fff !important;
+    color: hsla(0, 0%, 20%, 1) !important;
+    box-shadow: none !important;
+    appearance: none;
+
+    // --- Comprehensive Placeholder Styles ---
+    &::placeholder {
+      color: hsla(0, 0%, 20%, 1) !important;
+      opacity: 1; /* Firefox */
+    }
+    &::-webkit-input-placeholder {
+      /* Edge, Safari, Chrome */
+      color: hsla(0, 0%, 20%, 1) !important;
+    }
+    &::-moz-placeholder {
+      /* Firefox 19+ */
+      color: hsla(0, 0%, 20%, 1) !important;
+      opacity: 1;
+    }
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: hsla(0, 0%, 20%, 1) !important;
+    }
+    &:-moz-placeholder {
+      /* Firefox 18- */
+      color: hsla(0, 0%, 20%, 1) !important;
+      opacity: 1;
+    }
+    // --- End Placeholder Styles ---
+  }
+
+  // --- Textarea Override ---
+  textarea.hs-input {
+    border-radius: rem(20);
+    min-height: rem(120);
+    resize: vertical;
+    width: 100% !important; // HubSpot specificity fix
+  }
+
+  // --- Select Override (Base) ---
+  select {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 1L5 5L9 1' stroke='%2300457c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 1rem center !important;
+    background-size: 10px 6px !important;
+    padding-right: 2rem !important;
+    cursor: pointer;
+    transition: background-image 0.2s ease;
+
+    &:focus,
+    &:active {
+      outline: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 5L5 1L9 5' stroke='%2300457c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+    }
+  }
+
+  // --- Button (Base) ---
+  .hs-button,
+  input[type='submit'] {
+    @extend .btn-outline-white;
+    max-width: 100px;
+    border-radius: rem(100);
+    padding: 0.35rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $white;
+      color: $primaryColor;
+    }
+  }
+
+  // --- Misc Fixes & Overrides ---
+  .hs-error-msg {
+    font-size: rem(14);
+    color: #fff; // Default error color (for dark backgrounds)
+    margin-top: 0.25rem;
+  }
+
+  .hs_submit.hs-submit {
+    margin-top: 1rem;
+  }
+
+  fieldset.form-columns-1,
+  fieldset.form-columns-2 {
+    max-width: none !important;
+  }
+
+  .actions {
+    border-top: none !important;
+  }
+}
+
+// --- 3. White Background Variant ---
+body .custom-hubspot-form.form-white-bg {
+  justify-content: flex-start;
+
+  // --- Fields (White BG) ---
+  input,
+  select,
+  textarea {
+    border: 2px solid $brightBlue !important;
+  }
+
+  // --- Select (White BG) ---
+  // No override needed, it inherits the blue arrow from the base style.
+
+  // --- Button (White BG) ---
+  .hs-button,
+  input[type='submit'] {
+    @extend .btn-outline-primary;
+    color: $brightBlue !important;
+    border-color: $brightBlue !important;
+    background: transparent !important;
+
+    &:hover {
+      background: $brightBlue !important;
+      color: #fff !important;
+    }
+  }
+
+  // --- Error Message (White BG) ---
+  .hs-error-msg {
+    color: $darkGrey !important; // Error color for light backgrounds
+  }
+}
