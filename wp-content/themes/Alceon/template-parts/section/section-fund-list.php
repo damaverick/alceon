@@ -1,131 +1,113 @@
+<?php
+/**
+ * Capability List — simple regular ACF version (no Flexible Content)
+ * Requires page-level ACF fields:
+ *  - capability_list_heading (text)
+ *  - capability_source_list  (select: value 'your_capital' | 'our_capital')
+ */
+
+// --- CONFIG: update IDs if needed ---
+$YOUR_CAPITAL_CONTENT_ID     = 27;
+$OUR_CAPITAL_CONTENT_ID      = 125;
+
+$YOUR_CAPITAL_LOOP_PARENT_ID = 308;
+$OUR_CAPITAL_LOOP_PARENT_ID  = 306;
+
+// Field names
+$CAP_TEXT_PRIMARY  = 'capability_text_capital';
+$CAP_TEXT_FALLBACK = 'capability_text';
+$INTRO_FIELD_YOUR  = 'listing_text_your_capital';
+$INTRO_FIELD_OUR   = 'listing_text_our_capital_lp';
+
+// --- Read regular ACF fields on this page ---
+$cap_heading = (string) get_field('capability_list_heading');
+$cap_source  = (string) get_field('capability_source_list'); // expect value 'your_capital' or 'our_capital'
+
+// normalize in case ACF is returning Label
+$norm = strtolower(trim($cap_source));
+$norm = str_replace(' ', '_', $norm);
+$cap_source = in_array($norm, ['your_capital', 'our_capital'], true) ? $norm : 'our_capital';
+
+// Resolve IDs + intro field
+if ($cap_source === 'your_capital') {
+    $content_source_id = $YOUR_CAPITAL_CONTENT_ID;
+    $loop_parent_id    = $YOUR_CAPITAL_LOOP_PARENT_ID;
+    $intro_field_name  = $INTRO_FIELD_YOUR;
+} else {
+    $content_source_id = $OUR_CAPITAL_CONTENT_ID;
+    $loop_parent_id    = $OUR_CAPITAL_LOOP_PARENT_ID;
+    $intro_field_name  = $INTRO_FIELD_OUR;
+}
+
+// Pull top intro block (single fallback to a second field name)
+$cap_text_raw = (string) get_field($CAP_TEXT_PRIMARY, $content_source_id);
+if ($cap_text_raw === '' || $cap_text_raw === null) {
+    $cap_text_raw = (string) get_field($CAP_TEXT_FALLBACK, $content_source_id);
+}
+
+// Defaults
+$cap_heading       = $cap_heading ?: 'What we offer';
+$cap_text_raw      = $cap_text_raw ?: 'As a private capital partner, we offer access to high-quality, often under-the-radar opportunities across:';
+$cap_text_rendered = apply_filters('the_content', $cap_text_raw);
+?>
+
 <section class="section--grey what-we-offer border-top-0">
-  <div class="container">
-    <div class="container pb-5">
+  <div class="container pb-5">
 
-      <div class="row d-flex justify-content-between align-items-start mb-5">
-        <div class="col-md-5">
-          <h2 class="mb-3">What we offer</h2>
-        </div>
-        <div class="col-lg-6 pe-lg-5">
-          <p>As a private capital partner, we offer access to high-quality, often under-the-radar opportunities across:</p>
-        </div>
+    <div class="row d-flex justify-content-between align-items-start mb-5">
+      <div class="col-md-5">
+        <h2 class="mb-3"><?php echo esc_html($cap_heading); ?></h2>
       </div>
-
-
+      <div class="col-lg-6 pe-lg-5">
+        <?php echo $cap_text_rendered; ?>
+      </div>
     </div>
 
-
-
     <?php
-    // --- Custom Loop for Child Pages ---
+    // Loop child pages under the selected parent (308 or 306)
+    $q = new WP_Query([
+        'post_type'      => 'page',
+        'post_parent'    => (int) $loop_parent_id,
+        'posts_per_page' => -1,
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC',
+        'no_found_rows'  => true,
+    ]);
 
-    // ** NEW: Check which page we are on to set the correct Parent ID **
+    if ($q->have_posts()):
+        while ($q->have_posts()): $q->the_post();
 
-    $parent_id = 0; // Initialize the Parent ID
-    $tree = wp_get_post_parent_id(get_the_ID());
-    if (is_page('your-capital') || $tree == 310) {
-      // Set the Parent ID for "Your Capital"
-      $parent_id = 308; // We assume 308 is correct for 'your-capital' based on your code
+            $intro        = (string) get_field($intro_field_name);
+            $button_text  = (string) get_field('button_text');
+            $button_text  = $button_text !== '' ? $button_text : 'Learn More';
+            ?>
+            <div class="row align-items-start gx-lg-5 offer-row border-top border-2 py-5">
+              <div class="col-12 col-lg-8 pe-lg-5 mb-4 mb-lg-0">
+                <h3 class="mb-4"><?php the_title(); ?></h3>
 
-    } elseif (is_page('our-capital')) {
-      // Set the Parent ID for "Our Capital"
-      $parent_id = 306; // <-- *** IMPORTANT: REPLACE 123 with the correct Page ID for "Our Capital" ***
-    }
+                <?php if ($intro !== ''): ?>
+                  <p class="mb-4"><?php echo esc_html($intro); ?></p>
+                <?php endif; ?>
 
-    // This check is still used below for the custom field, so we keep it.
-    $is_special_page = is_page(array('your-capital', 'our-capital'));
+                <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary mt-1 rounded-pill">
+                  <?php echo esc_html($button_text); ?>
+                </a>
+              </div>
 
-
-    // 1. Get the Parent Page ID (This is now done above)
-
-    // Only proceed if the parent ID was set (is not 0)
-    if ($parent_id) :
-
-      // 2. Define the arguments for the query
-      $args = array(
-        'post_type'   => 'page',
-        'post_parent'  => $parent_id,    // <-- This will now be dynamic (e.g., 308 or 123)
-        'posts_per_page' => -1,        // Get all of them
-        'orderby'    => 'menu_order',  // Respects the "Page Order" you set
-        'order'     => 'ASC',
-        'meta_query'   => array(
-          array(
-            'key'   => 'show_in_audience_grid',
-            'value'  => '1',         // '1' means 'True'
-            'compare' => '=',
-          ),
-        ),
-      );
-
-      // 3. Run the query
-      $child_pages = new WP_Query($args);
-
-      // 4. The Loop
-      if ($child_pages->have_posts()) :
-        while ($child_pages->have_posts()) : $child_pages->the_post();
-
-          // --- ** MODIFIED LOGIC ** ---
-
-          // 1. Determine which field name to use based on the main page
-          $intro_field_name = $is_special_page ? 'listing_text_your_capital' : 'listing_text';
-
-          // 2. Get the intro text from the correct field
-          // Note: This gets the field *from the child page* in the loop
-          $intro = get_field($intro_field_name);
-
-          // 3. Get the button text (this was already correct)
-          $button_text = get_field('button_text');
-
-          // --- ** END MODIFIED LOGIC ** ---
-
-          // Set a default fallback for the button text
-          $button_text_final = $button_text ? $button_text : 'Learn More';
-    ?>
-
-          <div class="row align-items-start gx-lg-5 offer-row border-top border-2 py-5 ">
-
-            <div class="col-12 col-lg-8 pe-lg-5 mb-4 mb-lg-0">
-
-              <h3 class="mb-4"><?php the_title(); ?></h3>
-
-              <?php if ($intro) : // Only show the paragraph if the 'intro' field has content 
-              ?>
-                <p class="mb-4">
-                  <?php echo esc_html($intro); ?>
-                </p>
-              <?php endif; ?>
-
-              <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary mt-1 rounded-pill">
-                <?php echo esc_html($button_text_final); ?>
-              </a>
+              <div class="col-12 col-lg-4">
+                <?php
+                if (has_post_thumbnail()) {
+                    the_post_thumbnail('large', ['class' => 'img-fluid rounded-top-right']);
+                } else {
+                    echo '<img src="https://placehold.co/600x400/eee/ccc?text=No+Image" alt="Placeholder" class="img-fluid rounded">';
+                }
+                ?>
+              </div>
             </div>
-
-            <div class="col-12 col-lg-4">
-              <?php
-              // Display the Page's Featured Image
-              if (has_post_thumbnail()) {
-                the_post_thumbnail('large', [
-                  'class' => 'img-fluid rounded-top-right'
-                ]);
-              } else {
-                // Optional: Show a placeholder if no featured image is set
-                echo '<img src="https://placehold.co/600x400/eee/ccc?text=No+Image" alt="Placeholder" class="img-fluid rounded">';
-              }
-              ?>
-            </div>
-          </div>
-    <?php
+            <?php
         endwhile;
-      endif;
-
-      // 5. Restore original Post Data
-      wp_reset_postdata();
-
-    endif; // End check for $parent_id
-    // --- End Custom Loop ---
+        wp_reset_postdata();
+    endif;
     ?>
-
-
-
   </div>
 </section>

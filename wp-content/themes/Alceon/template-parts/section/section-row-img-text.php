@@ -50,7 +50,7 @@
                         if ($image) :
                             // Display image using its ID for full responsive support
                             echo wp_get_attachment_image($image['ID'], 'large', false, [
-                                'class' => 'img-fluid rounded w-100',
+                                'class' => 'img-fluid w-100 rounded-right',
                                 'alt' => $image['alt'] // Use alt text from Media Library
                             ]);
                         else :

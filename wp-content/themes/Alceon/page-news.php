@@ -48,10 +48,7 @@ get_header();
   </div>
 </section>
 
-<?php
-// Include modular sections
-get_template_part('template-parts/global/contact-form', 'contact');
-?>
+
 
 <?php
 get_footer();

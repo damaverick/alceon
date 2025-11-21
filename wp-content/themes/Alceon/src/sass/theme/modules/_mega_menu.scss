@@ -8,6 +8,7 @@
   font-size: rem(16);
   overflow: hidden;
   animation: fadeIn 0.25s ease-out;
+  z-index: 3 !important;
 
   .container-fluid {
     padding: 2rem 3rem;
@@ -40,7 +41,9 @@
 
         font-size: rem(17);
         opacity: 0.9;
-        transition: opacity 0.2s ease, text-decoration 0.2s ease;
+        transition:
+          opacity 0.2s ease,
+          text-decoration 0.2s ease;
 
         &:hover {
           opacity: 1;

@@ -17,16 +17,16 @@ $selected_case_studies = get_sub_field('case_studies');
 <section class="section--case-studies">
   <div class="container">
 
-    <div class="row justify-content-space-between align-items-center mb-5 pb-5">
-      <div class="col-md-5">
-        <h2 class="mb-2">Proven partnerships</h2>
+    <div class="row justify-content-space-between align-items-center">
+      <div class="col-md-12 mb-2">
+        <h2>Proven partnerships</h2>
         
         <?php if ($section_subtitle): ?>
-            <h4 class="section-subtitle"><?php echo esc_html($section_subtitle); ?></h4>
+            <h4 class="section-subtitle pt-2"><?php echo esc_html($section_subtitle); ?></h4>
         <?php endif; ?>
       </div>
       
-      <div class="col-md-6 pe-lg-5">
+      <div class="col-md-12">
         <?php if ($section_intro_text): ?>
             <p class="mb-0"><?php echo wp_kses_post($section_intro_text); ?></p>
         <?php endif; ?>
@@ -87,7 +87,7 @@ $selected_case_studies = get_sub_field('case_studies');
                     $stat_number = get_sub_field('stat_title');
                     $stat_label = get_sub_field('stat_description');
                 ?>
-                  <div class="case-stat text-center">
+                  <div class="case-stat text-left">
                     <?php if ($stat_number): ?>
                         <div class="case-stat__number"><?php echo esc_html($stat_number); ?></div>
                     <?php endif; ?>

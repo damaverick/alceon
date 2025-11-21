@@ -36,14 +36,14 @@ $container = get_theme_mod('understrap_container_type');
 
         <div class="custom-hubspot-form form-white-bg">
           <script>
-            hbspt.forms.create({
-              portalId: "45104793",
-              formId: "721c4dd4-9f37-4944-b86f-d4945c761935",
-              region: "ap1",
-              onFormReady: function($form) {
-                $form.find('input[type="submit"]').val('Submit');
-              }
-            });
+            // hbspt.forms.create({
+            //   portalId: "45104793",
+            //   formId: "721c4dd4-9f37-4944-b86f-d4945c761935",
+            //   region: "ap1",
+            //   onFormReady: function($form) {
+            //     $form.find('input[type="submit"]').val('Submit');
+            //   }
+            // });
           </script>
         </div>
 
@@ -56,15 +56,13 @@ $container = get_theme_mod('understrap_container_type');
 
 
 
-  <section class="image-section image-section--full" aria-hidden="true">
-    <div class="image-section__background"></div>
-  </section>
+  <?php
+  get_template_part('template-parts/section/section-full-width-img-video');
+  ?>
 
 
   <?php
-  // Include modular sections
-  get_template_part('template-parts/global/contact-form', 'contact');
-
+  get_template_part('template-parts/global/contact-form');
   ?>
   <?php
   get_footer();

@@ -1,11 +1,10 @@
-<?php if (get_row_layout() == 'section_icon_row'): ?>
     <?php
     // Get the main heading for the whole section
-    $heading = get_sub_field('heading');
+    $heading = get_field('heading');
     ?>
 
 
-<section class="section--white icon-row pt-0">
+<section class="section--white icon-row py-4  pt-0">
   <div class="container">
 
     <?php if ($heading): // Check if heading exists ?>
@@ -18,22 +17,20 @@
 
     <?php
     // Check if the repeater field (named 'icons') has rows
-    if (have_rows('icon_item')):
+    if (have_rows('section_icon_row')):
     ?>
         <div class="row justify-content-between gy-5 gx-4 gx-lg-5">
 
         <?php
         // Loop through each icon in the repeater
-        while (have_rows('icon_item')) : the_row();
+        while (have_rows('section_icon_row')) : the_row();
 
             // Get the sub-fields for *this specific icon*
             $icon_img = get_sub_field('icon');
-            $icon_heading = get_sub_field('icon_heading');
             $icon_text = get_sub_field('icon_text');
-            $icon_subtext = get_sub_field('sub_text');
         ?>
 
-          <div class="col-12 col-sm-6 col-lg-3 text-center text-lg-start">
+          <div class="col-12 col-sm-6 col-lg-4 text-center text-lg-start">
             
             <?php if ($icon_img): // Check for image and use its URL and Alt text ?>
                 <img src="<?php echo esc_url($icon_img['url']); ?>" 
@@ -41,9 +38,7 @@
                      class="icon-row__icon mb-3">
             <?php endif; ?>
 
-            <?php if ($icon_heading): ?>
-                <h4 class="icon-row__title mb-2 sml"><?php echo esc_html($icon_heading); ?></h4>
-            <?php endif; ?>
+       
 
             <?php if ($icon_text): // Using wp_kses_post to allow basic HTML like <strong> ?>
                 <p class="icon-row__text mb-0">
@@ -51,11 +46,7 @@
                 </p>
             <?php endif; ?>
             
-            <?php if ($icon_subtext): // Added this part for your sub_text field ?>
-                <p class="icon-row__subtext mt-2">
-                    <?php echo wp_kses_post($icon_subtext); ?>
-                </p>
-            <?php endif; ?>
+   
 
           </div>
 
@@ -65,4 +56,3 @@
 
   </div></section>
 
-<?php endif; // End if (get_row_layout() == 'section_icon_row') ?>

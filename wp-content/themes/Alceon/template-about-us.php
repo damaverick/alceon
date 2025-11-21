@@ -150,7 +150,7 @@ $container = get_theme_mod('understrap_container_type');
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const swiper = new Swiper(".mySwiper", {
-      slidesPerView: 3.2, // show 3 fully + peek 4th
+      slidesPerView: 3, // show 3 fully + peek 4th
       spaceBetween: 24,
       loop: false,
       grabCursor: true,
@@ -247,17 +247,17 @@ $container = get_theme_mod('understrap_container_type');
         <section class="actions mt-5 pb-5 w100">
           <div class="action-row d-flex justify-content-between align-items-center  border-bottom">
             <h3 class="h4 mb-0">Your Capital</h3>
-            <a href="#" class="btn btn-outline-dark fw-bold rounded-pill btn-outline-primary">Invest</a>
+            <a href="<?php echo get_bloginfo('url'); ?>/your-capital" class="btn btn-outline-dark fw-bold rounded-pill btn-outline-primary">Invest</a>
           </div>
 
           <div class="action-row d-flex justify-content-between align-items-center  border-bottom">
             <h3 class="h4 mb-0">Our Capital</h3>
-            <a href="#" class="btn btn-outline-dark fw-bold rounded-pill btn-outline-primary">Grow</a>
+            <a href="<?php echo get_bloginfo('url'); ?>/our-capital" class="btn btn-outline-dark fw-bold rounded-pill btn-outline-primary">Grow</a>
           </div>
 
           <div class="action-row d-flex justify-content-between align-items-center  border-bottom">
             <h3 class="h4 mb-0">Your Career</h3>
-            <a href="#" class="btn btn-outline-dark fw-bold rounded-pill btn-outline-primary">Join</a>
+            <a href="<?php echo get_bloginfo('url'); ?>/your-career" class="btn btn-outline-dark fw-bold rounded-pill btn-outline-primary">Join</a>
           </div>
         </section>
 
@@ -268,14 +268,12 @@ $container = get_theme_mod('understrap_container_type');
   </div>
 </section>
 
-
 <section class="section--accordion">
   <div class="container">
 
     <div class="accordion accordion--custom" id="infoAccordion">
       <h2>Community</h2>
       <?php the_field('community_text'); ?>
-
 
       <?php
       // Check if the repeater field 'institution' has rows of data
@@ -285,49 +283,50 @@ $container = get_theme_mod('understrap_container_type');
         while (have_rows('institution')) : the_row();
 
           // Get sub field values
-          $name = get_sub_field('name');
-          $bio = get_sub_field('bio');
-          $url = get_sub_field('url');
-          $logo = get_sub_field('logo'); // Image array
+          $name        = get_sub_field('name');
+          $bio         = get_sub_field('bio');
+          $url         = get_sub_field('url');
+          $logo        = get_sub_field('logo'); // Image array
           $button_text = get_sub_field('button_text');
 
           // Create unique IDs for accordion controls
-          $heading_id = 'heading-' . $accordion_index;
+          $heading_id  = 'heading-' . $accordion_index;
           $collapse_id = 'collapse-' . $accordion_index;
 
+          // Is this the first item?
+          $is_first = ($accordion_index === 0);
       ?>
 
           <div class="accordion-item">
             <h3 class="accordion-header" id="<?php echo esc_attr($heading_id); ?>">
-              <button class="accordion-button collapsed" type="button"
+              <button
+                class="accordion-button collapsed"
+                type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#<?php echo esc_attr($collapse_id); ?>"
-                aria-expanded="false"
+                aria-expanded= "false"
                 aria-controls="<?php echo esc_attr($collapse_id); ?>">
                 <span class="accordion-title h4"><?php echo esc_html($name); ?></span>
                 <span class="accordion-icon"></span>
               </button>
             </h3>
-            <div id="<?php echo esc_attr($collapse_id); ?>" class="accordion-collapse collapse"
+
+            <div
+              id="<?php echo esc_attr($collapse_id); ?>"
+              class="accordion-collapse collapse"
               aria-labelledby="<?php echo esc_attr($heading_id); ?>"
               data-bs-parent="#infoAccordion">
               <div class="accordion-body">
-                <div class="accordion-content d-flex flex-wrap align-items-start justify-content-between">
+                <div class="accordion-content d-flex flex-wrap align-items-start -flex  flex-column-reverse flex-xl-row justify-content-between">
 
-
-
-
-                  <div class="accordion-text pe-4 flex-grow-1">
-
-                    <?php
-                    // This will output the 'bio' field, respecting WYSIWYG formatting or <p> tags from Text Area
-                    the_sub_field('bio');
-                    ?>
+                  <div class="accordion-text pe-4 flex-grow-1 d">
+                    <?php the_sub_field('bio'); ?>
 
                     <?php if ($url && $button_text): ?>
-                      <a href="<?php echo esc_url($url); ?>" class="btn btn-outline-primary fw-bold rounded-pill mt-3"><?php echo esc_html($button_text); ?></a>
+                      <a href="<?php echo esc_url($url); ?>" class="btn btn-outline-primary fw-bold rounded-pill mt-3" target="_blank">
+                        <?php echo esc_html($button_text); ?>
+                      </a>
                     <?php endif; ?>
-
                   </div>
 
                   <?php if ($logo): ?>
@@ -344,11 +343,10 @@ $container = get_theme_mod('understrap_container_type');
               </div>
             </div>
           </div>
+
       <?php
           $accordion_index++; // Increment index
         endwhile;
-      else :
-      // No institutions found
       endif;
       ?>
 
@@ -356,10 +354,7 @@ $container = get_theme_mod('understrap_container_type');
   </div>
 </section>
 
-<?php
-// Include modular sections
-get_template_part('template-parts/global/contact-form', 'contact');
 
-?>
+
 <?php
 get_footer();

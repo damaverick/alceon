@@ -228,10 +228,7 @@ get_template_part('template-parts/section/section-disclaimer');
 
 
 
-<?php
-// Include modular sections
-get_template_part('template-parts/global/contact-form', 'contact');
-?>
+
 
 
 <div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="true">
@@ -239,7 +236,24 @@ get_template_part('template-parts/global/contact-form', 'contact');
     <div class="modal-content p-4 p-md-5 text-left">
       <h2 class="mb-4">Terms of Use</h2>
       <div class="terms-content text-start mx-auto">
-        <p>This website is strictly intended for use by wholesale clients and financial advisers only...</p>
+        <p>This website is strictly intended for use by wholesale clients and financial advisers only.</p>
+
+        <p>By proceeding you certify that you are:</p>
+        <ul>
+          <li>a wholesale client within the meaning of section 716G of the Corporations Act 2001, or</li>
+          <li>an AFS licensee, or an authorised representative, employee or director of an AFS licensee, that is authorised to provide personal advice to retail clients in relation to managed investment schemes.</li>
+        </ul>
+
+        <p>Melbourne Securities Corporation Limited (ACN 160 326 545, AFSL 428289) is the responsible entity and the issuer of the product disclosure statements for the Alceon Debt Income Fund ARSN 650 960 820 and Alceon Australian Property Fund ARSN 169 952 738. Offer documentation and factsheets may be accessed through this site.</p>
+
+        <p>That information on this site has been prepared by Alceon Real Asset Management Pty Ltd (ABN 99 627 059 723) Authorised Representative No. 001274531 (ARAM), the investment manager for the Funds and an affiliate member of the Alceon Group. While it has taken all reasonable care in the compilation and updating of this site, there may be inaccuracies, errors or omissions in the information available from time to time. Neither ARAM nor any member of the Alceon Group, gives any representations or warranties, whether express or implied, or accepts responsibility for the accuracy, timeliness or completeness of the information on this site.</p>
+
+        <p>This site is not intended for use in any jurisdiction contrary to any relevant law, regulation or directive. The content of this site does not contain any personal recommendations, offers or solicitations to invest, and all information is fully qualified by relevant disclosure documentation. As such the information on this site is not intended to form the basis of any investment decision.</p>
+
+        <p>The content of this site is not personal or investment advice. You should seek independent professional advice as to the suitability of any product to your investment needs. It is also your responsibility to ensure that any product, service or investment specified in this site is available in your jurisdiction. You agree to inform yourself as to any legal, regulatory, financial, accounting and taxation requirements that apply to you in respect of the consent of this site and relevant investment opportunity.</p>
+
+        <p>Past performance is not indicative of future performance. Neither ARAM, nor any member of the Alceon Group, guarantees or provides any assurance that its investment capabilities will achieve any target, objective or return on capital. The fact that a particular investment strategy or asset or shares in a particular company may have been mentioned is not a recommendation, whether expressly or by implication, to buy, sell or hold that financial product. Any prospective price-earnings ratios, distributions yields and dividend yields referred to on this site constitute estimates only. Any estimates, projections, opinions or outlook that may be stated on this site are subject to change at any time without notice. You should review the material assumptions, calculations and policies upon which any accompanying estimates or projections are based.</p>
+
       </div>
       <div class="mt-4 d-flex justify-content-start">
         <button id="acceptTermsBtn" class="btn btn-outline-primary pillpx-5">Accept</button>
@@ -251,28 +265,36 @@ get_template_part('template-parts/global/contact-form', 'contact');
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const modalEl = document.getElementById('termsModal');
+  document.addEventListener('DOMContentLoaded', function () {
+    const modalEl  = document.getElementById('termsModal');
     const acceptBtn = document.getElementById('acceptTermsBtn');
 
-    // Check localStorage for persistent consent
-    const termsAccepted = localStorage.getItem('termsAccepted');
+    if (!modalEl || !acceptBtn || typeof bootstrap === 'undefined') return;
 
-    if (!termsAccepted) {
+    // bump this if you change the terms text
+    const STORAGE_KEY = 'termsAccepted_v1';
+
+    const hasConsent = () => {
+      try { return localStorage.getItem(STORAGE_KEY) === 'true'; }
+      catch (e) { return false; } // localStorage might be blocked
+    };
+
+    if (!hasConsent()) {
       const modal = new bootstrap.Modal(modalEl, {
-        backdrop: 'static', // prevents closing by clicking outside
+        backdrop: 'static',
         keyboard: false
       });
 
       modal.show();
 
-      acceptBtn.addEventListener('click', function() {
-        localStorage.setItem('termsAccepted', 'true');
+      acceptBtn.addEventListener('click', function () {
+        try { localStorage.setItem(STORAGE_KEY, 'true'); } catch (e) {}
         modal.hide();
-      });
+      }, { once: true }); // avoid multiple handlers
     }
   });
 </script>
+
 
 <?php
 get_footer();

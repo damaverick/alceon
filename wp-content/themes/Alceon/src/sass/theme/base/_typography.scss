@@ -79,7 +79,7 @@ h1,
 h2,
 .h2 {
   font-size: rem(40);
-  font-weight: 400;
+  font-weight: 300;
   line-height: rem(42);
   color: $primaryColor;
   letter-spacing: -0.02em;
@@ -214,4 +214,9 @@ blockquote p {
 /* Your body font size doesn't need to be in a media query */
 p {
   font-size: 1rem; // Stays 16px on all screen sizes
+}
+
+
+.footnotes {
+  font-size:rem(16);
 }

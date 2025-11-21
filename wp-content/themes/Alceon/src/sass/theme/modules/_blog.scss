@@ -26,15 +26,15 @@
       border-radius: 50rem;
       padding: 0.5rem 1.25rem;
       transition: all 0.3s ease;
-      font-size: 0.95rem;
+      font-size: 0.95rem; 
 
       &.active {
-        background-color: $primaryColor;
+        background-color: $brightBlue;
         color: #fff;
       }
 
       &:hover:not(.active) {
-        background-color: lighten($primaryColor, 35%);
+        background-color: lighten($primaryColor, 55%);
       }
     }
   }
@@ -55,9 +55,12 @@
     }
 
     &__img {
-      width: 100%;
-      height: 274px;
-      object-fit: cover;
+
+          width: 100%;
+
+    object-fit: cover;
+    display: flex;
+    min-height: 240px;
     }
 
     &__body {
@@ -107,6 +110,14 @@
       &:first-child a {
         padding-left: 0;
       }
+ 
+      .next.page-link,
+      .prev.page-link{
+       border:none;
+        padding:0;
+        width:unset;
+
+      } 
 
       .page-link {
         width: 42px;

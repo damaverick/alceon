@@ -3,3 +3,9 @@
     max-width: 670px;
   }
 }
+.img-txt-section__row {
+  &:last-child {
+    padding-bottom:0!important;
+    margin-bottom:0!important;
+  }
+}

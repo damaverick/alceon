@@ -4,7 +4,7 @@
   .modal-content {
     border: none;
     border-radius: 1rem;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0;
     background-color: #fff;
     border-radius: rem(5);
   }
@@ -16,11 +16,14 @@
   }
 
   .terms-content {
-    max-height: 50vh;
-    overflow-y: auto;
-    font-size: rem(16);
-    line-height: 1.6;
+    p,
+    li {
+    // max-height: 50vh;
+    // overflow-y: auto;
+    font-size: rem(17);
+    line-height: 1.2;
     color: #333;
+  }
   }
 
   #acceptTermsBtn {

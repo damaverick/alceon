@@ -15,7 +15,9 @@
 // -------------------------------------
 
 // Solid primary (for light backgrounds)
-.btn-solid-primary {
+.btn-solid-primary,
+.btn-primary { 
+
   @extend .btn-base;
   background-color: $brightBlue;
   color: $white;
@@ -29,6 +31,11 @@
   }
 }
 
+.btn--login {
+  font-size:rem(14);
+  text-transform:uppercase;
+  font-weight:600;
+}
 // Solid white (for dark backgrounds)
 .btn-solid-white {
   @extend .btn-base;
@@ -48,6 +55,7 @@
 // OUTLINE BUTTONS
 // -------------------------------------
 
+
 // Outline primary (for light backgrounds)
 .btn-outline-primary {
   @extend .btn-base;
@@ -59,6 +67,7 @@
   &:hover,
   &:focus {
     background-color: $brightBlue;
+    border-color:$brightBlue;
     color: $white;
     text-decoration: none;
   }

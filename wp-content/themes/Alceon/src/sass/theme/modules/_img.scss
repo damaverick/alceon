@@ -1,3 +1,5 @@
-.rounded-right {
-  border-top-right-radius: rem(50);
+[class^='section--'] {
+  .rounded-right {
+    border-top-right-radius: rem(50) !important;
+  }
 }

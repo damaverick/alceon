@@ -113,6 +113,10 @@
           font-size: 1rem;
         
           margin-bottom: 1.25rem;
+
+          &:last-child {
+              margin-bottom: 0;
+          }
         }
       }
 

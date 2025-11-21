@@ -1,0 +1,147 @@
+.growth_testimonials {
+  .video_item {
+    position: relative;
+    margin-bottom: -8px;
+
+    video {
+      width: 100%;
+      opacity: 1;
+      object-fit: cover;
+    }
+  }
+
+  // Slide background + caption overlay
+  .item {
+    max-height: 500px;
+    position: relative;
+    background: #444;
+    margin-bottom: -6px;
+
+    h4 {
+      font-size: rem(22);
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    &:hover {
+      .current {
+        opacity: 0;
+      }
+
+      .hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 0;
+    padding: rem(48);
+    min-width: 100%;
+
+    p,
+    h3 {
+      color: #fff;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    .name {
+      padding-top: 15px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .position {
+      font-size: 14px;
+    }
+  }
+
+  // “Current / hover” text swap under the quote
+  .animation_container {
+    position: relative;
+
+    .current,
+    .hover {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .current {
+      min-height: 99px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .hover {
+    opacity: 0;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  // Owl nav + dots layout inside .bottom_slider
+  .owl-carousel {
+    .owl-dots {
+      display: block !important;
+      width: 50%;
+      text-align: left;
+      float: left;
+      padding-top: 28px;
+    }
+
+    .owl-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin: 5px;
+      background: #bebebe !important;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &.active {
+        background: $brightBlue !important;
+      }
+    }
+  }
+
+  .owl-nav {
+    width: 50%;
+    float: right;
+    text-align: right;
+    padding: 20px 0;
+  }
+
+  // Nav arrow spacing
+  .owl-next {
+    margin-left: 10px;
+  }
+
+  // Mobile tweak for caption padding
+  @media (max-width: 1024px) {
+    .caption {
+      padding: 20px 20px 45px;
+    }
+  }
+}
+
+// Hide desktop / mobile videos appropriately
+@media (min-width: 1025px) {
+  .hide_testimonial_desk {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hide_testimonial_mob {
+    display: none;
+  }
+}

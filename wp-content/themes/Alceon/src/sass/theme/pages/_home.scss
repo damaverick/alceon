@@ -43,11 +43,18 @@
   &--overlap-bottom {
     // Add extra padding to the *section* to make room
     padding-bottom: 6rem; // rem(70) + extra space
+    padding-top: 3rem;
 
-    &__img-wrap {
-      margin-bottom: -#{rem(180)};
-      @media (max-width:1200px) {
-        margin-bottom:0;
+    h3 {
+      font-size: rem(40);
+      font-weight: 300;
+      color: $white;
+    }
+
+    .img-wrap {
+      margin-bottom: -#{rem(300)};
+      @media (max-width: 1200px) {
+        margin-bottom: 0;
       }
     }
     // When the section has this modifier, style the image element

@@ -1,3 +1,9 @@
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 
 
 .navbar-logo {
@@ -13,7 +19,7 @@
 /* Last menu item as a pill button */
 
 @media (min-width: 992px) {
-  body   .navbar-nav > li:last-child > a {
+  body .navbar-nav > .btn--login {
     margin-left: 3rem; // ~48px separation
     padding: 0.425rem 2rem; // 10px x 20px
     background-color: $brightBlue;
@@ -32,18 +38,48 @@
   }
 }
 
-#menu-menu-1 {
+.menu-wrapper {
   background: rgb(9 12 14 / 15%);
   background-blend-mode: multiply;
-  min-width:rem(800);
+  min-width: rem(800);
 
   background-blend-mode: multiply;
-
+  justify-content: space-between;
   padding: 0.5rem 1rem;
   border-radius: 100px;
 }
+
 @media (min-width: 992px) {
-  body  .navbar-nav {
+  body .navbar-nav {
+    // target the "Partner with us" item (has .mega-menu on the <li>)
+    li.mega-menu > .nav-link {
+      position: relative;
+      padding-right: 2.5rem !important;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+
+        width: 10px;
+        height: 10px;
+        box-sizing: border-box; // ✅ borders included in 10x10
+        border-right: 1px solid currentColor; // use 1px to avoid sub-pixel wobble
+        border-bottom: 1px solid currentColor;
+
+        transform-origin: 50% 50%;
+        transform: translateY(-50%) rotate(45deg); // closed
+        transition: transform 0.18s ease;
+        will-change: transform;
+        backface-visibility: hidden;
+      }
+
+      &:hover::after,
+      &:focus-within::after {
+        transform: translateY(-50%) rotate(225deg); // open
+      }
+    }
     .nav-link {
       font-size: 1rem;
       font-weight: 500;
@@ -64,19 +100,24 @@
         text-decoration: none;
       }
     }
-
-    > li:last-child > a:hover {
-      background-color: #0b5ed7;
-    }
   }
 }
 body li.nav-item {
   margin-bottom: 0 !important;
-  margin-right:rem(10);
+  margin-right: rem(10);
   &:last-child {
-    margin-right:0;
-    @media (max-width:991px) {
-      margin-left:0!important
+    margin-right: 0;
+    @media (max-width: 991px) {
+      margin-left: 0 !important;
     }
+  }
+}
+
+/* 5 equal columns on lg+ */
+@media (min-width: 992px) {
+  /* or 1200px if you want xl instead */
+  .col-lg-5th {
+    flex: 0 0 20%;
+    max-width: 20%;
   }
 }

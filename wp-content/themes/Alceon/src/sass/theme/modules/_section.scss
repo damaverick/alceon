@@ -8,80 +8,118 @@
   padding-bottom: 7rem;
 
   > *:first-child {
-    margin-top: 0; // prevent double top space
-  }
+    margin-top: 0;
+  } // prevent double top space
   > *:last-child {
-    margin-bottom: 0; // prevent double bottom space
-  }
+    margin-bottom: 0;
+  } // prevent double bottom space
 
   [class*="col-"] {
     > :first-child {
       margin-top: 0 !important;
     }
-    > :last-child {
-      margin-bottom: 0 !important;
-    }
+    // > :last-child {
+    //   margin-bottom: 0 !important;
+    // }
   }
 
   @media (max-width: 1199.98px) {
-    // lg and below
     padding-top: 5rem;
     padding-bottom: 5rem;
-  }
-
+  } // lg-
   @media (max-width: 991.98px) {
-    // md and below
     padding-top: 4rem;
     padding-bottom: 4rem;
-  }
-
-  @media (max-width: 767.98px) {
-    // sm and below
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-
-  @media (max-width: 575.98px) {
-    // xs
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-  }
+  } // md-
+ 
+  
 }
 
 /* ==========================================
-   Image Section (BEM)
+   Image Section (BEM) — parallax-ready
    ========================================== */
-
 .image-section {
   position: relative;
   width: 100%;
-  min-height: 60vh; // adjust as needed
   overflow: hidden;
 
+  /* Movable background layer (the parallax target) */
   &__background {
     position: absolute;
-    inset: 0;
-    background-image: url("../img/home-fw-banner.png");
+    /* spill so edges never show while translating */
+    inset: -12vh 0 -12vh 0;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.06s linear;
     z-index: 0;
+    pointer-events: none;
   }
 
-  &--full {
-    min-height: 100vh; // full viewport height
+  /* Any foreground content should stack above the bg */
+  > *:not(&__background) {
+    position: relative;
+    z-index: 2;
   }
 
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    &__background {
+      inset: 0;
+      transform: none !important;
+      transition: none;
+    }
+  }
+
+  /* Half-height variant */
   &--half {
-    min-height: rem(520); // full viewport height
+    /* If you have a rem() helper, use rem(450); otherwise 28.125rem ≈ 450px */
+    min-height: rem(450);
+    overflow: hidden;
+  }
+
+  /* Full-bleed variant (keep if you use it elsewhere) */
+  &--full {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    min-height: rem(733); /* adjust as needed */
+    overflow: hidden;
   }
 }
 
-.section--dark-blue {
+/* Optional page tweak (keep if you rely on it) */
+.page-id-13 .image-section--full {
+  min-height: rem(576);
+}
+
+/* Optional: non-100vh variant (fixed aspect) */
+.image-section--ratio {
+  min-height: auto;
+  aspect-ratio: 16 / 9; // modern browsers
+}
+
+/* Dark blue section */
+.section--dark-blue,
+.section--blue {
   background-color: $primaryColor;
   color: #fff;
+
+  h2,
+  h3,
+  p {
+    color: $white;
+  }
+
+  .btn-outline-primary {
+    border-color: $white;
+    color: $white;
+  }
 }
 
+/* Gradient section */
 .section--gradient {
   background:
     linear-gradient(
@@ -96,11 +134,14 @@
       rgba(0, 55, 99, 0) 44.28%
     );
 }
+
 .img-txt-section {
   p {
-    // max-width:425px;
+    /* max-width:425px; */
   }
 }
+
+/* Grey section */
 .section--grey {
   background: $greyBg;
 
@@ -109,9 +150,11 @@
   }
 }
 
+/* Purple gradient section */
 .section--gradient-purple {
   padding-top: 5rem;
   padding-bottom: 5rem;
+
   h2 {
     margin-bottom: 1rem;
     max-width: unset;
@@ -120,24 +163,124 @@
   p {
     margin-bottom: 0;
   }
+
   background:
     linear-gradient(0deg, #6961ff, #6961ff),
     linear-gradient(273.55deg, rgba(0, 0, 0, 0) 46.82%, rgba(0, 0, 0, 0.2) 100%);
 }
 
+/* Overlap tweak */
 .section-feature--overlap-bottom + .section--white + .section--white {
-  margin-top: rem(-50);
+  margin-top: -3.125rem; // rem(-50)
 }
 
+/* White + white compression */
 .section--white + .section--white {
   padding-top: 0 !important;
 }
 
+/* Blog hero */
 .section {
   &--blog-hero {
-    // min-height: rem(350);
+    // min-height: 32.5rem; // if needed
     padding-top: 0 !important;
-    overflow:visible;
-       padding-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    overflow: visible;
   }
+}
+
+.page-id-13 .image-section--full {
+  min-height: rem(576);
+}
+
+// ===== VBV (Vimeo Background Video) – simplified =====
+
+$vbv-hero-min-height: 70vh !default;
+$vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
+
+
+
+.vbv-hero {
+  position: relative;
+  width: 100%;
+  min-height: $vbv-hero-min-height;
+  overflow: hidden;
+  isolation: isolate;
+
+  // the fallback still image (set via inline style)
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &.vbv-hero--bleed {
+    width: 100vw;
+    position: relative;
+    left: 50% !important;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  :where(iframe, div, noscript) {
+    max-width: none !important;
+    box-sizing: border-box;
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  // Vimeo iframe behaves like background-size: cover (16:9)
+  &__iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 100vw;
+    height: 56.25vw; // 9/16 of width
+    min-width: 177.78vh; // 16/9 of height
+    min-height: 100vh;
+
+    pointer-events: none;
+    display: block;
+    border: 0;
+    z-index: 0;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: $vbv-overlay-color;
+    z-index: 1;
+    pointer-events: none;
+  }
+}
+
+.home-hero--vbv {
+  position: relative;
+  min-height: 70vh;
+  overflow: hidden;
+}
+
+.home-hero--vbv > .vbv-hero {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+
+.home-hero--vbv .home-hero__inner {
+  position: relative;
+  z-index: 5;
+}
+.home-hero--vbv .home-hero__topbar {
+    position: relative;
+  z-index: 6;
+}
+.home-hero__inner {
+  padding-top: 7rem;
+  padding-bottom: 6rem;
 }

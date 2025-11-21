@@ -1,11 +1,11 @@
 #wrapper-navbar::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../img/lines-wide.svg');
+  background-image: url("../img/lines-wide.svg");
   /* Corrected syntax: X-position (center) Y-position (top -300px) */
   background-position: center top -300px;
   background-repeat: no-repeat;
@@ -18,32 +18,87 @@
   }
 }
 
+.header-hero {
+  position: relative; // already present via Bootstrap, keep it
+
+  // background layer we can move
+  &__bg {
+    position: absolute;
+    // spill top/bottom a bit so edges never show while translating
+    inset: -12vh 0 -12vh 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    z-index: 0;
+  }
+
+  // ensure real content sits above
+  // > *:not(.header-hero__bg) {
+  //   position: relative;
+  //   z-index: 2;
+  // }
+}
+
+// If you want the header to be truly full-bleed edge-to-edge:
+.header-hero--fullbleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+}
+
+// Respect reduced-motion
+@media (prefers-reduced-motion: reduce) {
+  .header-hero__bg {
+    inset: 0;
+    transform: none !important;
+  }
+}
+
+.page-template-template-your-capital .internal-hero {
+  min-height: rem(750);
+
+  &:after {
+    background-image: none;
+  }
+}
+
 .internal-hero {
   position: relative;
   background-color: $primaryColor;
   color: #fff;
-  overflow: hidden;
+  // overflow: hidden;
   min-height: rem(750);
+  // overflow:visible;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     opacity: 0.3;
-    background-image: url('../img/lines-wide.svg');
-    background-position: calc(50% - rem(580)) calc(50% + rem(220));
+    background-image: url("../img/lines-wide.svg");
+    background-position: calc(50% - rem(340)) calc(50% + rem(220));
     background-repeat: no-repeat;
     background-size: 6000px auto;
     z-index: 1;
     pointer-events: none;
     z-index: 0;
+
+    @media (max-width:840px) {
+          background-position: calc(50% - rem(40)) calc(50% + rem(220));
+    }
   }
 
   &__text {
     top: rem(-250);
+    @media (max-width:991px) {
+      top: 0;
+    }
   }
 
   &__title {
@@ -58,7 +113,12 @@
     color: #fff;
     font-size: rem(40);
     max-width: unset;
-  }
+
+    @media (max-width: 991px) {
+          font-size: rem(26);
+      line-height:1.1;
+    }
+   }
 
   &__bottom-svg {
     right: 0;
@@ -79,9 +139,9 @@
   }
 }
 
-.single .internal-hero,
+.single-post .internal-hero,
 .page-template-template-terms .internal-hero {
-  // min-height: 25vh;
+  min-height: rem(360);
 }
 
 /* Styles for the new full-width bottom image */
@@ -103,4 +163,148 @@
   /* You can change this to 'top', 'bottom', etc. 
      to control which part of the image is visible */
   object-position: center;
+}
+
+// HOME HEADER
+
+/* Overlay under text, over bg image */
+.home .header-hero--fullbleed {
+  position: relative;
+
+  // Background image layer (your existing element)
+  .header-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* your parallax attrs already on the element */
+  }
+
+  // Gradient overlay layer
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1; // above the bg image, below content
+    pointer-events: none; // don’t block clicks
+    background: linear-gradient(
+      113deg,
+      rgba(0, 69, 124, 0.4) 0%,
+      rgba(0, 69, 124, 0) 63.98%
+    );
+  }
+
+  // Ensure header content sits above overlay
+  > .container,
+  .site-navbar,
+  .mobile-menu-container,
+  .mega-menu-wrapper {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+// GOME HERO
+
+/* Base hero shell */
+.home-hero {
+  position: relative;
+  height: 100vh; /* full viewport height */
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Background image layer */
+.home-hero__bg,
+.home-hero__video-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+
+  // Gradient overlay layer
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1; // above the bg image, below content
+    pointer-events: none; // don’t block clicks
+    background: linear-gradient(
+      113deg,
+      rgb(6 48 82 / 59%) 0,
+      rgba(0, 69, 124, 0) 63.98%
+    );
+  }
+}
+
+.home-hero__bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Video layer */
+.home-hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Foreground layout */
+.home-hero__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%; /* fill full 100vh */
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem; /* space for nav */
+}
+
+/* Push hero content toward bottom */
+.home-hero__content {
+  /* This padding moves the content UP from the absolute bottom, so you
+     can align it with the middle of your bottom 35% vector-lines area. */
+  padding-bottom: clamp(4rem, 30vh, 10rem);
+}
+
+/*
+  If the vector lines occupy roughly the bottom 35% of the hero,
+  setting padding-bottom around 25–35vh will place the bottom of the
+  content near the center of that zone. You can fine-tune:
+    - smaller value => content sits lower
+    - larger value  => content sits higher
+*/
+
+/* Optional: small screens adjustments */
+
+@media (max-width: 767.98px) {
+  .home-hero__content {
+    padding-bottom: 20vh;
+  }
+}
+
+.home-hero__video-wrap video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-hero__video-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.home-hero__video-wrap video.home-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

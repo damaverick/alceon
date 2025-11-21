@@ -3,9 +3,9 @@
     position: relative;
     display: flex;
     justify-content: space-between; // text left, icon right
-    align-items: center; // vertically centered
-    padding: 2rem;
-    border-top-right-radius: 3.125rem; // rem(50)
+    align-items: end; // vertically centered
+    padding: 1.35rem 2rem 1.15rem 1rem;
+    border-top-right-radius: 2.125rem;
     color: #fff;
     overflow: hidden;
 
@@ -14,19 +14,20 @@
       flex: 1;
       color: #fff;
       font-size: 1rem;
-      line-height: 1.6;
+      line-height: rem(22);
       margin: 0;
       max-width: 80%;
+      padding-bottom:0;
     }
 
     // Icon
     &__icon {
       flex-shrink: 0;
-      margin-left: 1.5rem;
+      margin-left: 2.5rem;
 
       img {
         // width: 56px;
-        height: rem(57);
+        height: rem(60);
         width:auto;
         filter: brightness(0) invert(1); // ensures icon is white
       }

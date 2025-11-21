@@ -2,7 +2,7 @@
 
 /**
  * 
-Template Name: Single
+
 
  * @package Understrap
  */
@@ -46,11 +46,6 @@ $container = get_theme_mod('understrap_container_type');
 </div>
 
 
-<?php
-// Include modular sections
-get_template_part('template-parts/global/contact-form', 'contact');
-
-?>
 
 <?php
 get_footer();

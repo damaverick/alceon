@@ -87,24 +87,7 @@ $container = get_theme_mod('understrap_container_type');
     <?php endwhile; ?>
 <?php endif; ?>
 
-<?php
-// This will load /template-parts/global/contact-form.php
-get_template_part('template-parts/global/cta-purple');
-?>
 
 
-
-<?php
-// This will load /template-parts/global/contact-form.php
-get_template_part('template-parts/global/contact-form');
-?>
-
-
-<?php
-// This will load /template-parts/global/contact-form.php
-get_template_part('template-parts/global/disclaimer');
-?>
-
-
-<?php
+<?php get_template_part('template-parts/section/section-gradient-cta');
 get_footer();

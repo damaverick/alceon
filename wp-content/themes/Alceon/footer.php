@@ -1,3 +1,40 @@
+<?php if (
+  is_singular('case-study') &&
+  is_post_type_archive('case-study')
+) : ?>
+
+
+  <?php
+  get_template_part('template-parts/global/cta-purple');
+  ?>
+
+<?php endif; ?>
+
+
+<?php if (
+  ! is_front_page() &&
+  ! is_page('contact') &&
+  ! is_page('terms') &&
+  ! is_singular('case-study') &&
+  ! is_post_type_archive('case-study')
+) : ?>
+
+  <?php
+  get_template_part('template-parts/global/contact-form');
+  ?>
+
+<?php endif; ?>
+
+<?php if (is_page(92)) : ?>
+  <?php get_template_part('template-parts/global/disclaimer'); ?>
+<?php endif; ?>
+
+
+
+
+
+
+
 <?php
 
 /**
@@ -43,22 +80,33 @@ $container = get_theme_mod('understrap_container_type');
             <!-- Menu (left-aligned) -->
             <nav class="site-footer__nav me-3 flex-grow-1">
               <?php
-              // wp_nav_menu(
-              //   array(
-              //     'theme_location' => 'primary', // or 'footer' if you registered one
-              //     'container'      => false,
-              //     'menu_class'     => 'site-footer__nav-list list-unstyled d-flex align-items-center mb-0',
-              //     'fallback_cb'    => '',
-              //     'depth'          => 1,
-              //     'walker'         => new understrap_WP_Bootstrap_Navwalker(),
-              //   )
-              // );
+
+              wp_nav_menu(
+
+                array(
+
+
+                  'menu_id'        => 'footer',
+
+                  'container'      => false,
+
+                  'menu_class'     => 'site-footer__nav-list list-unstyled d-flex align-items-center mb-0',
+
+                  'fallback_cb'    => '',
+
+                  'depth'          => 1,
+
+                  'walker'         => new understrap_WP_Bootstrap_Navwalker(),
+
+                )
+
+              );
               ?>
             </nav>
 
             <!-- Login Button (right-aligned) -->
-            <!-- <a href="https://dynamo.dynamosoftware.com/tenant/dynamo3.netagesolutions.com/alceon/RE-Portal" target="_blank" class="btn btn-outline-light site-footer__login-btn ms-4">
-              Login -->
+            <a href="https://dynamo.dynamosoftware.com/tenant/dynamo3.netagesolutions.com/alceon/RE-Portal" target="_blank" class="btn btn-outline-light site-footer__login-btn ms-4">
+              Login
             </a>
 
           </div>
@@ -90,7 +138,7 @@ $container = get_theme_mod('understrap_container_type');
               </p>
             </div>
             <div class="col-12 col-md-6 text-md-end mt-2 mt-md-0">
-              <a href="https://alceon.local/terms/" class="site-footer__important-link text-white">Important Information</a>
+              <a href="<?php get_bloginfo('url'); ?>terms/" class="site-footer__important-link text-white">Important Information</a>
             </div>
           </div>
         </div>
@@ -103,6 +151,7 @@ $container = get_theme_mod('understrap_container_type');
 
 <?php // Closing div#page from header.php. 
 ?>
+</div><!-- #page -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
