@@ -2,4 +2,14 @@
   &__heading {
     font-size: rem(22);
   }
+
+  &__text.mb-0 {
+    max-width: 290px;
+}
+
+  img {
+    height:75px;
+    width:auto;
+  }
+  
 }

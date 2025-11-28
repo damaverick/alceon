@@ -6,15 +6,18 @@ $primaryColor: #00457c;
 $brightBlue: #155cd5;
 $purple: #5533ff; // Thats a sample how you could change a BootStrap variable.
 $primary: $purple; // Once we've changed the value, we'll also make it the primary brand color.
+$mmBlue: #003c70;
+$darkerBlue: #003763;
+$trannyBlue: rgb(#00457c, 15%);
+$trannyBlue2: rgb(#00457c, 25%);
+$trannyBlue3: rgb(0 69 124 / 65%);
 
-$bodyCopy: "Onest", sans-serif;
-$greyBg: #EEE ;
-$medGrey: #E6E6E6 !important;
-$darkGrey:#333;
+$bodyCopy: 'Onest', sans-serif;
+$greyBg: #eee;
+$medGrey: #e6e6e6 !important;
+$darkGrey: #333;
 $lightGrey: #ccc;
 $white: #fff;
 $black: #000;
 
-
 $textColor: hsla(0, 0%, 20%, 1);
-

@@ -23,17 +23,32 @@ body .section--gradient {
   }
 }
 
-// --- 2. Base Form Styles ---
-// Default styles (assumes a dark/themed background)
-.custom-hubspot-form {
-  display: flex;
+.modal-content .custom-hubspot-form {
   justify-content: flex-start;
   align-items: flex-start;
   margin-top: -1rem;
+}
+
+// --- 2. Base Form Styles ---
+// Default styles (assumes a dark/themed background)
+.custom-hubspot-form {
+  ul.no-list.hs-error-msgs.inputs-list {
+    list-style: none;
+    padding: 10px 0 0 0;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 991px) {
+    padding-top: 2rem;
+  }
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  // margin-top: -1rem;
 
   .hbspt-form {
     width: 100%;
-    max-width: 670px;
+    // max-width: 670px;
   }
 
   // Hide labels in favor of placeholders
@@ -41,12 +56,16 @@ body .section--gradient {
     display: none;
   }
 
+  label.hs-error-msg.hs-main-font-element {
+    display: block;
+  }
+
   .hs-form.stacked {
     display: flex;
     flex-direction: column;
     row-gap: 0.75rem;
     width: 100%;
-    max-width: 670px;
+    // max-width: 670px;
   }
 
   // --- Fields (Base) ---
@@ -54,7 +73,7 @@ body .section--gradient {
   select,
   textarea {
     width: 100%;
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 1rem;
     font-size: rem(16);
     border: none !important;
     border-radius: rem(100);
@@ -118,9 +137,9 @@ body .section--gradient {
   .hs-button,
   input[type='submit'] {
     @extend .btn-outline-white;
-    max-width: 100px;
+    width: auto;
     border-radius: rem(100);
-    padding: 0.35rem 1.25rem;
+    padding: 0.45rem 1.25rem 0.35rem;
     cursor: pointer;
     transition: all 0.3s ease;
 
@@ -138,7 +157,7 @@ body .section--gradient {
   }
 
   .hs_submit.hs-submit {
-    margin-top:0;
+    margin-top: 0;
   }
 
   fieldset.form-columns-1,

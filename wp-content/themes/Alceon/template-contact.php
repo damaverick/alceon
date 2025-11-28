@@ -1,8 +1,7 @@
 <?php
 
 /**
- Template Name: Contact
-
+ * Template Name: Contact
  */
 
 // Exit if accessed directly.
@@ -18,34 +17,64 @@ $container = get_theme_mod('understrap_container_type');
 
 <div id="content" tabindex="-1">
 
-  <div class="container section--white">
-
+  <div class="<?php echo esc_attr($container); ?> section--white">
     <div class="row gy-4 justify-content-between align-items-start">
 
 
-      <div class="col-lg-4 pe-0">
-        <h2>Let’s connect</h2>
-        <p class="text-blue">We welcome all enquiries, big or small. Share a few details here, and a member of our team will be in touch shortly.</p>
+      <div class="col-lg-4 pe-0 text-blue" data-aos="fade-right">
+
+
+        <?php if (get_field('intro_contact')) : ?>
+          <?php the_field('intro_contact'); // Using the_field() to allow for <p> tags from a WYSIWYG editor
+            ?>
+        <?php endif; ?>
       </div>
 
 
       <div class="col-lg-6 pe-lg-5">
 
-        <script charset="utf-8" type="text/javascript" src="//js-ap1.hsforms.net/forms/embed/v2.js"></script>
+          <script charset="utf-8" type="text/javascript" src="//js-ap1.hsforms.net/forms/embed/v2.js"></script>
+      <div class="custom-hubspot-form form-white-bg">
+<script>
+  window.hbspt.forms.create({
+    portalId: "4264043",
+    formId: "42189065-a810-4835-9d7e-2072a2d6eaf7",
+    region: "ap1",
+        
+              // 2. Updated the target to look for that specific ID
+              target: '.form-white-bg', 
+    /* This function runs once the form is loaded */
+    onFormReady: function($form) {
+        
+        // 1. First Name
+        $form.find('input[name="firstname"]').attr('placeholder', 'First Name');
+        
+        // 2. Last Name
+        $form.find('input[name="lastname"]').attr('placeholder', 'Last Name');
+        
+        // 3. Email
+        $form.find('input[name="email"]').attr('placeholder', 'name@company.com');
+        
+        // 4. Message (Textarea)
+        $form.find('textarea[name="message"]').attr('placeholder', 'How can we help?');
+
+        // 5. Company (Example of a custom field)
+        $form.find('input[name="company"]').attr('placeholder', 'Company');
+
+        // 6. Mobile  (Example of a custom field)
+        $form.find('input[name="mobilephone"]').attr('placeholder', 'Mobile Phone');
+
+        // 7. Change Submit Button Text
+        // We target the class .hs-button and change the value
+        $form.find('.hs-button').val('Submit Request');
+    }
+  });
+</script>
+ 
+    
+      </div>
 
 
-        <div class="custom-hubspot-form form-white-bg">
-          <script>
-            // hbspt.forms.create({
-            //   portalId: "45104793",
-            //   formId: "721c4dd4-9f37-4944-b86f-d4945c761935",
-            //   region: "ap1",
-            //   onFormReady: function($form) {
-            //     $form.find('input[type="submit"]').val('Submit');
-            //   }
-            // });
-          </script>
-        </div>
 
       </div>
 
@@ -56,13 +85,93 @@ $container = get_theme_mod('understrap_container_type');
 
 
 
-  <?php
-  get_template_part('template-parts/section/section-full-width-img-video');
-  ?>
+  <?php if (have_rows('flexible_content')): ?>
+    <section class="flexible-content-wrapper">
+      <?php while (have_rows('flexible_content')): the_row(); ?>
 
 
+        <?php if (get_row_layout() == 'full_width_image_or_video'):
+
+            get_template_part('template-parts/section/full-width-img-video-flex'); ?>
+
+        <?php endif; ?>
+
+
+
+      <?php endwhile; ?>
+    </section>
+  <?php endif; ?>
+
+
+
+<section class="section-contact section--gradient text-white">
+  <div class="container">
+    
+    <?php
+    // Start the main 'Country Sections' loop
+    if (have_rows('country_sections')):
+        while (have_rows('country_sections')) : the_row();
+
+            // Get the country name
+            $country_name = get_sub_field('country_name');
+            ?>
+
+            <div class="row mt-5">
+                <div class="col-12" data-aos="fade-up">
+                    <h2 class="text-white pb-0 pb-md-5"><?php echo esc_html($country_name); ?></h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <?php
+                // Start the nested 'Locations' loop
+                if (have_rows('locations')):
+
+                    // 1. Initialize counter (Resets for each country)
+                    $loc_index = 0;
+
+                    while (have_rows('locations')) : the_row();
+
+                        // Get location sub-fields
+                        $title = get_sub_field('location_title');
+                        $details = get_sub_field('location_details');
+
+                        // 2. Calculate delay (0ms, 100ms, 200ms...)
+                        $aos_delay = $loc_index * 100;
+                        ?>
+
+                        <div class="col-lg-3 col-md-6 mb-4" 
+                             data-aos="fade-up" 
+                             data-aos-delay="<?php echo intval($aos_delay); ?>">
+                            
+                            <?php if ($title): ?>
+                                <h5 class="fw-bold"><?php echo esc_html($title); ?></h5>
+                            <?php endif; ?>
+                            
+                            <?php if ($details): ?>
+                                <div class="location-details">
+                                    <?php echo wpautop($details); ?>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
+                        <?php
+                        // 3. Increment counter
+                        $loc_index++;
+                    endwhile; // End nested 'locations' loop
+                endif;
+            ?>
+            </div> 
+            
+            <?php
+        endwhile; // End main 'country_sections' loop
+    endif;
+?>
+
+  </div>
+</section>
+
+
+
   <?php
-  get_template_part('template-parts/global/contact-form');
-  ?>
-  <?php
-  get_footer();
+get_footer();

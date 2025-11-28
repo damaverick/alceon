@@ -42,20 +42,40 @@
   */
   &--overlap-bottom {
     // Add extra padding to the *section* to make room
-    padding-bottom: 6rem; // rem(70) + extra space
-    padding-top: 3rem;
+  @media (min-width:992px){
+    padding-bottom: 11rem; // rem(70) + extra space
+    padding-top: 7rem; 
 
+    .section-feature__content {
+      padding-bottom:rem(120);
+    }
+  } 
+
+   
     h3 {
       font-size: rem(40);
       font-weight: 300;
       color: $white;
-    }
+      padding-top:6rem;
+      max-width:400px;
 
-    .img-wrap {
-      margin-bottom: -#{rem(300)};
-      @media (max-width: 1200px) {
-        margin-bottom: 0;
+      @media (max-width:991px) {
+        padding-top:2rem;
       }
+    }
+.img-txt-section__row {
+  align-items:start!important;
+  @media (max-width:991px) {
+    flex-direction:column-reverse;
+
+    img {
+      margin-top:2rem;
+    }
+  }
+}
+    .img-wrap {
+     z-index:1;
+      position:relative;
     }
     // When the section has this modifier, style the image element
     .section-feature__image {
@@ -82,4 +102,26 @@
   &__content {
     // Global styles for the content area
   }
+}
+.section-feature--overlap-bottom + section {
+  position:relative;
+    @media (min-width:992px) {
+      margin-top:rem(-280);
+  padding-top:10rem;
+    }
+
+  @media (max-width:991px) {
+    margin-top:0;
+  }
+}
+
+.single-fund {
+     @media (min-width:992px) {
+
+    .section-feature--overlap-bottom + section {
+      // padding-top:7rem;
+       margin-top:rem(-280);
+      padding-botton:7rem;
+}
+   }
 }

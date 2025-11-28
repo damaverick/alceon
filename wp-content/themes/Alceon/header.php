@@ -16,14 +16,14 @@ defined('ABSPATH') || exit;
   <?php do_action('wp_body_open'); ?>
   <div class="site" id="page">
 
-  <?php if ( is_front_page() ) : ?>
+    <?php if (is_front_page()) : ?>
 
-  <?php get_template_part( 'template-parts/global/home-header' ); ?>
+      <?php get_template_part('template-parts/global/home-header'); ?>
 
-  <?php else : ?>
+    <?php else : ?>
 
-    <?php get_template_part( 'template-parts/global/internal-header' ); ?>
+      <?php get_template_part('template-parts/global/internal-header'); ?>
 
-  <?php endif; ?>
+    <?php endif; ?>
 
-  <!-- Closing #page, body, html are in footer.php -->
+    <!-- Closing #page, body, html are in footer.php -->

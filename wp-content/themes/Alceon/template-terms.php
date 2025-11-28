@@ -10,14 +10,14 @@ $container = get_theme_mod('understrap_container_type');
 // helper to make a slug if the field is blank
 function alceon_policy_slug($title, $custom_slug = '')
 {
-  $slug = trim($custom_slug);
-  if (!$slug) {
-    $slug = sanitize_title($title);
-  }
-  return $slug ?: 'section';
+    $slug = trim($custom_slug);
+    if (!$slug) {
+        $slug = sanitize_title($title);
+    }
+    return $slug ?: 'section';
 }
 ?>
-
+ 
 <div id="content" tabindex="-1">
   <div class="container section--white">
     <div class="row">
@@ -29,11 +29,11 @@ function alceon_policy_slug($title, $custom_slug = '')
           <?php if (have_rows('policies')): ?>
             <?php
             $index = 0;
-            while (have_rows('policies')): the_row();
-              $title   = get_sub_field('field_policy_title');
-              $slug    = alceon_policy_slug($title, get_sub_field('slug'));
-              $active  = ($index === 0) ? ' active' : '';
-            ?>
+              while (have_rows('policies')): the_row();
+                  $title   = get_sub_field('field_policy_title');
+                  $slug    = alceon_policy_slug($title, get_sub_field('slug'));
+                  $active  = ($index === 0) ? ' active' : '';
+                  ?>
               <li>
                 <a
                   href="#<?php echo esc_attr($slug); ?>"
@@ -43,30 +43,30 @@ function alceon_policy_slug($title, $custom_slug = '')
                 </a>
               </li>
             <?php $index++;
-            endwhile; ?>
+              endwhile; ?>
           <?php else: ?>
             <li>No policies have been added yet.</li>
           <?php endif; ?>
         </ul>
-      </div>
+      </div> 
 
       <!-- Content Area -->
       <div class="col-lg-9">
         <?php if (have_rows('policies')): ?>
           <?php
           $index = 0;
-          while (have_rows('policies')): the_row();
-            $title   = get_sub_field('field_policy_title');
-            $slug    = alceon_policy_slug($title, get_sub_field('slug'));
-            $content = get_sub_field('field_policy_content');
-            $hidden  = ($index === 0) ? '' : ' d-none';
-          ?>
+            while (have_rows('policies')): the_row();
+                $title   = get_sub_field('field_policy_title');
+                $slug    = alceon_policy_slug($title, get_sub_field('slug'));
+                $content = get_sub_field('field_policy_content');
+                $hidden  = ($index === 0) ? '' : ' d-none';
+                ?>
             <div class="policy-content<?php echo esc_attr($hidden); ?>" id="<?php echo esc_attr($slug); ?>">
               <h4><?php echo esc_html($title); ?></h4>
               <div><?php echo wp_kses_post($content); ?></div>
             </div>
           <?php $index++;
-          endwhile; ?>
+            endwhile; ?>
         <?php else: ?>
           <p>Add some policies in the page’s ACF fields to populate this area.</p>
         <?php endif; ?>

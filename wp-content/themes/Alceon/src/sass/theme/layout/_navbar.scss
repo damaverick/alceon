@@ -5,6 +5,12 @@ body {
 }
 
 
+body .home-hero,
+.hero-bg-image{
+  .menu-wrapper {
+background-color:$trannyBlue;
+  }
+}
 
 .navbar-logo {
   height: 4.5rem; // ~40px
@@ -38,8 +44,13 @@ body {
   }
 }
 
+
 .menu-wrapper {
-  background: rgb(9 12 14 / 15%);
+ 
+  background-color: $mmBlue;
+
+  
+  
   background-blend-mode: multiply;
   min-width: rem(800);
 
@@ -88,12 +99,13 @@ body {
       color: #fff;
       margin: 0;
       transition: color 0.3s ease;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      border-radius: rem(100);
+      padding-top: rem(8)!Important;
+      padding-bottom: rem(8)!Important;
+      border-radius: rem(100)!Important;
       display: block;
 
-      &:hover {
+      &:hover,
+      {
         background-color: rgba(0, 0, 0, 0.2);
         text-decoration: none;
         color: $white;
@@ -102,6 +114,12 @@ body {
     }
   }
 }
+
+body .navbar-nav  li.current-menu-item  .nav-link {
+background-color: rgba(0, 0, 0, 0.2)!important;
+}
+
+
 body li.nav-item {
   margin-bottom: 0 !important;
   margin-right: rem(10);

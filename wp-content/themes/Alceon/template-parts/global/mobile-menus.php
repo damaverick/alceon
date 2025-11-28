@@ -7,7 +7,7 @@
 
       <div class="offcanvas-body d-flex flex-column">
 
-          <div class="flex-grow-1 overflow-y-auto">
+          <div class="flex-grow-0 overflow-y-auto">
               <?php
                 wp_nav_menu(array(
                     'theme_location' => 'mobile_menu', // Use mobile menu
@@ -16,10 +16,12 @@
                     'fallback_cb'    => false,
                     'walker'         => null,
                 ));
-                ?>
+              ?>
           </div>
 
-          <div class="mt-auto pt-4 border-top">
+          <div class="mt-4 pt-4 border-top">
+              <div class="mt-4"> <?php get_template_part('inc/select-drop-down'); ?> </div>
+
           </div>
 
       </div>
@@ -48,22 +50,22 @@
               </div>
           </div>
 
-          <div class="flex-grow-1 mt-2 overflow-y-auto">
+          <div class="flex-grow-0 mt-2 overflow-y-auto">
 
               <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'mobile_menu', // Use mobile menu
-                    'container'      => false,
-                    'menu_class'     => 'navbar-nav mobile-accordion-menu', // Use accordion class
-                    'fallback_cb'    => false,
-                    'walker'         => null,
-                ));
-                ?>
+              wp_nav_menu(array(
+                  'theme_location' => 'mobile_menu', // Use mobile menu
+                  'container'      => false,
+                  'menu_class'     => 'navbar-nav mobile-accordion-menu', // Use accordion class
+                  'fallback_cb'    => false,
+                  'walker'         => null,
+              ));
+              ?>
 
 
           </div>
 
-          <div class="mt-auto"> <?php get_template_part('inc/select-drop-down'); ?> </div>
+          <div class="mt-4"> <?php get_template_part('inc/select-drop-down'); ?> </div>
 
       </div>
   </div>

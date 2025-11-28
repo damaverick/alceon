@@ -1,115 +1,77 @@
-/* ============================================
-   Global section spacing
-   Targets any element with class starting with .section--
-   ============================================ */
-[class^="section--"],
-[class*=" section--"] {
+/* ==========================================
+   Base Section Styles
+   ========================================== */
+
+[class^='section--'],
+[class*=' section--'] {
   padding-top: 7rem;
   padding-bottom: 7rem;
 
+  // Avoid double spacing when children have margins
   > *:first-child {
     margin-top: 0;
-  } // prevent double top space
-  > *:last-child {
+  }
+  > *:last-child:not(h2) {
     margin-bottom: 0;
-  } // prevent double bottom space
+  }
 
-  [class*="col-"] {
+  [class*='col-'] {
     > :first-child {
-      margin-top: 0 !important;
+      // margin-top: 0 !important;
     }
-    // > :last-child {
-    //   margin-bottom: 0 !important;
-    // }
+    > *:last-child:not(h2) {
+      margin-bottom: 0 !important;
+    }
   }
 
   @media (max-width: 1199.98px) {
     padding-top: 5rem;
     padding-bottom: 5rem;
-  } // lg-
+  }
+
   @media (max-width: 991.98px) {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  } // md-
- 
-  
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
 }
 
 /* ==========================================
-   Image Section (BEM) — parallax-ready
+   Section Modifiers (Colors & Layouts)
    ========================================== */
-.image-section {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
 
-  /* Movable background layer (the parallax target) */
-  &__background {
-    position: absolute;
-    /* spill so edges never show while translating */
-    inset: -12vh 0 -12vh 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
-    transition: transform 0.06s linear;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  /* Any foreground content should stack above the bg */
-  > *:not(&__background) {
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    &__background {
-      inset: 0;
-      transform: none !important;
-      transition: none;
-    }
-  }
-
-  /* Half-height variant */
-  &--half {
-    /* If you have a rem() helper, use rem(450); otherwise 28.125rem ≈ 450px */
-    min-height: rem(450);
-    overflow: hidden;
-  }
-
-  /* Full-bleed variant (keep if you use it elsewhere) */
-  &--full {
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    min-height: rem(733); /* adjust as needed */
-    overflow: hidden;
-  }
+/* White section */
+.section--white {
+  background-color: $white;
 }
 
-/* Optional page tweak (keep if you rely on it) */
-.page-id-13 .image-section--full {
-  min-height: rem(576);
+/* White + white compression */
+.section--white + .section--white {
+  padding-top: 0 !important;
 }
 
-/* Optional: non-100vh variant (fixed aspect) */
-.image-section--ratio {
-  min-height: auto;
-  aspect-ratio: 16 / 9; // modern browsers
+/* Overlap tweak */
+.section-feature--overlap-bottom + .section--white {
+  margin-top: -3.125rem; // rem(-50)
 }
 
-/* Dark blue section */
+/* Blog Hero Override */
+.section--blog-hero {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  overflow: visible;
+}
+
+/* Dark Blue Variants */
 .section--dark-blue,
 .section--blue {
   background-color: $primaryColor;
-  color: #fff;
+  color: $white;
 
   h2,
   h3,
-  p {
+  p,
+  strong,
+  li {
     color: $white;
   }
 
@@ -119,8 +81,29 @@
   }
 }
 
-/* Gradient section */
+.section--darker-blue {
+  background-color: $darkerBlue;
+  color: $white;
+
+  h2,
+  h3,
+  p,
+  strong,
+  li {
+    color: $white;
+  }
+
+  .btn-outline-primary {
+    border-color: $white;
+    color: $white;
+  }
+}
+
+/* Gradient Sections */
 .section--gradient {
+  p {
+    font-weight: 500;
+  }
   background:
     linear-gradient(
       278.74deg,
@@ -135,70 +118,127 @@
     );
 }
 
-.img-txt-section {
-  p {
-    /* max-width:425px; */
-  }
-}
-
-/* Grey section */
-.section--grey {
-  background: $greyBg;
-
-  .border-top {
-    border-color: $lightGrey !important;
-  }
-}
-
-/* Purple gradient section */
 .section--gradient-purple {
   padding-top: 5rem;
   padding-bottom: 5rem;
+  background:
+    linear-gradient(0deg, #6961ff, #6961ff),
+    linear-gradient(273.55deg, rgba(0, 0, 0, 0) 46.82%, rgba(0, 0, 0, 0.2) 100%);
 
   h2 {
     margin-bottom: 1rem;
     max-width: unset;
   }
-
   p {
     margin-bottom: 0;
   }
-
-  background:
-    linear-gradient(0deg, #6961ff, #6961ff),
-    linear-gradient(273.55deg, rgba(0, 0, 0, 0) 46.82%, rgba(0, 0, 0, 0.2) 100%);
 }
 
-/* Overlap tweak */
-.section-feature--overlap-bottom + .section--white + .section--white {
-  margin-top: -3.125rem; // rem(-50)
-}
+/* Grey Section */
+.section--grey {
+  background: $greyBg;
+  padding-top: 6rem;
+  padding-bottom: 5rem;
 
-/* White + white compression */
-.section--white + .section--white {
-  padding-top: 0 !important;
-}
+  .border-top {
+    border-color: $lightGrey !important;
 
-/* Blog hero */
-.section {
-  &--blog-hero {
-    // min-height: 32.5rem; // if needed
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    overflow: visible;
+    @media (max-width: 991px) {
+      border-top: none !important;
+
+      &:first-child {
+        padding-top: 0 !important;
+      }
+    }
   }
 }
 
-.page-id-13 .image-section--full {
-  min-height: rem(576);
+/* Heading-text + grey special case */
+.section--heading-text.section--grey {
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
-// ===== VBV (Vimeo Background Video) – simplified =====
+/* Image + text section tweaks */
+.img-txt-section {
+  p {
+    /* max-width: 425px; */
+  }
+}
+
+/* ==========================================
+   Image Section (BEM) — FIXED (No Parallax)
+   ========================================== */
+
+.image-section {
+  position: relative;
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: cover;
+    background-position: center;
+  will-change: transform;
+
+  // Background layer (Parallax removed for better fit)
+  &__background {
+    position: absolute;
+    inset: 0; // Snapped to edges (was -12vh)
+    height: 100%;
+    width: 100%;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    // Adjusted to show heads (Top 20%)
+    background-position: center 32%;
+
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  // Any foreground content should stack above the bg
+  > *:not(.image-section__background) {
+    position: relative;
+    z-index: 2;
+  }
+
+  // Half-height variant
+  &--half {
+    min-height: rem(490);
+    overflow: hidden;
+    z-index: 2;
+
+    @media (max-width: 991px) {
+      min-height: rem(200);
+      // Ensure mobile focuses on top of image
+      .image-section__background {
+        background-position: center top;
+      }
+    }
+  }
+
+  // Full-bleed variant
+  &--full {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    min-height: rem(733);
+    overflow: hidden;
+  }
+
+  // Optional: fixed aspect ratio variant
+  &--ratio {
+    min-height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ==========================================
+   VBV (Vimeo Background Video)
+   ========================================== */
 
 $vbv-hero-min-height: 70vh !default;
 $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
-
-
 
 .vbv-hero {
   position: relative;
@@ -207,7 +247,7 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
   overflow: hidden;
   isolation: isolate;
 
-  // the fallback still image (set via inline style)
+  // fallback still image
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -232,18 +272,15 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
     z-index: 0;
   }
 
-  // Vimeo iframe behaves like background-size: cover (16:9)
   &__iframe {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     width: 100vw;
     height: 56.25vw; // 9/16 of width
     min-width: 177.78vh; // 16/9 of height
     min-height: 100vh;
-
     pointer-events: none;
     display: block;
     border: 0;
@@ -263,24 +300,57 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
   position: relative;
   min-height: 70vh;
   overflow: hidden;
-}
 
-.home-hero--vbv > .vbv-hero {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
+  > .vbv-hero {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
 
-
-.home-hero--vbv .home-hero__inner {
-  position: relative;
-  z-index: 5;
-}
-.home-hero--vbv .home-hero__topbar {
+  .home-hero__inner {
     position: relative;
-  z-index: 6;
+    z-index: 5;
+    padding-top: 7rem;
+    padding-bottom: 6rem;
+  }
+
+  .home-hero__topbar {
+    position: relative;
+    z-index: 6;
+  }
 }
-.home-hero__inner {
-  padding-top: 7rem;
-  padding-bottom: 6rem;
+
+/* ==========================================
+   Page Specific & Miscellaneous
+   ========================================== */
+
+/* Offer row mobile stacking */
+.offer-row {
+  @media (max-width: 991px) {
+    flex-direction: column-reverse;
+
+    img {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+/* Page ID 13 tweak */
+.page-id-13 {
+  .image-section--full {
+    min-height: rem(576);
+
+    @media (max-width: 991px) {
+      min-height: rem(376);
+    }
+  }
+}
+
+/* About Us template tweak */
+.page-template-template-about-us {
+  @media (max-width: 992px) {
+    .section--white.row {
+      padding-bottom: 0 !important;
+    }
+  }
 }

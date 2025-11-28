@@ -1,10 +1,9 @@
 .section-contact {
-
   h2 {
-     max-width:rem(400);
+    max-width: rem(400);
   }
   p {
-    max-width:rem(430);
+    max-width: rem(430);
   }
   position: relative;
   z-index: 1;
@@ -16,15 +15,15 @@
     rgba(21, 92, 213, 0.95) 100%
   );
   overflow: hidden;
-  min-height:rem(600);
+  min-height: rem(600);
 
   /* SVG lines via ::before */
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0; /* top:0, right:0, bottom:0, left:0 */
-    background: url("../img/lines.svg") center/cover no-repeat;
-    opacity: 0.3; /* control visibility of SVG lines */
+    background: url('../img/lines.svg') center/cover no-repeat;
+    opacity: 0.65; /* control visibility of SVG lines */
     z-index: 0; /* stays behind content */
   }
 
@@ -36,5 +35,5 @@
 }
 
 .page-template-template-contact .section-contact::before {
-  display:none;
+  display: none;
 }

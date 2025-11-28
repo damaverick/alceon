@@ -51,6 +51,11 @@
   border-radius: 100px;
   font-size: rem(16);
   cursor: pointer;
+
+  @media (max-width:991px) {
+      padding: rem(8) rem(20); /* Right padding to avoid text overlapping the arrow */
+
+  }
 }
 
 /* Style the dropdown options */
@@ -75,6 +80,12 @@
   transition:
     background-color 0.2s,
     color 0.2s;
+
+  
+  @media (max-width:991px) {
+      padding: rem(8) rem(20); /* Right padding to avoid text overlapping the arrow */
+
+  }
 }
 
 .go-button:hover {

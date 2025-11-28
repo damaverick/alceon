@@ -1,6 +1,24 @@
+.home-hero,
+.hero-bg-image {
+
+  .mega-menu-wrapper {
+ background: $trannyBlue2;
+}
+
+}
+
+
+.page-id-27 .hero-bg-image,
+.page-id-125  .hero-bg-image {
+  
+    .mega-menu-wrapper {
+ background: $trannyBlue3;
+}
+  
+}
 .mega-menu-wrapper {
   display: none;
-  background: #013d6c; // $primaryColor
+   background:#003c70;
   color: #fff;
   border-radius: rem(10);
   z-index: 999;
@@ -83,4 +101,33 @@
   #mega-menu-capital {
     display: none !important;
   }
+}
+
+//  SWEEP
+
+/* 1. Define the Keyframe Animation */
+@keyframes sweepInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px); /* Starts slightly to the left */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* Ends in original position */
+  }
+}
+
+/* 2. Set Initial State of Items */
+/* We target headers and list items inside your wrapper */
+#mega-menu-capital h5,
+#mega-menu-capital h6,
+#mega-menu-capital li {
+  opacity: 0; /* Hidden by default so they don't flash before animating */
+  will-change: transform, opacity; /* Performance optimization */
+}
+
+/* 3. The Active Class */
+/* JS will add this class. 'forwards' keeps the element visible after animation ends */
+.animate-sweep-item {
+  animation: sweepInFromLeft 0.4s ease-out forwards;
 }

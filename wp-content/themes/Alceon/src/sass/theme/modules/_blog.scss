@@ -89,11 +89,12 @@
       font-weight: 400;
       color: #000;
       margin-top: 0.25rem;
-      margin-bottom: auto;
+      margin-bottom: .5rem!important;
       max-width: rem(330);
     }
 
     .btn {
+ // margin-top: 1rem!Important;
       align-self: flex-start;
     }
   }

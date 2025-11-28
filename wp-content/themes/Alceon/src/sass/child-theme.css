@@ -630,7 +630,7 @@ progress {
 .container-lg,
 .container-md,
 .container-sm {
-  --bs-gutter-x: 1.5rem;
+  --bs-gutter-x: 3rem;
   --bs-gutter-y: 0;
   width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
@@ -665,7 +665,7 @@ progress {
   }
 }
 .row {
-  --bs-gutter-x: 1.5rem;
+  --bs-gutter-x: 3rem;
   --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
@@ -1988,24 +1988,7 @@ progress {
   color: #6c757d;
 }
 
-.form-control, .wpcf7 .wpcf7-validation-errors, .wpcf7 input[type=text],
-.wpcf7 input[type=search],
-.wpcf7 input[type=url],
-.wpcf7 input[type=tel],
-.wpcf7 input[type=number],
-.wpcf7 input[type=range],
-.wpcf7 input[type=date],
-.wpcf7 input[type=month],
-.wpcf7 input[type=week],
-.wpcf7 input[type=time],
-.wpcf7 input[type=datetime],
-.wpcf7 input[type=datetime-local],
-.wpcf7 input[type=color],
-.wpcf7 input[type=email],
-.wpcf7 input[type=file],
-.wpcf7 input[type=submit],
-.wpcf7 select,
-.wpcf7 textarea {
+.form-control {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -2023,147 +2006,39 @@ progress {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control, .wpcf7 .wpcf7-validation-errors, .wpcf7 input[type=text],
-  .wpcf7 input[type=search],
-  .wpcf7 input[type=url],
-  .wpcf7 input[type=tel],
-  .wpcf7 input[type=number],
-  .wpcf7 input[type=range],
-  .wpcf7 input[type=date],
-  .wpcf7 input[type=month],
-  .wpcf7 input[type=week],
-  .wpcf7 input[type=time],
-  .wpcf7 input[type=datetime],
-  .wpcf7 input[type=datetime-local],
-  .wpcf7 input[type=color],
-  .wpcf7 input[type=email],
-  .wpcf7 input[type=file],
-  .wpcf7 input[type=submit],
-  .wpcf7 select,
-  .wpcf7 textarea {
+  .form-control {
     transition: none;
   }
 }
-.form-control[type=file], .wpcf7 [type=file].wpcf7-validation-errors,
-.wpcf7 input[type=file],
-.wpcf7 select[type=file],
-.wpcf7 textarea[type=file] {
+.form-control[type=file] {
   overflow: hidden;
 }
-.form-control[type=file]:not(:disabled):not([readonly]), .wpcf7 [type=file].wpcf7-validation-errors:not(:disabled):not([readonly]),
-.wpcf7 input[type=file]:not(:disabled):not([readonly]),
-.wpcf7 select[type=file]:not(:disabled):not([readonly]),
-.wpcf7 textarea[type=file]:not(:disabled):not([readonly]) {
+.form-control[type=file]:not(:disabled):not([readonly]) {
   cursor: pointer;
 }
-.form-control:focus, .wpcf7 .wpcf7-validation-errors:focus, .wpcf7 input[type=text]:focus,
-.wpcf7 input[type=search]:focus,
-.wpcf7 input[type=url]:focus,
-.wpcf7 input[type=tel]:focus,
-.wpcf7 input[type=number]:focus,
-.wpcf7 input[type=range]:focus,
-.wpcf7 input[type=date]:focus,
-.wpcf7 input[type=month]:focus,
-.wpcf7 input[type=week]:focus,
-.wpcf7 input[type=time]:focus,
-.wpcf7 input[type=datetime]:focus,
-.wpcf7 input[type=datetime-local]:focus,
-.wpcf7 input[type=color]:focus,
-.wpcf7 input[type=email]:focus,
-.wpcf7 input[type=file]:focus,
-.wpcf7 input[type=submit]:focus,
-.wpcf7 select:focus,
-.wpcf7 textarea:focus {
+.form-control:focus {
   color: #212529;
   background-color: #fff;
   border-color: #aa99ff;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(85, 51, 255, 0.25);
 }
-.form-control::-webkit-date-and-time-value, .wpcf7 .wpcf7-validation-errors::-webkit-date-and-time-value, .wpcf7 input[type=text]::-webkit-date-and-time-value,
-.wpcf7 input[type=search]::-webkit-date-and-time-value,
-.wpcf7 input[type=url]::-webkit-date-and-time-value,
-.wpcf7 input[type=tel]::-webkit-date-and-time-value,
-.wpcf7 input[type=number]::-webkit-date-and-time-value,
-.wpcf7 input[type=range]::-webkit-date-and-time-value,
-.wpcf7 input[type=date]::-webkit-date-and-time-value,
-.wpcf7 input[type=month]::-webkit-date-and-time-value,
-.wpcf7 input[type=week]::-webkit-date-and-time-value,
-.wpcf7 input[type=time]::-webkit-date-and-time-value,
-.wpcf7 input[type=datetime]::-webkit-date-and-time-value,
-.wpcf7 input[type=datetime-local]::-webkit-date-and-time-value,
-.wpcf7 input[type=color]::-webkit-date-and-time-value,
-.wpcf7 input[type=email]::-webkit-date-and-time-value,
-.wpcf7 input[type=file]::-webkit-date-and-time-value,
-.wpcf7 input[type=submit]::-webkit-date-and-time-value,
-.wpcf7 select::-webkit-date-and-time-value,
-.wpcf7 textarea::-webkit-date-and-time-value {
+.form-control::-webkit-date-and-time-value {
   height: 1.5em;
 }
-.form-control::-moz-placeholder, .wpcf7 .wpcf7-validation-errors::-moz-placeholder, .wpcf7 input[type=text]::-moz-placeholder, .wpcf7 input[type=search]::-moz-placeholder, .wpcf7 input[type=url]::-moz-placeholder, .wpcf7 input[type=tel]::-moz-placeholder, .wpcf7 input[type=number]::-moz-placeholder, .wpcf7 input[type=range]::-moz-placeholder, .wpcf7 input[type=date]::-moz-placeholder, .wpcf7 input[type=month]::-moz-placeholder, .wpcf7 input[type=week]::-moz-placeholder, .wpcf7 input[type=time]::-moz-placeholder, .wpcf7 input[type=datetime]::-moz-placeholder, .wpcf7 input[type=datetime-local]::-moz-placeholder, .wpcf7 input[type=color]::-moz-placeholder, .wpcf7 input[type=email]::-moz-placeholder, .wpcf7 input[type=file]::-moz-placeholder, .wpcf7 input[type=submit]::-moz-placeholder, .wpcf7 select::-moz-placeholder, .wpcf7 textarea::-moz-placeholder {
+.form-control::-moz-placeholder {
   color: #6c757d;
   opacity: 1;
 }
-.form-control::placeholder, .wpcf7 .wpcf7-validation-errors::placeholder, .wpcf7 input[type=text]::placeholder,
-.wpcf7 input[type=search]::placeholder,
-.wpcf7 input[type=url]::placeholder,
-.wpcf7 input[type=tel]::placeholder,
-.wpcf7 input[type=number]::placeholder,
-.wpcf7 input[type=range]::placeholder,
-.wpcf7 input[type=date]::placeholder,
-.wpcf7 input[type=month]::placeholder,
-.wpcf7 input[type=week]::placeholder,
-.wpcf7 input[type=time]::placeholder,
-.wpcf7 input[type=datetime]::placeholder,
-.wpcf7 input[type=datetime-local]::placeholder,
-.wpcf7 input[type=color]::placeholder,
-.wpcf7 input[type=email]::placeholder,
-.wpcf7 input[type=file]::placeholder,
-.wpcf7 input[type=submit]::placeholder,
-.wpcf7 select::placeholder,
-.wpcf7 textarea::placeholder {
+.form-control::placeholder {
   color: #6c757d;
   opacity: 1;
 }
-.form-control:disabled, .wpcf7 .wpcf7-validation-errors:disabled, .wpcf7 input[type=text]:disabled,
-.wpcf7 input[type=search]:disabled,
-.wpcf7 input[type=url]:disabled,
-.wpcf7 input[type=tel]:disabled,
-.wpcf7 input[type=number]:disabled,
-.wpcf7 input[type=range]:disabled,
-.wpcf7 input[type=date]:disabled,
-.wpcf7 input[type=month]:disabled,
-.wpcf7 input[type=week]:disabled,
-.wpcf7 input[type=time]:disabled,
-.wpcf7 input[type=datetime]:disabled,
-.wpcf7 input[type=datetime-local]:disabled,
-.wpcf7 input[type=color]:disabled,
-.wpcf7 input[type=email]:disabled,
-.wpcf7 input[type=file]:disabled,
-.wpcf7 input[type=submit]:disabled,
-.wpcf7 select:disabled,
-.wpcf7 textarea:disabled {
+.form-control:disabled {
   background-color: #e9ecef;
   opacity: 1;
 }
-.form-control::file-selector-button, .wpcf7 .wpcf7-validation-errors::file-selector-button, .wpcf7 input[type=text]::file-selector-button,
-.wpcf7 input[type=search]::file-selector-button,
-.wpcf7 input[type=url]::file-selector-button,
-.wpcf7 input[type=tel]::file-selector-button,
-.wpcf7 input[type=number]::file-selector-button,
-.wpcf7 input[type=range]::file-selector-button,
-.wpcf7 input[type=date]::file-selector-button,
-.wpcf7 input[type=month]::file-selector-button,
-.wpcf7 input[type=week]::file-selector-button,
-.wpcf7 input[type=time]::file-selector-button,
-.wpcf7 input[type=datetime]::file-selector-button,
-.wpcf7 input[type=datetime-local]::file-selector-button,
-.wpcf7 input[type=color]::file-selector-button,
-.wpcf7 input[type=email]::file-selector-button,
-.wpcf7 input[type=file]::file-selector-button,
-.wpcf7 input[type=submit]::file-selector-button,
-.wpcf7 select::file-selector-button,
-.wpcf7 textarea::file-selector-button {
+.form-control::file-selector-button {
   padding: 0.375rem 0.75rem;
   margin: -0.375rem -0.75rem;
   margin-inline-end: 0.75rem;
@@ -2178,45 +2053,11 @@ progress {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .form-control::file-selector-button, .wpcf7 .wpcf7-validation-errors::file-selector-button, .wpcf7 input[type=text]::file-selector-button,
-  .wpcf7 input[type=search]::file-selector-button,
-  .wpcf7 input[type=url]::file-selector-button,
-  .wpcf7 input[type=tel]::file-selector-button,
-  .wpcf7 input[type=number]::file-selector-button,
-  .wpcf7 input[type=range]::file-selector-button,
-  .wpcf7 input[type=date]::file-selector-button,
-  .wpcf7 input[type=month]::file-selector-button,
-  .wpcf7 input[type=week]::file-selector-button,
-  .wpcf7 input[type=time]::file-selector-button,
-  .wpcf7 input[type=datetime]::file-selector-button,
-  .wpcf7 input[type=datetime-local]::file-selector-button,
-  .wpcf7 input[type=color]::file-selector-button,
-  .wpcf7 input[type=email]::file-selector-button,
-  .wpcf7 input[type=file]::file-selector-button,
-  .wpcf7 input[type=submit]::file-selector-button,
-  .wpcf7 select::file-selector-button,
-  .wpcf7 textarea::file-selector-button {
+  .form-control::file-selector-button {
     transition: none;
   }
 }
-.form-control:hover:not(:disabled):not([readonly])::file-selector-button, .wpcf7 .wpcf7-validation-errors:hover:not(:disabled):not([readonly])::file-selector-button, .wpcf7 input[type=text]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=search]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=url]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=tel]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=number]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=range]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=date]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=month]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=week]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=time]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=datetime]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=datetime-local]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=color]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=email]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=file]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 input[type=submit]:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 select:hover:not(:disabled):not([readonly])::file-selector-button,
-.wpcf7 textarea:hover:not(:disabled):not([readonly])::file-selector-button {
+.form-control:hover:not(:disabled):not([readonly])::file-selector-button {
   background-color: rgb(221.35, 224.2, 227.05);
 }
 
@@ -2263,8 +2104,7 @@ progress {
   margin-inline-end: 1rem;
 }
 
-textarea.form-control, .wpcf7 textarea.wpcf7-validation-errors,
-.wpcf7 textarea {
+textarea.form-control {
   min-height: calc(1.5em + 0.75rem + 2px);
 }
 textarea.form-control-sm {
@@ -2474,7 +2314,7 @@ textarea.form-control-lg {
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
 }
-.btn-check[disabled] + .btn, .wpcf7 .btn-check[disabled] + input[type=submit], .woocommerce-info .btn-check[disabled] + a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-check[disabled] + a.button, .btn-check:disabled + .btn, .wpcf7 .btn-check:disabled + input[type=submit], .woocommerce-info .btn-check:disabled + a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-check:disabled + a.button {
+.btn-check[disabled] + .btn, .btn-check:disabled + .btn {
   pointer-events: none;
   filter: none;
   opacity: 0.65;
@@ -2573,24 +2413,7 @@ textarea.form-control-lg {
 .form-floating {
   position: relative;
 }
-.form-floating > .form-control, .wpcf7 .form-floating > .wpcf7-validation-errors, .wpcf7 .form-floating > input[type=text],
-.wpcf7 .form-floating > input[type=search],
-.wpcf7 .form-floating > input[type=url],
-.wpcf7 .form-floating > input[type=tel],
-.wpcf7 .form-floating > input[type=number],
-.wpcf7 .form-floating > input[type=range],
-.wpcf7 .form-floating > input[type=date],
-.wpcf7 .form-floating > input[type=month],
-.wpcf7 .form-floating > input[type=week],
-.wpcf7 .form-floating > input[type=time],
-.wpcf7 .form-floating > input[type=datetime],
-.wpcf7 .form-floating > input[type=datetime-local],
-.wpcf7 .form-floating > input[type=color],
-.wpcf7 .form-floating > input[type=email],
-.wpcf7 .form-floating > input[type=file],
-.wpcf7 .form-floating > input[type=submit],
-.wpcf7 .form-floating > select,
-.wpcf7 .form-floating > textarea,
+.form-floating > .form-control,
 .form-floating > .form-control-plaintext,
 .form-floating > .form-select {
   height: calc(3.5rem + 2px);
@@ -2617,113 +2440,28 @@ textarea.form-control-lg {
     transition: none;
   }
 }
-.form-floating > .form-control, .wpcf7 .form-floating > .wpcf7-validation-errors, .wpcf7 .form-floating > input[type=text],
-.wpcf7 .form-floating > input[type=search],
-.wpcf7 .form-floating > input[type=url],
-.wpcf7 .form-floating > input[type=tel],
-.wpcf7 .form-floating > input[type=number],
-.wpcf7 .form-floating > input[type=range],
-.wpcf7 .form-floating > input[type=date],
-.wpcf7 .form-floating > input[type=month],
-.wpcf7 .form-floating > input[type=week],
-.wpcf7 .form-floating > input[type=time],
-.wpcf7 .form-floating > input[type=datetime],
-.wpcf7 .form-floating > input[type=datetime-local],
-.wpcf7 .form-floating > input[type=color],
-.wpcf7 .form-floating > input[type=email],
-.wpcf7 .form-floating > input[type=file],
-.wpcf7 .form-floating > input[type=submit],
-.wpcf7 .form-floating > select,
-.wpcf7 .form-floating > textarea,
+.form-floating > .form-control,
 .form-floating > .form-control-plaintext {
   padding: 1rem 0.75rem;
 }
-.form-floating > .form-control::-moz-placeholder, .wpcf7 .form-floating > .wpcf7-validation-errors::-moz-placeholder, .wpcf7 .form-floating > input[type=text]::-moz-placeholder, .wpcf7 .form-floating > input[type=search]::-moz-placeholder, .wpcf7 .form-floating > input[type=url]::-moz-placeholder, .wpcf7 .form-floating > input[type=tel]::-moz-placeholder, .wpcf7 .form-floating > input[type=number]::-moz-placeholder, .wpcf7 .form-floating > input[type=range]::-moz-placeholder, .wpcf7 .form-floating > input[type=date]::-moz-placeholder, .wpcf7 .form-floating > input[type=month]::-moz-placeholder, .wpcf7 .form-floating > input[type=week]::-moz-placeholder, .wpcf7 .form-floating > input[type=time]::-moz-placeholder, .wpcf7 .form-floating > input[type=datetime]::-moz-placeholder, .wpcf7 .form-floating > input[type=datetime-local]::-moz-placeholder, .wpcf7 .form-floating > input[type=color]::-moz-placeholder, .wpcf7 .form-floating > input[type=email]::-moz-placeholder, .wpcf7 .form-floating > input[type=file]::-moz-placeholder, .wpcf7 .form-floating > input[type=submit]::-moz-placeholder, .wpcf7 .form-floating > select::-moz-placeholder, .wpcf7 .form-floating > textarea::-moz-placeholder, .form-floating > .form-control-plaintext::-moz-placeholder {
+.form-floating > .form-control::-moz-placeholder, .form-floating > .form-control-plaintext::-moz-placeholder {
   color: transparent;
 }
-.form-floating > .form-control::placeholder, .wpcf7 .form-floating > .wpcf7-validation-errors::placeholder, .wpcf7 .form-floating > input[type=text]::placeholder,
-.wpcf7 .form-floating > input[type=search]::placeholder,
-.wpcf7 .form-floating > input[type=url]::placeholder,
-.wpcf7 .form-floating > input[type=tel]::placeholder,
-.wpcf7 .form-floating > input[type=number]::placeholder,
-.wpcf7 .form-floating > input[type=range]::placeholder,
-.wpcf7 .form-floating > input[type=date]::placeholder,
-.wpcf7 .form-floating > input[type=month]::placeholder,
-.wpcf7 .form-floating > input[type=week]::placeholder,
-.wpcf7 .form-floating > input[type=time]::placeholder,
-.wpcf7 .form-floating > input[type=datetime]::placeholder,
-.wpcf7 .form-floating > input[type=datetime-local]::placeholder,
-.wpcf7 .form-floating > input[type=color]::placeholder,
-.wpcf7 .form-floating > input[type=email]::placeholder,
-.wpcf7 .form-floating > input[type=file]::placeholder,
-.wpcf7 .form-floating > input[type=submit]::placeholder,
-.wpcf7 .form-floating > select::placeholder,
-.wpcf7 .form-floating > textarea::placeholder,
+.form-floating > .form-control::placeholder,
 .form-floating > .form-control-plaintext::placeholder {
   color: transparent;
 }
-.form-floating > .form-control:not(:-moz-placeholder), .wpcf7 .form-floating > .wpcf7-validation-errors:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=text]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=search]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=url]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=tel]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=number]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=range]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=date]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=month]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=week]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=time]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=datetime]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=datetime-local]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=color]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=email]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=file]:not(:-moz-placeholder), .wpcf7 .form-floating > input[type=submit]:not(:-moz-placeholder), .wpcf7 .form-floating > select:not(:-moz-placeholder), .wpcf7 .form-floating > textarea:not(:-moz-placeholder), .form-floating > .form-control-plaintext:not(:-moz-placeholder) {
+.form-floating > .form-control:not(:-moz-placeholder), .form-floating > .form-control-plaintext:not(:-moz-placeholder) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:focus, .wpcf7 .form-floating > .wpcf7-validation-errors:focus, .wpcf7 .form-floating > input[type=text]:focus,
-.wpcf7 .form-floating > input[type=search]:focus,
-.wpcf7 .form-floating > input[type=url]:focus,
-.wpcf7 .form-floating > input[type=tel]:focus,
-.wpcf7 .form-floating > input[type=number]:focus,
-.wpcf7 .form-floating > input[type=range]:focus,
-.wpcf7 .form-floating > input[type=date]:focus,
-.wpcf7 .form-floating > input[type=month]:focus,
-.wpcf7 .form-floating > input[type=week]:focus,
-.wpcf7 .form-floating > input[type=time]:focus,
-.wpcf7 .form-floating > input[type=datetime]:focus,
-.wpcf7 .form-floating > input[type=datetime-local]:focus,
-.wpcf7 .form-floating > input[type=color]:focus,
-.wpcf7 .form-floating > input[type=email]:focus,
-.wpcf7 .form-floating > input[type=file]:focus,
-.wpcf7 .form-floating > input[type=submit]:focus,
-.wpcf7 .form-floating > select:focus,
-.wpcf7 .form-floating > textarea:focus, .form-floating > .form-control:not(:placeholder-shown), .wpcf7 .form-floating > .wpcf7-validation-errors:not(:placeholder-shown), .wpcf7 .form-floating > input[type=text]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=search]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=url]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=tel]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=number]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=range]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=date]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=month]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=week]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=time]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=datetime]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=datetime-local]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=color]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=email]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=file]:not(:placeholder-shown),
-.wpcf7 .form-floating > input[type=submit]:not(:placeholder-shown),
-.wpcf7 .form-floating > select:not(:placeholder-shown),
-.wpcf7 .form-floating > textarea:not(:placeholder-shown),
+.form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown),
 .form-floating > .form-control-plaintext:focus,
 .form-floating > .form-control-plaintext:not(:placeholder-shown) {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:-webkit-autofill, .wpcf7 .form-floating > .wpcf7-validation-errors:-webkit-autofill, .wpcf7 .form-floating > input[type=text]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=search]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=url]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=tel]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=number]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=range]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=date]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=month]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=week]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=time]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=datetime]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=datetime-local]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=color]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=email]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=file]:-webkit-autofill,
-.wpcf7 .form-floating > input[type=submit]:-webkit-autofill,
-.wpcf7 .form-floating > select:-webkit-autofill,
-.wpcf7 .form-floating > textarea:-webkit-autofill,
+.form-floating > .form-control:-webkit-autofill,
 .form-floating > .form-control-plaintext:-webkit-autofill {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
@@ -2732,71 +2470,18 @@ textarea.form-control-lg {
   padding-top: 1.625rem;
   padding-bottom: 0.625rem;
 }
-.form-floating > .form-control:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > .wpcf7-validation-errors:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=text]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=search]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=url]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=tel]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=number]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=range]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=date]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=month]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=week]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=time]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=datetime]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=datetime-local]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=color]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=email]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=file]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > input[type=submit]:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > select:not(:-moz-placeholder) ~ label, .wpcf7 .form-floating > textarea:not(:-moz-placeholder) ~ label {
+.form-floating > .form-control:not(:-moz-placeholder) ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
-.form-floating > .form-control:focus ~ label, .wpcf7 .form-floating > .wpcf7-validation-errors:focus ~ label, .wpcf7 .form-floating > input[type=text]:focus ~ label,
-.wpcf7 .form-floating > input[type=search]:focus ~ label,
-.wpcf7 .form-floating > input[type=url]:focus ~ label,
-.wpcf7 .form-floating > input[type=tel]:focus ~ label,
-.wpcf7 .form-floating > input[type=number]:focus ~ label,
-.wpcf7 .form-floating > input[type=range]:focus ~ label,
-.wpcf7 .form-floating > input[type=date]:focus ~ label,
-.wpcf7 .form-floating > input[type=month]:focus ~ label,
-.wpcf7 .form-floating > input[type=week]:focus ~ label,
-.wpcf7 .form-floating > input[type=time]:focus ~ label,
-.wpcf7 .form-floating > input[type=datetime]:focus ~ label,
-.wpcf7 .form-floating > input[type=datetime-local]:focus ~ label,
-.wpcf7 .form-floating > input[type=color]:focus ~ label,
-.wpcf7 .form-floating > input[type=email]:focus ~ label,
-.wpcf7 .form-floating > input[type=file]:focus ~ label,
-.wpcf7 .form-floating > input[type=submit]:focus ~ label,
-.wpcf7 .form-floating > select:focus ~ label,
-.wpcf7 .form-floating > textarea:focus ~ label,
+.form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > .wpcf7-validation-errors:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=text]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=search]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=url]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=tel]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=number]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=range]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=date]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=month]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=week]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=time]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=datetime]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=datetime-local]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=color]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=email]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=file]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > input[type=submit]:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > select:not(:placeholder-shown) ~ label,
-.wpcf7 .form-floating > textarea:not(:placeholder-shown) ~ label,
 .form-floating > .form-control-plaintext ~ label,
 .form-floating > .form-select ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
-.form-floating > .form-control:-webkit-autofill ~ label, .wpcf7 .form-floating > .wpcf7-validation-errors:-webkit-autofill ~ label, .wpcf7 .form-floating > input[type=text]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=search]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=url]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=tel]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=number]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=range]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=date]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=month]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=week]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=time]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=datetime]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=datetime-local]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=color]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=email]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=file]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > input[type=submit]:-webkit-autofill ~ label,
-.wpcf7 .form-floating > select:-webkit-autofill ~ label,
-.wpcf7 .form-floating > textarea:-webkit-autofill ~ label {
+.form-floating > .form-control:-webkit-autofill ~ label {
   opacity: 0.65;
   transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
 }
@@ -2811,24 +2496,7 @@ textarea.form-control-lg {
   align-items: stretch;
   width: 100%;
 }
-.input-group > .form-control, .wpcf7 .input-group > .wpcf7-validation-errors, .wpcf7 .input-group > input[type=text],
-.wpcf7 .input-group > input[type=search],
-.wpcf7 .input-group > input[type=url],
-.wpcf7 .input-group > input[type=tel],
-.wpcf7 .input-group > input[type=number],
-.wpcf7 .input-group > input[type=range],
-.wpcf7 .input-group > input[type=date],
-.wpcf7 .input-group > input[type=month],
-.wpcf7 .input-group > input[type=week],
-.wpcf7 .input-group > input[type=time],
-.wpcf7 .input-group > input[type=datetime],
-.wpcf7 .input-group > input[type=datetime-local],
-.wpcf7 .input-group > input[type=color],
-.wpcf7 .input-group > input[type=email],
-.wpcf7 .input-group > input[type=file],
-.wpcf7 .input-group > input[type=submit],
-.wpcf7 .input-group > select,
-.wpcf7 .input-group > textarea,
+.input-group > .form-control,
 .input-group > .form-select,
 .input-group > .form-floating {
   position: relative;
@@ -2836,33 +2504,16 @@ textarea.form-control-lg {
   width: 1%;
   min-width: 0;
 }
-.input-group > .form-control:focus, .wpcf7 .input-group > .wpcf7-validation-errors:focus, .wpcf7 .input-group > input[type=text]:focus,
-.wpcf7 .input-group > input[type=search]:focus,
-.wpcf7 .input-group > input[type=url]:focus,
-.wpcf7 .input-group > input[type=tel]:focus,
-.wpcf7 .input-group > input[type=number]:focus,
-.wpcf7 .input-group > input[type=range]:focus,
-.wpcf7 .input-group > input[type=date]:focus,
-.wpcf7 .input-group > input[type=month]:focus,
-.wpcf7 .input-group > input[type=week]:focus,
-.wpcf7 .input-group > input[type=time]:focus,
-.wpcf7 .input-group > input[type=datetime]:focus,
-.wpcf7 .input-group > input[type=datetime-local]:focus,
-.wpcf7 .input-group > input[type=color]:focus,
-.wpcf7 .input-group > input[type=email]:focus,
-.wpcf7 .input-group > input[type=file]:focus,
-.wpcf7 .input-group > input[type=submit]:focus,
-.wpcf7 .input-group > select:focus,
-.wpcf7 .input-group > textarea:focus,
+.input-group > .form-control:focus,
 .input-group > .form-select:focus,
 .input-group > .form-floating:focus-within {
   z-index: 5;
 }
-.input-group .btn, .input-group .wpcf7 input[type=submit], .wpcf7 .input-group input[type=submit], .input-group .woocommerce-info a.button, .woocommerce-info .input-group a.button, .input-group .woocommerce-notices-wrapper .woocommerce-message a.button, .woocommerce-notices-wrapper .woocommerce-message .input-group a.button {
+.input-group .btn {
   position: relative;
   z-index: 2;
 }
-.input-group .btn:focus, .input-group .wpcf7 input[type=submit]:focus, .wpcf7 .input-group input[type=submit]:focus, .input-group .woocommerce-info a.button:focus, .woocommerce-info .input-group a.button:focus, .input-group .woocommerce-notices-wrapper .woocommerce-message a.button:focus, .woocommerce-notices-wrapper .woocommerce-message .input-group a.button:focus {
+.input-group .btn:focus {
   z-index: 5;
 }
 
@@ -2881,57 +2532,19 @@ textarea.form-control-lg {
   border-radius: 0.375rem;
 }
 
-.input-group-lg > .form-control, .wpcf7 .input-group-lg > .wpcf7-validation-errors, .wpcf7 .input-group-lg > input[type=text],
-.wpcf7 .input-group-lg > input[type=search],
-.wpcf7 .input-group-lg > input[type=url],
-.wpcf7 .input-group-lg > input[type=tel],
-.wpcf7 .input-group-lg > input[type=number],
-.wpcf7 .input-group-lg > input[type=range],
-.wpcf7 .input-group-lg > input[type=date],
-.wpcf7 .input-group-lg > input[type=month],
-.wpcf7 .input-group-lg > input[type=week],
-.wpcf7 .input-group-lg > input[type=time],
-.wpcf7 .input-group-lg > input[type=datetime],
-.wpcf7 .input-group-lg > input[type=datetime-local],
-.wpcf7 .input-group-lg > input[type=color],
-.wpcf7 .input-group-lg > input[type=email],
-.wpcf7 .input-group-lg > input[type=file],
-.wpcf7 .input-group-lg > input[type=submit],
-.wpcf7 .input-group-lg > select,
-.wpcf7 .input-group-lg > textarea,
+.input-group-lg > .form-control,
 .input-group-lg > .form-select,
 .input-group-lg > .input-group-text,
-.input-group-lg > .btn,
-.woocommerce-info .input-group-lg > a.button,
-.woocommerce-notices-wrapper .woocommerce-message .input-group-lg > a.button {
+.input-group-lg > .btn {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;
   border-radius: 0.5rem;
 }
 
-.input-group-sm > .form-control, .wpcf7 .input-group-sm > .wpcf7-validation-errors, .wpcf7 .input-group-sm > input[type=text],
-.wpcf7 .input-group-sm > input[type=search],
-.wpcf7 .input-group-sm > input[type=url],
-.wpcf7 .input-group-sm > input[type=tel],
-.wpcf7 .input-group-sm > input[type=number],
-.wpcf7 .input-group-sm > input[type=range],
-.wpcf7 .input-group-sm > input[type=date],
-.wpcf7 .input-group-sm > input[type=month],
-.wpcf7 .input-group-sm > input[type=week],
-.wpcf7 .input-group-sm > input[type=time],
-.wpcf7 .input-group-sm > input[type=datetime],
-.wpcf7 .input-group-sm > input[type=datetime-local],
-.wpcf7 .input-group-sm > input[type=color],
-.wpcf7 .input-group-sm > input[type=email],
-.wpcf7 .input-group-sm > input[type=file],
-.wpcf7 .input-group-sm > input[type=submit],
-.wpcf7 .input-group-sm > select,
-.wpcf7 .input-group-sm > textarea,
+.input-group-sm > .form-control,
 .input-group-sm > .form-select,
 .input-group-sm > .input-group-text,
-.input-group-sm > .btn,
-.woocommerce-info .input-group-sm > a.button,
-.woocommerce-notices-wrapper .woocommerce-message .input-group-sm > a.button {
+.input-group-sm > .btn {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   border-radius: 0.25rem;
@@ -2945,25 +2558,6 @@ textarea.form-control-lg {
 .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
 .input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3),
 .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-control,
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > .wpcf7-validation-errors,
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=text],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=search],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=url],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=tel],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=number],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=range],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=date],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=month],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=week],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=time],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=datetime],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=datetime-local],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=color],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=email],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=file],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > input[type=submit],
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > select,
-.wpcf7 .input-group:not(.has-validation) > .form-floating:not(:last-child) > textarea,
 .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -2971,25 +2565,6 @@ textarea.form-control-lg {
 .input-group.has-validation > :nth-last-child(n+3):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
 .input-group.has-validation > .dropdown-toggle:nth-last-child(n+4),
 .input-group.has-validation > .form-floating:nth-last-child(n+3) > .form-control,
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > .wpcf7-validation-errors,
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=text],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=search],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=url],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=tel],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=number],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=range],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=date],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=month],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=week],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=time],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=datetime],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=datetime-local],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=color],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=email],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=file],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > input[type=submit],
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > select,
-.wpcf7 .input-group.has-validation > .form-floating:nth-last-child(n+3) > textarea,
 .input-group.has-validation > .form-floating:nth-last-child(n+3) > .form-select {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -2999,24 +2574,7 @@ textarea.form-control-lg {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.input-group > .form-floating:not(:first-child) > .form-control, .wpcf7 .input-group > .form-floating:not(:first-child) > .wpcf7-validation-errors, .wpcf7 .input-group > .form-floating:not(:first-child) > input[type=text],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=search],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=url],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=tel],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=number],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=range],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=date],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=month],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=week],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=time],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=datetime],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=datetime-local],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=color],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=email],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=file],
-.wpcf7 .input-group > .form-floating:not(:first-child) > input[type=submit],
-.wpcf7 .input-group > .form-floating:not(:first-child) > select,
-.wpcf7 .input-group > .form-floating:not(:first-child) > textarea,
+.input-group > .form-floating:not(:first-child) > .form-control,
 .input-group > .form-floating:not(:first-child) > .form-select {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -3051,58 +2609,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.was-validated .form-control:valid, .was-validated .wpcf7 .wpcf7-validation-errors:valid, .wpcf7 .was-validated .wpcf7-validation-errors:valid, .was-validated .wpcf7 input[type=text]:valid, .wpcf7 .was-validated input[type=text]:valid,
-.was-validated .wpcf7 input[type=search]:valid,
-.wpcf7 .was-validated input[type=search]:valid,
-.was-validated .wpcf7 input[type=url]:valid,
-.wpcf7 .was-validated input[type=url]:valid,
-.was-validated .wpcf7 input[type=tel]:valid,
-.wpcf7 .was-validated input[type=tel]:valid,
-.was-validated .wpcf7 input[type=number]:valid,
-.wpcf7 .was-validated input[type=number]:valid,
-.was-validated .wpcf7 input[type=range]:valid,
-.wpcf7 .was-validated input[type=range]:valid,
-.was-validated .wpcf7 input[type=date]:valid,
-.wpcf7 .was-validated input[type=date]:valid,
-.was-validated .wpcf7 input[type=month]:valid,
-.wpcf7 .was-validated input[type=month]:valid,
-.was-validated .wpcf7 input[type=week]:valid,
-.wpcf7 .was-validated input[type=week]:valid,
-.was-validated .wpcf7 input[type=time]:valid,
-.wpcf7 .was-validated input[type=time]:valid,
-.was-validated .wpcf7 input[type=datetime]:valid,
-.wpcf7 .was-validated input[type=datetime]:valid,
-.was-validated .wpcf7 input[type=datetime-local]:valid,
-.wpcf7 .was-validated input[type=datetime-local]:valid,
-.was-validated .wpcf7 input[type=color]:valid,
-.wpcf7 .was-validated input[type=color]:valid,
-.was-validated .wpcf7 input[type=email]:valid,
-.wpcf7 .was-validated input[type=email]:valid,
-.was-validated .wpcf7 input[type=file]:valid,
-.wpcf7 .was-validated input[type=file]:valid,
-.was-validated .wpcf7 input[type=submit]:valid,
-.wpcf7 .was-validated input[type=submit]:valid,
-.was-validated .wpcf7 select:valid,
-.wpcf7 .was-validated select:valid,
-.was-validated .wpcf7 textarea:valid,
-.wpcf7 .was-validated textarea:valid, .form-control.is-valid, .wpcf7 .is-valid.wpcf7-validation-errors, .wpcf7 input.is-valid[type=text],
-.wpcf7 input.is-valid[type=search],
-.wpcf7 input.is-valid[type=url],
-.wpcf7 input.is-valid[type=tel],
-.wpcf7 input.is-valid[type=number],
-.wpcf7 input.is-valid[type=range],
-.wpcf7 input.is-valid[type=date],
-.wpcf7 input.is-valid[type=month],
-.wpcf7 input.is-valid[type=week],
-.wpcf7 input.is-valid[type=time],
-.wpcf7 input.is-valid[type=datetime],
-.wpcf7 input.is-valid[type=datetime-local],
-.wpcf7 input.is-valid[type=color],
-.wpcf7 input.is-valid[type=email],
-.wpcf7 input.is-valid[type=file],
-.wpcf7 input.is-valid[type=submit],
-.wpcf7 select.is-valid,
-.wpcf7 textarea.is-valid {
+.was-validated .form-control:valid, .form-control.is-valid {
   border-color: #198754;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -3110,66 +2617,12 @@ textarea.form-control-lg {
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
-.was-validated .form-control:valid:focus, .was-validated .wpcf7 .wpcf7-validation-errors:valid:focus, .wpcf7 .was-validated .wpcf7-validation-errors:valid:focus, .was-validated .wpcf7 input[type=text]:valid:focus, .wpcf7 .was-validated input[type=text]:valid:focus,
-.was-validated .wpcf7 input[type=search]:valid:focus,
-.wpcf7 .was-validated input[type=search]:valid:focus,
-.was-validated .wpcf7 input[type=url]:valid:focus,
-.wpcf7 .was-validated input[type=url]:valid:focus,
-.was-validated .wpcf7 input[type=tel]:valid:focus,
-.wpcf7 .was-validated input[type=tel]:valid:focus,
-.was-validated .wpcf7 input[type=number]:valid:focus,
-.wpcf7 .was-validated input[type=number]:valid:focus,
-.was-validated .wpcf7 input[type=range]:valid:focus,
-.wpcf7 .was-validated input[type=range]:valid:focus,
-.was-validated .wpcf7 input[type=date]:valid:focus,
-.wpcf7 .was-validated input[type=date]:valid:focus,
-.was-validated .wpcf7 input[type=month]:valid:focus,
-.wpcf7 .was-validated input[type=month]:valid:focus,
-.was-validated .wpcf7 input[type=week]:valid:focus,
-.wpcf7 .was-validated input[type=week]:valid:focus,
-.was-validated .wpcf7 input[type=time]:valid:focus,
-.wpcf7 .was-validated input[type=time]:valid:focus,
-.was-validated .wpcf7 input[type=datetime]:valid:focus,
-.wpcf7 .was-validated input[type=datetime]:valid:focus,
-.was-validated .wpcf7 input[type=datetime-local]:valid:focus,
-.wpcf7 .was-validated input[type=datetime-local]:valid:focus,
-.was-validated .wpcf7 input[type=color]:valid:focus,
-.wpcf7 .was-validated input[type=color]:valid:focus,
-.was-validated .wpcf7 input[type=email]:valid:focus,
-.wpcf7 .was-validated input[type=email]:valid:focus,
-.was-validated .wpcf7 input[type=file]:valid:focus,
-.wpcf7 .was-validated input[type=file]:valid:focus,
-.was-validated .wpcf7 input[type=submit]:valid:focus,
-.wpcf7 .was-validated input[type=submit]:valid:focus,
-.was-validated .wpcf7 select:valid:focus,
-.wpcf7 .was-validated select:valid:focus,
-.was-validated .wpcf7 textarea:valid:focus,
-.wpcf7 .was-validated textarea:valid:focus, .form-control.is-valid:focus, .wpcf7 .is-valid.wpcf7-validation-errors:focus, .wpcf7 input.is-valid[type=text]:focus,
-.wpcf7 input.is-valid[type=search]:focus,
-.wpcf7 input.is-valid[type=url]:focus,
-.wpcf7 input.is-valid[type=tel]:focus,
-.wpcf7 input.is-valid[type=number]:focus,
-.wpcf7 input.is-valid[type=range]:focus,
-.wpcf7 input.is-valid[type=date]:focus,
-.wpcf7 input.is-valid[type=month]:focus,
-.wpcf7 input.is-valid[type=week]:focus,
-.wpcf7 input.is-valid[type=time]:focus,
-.wpcf7 input.is-valid[type=datetime]:focus,
-.wpcf7 input.is-valid[type=datetime-local]:focus,
-.wpcf7 input.is-valid[type=color]:focus,
-.wpcf7 input.is-valid[type=email]:focus,
-.wpcf7 input.is-valid[type=file]:focus,
-.wpcf7 input.is-valid[type=submit]:focus,
-.wpcf7 select.is-valid:focus,
-.wpcf7 textarea.is-valid:focus {
+.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
   border-color: #198754;
   box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
 }
 
-.was-validated textarea.form-control:valid,
-.was-validated .wpcf7 textarea:valid,
-.wpcf7 .was-validated textarea:valid, textarea.form-control.is-valid,
-.wpcf7 textarea.is-valid {
+.was-validated textarea.form-control:valid, textarea.form-control.is-valid {
   padding-right: calc(1.5em + 0.75rem);
   background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
 }
@@ -3209,58 +2662,7 @@ textarea.form-control-lg {
   margin-left: 0.5em;
 }
 
-.was-validated .input-group > .form-control:not(:focus):valid, .was-validated .wpcf7 .input-group > .wpcf7-validation-errors:not(:focus):valid, .wpcf7 .was-validated .input-group > .wpcf7-validation-errors:not(:focus):valid, .was-validated .wpcf7 .input-group > input[type=text]:not(:focus):valid, .wpcf7 .was-validated .input-group > input[type=text]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=search]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=search]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=url]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=url]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=tel]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=tel]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=number]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=number]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=range]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=range]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=date]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=date]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=month]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=month]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=week]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=week]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=time]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=time]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=datetime]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=datetime]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=datetime-local]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=datetime-local]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=color]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=color]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=email]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=email]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=file]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=file]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > input[type=submit]:not(:focus):valid,
-.wpcf7 .was-validated .input-group > input[type=submit]:not(:focus):valid,
-.was-validated .wpcf7 .input-group > select:not(:focus):valid,
-.wpcf7 .was-validated .input-group > select:not(:focus):valid,
-.was-validated .wpcf7 .input-group > textarea:not(:focus):valid,
-.wpcf7 .was-validated .input-group > textarea:not(:focus):valid, .input-group > .form-control:not(:focus).is-valid, .wpcf7 .input-group > .wpcf7-validation-errors:not(:focus).is-valid, .wpcf7 .input-group > input[type=text]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=search]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=url]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=tel]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=number]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=range]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=date]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=month]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=week]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=time]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=datetime]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=datetime-local]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=color]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=email]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=file]:not(:focus).is-valid,
-.wpcf7 .input-group > input[type=submit]:not(:focus).is-valid,
-.wpcf7 .input-group > select:not(:focus).is-valid,
-.wpcf7 .input-group > textarea:not(:focus).is-valid,
+.was-validated .input-group > .form-control:not(:focus):valid, .input-group > .form-control:not(:focus).is-valid,
 .was-validated .input-group > .form-select:not(:focus):valid,
 .input-group > .form-select:not(:focus).is-valid,
 .was-validated .input-group > .form-floating:not(:focus-within):valid,
@@ -3297,58 +2699,7 @@ textarea.form-control-lg {
   display: block;
 }
 
-.was-validated .form-control:invalid, .was-validated .wpcf7 .wpcf7-validation-errors:invalid, .wpcf7 .was-validated .wpcf7-validation-errors:invalid, .was-validated .wpcf7 input[type=text]:invalid, .wpcf7 .was-validated input[type=text]:invalid,
-.was-validated .wpcf7 input[type=search]:invalid,
-.wpcf7 .was-validated input[type=search]:invalid,
-.was-validated .wpcf7 input[type=url]:invalid,
-.wpcf7 .was-validated input[type=url]:invalid,
-.was-validated .wpcf7 input[type=tel]:invalid,
-.wpcf7 .was-validated input[type=tel]:invalid,
-.was-validated .wpcf7 input[type=number]:invalid,
-.wpcf7 .was-validated input[type=number]:invalid,
-.was-validated .wpcf7 input[type=range]:invalid,
-.wpcf7 .was-validated input[type=range]:invalid,
-.was-validated .wpcf7 input[type=date]:invalid,
-.wpcf7 .was-validated input[type=date]:invalid,
-.was-validated .wpcf7 input[type=month]:invalid,
-.wpcf7 .was-validated input[type=month]:invalid,
-.was-validated .wpcf7 input[type=week]:invalid,
-.wpcf7 .was-validated input[type=week]:invalid,
-.was-validated .wpcf7 input[type=time]:invalid,
-.wpcf7 .was-validated input[type=time]:invalid,
-.was-validated .wpcf7 input[type=datetime]:invalid,
-.wpcf7 .was-validated input[type=datetime]:invalid,
-.was-validated .wpcf7 input[type=datetime-local]:invalid,
-.wpcf7 .was-validated input[type=datetime-local]:invalid,
-.was-validated .wpcf7 input[type=color]:invalid,
-.wpcf7 .was-validated input[type=color]:invalid,
-.was-validated .wpcf7 input[type=email]:invalid,
-.wpcf7 .was-validated input[type=email]:invalid,
-.was-validated .wpcf7 input[type=file]:invalid,
-.wpcf7 .was-validated input[type=file]:invalid,
-.was-validated .wpcf7 input[type=submit]:invalid,
-.wpcf7 .was-validated input[type=submit]:invalid,
-.was-validated .wpcf7 select:invalid,
-.wpcf7 .was-validated select:invalid,
-.was-validated .wpcf7 textarea:invalid,
-.wpcf7 .was-validated textarea:invalid, .form-control.is-invalid, .wpcf7 .is-invalid.wpcf7-validation-errors, .wpcf7 input.is-invalid[type=text],
-.wpcf7 input.is-invalid[type=search],
-.wpcf7 input.is-invalid[type=url],
-.wpcf7 input.is-invalid[type=tel],
-.wpcf7 input.is-invalid[type=number],
-.wpcf7 input.is-invalid[type=range],
-.wpcf7 input.is-invalid[type=date],
-.wpcf7 input.is-invalid[type=month],
-.wpcf7 input.is-invalid[type=week],
-.wpcf7 input.is-invalid[type=time],
-.wpcf7 input.is-invalid[type=datetime],
-.wpcf7 input.is-invalid[type=datetime-local],
-.wpcf7 input.is-invalid[type=color],
-.wpcf7 input.is-invalid[type=email],
-.wpcf7 input.is-invalid[type=file],
-.wpcf7 input.is-invalid[type=submit],
-.wpcf7 select.is-invalid,
-.wpcf7 textarea.is-invalid {
+.was-validated .form-control:invalid, .form-control.is-invalid {
   border-color: #dc3545;
   padding-right: calc(1.5em + 0.75rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
@@ -3356,66 +2707,12 @@ textarea.form-control-lg {
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
-.was-validated .form-control:invalid:focus, .was-validated .wpcf7 .wpcf7-validation-errors:invalid:focus, .wpcf7 .was-validated .wpcf7-validation-errors:invalid:focus, .was-validated .wpcf7 input[type=text]:invalid:focus, .wpcf7 .was-validated input[type=text]:invalid:focus,
-.was-validated .wpcf7 input[type=search]:invalid:focus,
-.wpcf7 .was-validated input[type=search]:invalid:focus,
-.was-validated .wpcf7 input[type=url]:invalid:focus,
-.wpcf7 .was-validated input[type=url]:invalid:focus,
-.was-validated .wpcf7 input[type=tel]:invalid:focus,
-.wpcf7 .was-validated input[type=tel]:invalid:focus,
-.was-validated .wpcf7 input[type=number]:invalid:focus,
-.wpcf7 .was-validated input[type=number]:invalid:focus,
-.was-validated .wpcf7 input[type=range]:invalid:focus,
-.wpcf7 .was-validated input[type=range]:invalid:focus,
-.was-validated .wpcf7 input[type=date]:invalid:focus,
-.wpcf7 .was-validated input[type=date]:invalid:focus,
-.was-validated .wpcf7 input[type=month]:invalid:focus,
-.wpcf7 .was-validated input[type=month]:invalid:focus,
-.was-validated .wpcf7 input[type=week]:invalid:focus,
-.wpcf7 .was-validated input[type=week]:invalid:focus,
-.was-validated .wpcf7 input[type=time]:invalid:focus,
-.wpcf7 .was-validated input[type=time]:invalid:focus,
-.was-validated .wpcf7 input[type=datetime]:invalid:focus,
-.wpcf7 .was-validated input[type=datetime]:invalid:focus,
-.was-validated .wpcf7 input[type=datetime-local]:invalid:focus,
-.wpcf7 .was-validated input[type=datetime-local]:invalid:focus,
-.was-validated .wpcf7 input[type=color]:invalid:focus,
-.wpcf7 .was-validated input[type=color]:invalid:focus,
-.was-validated .wpcf7 input[type=email]:invalid:focus,
-.wpcf7 .was-validated input[type=email]:invalid:focus,
-.was-validated .wpcf7 input[type=file]:invalid:focus,
-.wpcf7 .was-validated input[type=file]:invalid:focus,
-.was-validated .wpcf7 input[type=submit]:invalid:focus,
-.wpcf7 .was-validated input[type=submit]:invalid:focus,
-.was-validated .wpcf7 select:invalid:focus,
-.wpcf7 .was-validated select:invalid:focus,
-.was-validated .wpcf7 textarea:invalid:focus,
-.wpcf7 .was-validated textarea:invalid:focus, .form-control.is-invalid:focus, .wpcf7 .is-invalid.wpcf7-validation-errors:focus, .wpcf7 input.is-invalid[type=text]:focus,
-.wpcf7 input.is-invalid[type=search]:focus,
-.wpcf7 input.is-invalid[type=url]:focus,
-.wpcf7 input.is-invalid[type=tel]:focus,
-.wpcf7 input.is-invalid[type=number]:focus,
-.wpcf7 input.is-invalid[type=range]:focus,
-.wpcf7 input.is-invalid[type=date]:focus,
-.wpcf7 input.is-invalid[type=month]:focus,
-.wpcf7 input.is-invalid[type=week]:focus,
-.wpcf7 input.is-invalid[type=time]:focus,
-.wpcf7 input.is-invalid[type=datetime]:focus,
-.wpcf7 input.is-invalid[type=datetime-local]:focus,
-.wpcf7 input.is-invalid[type=color]:focus,
-.wpcf7 input.is-invalid[type=email]:focus,
-.wpcf7 input.is-invalid[type=file]:focus,
-.wpcf7 input.is-invalid[type=submit]:focus,
-.wpcf7 select.is-invalid:focus,
-.wpcf7 textarea.is-invalid:focus {
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
   border-color: #dc3545;
   box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
 }
 
-.was-validated textarea.form-control:invalid,
-.was-validated .wpcf7 textarea:invalid,
-.wpcf7 .was-validated textarea:invalid, textarea.form-control.is-invalid,
-.wpcf7 textarea.is-invalid {
+.was-validated textarea.form-control:invalid, textarea.form-control.is-invalid {
   padding-right: calc(1.5em + 0.75rem);
   background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
 }
@@ -3455,58 +2752,7 @@ textarea.form-control-lg {
   margin-left: 0.5em;
 }
 
-.was-validated .input-group > .form-control:not(:focus):invalid, .was-validated .wpcf7 .input-group > .wpcf7-validation-errors:not(:focus):invalid, .wpcf7 .was-validated .input-group > .wpcf7-validation-errors:not(:focus):invalid, .was-validated .wpcf7 .input-group > input[type=text]:not(:focus):invalid, .wpcf7 .was-validated .input-group > input[type=text]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=search]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=search]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=url]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=url]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=tel]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=tel]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=number]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=number]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=range]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=range]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=date]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=date]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=month]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=month]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=week]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=week]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=time]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=time]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=datetime]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=datetime]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=datetime-local]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=datetime-local]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=color]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=color]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=email]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=email]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=file]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=file]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > input[type=submit]:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > input[type=submit]:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > select:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > select:not(:focus):invalid,
-.was-validated .wpcf7 .input-group > textarea:not(:focus):invalid,
-.wpcf7 .was-validated .input-group > textarea:not(:focus):invalid, .input-group > .form-control:not(:focus).is-invalid, .wpcf7 .input-group > .wpcf7-validation-errors:not(:focus).is-invalid, .wpcf7 .input-group > input[type=text]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=search]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=url]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=tel]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=number]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=range]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=date]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=month]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=week]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=time]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=datetime]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=datetime-local]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=color]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=email]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=file]:not(:focus).is-invalid,
-.wpcf7 .input-group > input[type=submit]:not(:focus).is-invalid,
-.wpcf7 .input-group > select:not(:focus).is-invalid,
-.wpcf7 .input-group > textarea:not(:focus).is-invalid,
+.was-validated .input-group > .form-control:not(:focus):invalid, .input-group > .form-control:not(:focus).is-invalid,
 .was-validated .input-group > .form-select:not(:focus):invalid,
 .input-group > .form-select:not(:focus).is-invalid,
 .was-validated .input-group > .form-floating:not(:focus-within):invalid,
@@ -3514,7 +2760,7 @@ textarea.form-control-lg {
   z-index: 4;
 }
 
-.btn, .wpcf7 input[type=submit], .woocommerce-info a.button, .woocommerce-notices-wrapper .woocommerce-message a.button {
+.btn {
   --bs-btn-padding-x: 0.75rem;
   --bs-btn-padding-y: 0.375rem;
   --bs-btn-font-family: ;
@@ -3550,41 +2796,41 @@ textarea.form-control-lg {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn, .wpcf7 input[type=submit], .woocommerce-info a.button, .woocommerce-notices-wrapper .woocommerce-message a.button {
+  .btn {
     transition: none;
   }
 }
-.btn:hover, .wpcf7 input[type=submit]:hover, .woocommerce-info a.button:hover, .woocommerce-notices-wrapper .woocommerce-message a.button:hover {
+.btn:hover {
   color: var(--bs-btn-hover-color);
   background-color: var(--bs-btn-hover-bg);
   border-color: var(--bs-btn-hover-border-color);
 }
-.btn-check + .btn:hover, .wpcf7 .btn-check + input[type=submit]:hover, .woocommerce-info .btn-check + a.button:hover, .woocommerce-notices-wrapper .woocommerce-message .btn-check + a.button:hover {
+.btn-check + .btn:hover {
   color: var(--bs-btn-color);
   background-color: var(--bs-btn-bg);
   border-color: var(--bs-btn-border-color);
 }
-.btn:focus-visible, .wpcf7 input[type=submit]:focus-visible, .woocommerce-info a.button:focus-visible, .woocommerce-notices-wrapper .woocommerce-message a.button:focus-visible {
+.btn:focus-visible {
   color: var(--bs-btn-hover-color);
   background-color: var(--bs-btn-hover-bg);
   border-color: var(--bs-btn-hover-border-color);
   outline: 0;
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
-.btn-check:focus-visible + .btn, .wpcf7 .btn-check:focus-visible + input[type=submit], .woocommerce-info .btn-check:focus-visible + a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-check:focus-visible + a.button {
+.btn-check:focus-visible + .btn {
   border-color: var(--bs-btn-hover-border-color);
   outline: 0;
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
-.btn-check:checked + .btn, .wpcf7 .btn-check:checked + input[type=submit], .woocommerce-info .btn-check:checked + a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-check:checked + a.button, :not(.btn-check) + .btn:active, .wpcf7 :not(.btn-check) + input[type=submit]:active, .woocommerce-info :not(.btn-check) + a.button:active, .woocommerce-notices-wrapper .woocommerce-message :not(.btn-check) + a.button:active, .btn:first-child:active, .wpcf7 input[type=submit]:first-child:active, .woocommerce-info a.button:first-child:active, .woocommerce-notices-wrapper .woocommerce-message a.button:first-child:active, .btn.active, .wpcf7 input.active[type=submit], .woocommerce-info a.active.button, .woocommerce-notices-wrapper .woocommerce-message a.active.button, .btn.show, .wpcf7 input.show[type=submit], .woocommerce-info a.show.button, .woocommerce-notices-wrapper .woocommerce-message a.show.button {
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
   color: var(--bs-btn-active-color);
   background-color: var(--bs-btn-active-bg);
   border-color: var(--bs-btn-active-border-color);
 }
-.btn-check:checked + .btn:focus-visible, .wpcf7 .btn-check:checked + input[type=submit]:focus-visible, .woocommerce-info .btn-check:checked + a.button:focus-visible, .woocommerce-notices-wrapper .woocommerce-message .btn-check:checked + a.button:focus-visible, :not(.btn-check) + .btn:active:focus-visible, .wpcf7 :not(.btn-check) + input[type=submit]:active:focus-visible, .woocommerce-info :not(.btn-check) + a.button:active:focus-visible, .woocommerce-notices-wrapper .woocommerce-message :not(.btn-check) + a.button:active:focus-visible, .btn:first-child:active:focus-visible, .wpcf7 input[type=submit]:first-child:active:focus-visible, .woocommerce-info a.button:first-child:active:focus-visible, .woocommerce-notices-wrapper .woocommerce-message a.button:first-child:active:focus-visible, .btn.active:focus-visible, .wpcf7 input.active[type=submit]:focus-visible, .woocommerce-info a.active.button:focus-visible, .woocommerce-notices-wrapper .woocommerce-message a.active.button:focus-visible, .btn.show:focus-visible, .wpcf7 input.show[type=submit]:focus-visible, .woocommerce-info a.show.button:focus-visible, .woocommerce-notices-wrapper .woocommerce-message a.show.button:focus-visible {
+.btn-check:checked + .btn:focus-visible, :not(.btn-check) + .btn:active:focus-visible, .btn:first-child:active:focus-visible, .btn.active:focus-visible, .btn.show:focus-visible {
   box-shadow: var(--bs-btn-focus-box-shadow);
 }
-.btn:disabled, .wpcf7 input[type=submit]:disabled, .woocommerce-info a.button:disabled, .woocommerce-notices-wrapper .woocommerce-message a.button:disabled, .btn.disabled, .wpcf7 input.disabled[type=submit], .woocommerce-info a.disabled.button, .woocommerce-notices-wrapper .woocommerce-message a.disabled.button, fieldset:disabled .btn, fieldset:disabled .wpcf7 input[type=submit], .wpcf7 fieldset:disabled input[type=submit], fieldset:disabled .woocommerce-info a.button, .woocommerce-info fieldset:disabled a.button, fieldset:disabled .woocommerce-notices-wrapper .woocommerce-message a.button, .woocommerce-notices-wrapper .woocommerce-message fieldset:disabled a.button {
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
   color: var(--bs-btn-disabled-color);
   pointer-events: none;
   background-color: var(--bs-btn-disabled-bg);
@@ -3626,7 +2872,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #6c757d;
 }
 
-.btn-success, .woocommerce-notices-wrapper .woocommerce-message a.button {
+.btn-success {
   --bs-btn-color: #fff;
   --bs-btn-bg: #198754;
   --bs-btn-border-color: #198754;
@@ -3643,7 +2889,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #198754;
 }
 
-.btn-info, .woocommerce-info a.button {
+.btn-info {
   --bs-btn-color: #000;
   --bs-btn-bg: #0dcaf0;
   --bs-btn-border-color: #0dcaf0;
@@ -3677,7 +2923,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #ffc107;
 }
 
-.btn-danger, .woocommerce-notices-wrapper .woocommerce-message.woocommerce-error a.button {
+.btn-danger {
   --bs-btn-color: #fff;
   --bs-btn-bg: #dc3545;
   --bs-btn-border-color: #dc3545;
@@ -3728,7 +2974,8 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #212529;
 }
 
-.btn-outline-primary, .wpcf7 input[type=submit] {
+.btn-outline-primary, body .custom-hubspot-form.form-white-bg .hs-button,
+body .custom-hubspot-form.form-white-bg input[type=submit] {
   --bs-btn-color: #5533ff;
   --bs-btn-border-color: #5533ff;
   --bs-btn-hover-color: #fff;
@@ -3886,14 +3133,14 @@ textarea.form-control-lg {
   color: var(--bs-btn-hover-color);
 }
 
-.btn-lg, .btn-group-lg > .btn, .wpcf7 .btn-group-lg > input[type=submit], .woocommerce-info .btn-group-lg > a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-group-lg > a.button {
+.btn-lg, .btn-group-lg > .btn {
   --bs-btn-padding-y: 0.5rem;
   --bs-btn-padding-x: 1rem;
   --bs-btn-font-size: 1.25rem;
   --bs-btn-border-radius: 0.5rem;
 }
 
-.btn-sm, .btn-group-sm > .btn, .wpcf7 .btn-group-sm > input[type=submit], .woocommerce-info .btn-group-sm > a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-group-sm > a.button {
+.btn-sm, .btn-group-sm > .btn {
   --bs-btn-padding-y: 0.25rem;
   --bs-btn-padding-x: 0.5rem;
   --bs-btn-font-size: 0.875rem;
@@ -4259,59 +3506,23 @@ textarea.form-control-lg {
   display: inline-flex;
   vertical-align: middle;
 }
-.btn-group > .btn, .wpcf7 .btn-group > input[type=submit], .woocommerce-info .btn-group > a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-group > a.button,
-.btn-group-vertical > .btn,
-.wpcf7 .btn-group-vertical > input[type=submit],
-.woocommerce-info .btn-group-vertical > a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button {
+.btn-group > .btn,
+.btn-group-vertical > .btn {
   position: relative;
   flex: 1 1 auto;
 }
-.btn-group > .btn-check:checked + .btn, .wpcf7 .btn-group > .btn-check:checked + input[type=submit], .woocommerce-info .btn-group > .btn-check:checked + a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-group > .btn-check:checked + a.button,
+.btn-group > .btn-check:checked + .btn,
 .btn-group > .btn-check:focus + .btn,
-.wpcf7 .btn-group > .btn-check:focus + input[type=submit],
-.woocommerce-info .btn-group > .btn-check:focus + a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > .btn-check:focus + a.button,
 .btn-group > .btn:hover,
-.wpcf7 .btn-group > input[type=submit]:hover,
-.woocommerce-info .btn-group > a.button:hover,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > a.button:hover,
 .btn-group > .btn:focus,
-.wpcf7 .btn-group > input[type=submit]:focus,
-.woocommerce-info .btn-group > a.button:focus,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > a.button:focus,
 .btn-group > .btn:active,
-.wpcf7 .btn-group > input[type=submit]:active,
-.woocommerce-info .btn-group > a.button:active,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > a.button:active,
 .btn-group > .btn.active,
-.wpcf7 .btn-group > input.active[type=submit],
-.woocommerce-info .btn-group > a.active.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > a.active.button,
 .btn-group-vertical > .btn-check:checked + .btn,
-.wpcf7 .btn-group-vertical > .btn-check:checked + input[type=submit],
-.woocommerce-info .btn-group-vertical > .btn-check:checked + a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > .btn-check:checked + a.button,
 .btn-group-vertical > .btn-check:focus + .btn,
-.wpcf7 .btn-group-vertical > .btn-check:focus + input[type=submit],
-.woocommerce-info .btn-group-vertical > .btn-check:focus + a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > .btn-check:focus + a.button,
 .btn-group-vertical > .btn:hover,
-.wpcf7 .btn-group-vertical > input[type=submit]:hover,
-.woocommerce-info .btn-group-vertical > a.button:hover,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button:hover,
 .btn-group-vertical > .btn:focus,
-.wpcf7 .btn-group-vertical > input[type=submit]:focus,
-.woocommerce-info .btn-group-vertical > a.button:focus,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button:focus,
 .btn-group-vertical > .btn:active,
-.wpcf7 .btn-group-vertical > input[type=submit]:active,
-.woocommerce-info .btn-group-vertical > a.button:active,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button:active,
-.btn-group-vertical > .btn.active,
-.wpcf7 .btn-group-vertical > input.active[type=submit],
-.woocommerce-info .btn-group-vertical > a.active.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.active.button {
+.btn-group-vertical > .btn.active {
   z-index: 1;
 }
 
@@ -4327,31 +3538,19 @@ textarea.form-control-lg {
 .btn-group {
   border-radius: 0.375rem;
 }
-.btn-group > :not(.btn-check:first-child) + .btn, .wpcf7 .btn-group > :not(.btn-check:first-child) + input[type=submit], .woocommerce-info .btn-group > :not(.btn-check:first-child) + a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-group > :not(.btn-check:first-child) + a.button,
+.btn-group > :not(.btn-check:first-child) + .btn,
 .btn-group > .btn-group:not(:first-child) {
   margin-left: -1px;
 }
-.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .wpcf7 .btn-group > input[type=submit]:not(:last-child):not(.dropdown-toggle), .woocommerce-info .btn-group > a.button:not(:last-child):not(.dropdown-toggle), .woocommerce-notices-wrapper .woocommerce-message .btn-group > a.button:not(:last-child):not(.dropdown-toggle),
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle),
 .btn-group > .btn.dropdown-toggle-split:first-child,
-.wpcf7 .btn-group > input.dropdown-toggle-split[type=submit]:first-child,
-.woocommerce-info .btn-group > a.dropdown-toggle-split.button:first-child,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > a.dropdown-toggle-split.button:first-child,
-.btn-group > .btn-group:not(:last-child) > .btn,
-.wpcf7 .btn-group > .btn-group:not(:last-child) > input[type=submit],
-.woocommerce-info .btn-group > .btn-group:not(:last-child) > a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > .btn-group:not(:last-child) > a.button {
+.btn-group > .btn-group:not(:last-child) > .btn {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
-.btn-group > .btn:nth-child(n+3), .wpcf7 .btn-group > input[type=submit]:nth-child(n+3), .woocommerce-info .btn-group > a.button:nth-child(n+3), .woocommerce-notices-wrapper .woocommerce-message .btn-group > a.button:nth-child(n+3),
+.btn-group > .btn:nth-child(n+3),
 .btn-group > :not(.btn-check) + .btn,
-.wpcf7 .btn-group > :not(.btn-check) + input[type=submit],
-.woocommerce-info .btn-group > :not(.btn-check) + a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > :not(.btn-check) + a.button,
-.btn-group > .btn-group:not(:first-child) > .btn,
-.wpcf7 .btn-group > .btn-group:not(:first-child) > input[type=submit],
-.woocommerce-info .btn-group > .btn-group:not(:first-child) > a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group > .btn-group:not(:first-child) > a.button {
+.btn-group > .btn-group:not(:first-child) > .btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -4367,12 +3566,12 @@ textarea.form-control-lg {
   margin-right: 0;
 }
 
-.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split, .wpcf7 .btn-group-sm > input[type=submit] + .dropdown-toggle-split, .woocommerce-info .btn-group-sm > a.button + .dropdown-toggle-split, .woocommerce-notices-wrapper .woocommerce-message .btn-group-sm > a.button + .dropdown-toggle-split {
+.btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
 }
 
-.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split, .wpcf7 .btn-group-lg > input[type=submit] + .dropdown-toggle-split, .woocommerce-info .btn-group-lg > a.button + .dropdown-toggle-split, .woocommerce-notices-wrapper .woocommerce-message .btn-group-lg > a.button + .dropdown-toggle-split {
+.btn-lg + .dropdown-toggle-split, .btn-group-lg > .btn + .dropdown-toggle-split {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
 }
@@ -4382,27 +3581,21 @@ textarea.form-control-lg {
   align-items: flex-start;
   justify-content: center;
 }
-.btn-group-vertical > .btn, .wpcf7 .btn-group-vertical > input[type=submit], .woocommerce-info .btn-group-vertical > a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button,
+.btn-group-vertical > .btn,
 .btn-group-vertical > .btn-group {
   width: 100%;
 }
-.btn-group-vertical > .btn:not(:first-child), .wpcf7 .btn-group-vertical > input[type=submit]:not(:first-child), .woocommerce-info .btn-group-vertical > a.button:not(:first-child), .woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button:not(:first-child),
+.btn-group-vertical > .btn:not(:first-child),
 .btn-group-vertical > .btn-group:not(:first-child) {
   margin-top: -1px;
 }
-.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle), .wpcf7 .btn-group-vertical > input[type=submit]:not(:last-child):not(.dropdown-toggle), .woocommerce-info .btn-group-vertical > a.button:not(:last-child):not(.dropdown-toggle), .woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button:not(:last-child):not(.dropdown-toggle),
-.btn-group-vertical > .btn-group:not(:last-child) > .btn,
-.wpcf7 .btn-group-vertical > .btn-group:not(:last-child) > input[type=submit],
-.woocommerce-info .btn-group-vertical > .btn-group:not(:last-child) > a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > .btn-group:not(:last-child) > a.button {
+.btn-group-vertical > .btn:not(:last-child):not(.dropdown-toggle),
+.btn-group-vertical > .btn-group:not(:last-child) > .btn {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.btn-group-vertical > .btn ~ .btn, .wpcf7 .btn-group-vertical > input[type=submit] ~ .btn, .wpcf7 .btn-group-vertical > .btn ~ input[type=submit], .wpcf7 .btn-group-vertical > input[type=submit] ~ input[type=submit], .woocommerce-info .btn-group-vertical > a.button ~ .btn, .woocommerce-info .wpcf7 .btn-group-vertical > a.button ~ input[type=submit], .wpcf7 .woocommerce-info .btn-group-vertical > a.button ~ input[type=submit], .woocommerce-info .btn-group-vertical > .btn ~ a.button, .woocommerce-info .wpcf7 .btn-group-vertical > input[type=submit] ~ a.button, .wpcf7 .woocommerce-info .btn-group-vertical > input[type=submit] ~ a.button, .woocommerce-info .btn-group-vertical > a.button ~ a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button ~ .btn, .woocommerce-notices-wrapper .woocommerce-message .wpcf7 .btn-group-vertical > a.button ~ input[type=submit], .wpcf7 .woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button ~ input[type=submit], .woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > .btn ~ a.button, .woocommerce-notices-wrapper .woocommerce-message .wpcf7 .btn-group-vertical > input[type=submit] ~ a.button, .wpcf7 .woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > input[type=submit] ~ a.button, .woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > a.button ~ a.button,
-.btn-group-vertical > .btn-group:not(:first-child) > .btn,
-.wpcf7 .btn-group-vertical > .btn-group:not(:first-child) > input[type=submit],
-.woocommerce-info .btn-group-vertical > .btn-group:not(:first-child) > a.button,
-.woocommerce-notices-wrapper .woocommerce-message .btn-group-vertical > .btn-group:not(:first-child) > a.button {
+.btn-group-vertical > .btn ~ .btn,
+.btn-group-vertical > .btn-group:not(:first-child) > .btn {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -4968,7 +4161,7 @@ textarea.form-control-lg {
   --bs-card-color: ;
   --bs-card-bg: #fff;
   --bs-card-img-overlay-padding: 1rem;
-  --bs-card-group-margin: 0.75rem;
+  --bs-card-group-margin: 1.5rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -5416,12 +4609,12 @@ textarea.form-control-lg {
   display: none;
 }
 
-.btn .badge, .wpcf7 input[type=submit] .badge, .woocommerce-info a.button .badge, .woocommerce-notices-wrapper .woocommerce-message a.button .badge {
+.btn .badge {
   position: relative;
   top: -1px;
 }
 
-.alert, .woocommerce-info, .woocommerce-notices-wrapper .woocommerce-message {
+.alert {
   --bs-alert-bg: transparent;
   --bs-alert-padding-x: 1rem;
   --bs-alert-padding-y: 1rem;
@@ -5476,21 +4669,21 @@ textarea.form-control-lg {
   color: rgb(51.84, 56.16, 60);
 }
 
-.alert-success, .woocommerce-notices-wrapper .woocommerce-message {
+.alert-success {
   --bs-alert-color: rgb(15, 81, 50.4);
   --bs-alert-bg: rgb(209, 231, 220.8);
   --bs-alert-border-color: rgb(186, 219, 203.7);
 }
-.alert-success .alert-link, .woocommerce-notices-wrapper .woocommerce-message .alert-link {
+.alert-success .alert-link {
   color: rgb(12, 64.8, 40.32);
 }
 
-.alert-info, .woocommerce-info {
+.alert-info {
   --bs-alert-color: rgb(5.2, 80.8, 96);
   --bs-alert-bg: rgb(206.6, 244.4, 252);
   --bs-alert-border-color: rgb(182.4, 239.1, 250.5);
 }
-.alert-info .alert-link, .woocommerce-info .alert-link {
+.alert-info .alert-link {
   color: rgb(4.16, 64.64, 76.8);
 }
 
@@ -5503,12 +4696,12 @@ textarea.form-control-lg {
   color: rgb(81.6, 61.76, 2.24);
 }
 
-.alert-danger, .woocommerce-notices-wrapper .woocommerce-message.woocommerce-error {
+.alert-danger {
   --bs-alert-color: rgb(132, 31.8, 41.4);
   --bs-alert-bg: rgb(248, 214.6, 217.8);
   --bs-alert-border-color: rgb(244.5, 194.4, 199.2);
 }
-.alert-danger .alert-link, .woocommerce-notices-wrapper .woocommerce-message.woocommerce-error .alert-link {
+.alert-danger .alert-link {
   color: rgb(105.6, 25.44, 33.12);
 }
 
@@ -5971,7 +5164,7 @@ textarea.form-control-lg {
   --bs-toast-zindex: 1090;
   --bs-toast-padding-x: 0.75rem;
   --bs-toast-padding-y: 0.5rem;
-  --bs-toast-spacing: 1.5rem;
+  --bs-toast-spacing: 3rem;
   --bs-toast-max-width: 350px;
   --bs-toast-font-size: 0.875rem;
   --bs-toast-color: ;
@@ -7360,7 +6553,7 @@ textarea.form-control-lg {
   background-color: currentcolor;
   opacity: 0.5;
 }
-.placeholder.btn::before, .wpcf7 input.placeholder[type=submit]::before, .woocommerce-info a.placeholder.button::before, .woocommerce-notices-wrapper .woocommerce-message a.placeholder.button::before {
+.placeholder.btn::before {
   display: inline-block;
   content: "";
 }
@@ -11581,7 +10774,7 @@ body {
 }
 
 .wrapper {
-  padding: 1.5rem 0;
+  padding: 3rem 0;
 }
 
 #wrapper-hero {
@@ -11779,7 +10972,7 @@ a.skip-link:not(:focus):not(:focus-within) {
 }
 
 .wp-block-search .wp-block-search__button {
-  margin-left: 0.75rem;
+  margin-left: 1.5rem;
 }
 .wp-block-search.wp-block-search__button-inside .wp-block-search__inside-wrapper {
   border: none;
@@ -11792,67 +10985,6 @@ a.skip-link:not(:focus):not(:focus-within) {
 }
 .wp-block-search.wp-block-search__button-inside .wp-block-search__button {
   margin-left: 0;
-}
-
-.woocommerce-input-wrapper {
-  width: 100%;
-}
-
-figure.woocommerce-product-gallery__wrapper {
-  max-width: inherit !important;
-}
-
-@media (min-width: 768px) {
-  .woocommerce-cart #coupon_code.input-text {
-    width: 110px !important;
-  }
-}
-#stripe-payment-data #wc-stripe-cc-form .form-row {
-  display: flex;
-  flex-direction: column;
-}
-#stripe-payment-data #wc-stripe-cc-form .form-row .wc-stripe-elements-field {
-  max-height: 2rem;
-}
-#stripe-payment-data .woocommerce-SavedPaymentMethods-saveNew {
-  display: inherit;
-}
-
-.woocommerce-notices-wrapper .woocommerce-message {
-  padding: 1em 2em 1em 3.5em;
-}
-.woocommerce-info {
-  padding: 1em 2em 1em 3.5em;
-}
-.woocommerce form .form-row .required {
-  color: #dc3545;
-}
-
-.woocommerce form .form-row label.form-check-label {
-  line-height: inherit;
-}
-
-.woocommerce form .form-row .checkbox.form-check {
-  display: block;
-  line-height: inherit;
-}
-
-.woocommerce form .form-row .input-checkbox.form-check-input {
-  margin: 0.25em 0 0 -1.5em;
-}
-
-.woocommerce div.product p.price,
-.woocommerce div.product span.price,
-.woocommerce div.product .stock,
-.woocommerce ul.products li.product .price,
-#add_payment_method .cart-collaterals .cart_totals .discount td,
-.woocommerce-cart .cart-collaterals .cart_totals .discount td,
-.woocommerce-checkout .cart-collaterals .cart_totals .discount td {
-  color: #198754;
-}
-
-.woocommerce-page form .show-password-input {
-  top: initial;
 }
 
 /*!
@@ -14944,6 +14076,13 @@ h6,
 .hero-title {
   font-weight: 600;
   margin-top: 4rem;
+  margin-bottom: 0;
+}
+@media (max-width: 767px) {
+  .hero-title {
+    font-size: 2.7777777778rem;
+    line-height: 2.8888888889rem;
+  }
 }
 
 h1,
@@ -14954,21 +14093,42 @@ h1,
   letter-spacing: -0.02em;
 }
 
+#content h1,
+#content .h1 {
+  font-size: 2.7777777778rem;
+  line-height: 2.8888888889rem;
+  letter-spacing: -0.02em;
+}
+
 h2,
-.h2 {
+.h2,
+h1.h2 {
   font-size: 2.2222222222rem;
   font-weight: 300;
   line-height: 2.3333333333rem;
   color: #00457c;
   letter-spacing: -0.02em;
+  max-width: 23.8888888889rem;
+}
+
+#content h1.h2, #content .h2.h1 {
+  max-width: unset;
+  font-size: 2.2222222222rem;
+  line-height: 2.3333333333rem;
+}
+
+.single .content h2, .single .content .h2 {
+  font-size: 1.4444444444rem;
+  margin-bottom: 1rem;
 }
 
 h3,
 .h3 {
   font-size: 1.7777777778rem;
   font-weight: 400;
-  line-height: 1.7777777778rem;
+  line-height: 2.1666666667rem;
   color: #00457c;
+  letter-spacing: -0.02em;
 }
 
 h4,
@@ -15000,7 +14160,7 @@ p {
 }
 
 a {
-  color: #007bff;
+  color: #00457c;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
 }
@@ -15017,22 +14177,87 @@ ol {
 ul li,
 ol li {
   font-size: 1rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.3333333333rem;
+  margin-bottom: 0.25rem;
+  line-height: 1.2222222222rem;
+  max-width: 55.5555555556rem;
 }
 
 blockquote {
   font-size: 1.2rem;
   font-style: italic;
-  font-family: "Georgia", "Times New Roman", Times, serif;
   margin: 1.5rem 0;
-  padding: 1rem 1.5rem;
+  padding: 3rem 1.5rem 3rem 3rem;
   border-left: 4px solid #eee;
   color: #555;
 }
 
 body .navbar-nav {
   margin-bottom: 0 !important;
+}
+
+.text-blue {
+  color: #00457c;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 3rem 1.5rem 3rem 3rem;
+  quotes: "“" "”" "‘" "’";
+  line-height: 1.3333333333rem;
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
+/* --- Mobile Font Sizes --- */
+@media (max-width: 480px) {
+  h1, .h1 {
+    /* Mobile size: 40px / 16px = 2.5rem */
+    font-size: 2.5rem;
+  }
+  h1.hero-title, .hero-title.h1 {
+    font-size: 2.4444444444rem;
+    line-height: 2.4444444444rem;
+    max-width: 16.6666666667rem;
+  }
+  h2, .h2 {
+    font-size: 2rem;
+  }
+}
+/* Your body font size doesn't need to be in a media query */
+p {
+  font-size: 1rem;
+}
+
+.footnotes {
+  font-size: 0.8888888889rem;
+}
+
+header h3, header .h3 {
+  white-space: pre-wrap;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body .home-hero .menu-wrapper,
+.hero-bg-image .menu-wrapper {
+  background-color: rgba(0, 69, 124, 0.15);
 }
 
 .navbar-logo {
@@ -15047,7 +14272,7 @@ body .navbar-nav {
 
 /* Last menu item as a pill button */
 @media (min-width: 992px) {
-  body .navbar-expand-lg .navbar-nav > li:last-child > a {
+  body .navbar-nav > .btn--login {
     margin-left: 3rem;
     padding: 0.425rem 2rem;
     background-color: #155cd5;
@@ -15060,168 +14285,214 @@ body .navbar-nav {
     text-transform: uppercase;
     font-size: 0.7777777778rem;
   }
+  body .navbar-nav > .btn--login:hover {
+    background-color: #00457c !important;
+  }
 }
-#menu-menu-1 {
-  background: rgba(9, 12, 14, 0.15);
+.menu-wrapper {
+  background-color: #003C70;
   background-blend-mode: multiply;
+  min-width: 44.4444444444rem;
   background-blend-mode: multiply;
+  justify-content: space-between;
   padding: 0.5rem 1rem;
   border-radius: 100px;
 }
 
 @media (min-width: 992px) {
-  body .navbar-expand-lg .navbar-nav .nav-link {
+  body .navbar-nav li.mega-menu > .nav-link {
+    position: relative;
+    padding-right: 2.5rem !important;
+  }
+  body .navbar-nav li.mega-menu > .nav-link::after {
+    content: "";
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    box-sizing: border-box;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform-origin: 50% 50%;
+    transform: translateY(-50%) rotate(45deg);
+    transition: transform 0.18s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  body .navbar-nav li.mega-menu > .nav-link:hover::after, body .navbar-nav li.mega-menu > .nav-link:focus-within::after {
+    transform: translateY(-50%) rotate(225deg);
+  }
+  body .navbar-nav .nav-link {
     font-size: 1rem;
     font-weight: 500;
     padding-left: 1rem !important;
     padding-right: 1rem !important;
     color: #fff;
-    margin: 0 0.5rem;
+    margin: 0;
     transition: color 0.3s ease;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 5.5555555556rem;
+    padding-top: 0.4444444444rem !important;
+    padding-bottom: 0.4444444444rem !important;
+    border-radius: 5.5555555556rem !important;
     display: block;
   }
-  body .navbar-expand-lg .navbar-nav .nav-link:hover {
+  body .navbar-nav .nav-link:hover {
     background-color: rgba(0, 0, 0, 0.2);
     text-decoration: none;
     color: #fff;
     text-decoration: none;
   }
-  body .navbar-expand-lg .navbar-nav > li:last-child > a:hover {
-    background-color: #0b5ed7;
-  }
 }
+body .navbar-nav li.current-menu-item .nav-link {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
 body li.nav-item {
   margin-bottom: 0 !important;
+  margin-right: 0.5555555556rem;
 }
-
-/* ============================================
-   Global section spacing
-   Targets any element with class starting with .section--
-   ============================================ */
-[class^=section--],
-[class*=" section--"] {
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+body li.nav-item:last-child {
+  margin-right: 0;
 }
-@media (max-width: 1199.98px) {
-  [class^=section--],
-  [class*=" section--"] {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-}
-@media (max-width: 991.98px) {
-  [class^=section--],
-  [class*=" section--"] {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-}
-@media (max-width: 767.98px) {
-  [class^=section--],
-  [class*=" section--"] {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-}
-@media (max-width: 575.98px) {
-  [class^=section--],
-  [class*=" section--"] {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
+@media (max-width: 991px) {
+  body li.nav-item:last-child {
+    margin-left: 0 !important;
   }
 }
 
-/* ==========================================
-   Image Section (BEM)
-   ========================================== */
-.image-section {
-  position: relative;
-  width: 100%;
-  min-height: 60vh;
-  overflow: hidden;
+/* 5 equal columns on lg+ */
+@media (min-width: 992px) {
+  /* or 1200px if you want xl instead */
+  .col-lg-5th {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
 }
-.image-section__background {
+#wrapper-navbar::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  background-image: url("../img/home-fw-banner.png");
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/lines-wide.svg");
+  /* Corrected syntax: X-position (center) Y-position (top -300px) */
+  background-position: center top -320px;
+  background-repeat: no-repeat;
+  background-size: 6000px auto;
+  z-index: 1;
+  pointer-events: none;
+}
+@media (max-width: 767px) {
+  #wrapper-navbar::after {
+    background-position: center bottom -800px;
+  }
+}
+
+.header-hero {
+  position: relative;
+}
+.header-hero__bg {
+  position: absolute;
+  inset: -12vh 0 -12vh 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
   z-index: 0;
 }
-.image-section--full {
-  min-height: 100vh;
-}
-.image-section--half {
-  min-height: 22.2222222222rem;
+
+.header-hero--fullbleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
 }
 
-.section--dark-blue {
-  background-color: #00457c;
-  color: #fff;
+@media (prefers-reduced-motion: reduce) {
+  .header-hero__bg {
+    inset: 0;
+    transform: none !important;
+  }
+}
+.page-template-template-your-capital .internal-hero {
+  min-height: 41.6666666667rem;
+}
+.page-template-template-your-capital .internal-hero:after {
+  background-image: none;
 }
 
-.section--gradient {
-  background: linear-gradient(278.74deg, rgba(21, 92, 213, 0.8) 0, #155cd5 29.55%, #155cd5 100%), linear-gradient(93.66deg, rgba(0, 55, 99, 0.42) 0, rgba(0, 55, 99, 0) 44.28%);
+@media (min-width: 992px) {
+  .page-template-template-terms .internal-hero .internal-hero__text {
+    margin-bottom: 3.277778rem;
+  }
 }
 
-.section--grey {
-  background: #eee;
-}
-
-.section--gradient-purple {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  background: linear-gradient(0deg, #6961ff, #6961ff), linear-gradient(273.55deg, rgba(0, 0, 0, 0) 46.82%, rgba(0, 0, 0, 0.2) 100%);
-}
-.section--gradient-purple h2, .section--gradient-purple .h2 {
-  margin-bottom: 1rem;
-}
-.section--gradient-purple p {
-  margin-bottom: 0;
+.section--blog-hero .internal-hero .w-100 {
+  padding-bottom: 5.5555555556rem;
 }
 
 .internal-hero {
   position: relative;
   background-color: #00457c;
   color: #fff;
-  min-height: 65vh;
-  overflow: hidden;
+  min-height: 41.6666666667rem;
 }
-.internal-hero__bg-left, .internal-hero__bg-right {
+@media (max-width: 991px) {
+  .internal-hero {
+    min-height: 75vh;
+  }
+}
+@media (min-width: 992px) {
+  .internal-hero .internal-hero__text {
+    margin-top: 0rem;
+    margin-bottom: 16.6666666667rem;
+  }
+}
+.internal-hero:after {
+  content: "";
   position: absolute;
   top: 0;
-  height: 100%;
-  pointer-events: none;
-}
-.internal-hero__bg-left svg, .internal-hero__bg-right svg {
+  left: 0;
   width: 100%;
   height: 100%;
-}
-.internal-hero__bg-left {
-  left: 0;
-  width: 55%;
-  background: url(../img/left-line.svg) bottom 40px right 0;
-  background-size: cover;
+  opacity: 0.3;
+  background-image: url("../img/lines-wide.svg");
+  background-position: calc(50% - 18.8888888889rem) calc(50% + 12.2222222222rem);
   background-repeat: no-repeat;
+  background-size: 6000px auto;
+  z-index: 1;
+  pointer-events: none;
+  z-index: 0;
 }
-.internal-hero__bg-right {
-  right: 0;
-  width: 70%;
+@media (max-width: 840px) {
+  .internal-hero:after {
+    background-position: calc(50% - 2.2222222222rem) calc(50% + 12.2222222222rem);
+  }
+}
+@media (max-width: 991px) {
+  .internal-hero__text {
+    top: -190px;
+  }
 }
 .internal-hero__title {
   font-size: 2.7777777778rem;
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.1;
   letter-spacing: -0.02em;
+  max-width: 27.7777777778rem;
 }
 .internal-hero__excerpt {
   color: #fff;
   font-size: 2.2222222222rem;
+  max-width: 33.0555555556rem;
+}
+@media (max-width: 991px) {
+  .internal-hero__excerpt {
+    font-size: 1.4444444444rem;
+    line-height: 1.1;
+  }
 }
 .internal-hero__bottom-svg {
   right: 0;
@@ -15239,9 +14510,470 @@ body li.nav-item {
   }
 }
 
+.single-post .internal-hero,
+.page-template-template-terms .internal-hero {
+  min-height: 20rem;
+}
+
+/* Styles for the new full-width bottom image */
+.internal-hero__image-bottom {
+  /* This prevents any extra space below the image */
+  line-height: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.internal-hero__image-bottom img {
+  width: 100%;
+  max-height: 340px;
+  /* This is key: it makes the image cover the area 
+     without stretching or distorting. */
+  -o-object-fit: cover;
+     object-fit: cover;
+  /* You can change this to 'top', 'bottom', etc. 
+     to control which part of the image is visible */
+  -o-object-position: center;
+     object-position: center;
+}
+
+/* Overlay under text, over bg image */
+.home .header-hero--fullbleed {
+  position: relative;
+}
+.home .header-hero--fullbleed .header-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* your parallax attrs already on the element */
+}
+.home .header-hero--fullbleed::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(113deg, rgba(0, 69, 124, 0.4) 0%, rgba(0, 69, 124, 0) 63.98%);
+}
+.home .header-hero--fullbleed > .container,
+.home .header-hero--fullbleed .site-navbar,
+.home .header-hero--fullbleed .mobile-menu-container,
+.home .header-hero--fullbleed .mega-menu-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Base hero shell */
+.home-hero {
+  position: relative;
+  height: 100vh; /* full viewport height */
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Background image layer */
+.home-hero__bg,
+.home-hero__video-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.home-hero__bg::before,
+.home-hero__video-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(113deg, rgba(6, 48, 82, 0.59) 0, rgba(0, 69, 124, 0) 63.98%);
+}
+
+.home-hero__bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Video layer */
+.home-hero__video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/* Foreground layout */
+.home-hero__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%; /* fill full 100vh */
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem; /* space for nav */
+}
+
+/* Push hero content toward bottom */
+.home-hero__content {
+  /* This padding moves the content UP from the absolute bottom, so you
+     can align it with the middle of your bottom 35% vector-lines area. */
+  padding-bottom: clamp(4rem, 30vh, 10rem);
+}
+
+/*
+  If the vector lines occupy roughly the bottom 35% of the hero,
+  setting padding-bottom around 25–35vh will place the bottom of the
+  content near the center of that zone. You can fine-tune:
+    - smaller value => content sits lower
+    - larger value  => content sits higher
+*/
+/* Optional: small screens adjustments */
+@media (max-width: 767.98px) {
+  .home-hero__content {
+    padding-bottom: 20vh;
+  }
+}
+.home-hero__video-wrap video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.home-hero__video-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.home-hero__video-wrap video.home-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.hero-bg-image .internal-hero__text {
+  position: relative;
+  z-index: 2;
+}
+.hero-bg-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ============================================
+   Global section spacing
+   Targets any element with class starting with .section--
+   ============================================ */
+[class^=section--],
+[class*=" section--"] {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+[class^=section--] > *:last-child:not(h2):not(.h2),
+[class*=" section--"] > *:last-child:not(h2):not(.h2) {
+  margin-bottom: 0;
+}
+[class^=section--] [class*=col-] > *:last-child:not(h2):not(.h2),
+[class*=" section--"] [class*=col-] > *:last-child:not(h2):not(.h2) {
+  margin-bottom: 0 !important;
+}
+@media (max-width: 1199.98px) {
+  [class^=section--],
+  [class*=" section--"] {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+@media (max-width: 991.98px) {
+  [class^=section--],
+  [class*=" section--"] {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+/* ==========================================
+   Image Section (BEM) — parallax-ready
+   ========================================== */
+.image-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Movable background layer (the parallax target) */
+  /* Any foreground content should stack above the bg */
+  /* Respect reduced motion */
+  /* Half-height variant */
+  /* Full-bleed variant (keep if you use it elsewhere) */
+}
+.image-section__background {
+  position: absolute;
+  /* spill so edges never show while translating */
+  inset: -12vh 0 -12vh 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.06s linear;
+  z-index: 0;
+  pointer-events: none;
+}
+@media (max-width: 991px) {
+  .image-section__background {
+    inset: 0;
+  }
+}
+> *:not(.image-section__background) {
+  position: relative;
+  z-index: 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .image-section__background {
+    inset: 0;
+    transform: none !important;
+    transition: none;
+  }
+}
+.image-section--half {
+  /* If you have a rem() helper, use rem(450); otherwise 28.125rem ≈ 450px */
+  min-height: 25rem;
+  overflow: hidden;
+  z-index: 2;
+}
+@media (max-width: 991px) {
+  .image-section--half {
+    min-height: 11.1111111111rem;
+    background-position: top center;
+  }
+}
+.image-section--full {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  min-height: 40.7222222222rem; /* adjust as needed */
+  overflow: hidden;
+}
+
+/* Optional page tweak (keep if you rely on it) */
+.page-id-13 .image-section--full {
+  min-height: 32rem;
+}
+
+/* Optional: non-100vh variant (fixed aspect) */
+.image-section--ratio {
+  min-height: auto;
+  aspect-ratio: 16/9;
+}
+
+/* Dark blue section */
+.section--dark-blue,
+.section--blue {
+  background-color: #00457c;
+  color: #fff;
+}
+.section--dark-blue h2, .section--dark-blue .h2,
+.section--dark-blue h3,
+.section--dark-blue .h3,
+.section--dark-blue p,
+.section--blue h2,
+.section--blue .h2,
+.section--blue h3,
+.section--blue .h3,
+.section--blue p {
+  color: #fff;
+}
+.section--dark-blue .btn-outline-primary, .section--dark-blue body .custom-hubspot-form.form-white-bg .hs-button, body .custom-hubspot-form.form-white-bg .section--dark-blue .hs-button,
+.section--dark-blue body .custom-hubspot-form.form-white-bg input[type=submit],
+body .custom-hubspot-form.form-white-bg .section--dark-blue input[type=submit],
+.section--blue .btn-outline-primary,
+.section--blue body .custom-hubspot-form.form-white-bg .hs-button,
+body .custom-hubspot-form.form-white-bg .section--blue .hs-button,
+.section--blue body .custom-hubspot-form.form-white-bg input[type=submit],
+body .custom-hubspot-form.form-white-bg .section--blue input[type=submit] {
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Gradient section */
+.section--gradient {
+  background: linear-gradient(278.74deg, rgba(21, 92, 213, 0.8) 0, #155cd5 29.55%, #155cd5 100%), linear-gradient(93.66deg, rgba(0, 55, 99, 0.42) 0, rgba(0, 55, 99, 0) 44.28%);
+}
+
+.img-txt-section p {
+  /* max-width:425px; */
+}
+
+.section--heading-text.section--grey p::last-child {
+  margin-bottom: 0;
+}
+
+/* Grey section */
+.section--grey {
+  background: #EEE;
+  padding-top: 6rem;
+  padding-bottom: 5rem;
+}
+.section--grey .border-top {
+  border-color: #ccc !important;
+}
+@media (max-width: 991px) {
+  .section--grey .border-top {
+    border-top: none !important;
+  }
+  .section--grey .border-top::first-child {
+    padding-top: 0 !important;
+  }
+}
+
+/* Purple gradient section */
+.section--gradient-purple {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background: linear-gradient(0deg, #6961ff, #6961ff), linear-gradient(273.55deg, rgba(0, 0, 0, 0) 46.82%, rgba(0, 0, 0, 0.2) 100%);
+}
+.section--gradient-purple h2, .section--gradient-purple .h2 {
+  margin-bottom: 1rem;
+  max-width: unset;
+}
+.section--gradient-purple p {
+  margin-bottom: 0;
+}
+
+/* Overlap tweak */
+.section-feature--overlap-bottom + .section--white + .section--white {
+  margin-top: -3.125rem;
+}
+
+/* White + white compression */
+.section--white + .section--white {
+  padding-top: 0 !important;
+}
+
+/* Blog hero */
+.section--blog-hero {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  overflow: visible;
+}
+
+.page-id-13 .image-section--full {
+  min-height: 32rem;
+}
+@media (max-width: 991px) {
+  .page-id-13 .image-section--full {
+    min-height: 20.8888888889rem;
+  }
+}
+
+.vbv-hero {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  overflow: hidden;
+  isolation: isolate;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.vbv-hero.vbv-hero--bleed {
+  width: 100vw;
+  position: relative;
+  left: 50% !important;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.vbv-hero :where(iframe, div, noscript) {
+  max-width: none !important;
+  box-sizing: border-box;
+}
+.vbv-hero__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.vbv-hero__iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 56.25vw;
+  min-width: 177.78vh;
+  min-height: 100vh;
+  pointer-events: none;
+  display: block;
+  border: 0;
+  z-index: 0;
+}
+.vbv-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.home-hero--vbv {
+  position: relative;
+  min-height: 70vh;
+  overflow: hidden;
+}
+
+.home-hero--vbv > .vbv-hero {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.home-hero--vbv .home-hero__inner {
+  position: relative;
+  z-index: 5;
+}
+
+.home-hero--vbv .home-hero__topbar {
+  position: relative;
+  z-index: 6;
+}
+
+.home-hero__inner {
+  padding-top: 7rem;
+  padding-bottom: 6rem;
+}
+
+@media (max-width: 991px) {
+  .offer-row {
+    flex-direction: column-reverse;
+  }
+  .offer-row img {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .page-template-template-about-us .section--white.row {
+    padding-bottom: 0 !important;
+  }
+}
+
 /* 1. The Flex container for layout */
 .select-container {
   display: flex;
+  width: 100%;
   align-items: flex-end; /* Aligns items to the bottom */
   gap: 1rem; /* Space between items */
 }
@@ -15281,13 +15013,18 @@ body li.nav-item {
   color: white;
   background-color: transparent;
   /* Sizing and Spacing */
-  padding: 0.5rem 2.5rem 0.5rem 1rem; /* Right padding to avoid text overlapping the arrow */
+  padding: 0.2777777778rem 1.1111111111rem; /* Right padding to avoid text overlapping the arrow */
   border-radius: 100px;
-  font-size: 1rem;
+  font-size: 0.8888888889rem;
   cursor: pointer;
 }
 .custom-select:first-of-type {
   min-width: 274px;
+}
+@media (max-width: 991px) {
+  .custom-select {
+    padding: 0.4444444444rem 1.1111111111rem; /* Right padding to avoid text overlapping the arrow */
+  }
 }
 
 /* Style the dropdown options */
@@ -15300,21 +15037,30 @@ body li.nav-item {
 .go-button {
   font-size: 0.7777777778rem;
   text-transform: uppercase;
-  padding: 0.5rem 1.5rem;
+  line-height: 1.8;
+  padding: 0.2777777778rem 1.1666666667rem;
   border: 3px solid #155cd5;
   background-color: #155cd5;
   color: #fff; /* Matches the body background */
-  font-size: 1rem;
   font-weight: 600;
   border-radius: 100px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 }
+@media (max-width: 991px) {
+  .go-button {
+    padding: 0.4444444444rem 1.1111111111rem; /* Right padding to avoid text overlapping the arrow */
+  }
+}
 
 .go-button:hover {
-  background-color: white;
-  color: #155cd5;
-  border-color: #fff;
+  background-color: #00457c;
+  color: #fff;
+  border-color: #00457c;
+}
+
+.select-wrapper + .select-wrapper .custom-select:last-of-type {
+  padding-right: 36px;
 }
 
 /* ===============================
@@ -15328,13 +15074,12 @@ body li.nav-item {
   font-size: 3.4444444444rem;
   font-weight: 300;
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #fff;
 }
 
 .stat-text {
   font-size: 1rem;
-  line-height: 1.6;
   margin: 0;
 }
 
@@ -15344,9 +15089,15 @@ body li.nav-item {
   color: #fff;
   background: linear-gradient(278.74deg, rgba(21, 92, 213, 0.85) 0%, rgba(21, 92, 213, 0.9) 29.55%, rgba(21, 92, 213, 0.95) 100%);
   overflow: hidden;
-  min-height: 27.7777777778rem;
+  min-height: 33.3333333333rem;
   /* SVG lines via ::before */
   /* Ensure content stays above both layers */
+}
+.section-contact h2, .section-contact .h2 {
+  max-width: 22.2222222222rem;
+}
+.section-contact p {
+  max-width: 23.8888888889rem;
 }
 .section-contact::before {
   content: "";
@@ -15361,26 +15112,30 @@ body li.nav-item {
   z-index: 1;
 }
 
+.page-template-template-contact .section-contact::before {
+  display: none;
+}
+
 .actions {
-  border-top: 2px solid #E6E6E6 !important;
+  border-top: 2px solid #ccc !important;
 }
 .actions .action-row {
-  border-bottom: 2px solid #E6E6E6 !important;
+  border-bottom: 2px solid #ccc !important;
   padding-bottom: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
   padding-top: 1.5rem;
 }
 .actions h3, .actions .h3 {
   color: #00457c;
   margin-top: 0;
 }
-.actions .btn, .actions .wpcf7 input[type=submit], .wpcf7 .actions input[type=submit], .actions .woocommerce-notices-wrapper .woocommerce-message a.button, .woocommerce-notices-wrapper .woocommerce-message .actions a.button, .actions .woocommerce-info a.button, .woocommerce-info .actions a.button {
+.actions .btn {
   color: #155cd5;
   border-color: #155cd5;
   min-width: 6.6666666667rem;
   text-decoration: none;
 }
-.actions .btn:hover, .actions .wpcf7 input[type=submit]:hover, .wpcf7 .actions input[type=submit]:hover, .actions .woocommerce-notices-wrapper .woocommerce-message a.button:hover, .woocommerce-notices-wrapper .woocommerce-message .actions a.button:hover, .actions .woocommerce-info a.button:hover, .woocommerce-info .actions a.button:hover {
+.actions .btn:hover {
   background: #155cd5;
   color: #fff;
 }
@@ -15400,12 +15155,18 @@ body li.nav-item {
 .section--carousel .swiper-wrapper {
   display: flex;
   flex-wrap: nowrap;
-  padding-left: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+  --bs-gutter-x: 3rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
 }
 .section--carousel .swiper-slide {
   flex-shrink: 0;
   width: auto;
-  max-width: 365px;
+  max-width: 420px;
   box-sizing: border-box;
 }
 .section--carousel .team-card {
@@ -15450,7 +15211,7 @@ body li.nav-item {
 }
 .team-card .card-img-top {
   width: 100%;
-  height: 274px;
+  height: 325px;
   -o-object-fit: cover;
      object-fit: cover;
   border-bottom: 1.75px solid hsl(0, 0%, 90%);
@@ -15547,6 +15308,7 @@ body li.nav-item {
   margin-bottom: 0;
   border-radius: 0;
   border-bottom: 2px solid rgba(17, 17, 17, 0.1);
+  padding: 0.5rem 0;
 }
 .accordion--custom .accordion-item .h4,
 .accordion--custom .accordion-item:last-child .h4 {
@@ -15620,7 +15382,7 @@ body li.nav-item {
 }
 .accordion--custom .accordion-item .accordion-body,
 .accordion--custom .accordion-item:last-child .accordion-body {
-  padding: 0 0 1.25rem 0;
+  padding: 1rem 0 2rem 0;
 }
 .accordion--custom .accordion-item .accordion-body .accordion-content,
 .accordion--custom .accordion-item:last-child .accordion-body .accordion-content {
@@ -15630,6 +15392,10 @@ body li.nav-item {
   justify-content: space-between;
   gap: 1rem;
 }
+.accordion--custom .accordion-item .accordion-body ul,
+.accordion--custom .accordion-item:last-child .accordion-body ul {
+  margin: 1.5rem 0 2rem;
+}
 .accordion--custom .accordion-item .accordion-body .accordion-text,
 .accordion--custom .accordion-item:last-child .accordion-body .accordion-text {
   flex: 1 1 auto;
@@ -15637,8 +15403,11 @@ body li.nav-item {
 .accordion--custom .accordion-item .accordion-body .accordion-text p,
 .accordion--custom .accordion-item:last-child .accordion-body .accordion-text p {
   font-size: 1rem;
-  line-height: 1.6;
   margin-bottom: 1.25rem;
+}
+.accordion--custom .accordion-item .accordion-body .accordion-text p:last-child,
+.accordion--custom .accordion-item:last-child .accordion-body .accordion-text p:last-child {
+  margin-bottom: 0;
 }
 .accordion--custom .accordion-item .accordion-body .accordion-logo img,
 .accordion--custom .accordion-item:last-child .accordion-body .accordion-logo img {
@@ -15647,25 +15416,42 @@ body li.nav-item {
   height: auto;
 }
 
-.btn-base, .btn-outline-white, .custom-hubspot-form .hs-button, .btn-outline-primary, .wpcf7 input[type=submit], .btn-solid-white, .btn-solid-primary {
+.btn-base, .btn-outline-white, .custom-hubspot-form .hs-button,
+.custom-hubspot-form input[type=submit], .btn-outline-primary, body .custom-hubspot-form.form-white-bg .hs-button,
+body .custom-hubspot-form.form-white-bg input[type=submit], .btn-solid-white, .btn-solid-primary,
+.btn-primary {
   text-decoration: none;
   font-weight: 500;
+  padding: 0.4444444444rem 1.25rem;
   border-radius: 50rem;
   transition: all 0.25s ease;
+  line-height: 1.3;
 }
-.btn-base:hover, .btn-outline-white:hover, .custom-hubspot-form .hs-button:hover, .btn-outline-primary:hover, .wpcf7 input[type=submit]:hover, .btn-solid-white:hover, .btn-solid-primary:hover {
+.btn-base:hover, .btn-outline-white:hover, .custom-hubspot-form .hs-button:hover,
+.custom-hubspot-form input[type=submit]:hover, .btn-outline-primary:hover, body .custom-hubspot-form.form-white-bg .hs-button:hover,
+body .custom-hubspot-form.form-white-bg input[type=submit]:hover, .btn-solid-white:hover, .btn-solid-primary:hover,
+.btn-primary:hover {
   text-decoration: none;
 }
 
-.btn-solid-primary {
+.btn-solid-primary,
+.btn-primary {
   background-color: #155cd5;
   color: #fff;
   border: 1px solid #155cd5;
 }
-.btn-solid-primary:hover, .btn-solid-primary:focus {
+.btn-solid-primary:hover, .btn-solid-primary:focus,
+.btn-primary:hover,
+.btn-primary:focus {
   background-color: rgb(0, 46.2967741935, 83.2);
   border-color: rgb(0, 46.2967741935, 83.2);
   color: #fff;
+}
+
+.btn--login {
+  font-size: 0.7777777778rem;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .btn-solid-white {
@@ -15679,148 +15465,226 @@ body li.nav-item {
   border-color: #fff;
 }
 
-.btn-outline-primary, .wpcf7 input[type=submit] {
+.btn-outline-primary, body .custom-hubspot-form.form-white-bg .hs-button,
+body .custom-hubspot-form.form-white-bg input[type=submit] {
   color: #155cd5;
   border: 2px solid #155cd5;
   background-color: transparent;
   font-weight: 600;
 }
-.btn-outline-primary:hover, .wpcf7 input[type=submit]:hover, .btn-outline-primary:focus, .wpcf7 input[type=submit]:focus {
+.btn-outline-primary:hover, body .custom-hubspot-form.form-white-bg .hs-button:hover,
+body .custom-hubspot-form.form-white-bg input[type=submit]:hover, .btn-outline-primary:focus, body .custom-hubspot-form.form-white-bg .hs-button:focus,
+body .custom-hubspot-form.form-white-bg input[type=submit]:focus {
   background-color: #155cd5;
+  border-color: #155cd5;
   color: #fff;
   text-decoration: none;
 }
 
-.btn-outline-white, .custom-hubspot-form .hs-button {
+.btn-outline-white, .custom-hubspot-form .hs-button,
+.custom-hubspot-form input[type=submit] {
   color: #fff;
   border: 2px solid #fff;
   background-color: transparent;
 }
-.btn-outline-white:hover, .custom-hubspot-form .hs-button:hover, .btn-outline-white:focus, .custom-hubspot-form .hs-button:focus {
+.btn-outline-white:hover, .custom-hubspot-form .hs-button:hover,
+.custom-hubspot-form input[type=submit]:hover, .btn-outline-white:focus, .custom-hubspot-form .hs-button:focus,
+.custom-hubspot-form input[type=submit]:focus {
   background-color: rgb(0, 54.810483871, 98.5);
   color: #fff !important;
   border-color: rgb(0, 54.810483871, 98.5);
 }
 
+.owl-item .btn-outline-white:hover, .owl-item .custom-hubspot-form .hs-button:hover, .custom-hubspot-form .owl-item .hs-button:hover,
+.owl-item .custom-hubspot-form input[type=submit]:hover,
+.custom-hubspot-form .owl-item input[type=submit]:hover, .owl-item .btn-outline-white:focus, .owl-item .custom-hubspot-form .hs-button:focus, .custom-hubspot-form .owl-item .hs-button:focus,
+.owl-item .custom-hubspot-form input[type=submit]:focus,
+.custom-hubspot-form .owl-item input[type=submit]:focus {
+  background-color: #fff;
+  color: #00457c !important;
+  border-color: #fff;
+}
+
+/* ========================================================================
+   Custom HubSpot Form Styles
+   ======================================================================== */
+body .section--gradient .custom-hubspot-form .hs-button,
+body .section--gradient .custom-hubspot-form input[type=submit] {
+  background-color: transparent !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+  font-weight: 500;
+  font-size: 1rem;
+}
+body .section--gradient .custom-hubspot-form .hs-button:hover,
+body .section--gradient .custom-hubspot-form input[type=submit]:hover {
+  background-color: #00457c !important;
+  border-color: #00457c !important;
+}
+
 .custom-hubspot-form {
   display: flex;
-  align-items: flex-end;
   justify-content: flex-end;
+  align-items: flex-end;
   margin-top: -1rem;
 }
-.custom-hubspot-form input::-moz-placeholder, .custom-hubspot-form textarea::-moz-placeholder {
-  color: hsl(0, 0%, 20%);
-  opacity: 1;
-}
-.custom-hubspot-form input::placeholder,
-.custom-hubspot-form textarea::placeholder {
-  color: hsl(0, 0%, 20%);
-  opacity: 1;
-}
-.custom-hubspot-form input::-webkit-input-placeholder,
-.custom-hubspot-form textarea::-webkit-input-placeholder {
-  color: hsl(0, 0%, 20%);
-}
-.custom-hubspot-form input::-moz-placeholder,
-.custom-hubspot-form textarea::-moz-placeholder {
-  color: hsl(0, 0%, 20%);
-}
-.custom-hubspot-form input:-ms-input-placeholder,
-.custom-hubspot-form textarea:-ms-input-placeholder {
-  color: hsl(0, 0%, 20%);
+@media (max-width: 991px) {
+  .custom-hubspot-form {
+    padding-top: 2rem;
+  }
 }
 .custom-hubspot-form .hbspt-form {
   width: 100%;
   max-width: 670px;
 }
-.custom-hubspot-form .hs-button {
-  max-width: 100px;
+.custom-hubspot-form label {
+  display: none;
 }
-.custom-hubspot-form .hs-error-msg {
-  font-size: 0.7777777778rem;
-}
-.custom-hubspot-form fieldset.form-columns-2,
-.custom-hubspot-form fieldset.form-columns-1 {
-  max-width: unset !important;
+.custom-hubspot-form .hs-form.stacked {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.75rem;
+  width: 100%;
+  max-width: 670px;
 }
 .custom-hubspot-form input,
 .custom-hubspot-form select,
 .custom-hubspot-form textarea {
   width: 100%;
-  border: none;
-  border: none;
-  background: transparent;
-  color: #fff !important;
-  padding: 0.5rem 1rem;
-  font-size: 20px;
-  border-radius: 0;
-  box-shadow: none;
-  box-sizing: border-box;
-  background: #fff;
-  border-radius: 5.5555555556rem;
+  padding: 0.4rem 1rem;
   font-size: 0.8888888889rem;
+  border: none !important;
+  border-radius: 5.5555555556rem;
+  background: #fff !important;
+  color: hsl(0, 0%, 20%) !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
 }
-.custom-hubspot-form input::placeholder, .custom-hubspot-form input::-webkit-input-placeholder, .custom-hubspot-form input::-moz-placeholder, .custom-hubspot-form input:-ms-input-placeholder,
+.custom-hubspot-form input::-moz-placeholder, .custom-hubspot-form select::-moz-placeholder, .custom-hubspot-form textarea::-moz-placeholder {
+  color: hsl(0, 0%, 20%) !important;
+  opacity: 1; /* Firefox */
+}
+.custom-hubspot-form input::placeholder,
 .custom-hubspot-form select::placeholder,
+.custom-hubspot-form textarea::placeholder {
+  color: hsl(0, 0%, 20%) !important;
+  opacity: 1; /* Firefox */
+}
+.custom-hubspot-form input::-webkit-input-placeholder,
 .custom-hubspot-form select::-webkit-input-placeholder,
+.custom-hubspot-form textarea::-webkit-input-placeholder {
+  /* Edge, Safari, Chrome */
+  color: hsl(0, 0%, 20%) !important;
+}
+.custom-hubspot-form input::-moz-placeholder,
 .custom-hubspot-form select::-moz-placeholder,
-.custom-hubspot-form select:-ms-input-placeholder,
-.custom-hubspot-form textarea::placeholder,
-.custom-hubspot-form textarea::-webkit-input-placeholder,
-.custom-hubspot-form textarea::-moz-placeholder,
-.custom-hubspot-form textarea:-ms-input-placeholder {
-  color: #9ea2ae;
+.custom-hubspot-form textarea::-moz-placeholder {
+  /* Firefox 19+ */
+  color: hsl(0, 0%, 20%) !important;
   opacity: 1;
 }
+.custom-hubspot-form input:-ms-input-placeholder,
+.custom-hubspot-form select:-ms-input-placeholder,
+.custom-hubspot-form textarea:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: hsl(0, 0%, 20%) !important;
+}
+.custom-hubspot-form input:-moz-placeholder,
+.custom-hubspot-form select:-moz-placeholder,
+.custom-hubspot-form textarea:-moz-placeholder {
+  /* Firefox 18- */
+  color: hsl(0, 0%, 20%) !important;
+  opacity: 1;
+}
+.custom-hubspot-form textarea.hs-input {
+  border-radius: 1.1111111111rem;
+  min-height: 6.6666666667rem;
+  resize: vertical;
+  width: 100% !important;
+}
 .custom-hubspot-form select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 1L5 5L9 1' stroke='%2300457c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 10px 6px;
-  border: 1px solid #fff;
-  padding-right: 2rem;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 1L5 5L9 1' stroke='%2300457c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1rem center !important;
+  background-size: 10px 6px !important;
+  padding-right: 2rem !important;
   cursor: pointer;
-  color: hsl(0, 0%, 20%);
-  font-size: 1rem;
-  line-height: 1.4;
   transition: background-image 0.2s ease;
 }
-.custom-hubspot-form select:focus,
-.custom-hubspot-form select:active {
+.custom-hubspot-form select:focus, .custom-hubspot-form select:active {
   outline: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 5L5 1L9 5' stroke='%2300457c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'><path d='M1 5L5 1L9 5' stroke='%2300457c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") !important;
+}
+.custom-hubspot-form .hs-button,
+.custom-hubspot-form input[type=submit] {
+  max-width: 100px;
+  border-radius: 5.5555555556rem;
+  padding: 0.35rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.custom-hubspot-form .hs-button:hover,
+.custom-hubspot-form input[type=submit]:hover {
+  background-color: #fff;
+  color: #00457c;
+}
+.custom-hubspot-form .hs-error-msg {
+  font-size: 0.7777777778rem;
+  color: #fff;
+  margin-top: 0.25rem;
 }
 .custom-hubspot-form .hs_submit.hs-submit {
-  margin: 1rem 0 0;
+  margin-top: 0;
+}
+.custom-hubspot-form fieldset.form-columns-1,
+.custom-hubspot-form fieldset.form-columns-2 {
+  max-width: none !important;
 }
 .custom-hubspot-form .actions {
   border-top: none !important;
 }
-.custom-hubspot-form textarea {
-  border-radius: 1.1111111111rem;
-}
-.custom-hubspot-form .hs-input.hs-fieldtype-textarea {
-  width: 100% !important;
-}
 
-.hs_recaptcha.field {
-  display: none;
+body .custom-hubspot-form.form-white-bg {
+  justify-content: flex-start;
+}
+body .custom-hubspot-form.form-white-bg input,
+body .custom-hubspot-form.form-white-bg select,
+body .custom-hubspot-form.form-white-bg textarea {
+  border: 2px solid #155cd5 !important;
+}
+body .custom-hubspot-form.form-white-bg .hs-button,
+body .custom-hubspot-form.form-white-bg input[type=submit] {
+  color: #155cd5 !important;
+  border-color: #155cd5 !important;
+  background: transparent !important;
+}
+body .custom-hubspot-form.form-white-bg .hs-button:hover,
+body .custom-hubspot-form.form-white-bg input[type=submit]:hover {
+  background: #155cd5 !important;
+  color: #fff !important;
+}
+body .custom-hubspot-form.form-white-bg .hs-error-msg {
+  color: #333 !important;
 }
 
 .img-txt-section img {
   max-width: 670px;
 }
 
+.img-txt-section__row:last-child {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .section--icon-widgets .icon-widget {
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 2rem;
-  border-top-right-radius: 3.125rem;
+  align-items: end;
+  padding: 1.35rem 2rem 1.15rem 1rem;
+  border-top-right-radius: 2.125rem;
   color: #fff;
   overflow: hidden;
 }
@@ -15828,17 +15692,18 @@ body li.nav-item {
   flex: 1;
   color: #fff;
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.2222222222rem;
   margin: 0;
   max-width: 80%;
+  padding-bottom: 0;
 }
 .section--icon-widgets .icon-widget__icon {
   flex-shrink: 0;
-  margin-left: 1.5rem;
+  margin-left: 2.5rem;
 }
 .section--icon-widgets .icon-widget__icon img {
-  width: 56px;
-  height: auto;
+  height: 3.3333333333rem;
+  width: auto;
   filter: brightness(0) invert(1);
 }
 .section--icon-widgets .icon-widget--blue {
@@ -15852,6 +15717,12 @@ body li.nav-item {
 }
 .section--icon-widgets .icon-widget--violet {
   background-color: #7049a7;
+}
+.section--icon-widgets .icon-widget--pac-blue {
+  background-color: #009de6;
+}
+.section--icon-widgets .icon-widget--bronze {
+  background-color: #b07d3d;
 }
 @media (max-width: 767.98px) {
   .section--icon-widgets .icon-widget {
@@ -15950,7 +15821,7 @@ body li.nav-item {
 .section--gradient-dark-blue {
   background: linear-gradient(135deg, #00457c 0%, #155cd5 50%, #0a2e5a 100%);
   color: #fff;
-  background: #00457C;
+  background: #00457c;
 }
 .section--gradient-dark-blue .section-title {
   font-size: 1.5555555556rem;
@@ -16015,6 +15886,44 @@ body li.nav-item {
   }
 }
 
+.institution-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 1rem;
+}
+.institution-logos .logo-item {
+  flex: 0 0 calc((100% - 60px) / 3);
+  max-width: calc((100% - 60px) / 3);
+  box-sizing: border-box;
+  display: flex;
+  max-height: 7.2222222222rem;
+}
+@media (max-width: 767.98px) {
+  .institution-logos .logo-item {
+    flex: 0 0 calc((100% - 30px) / 2);
+    max-width: calc((100% - 30px) / 2);
+  }
+}
+.institution-logos .logo-box {
+  background: #ffffff;
+  border: 2px solid #E6E6E6;
+  border-radius: 1.1111111111rem;
+  padding: 10px;
+  padding: 0.8333333333rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.institution-logos .logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: block;
+}
+
 .section--stats {
   background: linear-gradient(135deg, #00457c 0%, #155cd5 50%, #0a2e5a 100%);
   color: #fff;
@@ -16070,6 +15979,7 @@ body li.nav-item {
   color: #00457c;
   border-bottom: 2px solid #E6E6E6 !important;
   white-space: nowrap;
+  line-height: 1.2222222222rem;
 }
 .section--performance-table .performance-table tbody tr {
   border-bottom: 2px solid #E6E6E6 !important;
@@ -16094,13 +16004,16 @@ body li.nav-item {
   }
 }
 
-.terms-modal {
-  max-width: 817px;
+[class^=section--] .rounded-right {
+  border-top-right-radius: 2.7777777778rem !important;
 }
+
 .terms-modal .modal-content {
+  max-width: 44.4444444444rem;
+  margin: auto;
   border: none;
   border-radius: 1rem;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0;
   background-color: #fff;
   border-radius: 0.2777777778rem;
 }
@@ -16109,11 +16022,10 @@ body li.nav-item {
   font-weight: 300;
   color: #00457c;
 }
-.terms-modal .terms-content {
-  max-height: 50vh;
-  overflow-y: auto;
-  font-size: 0.8888888889rem;
-  line-height: 1.6;
+.terms-modal .terms-content p,
+.terms-modal .terms-content li {
+  font-size: 0.9444444444rem;
+  line-height: 1.2;
   color: #333;
 }
 .terms-modal #acceptTermsBtn {
@@ -16130,6 +16042,56 @@ body li.nav-item {
           backdrop-filter: blur(3px);
 }
 
+.model-text-content {
+  background-color: #00457c;
+  color: #fff;
+  padding: 2rem;
+  position: relative;
+  min-height: 60vh;
+}
+.model-text-content h4, .model-text-content .h4 {
+  margin-bottom: 0.5555555556rem;
+}
+
+/* For Bootstrap 5 */
+.modal-backdrop.show {
+  opacity: 0.8; /* Adjust between 0.5 (default) and 1.0 (black) */
+}
+
+/* For Bootstrap 4 */
+.modal-backdrop.in {
+  opacity: 0.8;
+}
+
+.modal-blue .modal-content {
+  border-radius: 0;
+  border-top-right-radius: 2.7777777778rem;
+}
+.modal-blue .modal-content .btn-outline-white, .modal-blue .modal-content .custom-hubspot-form .hs-button, .custom-hubspot-form .modal-blue .modal-content .hs-button,
+.modal-blue .modal-content .custom-hubspot-form input[type=submit],
+.custom-hubspot-form .modal-blue .modal-content input[type=submit] {
+  top: 1.6666666667rem;
+  right: 1.6666666667rem;
+}
+.modal-blue h4, .modal-blue .h4 {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+@media (min-width: 992px) {
+  .modal-blue .modal-lg,
+  .modal-blue .modal-xl {
+    width: 1000px;
+    --bs-modal-width: 1000px;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
 .section--news {
   background: #fff;
   /* Filter Tabs */
@@ -16145,7 +16107,7 @@ body li.nav-item {
   text-align: left;
 }
 .section--news .news-filter .filter-label {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: #333;
   font-weight: 400;
 }
@@ -16161,11 +16123,11 @@ body li.nav-item {
   font-size: 0.95rem;
 }
 .section--news .news-filter .filter-btn.active {
-  background-color: green;
+  background-color: #155cd5;
   color: #fff;
 }
 .section--news .news-filter .filter-btn:hover:not(.active) {
-  background-color: rgb(47.5, 162.9637096774, 255);
+  background-color: rgb(149.5, 208.2056451613, 255);
 }
 .section--news .news-card {
   border: none;
@@ -16182,9 +16144,10 @@ body li.nav-item {
 }
 .section--news .news-card__img {
   width: 100%;
-  height: 274px;
   -o-object-fit: cover;
      object-fit: cover;
+  display: flex;
+  min-height: 240px;
 }
 .section--news .news-card__body {
   padding: 1.25rem 0;
@@ -16212,11 +16175,8 @@ body li.nav-item {
   margin-bottom: auto;
   max-width: 18.3333333333rem;
 }
-.section--news .news-card .btn, .section--news .news-card .wpcf7 input[type=submit], .wpcf7 .section--news .news-card input[type=submit], .section--news .news-card .woocommerce-notices-wrapper .woocommerce-message a.button, .woocommerce-notices-wrapper .woocommerce-message .section--news .news-card a.button, .section--news .news-card .woocommerce-info a.button, .woocommerce-info .section--news .news-card a.button {
+.section--news .news-card .btn {
   align-self: flex-start;
-}
-.section--news body {
-  border: 5px solid red;
 }
 .section--news .pagination--custom {
   display: flex;
@@ -16226,6 +16186,15 @@ body li.nav-item {
 .section--news .pagination--custom .page-item {
   margin: 0 0.25rem;
 }
+.section--news .pagination--custom .page-item:first-child a {
+  padding-left: 0;
+}
+.section--news .pagination--custom .page-item .next.page-link,
+.section--news .pagination--custom .page-item .prev.page-link {
+  border: none;
+  padding: 0;
+  width: unset;
+}
 .section--news .pagination--custom .page-item .page-link {
   width: 42px;
   height: 42px;
@@ -16234,20 +16203,181 @@ body li.nav-item {
   align-items: center;
   justify-content: center;
   color: hsl(0, 0%, 20%);
-  border: 1px solid red;
+  border: none;
   transition: all 0.3s ease;
   background-color: transparent;
 }
 .section--news .pagination--custom .page-item .page-link:hover {
-  background-color: #00457c;
-  color: #fff;
-  border-color: #00457c;
+  background-color: transparent;
   text-decoration: none;
 }
 .section--news .pagination--custom .page-item.active .page-link {
   background-color: #155cd5;
   color: #fff;
   border-color: #155cd5;
+}
+
+.policy-nav {
+  margin: 0;
+  padding: 0;
+}
+.policy-nav .policy-link {
+  display: block;
+  color: #00457c;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+}
+.policy-nav .policy-link:hover {
+  text-decoration: underline;
+}
+.policy-nav .policy-link.active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.policy-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.home-hero .mega-menu-wrapper,
+.hero-bg-image .mega-menu-wrapper {
+  background: rgba(0, 69, 124, 0.25);
+}
+
+.mega-menu-wrapper {
+  display: none;
+  background: #003c70;
+  color: #fff;
+  border-radius: 0.5555555556rem;
+  z-index: 999;
+  box-shadow: none;
+  font-size: 0.8888888889rem;
+  overflow: hidden;
+  animation: fadeIn 0.25s ease-out;
+  z-index: 3 !important;
+}
+.mega-menu-wrapper .container-fluid, .mega-menu-wrapper .container-sm, .mega-menu-wrapper .container-md, .mega-menu-wrapper .container-lg, .mega-menu-wrapper .container-xl, .mega-menu-wrapper .container-xxl {
+  padding: 2rem 3rem;
+}
+.mega-menu-wrapper .mega-heading {
+  font-size: 0.9444444444rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+.mega-menu-wrapper .mega-heading > a {
+  color: #fff;
+}
+.mega-menu-wrapper .mega-subheading {
+  font-size: 0.8888888889rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+.mega-menu-wrapper .mega-links li {
+  margin-bottom: 0.5rem;
+}
+.mega-menu-wrapper .mega-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9444444444rem;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, -webkit-text-decoration 0.2s ease;
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
+  transition: opacity 0.2s ease, text-decoration 0.2s ease, -webkit-text-decoration 0.2s ease;
+}
+.mega-menu-wrapper .mega-links li a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+.mega-menu-wrapper .col-lg-3 {
+  border-left: 1px solid #fff;
+  padding-left: 2rem;
+}
+@media (max-width: 991.98px) {
+  .mega-menu-wrapper {
+    position: relative !important;
+    left: 0 !important;
+    width: 100% !important;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 991px) {
+  #mega-menu-capital {
+    display: none !important;
+  }
+}
+/* 1. Define the Keyframe Animation */
+@keyframes sweepInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px); /* Starts slightly to the left */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* Ends in original position */
+  }
+}
+/* 2. Set Initial State of Items */
+/* We target headers and list items inside your wrapper */
+#mega-menu-capital h5, #mega-menu-capital .h5,
+#mega-menu-capital h6,
+#mega-menu-capital .h6,
+#mega-menu-capital li {
+  opacity: 0; /* Hidden by default so they don't flash before animating */
+  will-change: transform, opacity; /* Performance optimization */
+}
+
+/* 3. The Active Class */
+/* JS will add this class. 'forwards' keeps the element visible after animation ends */
+.animate-sweep-item {
+  animation: sweepInFromLeft 0.4s ease-out forwards;
+}
+
+.rounded-top-right {
+  border-top-right-radius: 50px !important;
+}
+
+.icon-row__heading {
+  font-size: 1.2222222222rem;
+}
+.icon-row__text.mb-0 {
+  max-width: 290px;
+}
+.icon-row img {
+  height: 75px;
+  width: auto;
+}
+
+.section--disclaimer p {
+  font-size: 0.8888888889rem;
+  line-height: 1.1111111111rem;
+  max-width: unset;
+  color: hsla(0, 0%, 20%, 0.8);
 }
 
 .section-divider {
@@ -16262,6 +16392,440 @@ body li.nav-item {
   margin-top: 3.3333333333rem;
   margin-bottom: 3.3333333333rem;
   opacity: 0.9;
+}
+
+.border-top {
+  border-color: #ccc;
+}
+
+/*
+=================================================
+CUSTOM NAVBAR BREAKPOINTS
+=================================================
+*/
+/* ---
+1. Desktop First (Default state, > 1024px)
+--- 
+*/
+.desktop-menu-container {
+  display: block; /* Show desktop menu */
+}
+@media (min-width: 992px) {
+  .desktop-menu-container {
+    display: flex !important;
+    flex-basis: auto;
+  }
+}
+
+.tablet-toggler,
+.mobile-toggler {
+  display: none; /* Hide both togglers */
+}
+
+.navbar-toggler {
+  padding: 0.3333333333rem !important;
+  color: #00457c;
+  border: 1px solid #00457c;
+  border-radius: 6.6666666667rem;
+  width: 42px;
+  height: 42px;
+  padding-left: 0.2777777778rem !important;
+}
+
+/* * *** THIS IS THE FIX FOR YOUR DESKTO'P MENU ***
+* Re-creates Bootstrap's "navbar-expand" behavior
+* to make the desktop .navbar-nav horizontal.
+*/
+.desktop-menu-container .navbar-nav {
+  flex-direction: row;
+}
+
+/* Optional: Adds spacing between desktop menu items */
+.desktop-menu-container .navbar-nav .nav-item {
+  margin-left: 0.5rem;
+}
+.desktop-menu-container .navbar-nav .nav-item:first-child {
+  margin-left: 0;
+}
+
+/* ---
+2. Tablet View (1024px and down)
+--- 
+*/
+@media (max-width: 991px) {
+  .desktop-menu-container {
+    display: none; /* Hide desktop menu */
+  }
+  .tablet-toggler {
+    display: block; /* Show tablet (offcanvas) toggler */
+  }
+  .mobile-toggler {
+    display: none; /* Keep mobile toggler hidden */
+  }
+}
+/* ---
+3. Mobile View (767px and down)
+--- 
+*/
+@media (max-width: 767px) {
+  /* .desktop-menu-container is already hidden from tablet rule */
+  .tablet-toggler {
+    display: none; /* Hide tablet toggler */
+  }
+  .mobile-toggler {
+    display: block; /* Show mobile (collapse) toggler */
+  }
+}
+/* ---
+4. Mobile Collapse Container Styling
+--- */
+.mobile-menu-container {
+  background: rgb(0, 69, 124);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* Use 100vh to fill the viewport */
+  z-index: 1050;
+  overflow-y: auto;
+}
+.mobile-menu-container .btn-outline-primary, .mobile-menu-container body .custom-hubspot-form.form-white-bg .hs-button, body .custom-hubspot-form.form-white-bg .mobile-menu-container .hs-button,
+.mobile-menu-container body .custom-hubspot-form.form-white-bg input[type=submit],
+body .custom-hubspot-form.form-white-bg .mobile-menu-container input[type=submit] {
+  color: #fff;
+  border: 2px solid #155cd5 !important;
+  background-color: #155cd5 !important;
+  font-weight: 600;
+  font-size: 0.7777777778rem;
+  text-transform: uppercase;
+}
+.mobile-menu-container .select-wrapper {
+  position: relative;
+  width: 100%;
+}
+.mobile-menu-container .custom-select:first-of-type {
+  min-width: 274px;
+  width: 100%;
+}
+.mobile-menu-container .select-container {
+  display: flex !important;
+  flex-direction: column;
+  width: 100%;
+  align-items: start;
+  padding-bottom: 3rem;
+}
+.mobile-menu-container .container {
+  min-height: 100vh;
+  padding-top: 0;
+}
+.mobile-menu-container .btn-close {
+  background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+  border: 0;
+  border-radius: 0.375rem;
+  opacity: 1;
+  border-radius: 200px;
+  border: 2px solid #fff !important;
+  padding: 10px !important;
+  color: #fff !important;
+}
+
+/*
+=================================================
+OFFCANVAS & MOBILE MENU STYLING
+=================================================
+*/
+.offcanvas {
+  background-color: #00457c;
+}
+.offcanvas .btn-outline-primary, .offcanvas body .custom-hubspot-form.form-white-bg .hs-button, body .custom-hubspot-form.form-white-bg .offcanvas .hs-button,
+.offcanvas body .custom-hubspot-form.form-white-bg input[type=submit],
+body .custom-hubspot-form.form-white-bg .offcanvas input[type=submit] {
+  border-color: #fff;
+  color: #fff;
+}
+.offcanvas .btn-close {
+  background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+  border: 0;
+  border-radius: 0.375rem;
+  opacity: 1;
+  border-radius: 200px;
+  border: 2px solid #fff !important;
+  padding: 10px !important;
+  color: #fff !important;
+}
+
+#tabletOffcanvasMenu {
+  max-width: 385px;
+}
+
+.mobile-accordion-menu {
+  color: #fff;
+  /*
+  ==================================
+  FONT SIZE HIERARCHY (Corrected)
+  ==================================
+  */
+}
+.mobile-accordion-menu .select-container {
+  display: flex !important;
+}
+.mobile-accordion-menu a {
+  color: #fff !important;
+  text-decoration: none;
+  line-height: 1.3;
+}
+.mobile-accordion-menu a:hover {
+  color: #eee !important;
+}
+.mobile-accordion-menu .menu-item-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.mobile-accordion-menu .arrow-toggle {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.mobile-accordion-menu .arrow-toggle::after {
+  content: "";
+  display: inline-block;
+  width: 0.875em;
+  height: 0.875em;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+  transition: transform 0.3s ease;
+}
+.mobile-accordion-menu .arrow-toggle[aria-expanded=true]::after {
+  transform: rotate(-135deg);
+}
+.mobile-accordion-menu > .menu-item {
+  margin-bottom: 1.75rem;
+}
+.mobile-accordion-menu > .menu-item:last-child {
+  margin-bottom: 0;
+}
+.mobile-accordion-menu > .menu-item > a,
+.mobile-accordion-menu > .menu-item > .menu-item-wrapper > a {
+  font-size: 30px;
+}
+.mobile-accordion-menu .sub-menu {
+  padding-left: 0;
+  margin-left: 0;
+  margin-top: 0.5rem;
+}
+.mobile-accordion-menu .sub-menu:last-child {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.mobile-accordion-menu .sub-menu .menu-item {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0.25rem;
+}
+.mobile-accordion-menu .sub-menu .menu-item:last-child {
+  margin-bottom: 0;
+}
+.mobile-accordion-menu .sub-menu > .menu-item > a,
+.mobile-accordion-menu .sub-menu > .menu-item > .menu-item-wrapper > a {
+  font-size: 24px;
+}
+.mobile-accordion-menu .sub-menu .sub-menu > .menu-item > a,
+.mobile-accordion-menu .sub-menu .sub-menu > .menu-item > .menu-item-wrapper > a {
+  font-size: 21px;
+}
+.mobile-accordion-menu .sub-menu .sub-menu .sub-menu > .menu-item > a,
+.mobile-accordion-menu .sub-menu .sub-menu .sub-menu > .menu-item > .menu-item-wrapper > a {
+  font-size: 18px;
+}
+
+@media (max-width: 767px) {
+  .navbar {
+    padding-top: 3rem;
+  }
+}
+
+.growth_testimonials .video_item {
+  position: relative;
+  margin-bottom: -8px;
+  z-index: 0;
+}
+.growth_testimonials .video_item video,
+.growth_testimonials .video_item img {
+  width: 100%;
+  opacity: 1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+.growth_testimonials .item {
+  max-height: 600px;
+  position: relative;
+  background: #444;
+  margin-bottom: -6px;
+  overflow: hidden;
+}
+.growth_testimonials .item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(207.35deg, rgba(0, 0, 0, 0) 64.03%, rgba(0, 0, 0, 0.65) 96.33%), linear-gradient(0deg, rgba(230, 230, 230, 0), rgba(230, 230, 230, 0));
+}
+.growth_testimonials .item h4, .growth_testimonials .item .h4 {
+  font-size: 1.2222222222rem;
+  font-weight: 600;
+}
+.growth_testimonials .item a {
+  text-decoration: none;
+}
+.growth_testimonials .item:hover .current {
+  opacity: 0;
+}
+.growth_testimonials .item:hover .hover {
+  opacity: 1;
+}
+.growth_testimonials .caption {
+  position: absolute;
+  bottom: 0;
+  padding: 2rem;
+  min-width: 100%;
+  z-index: 2;
+}
+.growth_testimonials .caption p,
+.growth_testimonials .caption h3,
+.growth_testimonials .caption .h3,
+.growth_testimonials .caption h4,
+.growth_testimonials .caption .h4,
+.growth_testimonials .caption .text-white {
+  color: #fff;
+  text-shadow: none !important;
+}
+.growth_testimonials .caption p {
+  padding: 0;
+  margin: 0;
+}
+.growth_testimonials .caption .name {
+  padding-top: 15px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.growth_testimonials .caption .position {
+  font-size: 14px;
+}
+.growth_testimonials .animation_container {
+  position: relative;
+}
+.growth_testimonials .animation_container .current,
+.growth_testimonials .animation_container .hover {
+  position: absolute;
+  bottom: 0;
+}
+.growth_testimonials .animation_container .current {
+  min-height: 99px;
+  display: flex;
+  align-items: center;
+}
+.growth_testimonials .hover {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.growth_testimonials .owl-carousel .owl-dots {
+  display: block !important;
+  width: 50%;
+  text-align: left;
+  float: left;
+  padding-top: 72px;
+}
+.growth_testimonials .owl-carousel .owl-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 5px;
+  background: #fff !important;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #155cd5;
+}
+.growth_testimonials .owl-carousel .owl-dot.active {
+  background: #155cd5 !important;
+}
+.growth_testimonials .owl-nav {
+  width: 50%;
+  float: right;
+  text-align: right;
+  padding: 72px 0 0;
+}
+.growth_testimonials .owl-next {
+  margin-left: 10px;
+}
+@media (max-width: 1024px) {
+  .growth_testimonials .caption {
+    padding: 20px 20px 45px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hide_testimonial_desk {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  .hide_testimonial_mob {
+    display: none;
+  }
+}
+.page-template-template-about-us .growth_testimonials .item {
+  background: transparent;
+}
+
+#talentCommunity .owl-item {
+  transition: all 0.4s ease;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+#talentCommunity:hover .owl-item {
+  filter: blur(0) brightness(0.76);
+}
+#talentCommunity:hover .owl-item:hover {
+  filter: none;
+  opacity: 1;
+  z-index: 10;
+  transform: none;
+}
+
+/* If the slider container is empty, hide it completely */
+.container.bottom_slider:empty {
+  display: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Hide on Desktop if the JS logic misses it 
+   (Targeting the disabled classes specifically)
+*/
+@media (min-width: 1080px) {
+  .owl-carousel .owl-nav.disabled,
+  .owl-carousel .owl-dots.disabled {
+    display: none !important;
+  }
+  /* If the wrapper contains disabled items, hide the whole wrapper */
+  .container.bottom_slider:has(.owl-nav.disabled):has(.owl-dots.disabled) {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 1080px) {
+  .page-id-2 .growth_testimonials {
+    padding-bottom: 0 !important;
+  }
 }
 
 /* Sass function for rem conversion
@@ -16293,11 +16857,38 @@ body li.nav-item {
 .section-feature--flat-blue {
   background-color: #005599;
 }
-.section-feature--overlap-bottom {
-  padding-bottom: 6rem;
+@media (min-width: 992px) {
+  .section-feature--overlap-bottom {
+    padding-bottom: 11rem;
+    padding-top: 7rem;
+  }
 }
-.section-feature--overlap-bottom__img-wrap {
-  margin-bottom: -10rem;
+.section-feature--overlap-bottom h3, .section-feature--overlap-bottom .h3 {
+  font-size: 2.2222222222rem;
+  font-weight: 300;
+  color: #fff;
+  padding-top: 6rem;
+  max-width: 400px;
+}
+@media (max-width: 991px) {
+  .section-feature--overlap-bottom h3, .section-feature--overlap-bottom .h3 {
+    padding-top: 2rem;
+  }
+}
+.section-feature--overlap-bottom .img-txt-section__row {
+  align-items: start !important;
+}
+@media (max-width: 991px) {
+  .section-feature--overlap-bottom .img-txt-section__row {
+    flex-direction: column-reverse;
+  }
+  .section-feature--overlap-bottom .img-txt-section__row img {
+    margin-top: 2rem;
+  }
+}
+.section-feature--overlap-bottom .img-wrap {
+  z-index: 1;
+  position: relative;
 }
 .section-feature--overlap-bottom .section-feature__image {
   border-top-right-radius: 2.7777777778rem;
@@ -16308,12 +16899,32 @@ body li.nav-item {
   width: 100%;
   max-width: 90%;
 }
+.section-feature--overlap-bottom + section {
+  position: relative;
+}
+@media (min-width: 992px) {
+  .section-feature--overlap-bottom + section {
+    margin-top: -15.5555555556rem;
+    padding-top: 10rem;
+  }
+}
+@media (max-width: 991px) {
+  .section-feature--overlap-bottom + section {
+    margin-top: 0;
+  }
+}
+
 .site-footer {
   color: #fff;
   font-size: 1rem;
 }
 .site-footer .nav-link {
   padding: 0 2rem 0 0;
+}
+@media (max-width: 767px) {
+  .site-footer .nav-link {
+    padding: 0 0.5rem 0 0;
+  }
 }
 .site-footer a {
   color: #fff;
@@ -16355,8 +16966,7 @@ body li.nav-item {
   text-decoration: underline !important;
 }
 .site-footer__important-link:hover {
-  text-decoration: underline;
-  opacity: 1;
+  text-decoration: none !important;
 }
 
 .bg-dark-blue {
@@ -16687,7 +17297,7 @@ body.understrap-no-sidebar .alignwide .wp-block-cover__inner-container,
 body.understrap-no-sidebar .alignfull .wp-block-cover__inner-container,
 body.understrap-no-sidebar .wp-block-cover.alignwide .wp-block-cover__inner-container,
 body.understrap-no-sidebar .wp-block-cover.alignfull .wp-block-cover__inner-container {
-  --bs-gutter-x: 1.5rem;
+  --bs-gutter-x: 3rem;
   --bs-gutter-y: 0;
   width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
@@ -16758,35 +17368,4 @@ body.understrap-no-sidebar .wp-block-cover.alignwide {
 }
 .wp-block-buttons .wp-block-button:not(.is-style-outline) .wp-block-button__link {
   border: 1px solid transparent;
-}
-
-/*
-* Use existing Bootstrap 4/5 classes and
-* variables to extend - override CF7 style
-*
-* Useful CF7 classes:
-* .wpcf7 the wrapper element
-* .wpcf7-form
-* .wpcf7-form-control
-* .wpcf7-text
-* .wpcf7-email
-* .wpcf7-textarea
-* .wpcf7-submit
-*/
-.wpcf7 {
-  max-width: 600px;
-  margin: 0 auto !important;
-}
-.wpcf7 .wpcf7-form p {
-  margin-bottom: 1rem;
-}
-.wpcf7 .wpcf7-form label {
-  width: 100%;
-}
-.wpcf7 .wpcf7-not-valid-tip {
-  color: theme-color("danger");
-}
-.wpcf7 .wpcf7-validation-errors {
-  color: theme-color("danger");
-  border: 1px solid #e9ecef;
 }/*# sourceMappingURL=child-theme.css.map */

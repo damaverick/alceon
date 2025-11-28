@@ -1,12 +1,14 @@
 .terms-modal {
-  max-width: 817px;
-
   .modal-content {
+    max-width: rem(800);
+    margin: auto;
     border: none;
     border-radius: 1rem;
     box-shadow: 0;
     background-color: #fff;
     border-radius: rem(5);
+    max-height: 80vh;
+    overflow: auto;
   }
 
   h2 {
@@ -18,20 +20,19 @@
   .terms-content {
     p,
     li {
-    // max-height: 50vh;
-    // overflow-y: auto;
-    font-size: rem(17);
-    line-height: 1.2;
-    color: #333;
-  }
+      // max-height: 50vh;
+      // overflow-y: auto;
+      font-size: rem(17);
+      line-height: 1.2;
+      color: #333;
+    }
   }
 
   #acceptTermsBtn {
- display: inline-block; // ✅ ensures it only takes up what it needs
-  width: auto;
-  min-width: unset;
-  transition: background-color 0.3s ease;
-  
+    display: inline-block; // ✅ ensures it only takes up what it needs
+    width: auto;
+    min-width: unset;
+    transition: background-color 0.3s ease;
   }
 }
 
@@ -39,4 +40,107 @@
 .modal-backdrop.show {
   background-color: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(3px); // Optional subtle blur
+}
+
+.model-text-content {
+  background-color: $primaryColor;
+  color: #fff;
+  padding: 2rem;
+  position: relative;
+  min-height: 60vh;
+
+  h4 {
+    margin-bottom: rem(10);
+  }
+}
+
+/* For Bootstrap 5 */
+.modal-backdrop.show {
+  opacity: 0.8; /* Adjust between 0.5 (default) and 1.0 (black) */
+}
+
+/* For Bootstrap 4 */
+.modal-backdrop.in {
+  opacity: 0.8;
+}
+.section--gradient.modal-content {
+  border-radius: 0;
+  border-top-right-radius: rem(50);
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  .btn-outline-white {
+    top: rem(30);
+    right: rem(30);
+  }
+
+  /* SVG lines via ::before */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url(../img/modal-lines.svg) center / cover no-repeat;
+    opacity: 1;
+    z-index: 0;
+  }
+
+  /* Ensure content stays above both layers */
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.modal-blue {
+  .modal-content {
+    border-radius: 0;
+    border-top-right-radius: rem(50);
+
+    .btn-outline-white {
+      top: rem(30);
+      right: rem(30);
+    }
+  }
+
+  h4 {
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  @media (min-width: 992px) {
+    .modal-lg,
+    .modal-xl {
+      width: 1000px;
+      --bs-modal-width: 1000px;
+    }
+  }
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    // max-width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+/* 1. Force the HubSpot form to have height inside the modal */
+.hbspt-form-container iframe,
+.hbspt-form iframe {
+  width: 100% !important;
+  min-height: 600px !important; /* Forces it open */
+}
+
+
+.item {
+  /* 2. Fix the Close Button Color if it's invisible */
+.btn-outline-white {
+  border-color: $white;
+  color: $white;
+}
+.btn-outline-white:hover {
+  border-color: $white!Important;
+  background-color: $white!Important;
+  color: #000!Important;
+}
+
 }

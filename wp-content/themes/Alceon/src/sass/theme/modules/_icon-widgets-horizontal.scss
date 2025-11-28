@@ -2,12 +2,18 @@
   .icon-widget {
     position: relative;
     display: flex;
-    justify-content: space-between; // text left, icon right
-    align-items: end; // vertically centered
+    justify-content: space-between;
+    align-items: end;
     padding: 1.35rem 2rem 1.15rem 1rem;
     border-top-right-radius: 2.125rem;
     color: #fff;
     overflow: hidden;
+    
+    // ✨ Added: Smooth transition for the hover effect
+    transition: background-color 0.2s ease-in-out; 
+    
+    // ✨ Added: UX indicator (optional, if these are clickable)
+    cursor: pointer; 
 
     // Text
     &__text {
@@ -17,7 +23,7 @@
       line-height: rem(22);
       margin: 0;
       max-width: 80%;
-      padding-bottom:0;
+      padding-bottom: 0;
     }
 
     // Icon
@@ -26,32 +32,37 @@
       margin-left: 2.5rem;
 
       img {
-        // width: 56px;
         height: rem(60);
-        width:auto;
-        filter: brightness(0) invert(1); // ensures icon is white
+        width: auto;
+        filter: brightness(0) invert(1);
       }
     }
 
     // Background variants
+    // I used 7% darken, but you can adjust to 5% or 10%
     &--blue {
       background-color: #00457c;
+      &:hover { background-color: darken(#00457c, 7%); }
     }
     &--lightblue {
       background-color: #155cd5;
+      &:hover { background-color: darken(#155cd5, 7%); }
     }
     &--purple {
       background-color: #6961ff;
+      &:hover { background-color: darken(#6961ff, 7%); }
     }
     &--violet {
       background-color: #7049a7;
+      &:hover { background-color: darken(#7049a7, 7%); }
     }
     &--pac-blue {
       background-color: #009de6;
+      &:hover { background-color: darken(#009de6, 7%); }
     }
-
     &--bronze {
       background-color: #b07d3d;
+      &:hover { background-color: darken(#b07d3d, 7%); }
     }
 
     // Responsive
