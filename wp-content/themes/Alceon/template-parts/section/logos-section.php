@@ -2,17 +2,17 @@
   <?php
   // Get fields for the layout
   $title_1 = get_sub_field('title_1');
-  $title_2 = get_sub_field('title_2');
-  ?>
+    $title_2 = get_sub_field('title_2');
+    ?>
 
   <section class="section--gradient-dark-blue text-white">
     <div class="container">
 
-      <?php // ===== First Logo Row (Exited Investments) ===== 
-      ?>
+      <?php // ===== First Logo Row (Exited Investments) =====
+        ?>
       <?php if ($title_1): ?>
         <div class="row mb-4">
-          <div class="col-12">
+          <div class="col-12" data-aos="fade-up">
             <h3 class="section-title mb-4"><?php echo esc_html($title_1); ?></h3>
           </div>
         </div>
@@ -21,13 +21,23 @@
       <?php if (have_rows('logos_row_1')): ?>
         <div class="row g-4 justify-content-start text-white text-center text-md-start mb-5 pb-4">
 
-          <?php while (have_rows('logos_row_1')) : the_row();
-            // Get sub-fields for Row 1
-            $logo = get_sub_field('logo');
-            $logo_text = get_sub_field('logo_text');
-            $statistic = get_sub_field('statistic');
-          ?>
-            <div class="col-6 col-md-4 col-lg-3">
+          <?php
+            // 1. Initialize Counter for Row 1
+            $i_row1 = 0;
+
+          while (have_rows('logos_row_1')) : the_row();
+              // Get sub-fields for Row 1
+              $logo = get_sub_field('logo');
+              $logo_text = get_sub_field('logo_text');
+              $statistic = get_sub_field('statistic');
+
+              // 2. Calculate Delay
+              $delay = $i_row1 * 100;
+              ?>
+            <div class="col-6 col-md-4 col-lg-3" 
+                 data-aos="fade-up" 
+                 data-aos-delay="<?php echo intval($delay); ?>">
+                 
               <div class="investment-stat d-flex flex-column align-items-center text-white">
 
                 <?php if ($logo): ?>
@@ -49,26 +59,30 @@
 
               </div>
             </div>
-          <?php endwhile; ?>
+          <?php
+                // 3. Increment Counter
+                $i_row1++;
+          endwhile;
+          ?>
 
         </div>
-      <?php endif; // end have_rows('logos_row_1') 
-      ?>
+      <?php endif; // end have_rows('logos_row_1')
+    ?>
 
 
       <?php // ===== Conditional Divider =====
-      // Only show the divider if the *second* row has logos
-      if (have_rows('logos_row_2')):
-      ?>
-        <div class="section-divider--white my-5 pb-4"></div>
+    // Only show the divider if the *second* row has logos
+    if (have_rows('logos_row_2')):
+        ?>
+        <div class="section-divider--white my-5 pb-4" data-aos="fade-in"></div>
       <?php endif; ?>
 
 
-      <?php // ===== Second Logo Row (Current Investments) ===== 
-      ?>
+      <?php // ===== Second Logo Row (Current Investments) =====
+        ?>
       <?php if ($title_2): ?>
         <div class="row mb-4">
-          <div class="col-12">
+          <div class="col-12" data-aos="fade-up">
             <h3 class="section-title mb-4"><?php echo esc_html($title_2); ?></h3>
           </div>
         </div>
@@ -77,12 +91,22 @@
       <?php if (have_rows('logos_row_2')): ?>
         <div class="row g-4 justify-content-start text-white text-center text-md-start">
 
-          <?php while (have_rows('logos_row_2')) : the_row();
-            // Get sub-fields for Row 2
-            $logo = get_sub_field('logo');
-            $logo_text = get_sub_field('logo_text');
-          ?>
-            <div class="col-6 col-md-4 col-lg-3">
+          <?php
+            // 4. Initialize Counter for Row 2 (Starts fresh)
+            $i_row2 = 0;
+
+          while (have_rows('logos_row_2')) : the_row();
+              // Get sub-fields for Row 2
+              $logo = get_sub_field('logo');
+              $logo_text = get_sub_field('logo_text');
+
+              // 5. Calculate Delay
+              $delay = $i_row2 * 100;
+              ?>
+            <div class="col-6 col-md-4 col-lg-3"
+                 data-aos="fade-up" 
+                 data-aos-delay="<?php echo intval($delay); ?>">
+                 
               <div class="investment-stat d-flex flex-column align-items-center text-white">
 
                 <?php if ($logo): ?>
@@ -97,14 +121,18 @@
 
               </div>
             </div>
-          <?php endwhile; ?>
+          <?php
+                // 6. Increment Counter
+                $i_row2++;
+          endwhile;
+          ?>
 
         </div>
-      <?php endif; // end have_rows('logos_row_2') 
-      ?>
+      <?php endif; // end have_rows('logos_row_2')
+    ?>
 
     </div>
   </section>
 
-<?php endif; // end if layout == 'section_logos' 
+<?php endif; // end if layout == 'section_logos'
 ?>

@@ -31,7 +31,7 @@ $container = get_theme_mod('understrap_container_type');
       </div>
 
 
-      <div class="col-lg-6 pe-lg-5">
+      <div class="col-lg-6 pe-lg-5" data-aos="fade-left">
 
           <script charset="utf-8" type="text/javascript" src="//js-ap1.hsforms.net/forms/embed/v2.js"></script>
       <div class="custom-hubspot-form form-white-bg">

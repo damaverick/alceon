@@ -20,6 +20,11 @@ function understrap_remove_scripts()
 }
 add_action('wp_enqueue_scripts', 'understrap_remove_scripts', 20);
 
+
+
+require get_stylesheet_directory() . '/inc/class-mega-menu-walker.php';
+
+
 /**
  * 2. Enqueue Child Assets & Global Scripts
  */
@@ -380,3 +385,106 @@ function enqueue_aos_scripts()
     wp_add_inline_script('aos-js', $aos_init);
 }
 add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
+
+
+
+
+/**
+ * Enqueue GSAP and SplitType for Text Animations
+ */
+function enqueue_gsap_text_animations()
+{
+
+    // 1. Load GSAP Core
+    wp_enqueue_script(
+        'gsap-js',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
+        array(),
+        '3.12.2',
+        true // Load in footer
+    );
+
+    // 2. Load ScrollTrigger
+    wp_enqueue_script(
+        'gsap-scrolltrigger',
+        'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
+        array('gsap-js'),
+        '3.12.2',
+        true
+    );
+
+    // 3. Load SplitType (The free alternative to GSAP SplitText)
+    wp_enqueue_script(
+        'split-type',
+        'https://unpkg.com/split-type',
+        array(),
+        '0.3.3',
+        true
+    );
+
+    // 4. Initialize the Animation
+    // We use a PHP "Heredoc" (<<<EOD) to write clean JS without worrying about quotes.
+    $custom_js = <<<EOD
+    document.addEventListener("DOMContentLoaded", function() {
+        
+        // Safety check to ensure libraries loaded
+        if (typeof gsap !== 'undefined' && typeof SplitType !== 'undefined') {
+            
+            gsap.registerPlugin(ScrollTrigger);
+
+            const targetClass = '.internal-hero__excerpt';
+
+            // Check if element exists before running to avoid errors
+            if(document.querySelector(targetClass)) {
+
+                // 1. Split the text
+                const textElement = new SplitType(targetClass, { types: 'lines, words' });
+
+                // 2. Wrap lines for the "masking" effect (using jQuery since your theme uses it)
+                // This hides the word before it slides up
+                jQuery(textElement.lines).wrap('<div class="line-wrapper" style="overflow:hidden;"></div>');
+
+                // 3. Animate
+                gsap.from(textElement.words, {
+                    scrollTrigger: {
+                        trigger: targetClass,
+                        start: 'top 85%', // Start animating when text is near bottom of screen
+                        toggleActions: 'play none none reverse'
+                    },
+                    yPercent: 100,    // Move up from 100% down
+                    duration: 1.0,
+                    ease: 'power4.out',
+                    stagger: 0.02     // 0.02s delay between words
+                });
+
+                // 4. Handle Resize (Reset split on screen resize to fix line breaks)
+                let windowWidth = window.innerWidth;
+                window.addEventListener('resize', function() {
+                    if (windowWidth !== window.innerWidth) {
+                        windowWidth = window.innerWidth;
+                        textElement.split(); 
+                        jQuery(textElement.lines).wrap('<div class="line-wrapper" style="overflow:hidden;"></div>');
+                    }
+                });
+            }
+        }
+    });
+EOD;
+
+    // Inject the JS after the split-type script loads
+    wp_add_inline_script('split-type', $custom_js);
+}
+
+// Hook into WordPress
+add_action('wp_enqueue_scripts', 'enqueue_gsap_text_animations');
+
+
+
+// In functions.php
+function Alceon_register_menus()
+{
+    register_nav_menus([
+        'mega_capital' => __('Mega Menu – Capital', 'Alceon'),
+    ]);
+}
+add_action('after_setup_theme', 'Alceon_register_menus');

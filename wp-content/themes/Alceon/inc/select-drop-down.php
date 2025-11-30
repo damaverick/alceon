@@ -8,7 +8,7 @@
  */
 ?>
 
-<form class="select-container mt-5 d-none d-lg-flex" id="header-select-form" novalidate>
+<form class="select-container mt-5 d-none d-lg-flex" id="header-select-form" novalidate data-aos="fade-up">
     <div class="select-wrapper">
         <label for="category" class="visually-hidden">
             <?php echo esc_html(($placeholders['menu_1_placeholder'] ?? 'I am a...')); ?>
@@ -18,7 +18,9 @@
             <option value="" disabled selected>I am a...</option>
             <?php foreach (array_values($cats) as $i => $row):
                 $label = trim($row['label'] ?? '');
-                if (!$label) continue; ?>
+                if (!$label) {
+                    continue;
+                } ?>
                 <option value="<?php echo esc_attr($i); ?>"><?php echo esc_html($label); ?></option>
             <?php endforeach; ?>
         </select>

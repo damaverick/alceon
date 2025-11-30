@@ -92,7 +92,7 @@
   background-color: $primaryColor;
   color: #fff;
   // overflow: hidden;
-  min-height: rem(750);
+  min-height: rem(700);
   // overflow:visible;
 
   @media (max-width: 991px) {
@@ -102,7 +102,7 @@
   @media (min-width: 992px) {
     .internal-hero__text {
       margin-top: rem(0);
-      margin-bottom: rem(300);
+      margin-bottom: rem(220);
     }
   }
 

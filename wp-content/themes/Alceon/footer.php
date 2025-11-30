@@ -1,4 +1,18 @@
-<?php if (
+<?php
+
+
+/**
+ * The template for displaying the footer
+ *
+ * Custom footer for Alceon Understrap child theme.
+ *
+ * @package Understrap Child
+ */
+
+defined('ABSPATH') || exit;
+
+
+if (
     is_singular('case-study') &&
     is_post_type_archive('case-study')
 ) : ?>
@@ -37,15 +51,8 @@
 
 <?php
 
-/**
- * The template for displaying the footer
- *
- * Custom footer for Alceon Understrap child theme.
- *
- * @package Understrap Child
- */
 
-defined('ABSPATH') || exit;
+
 
 $container = get_theme_mod('understrap_container_type');
 ?>
@@ -113,6 +120,7 @@ $container = get_theme_mod('understrap_container_type');
 
           <p class="site-footer__disclaimer mb-4">
             <?php echo nl2br(esc_html(get_field('terms_paragraph', 'option'))); ?>
+            
           </p>
 
          

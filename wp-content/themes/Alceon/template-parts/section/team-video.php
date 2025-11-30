@@ -27,7 +27,7 @@ if (! have_rows('team_member_vid')) {
 <!-- Owl Carousel JS (jQuery should already be loaded by WordPress) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-<section class="growth_testimonials section--white pt-0">
+<section class="growth_testimonials section--white pt-0" data-aos="fade-up">
     <div class="container-fluid padding-y-top padding-y-btm p-0">
         <div class="row p-0">
             <div class="col-12 bg">

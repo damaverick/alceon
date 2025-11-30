@@ -106,7 +106,7 @@ if ($is_video && $video_url) {
                 <h1 class="hero-title" data-aos="fade-up">
                     <?php the_field('home_page_heading'); ?>
                 </h1>
-                <div class="home-hero__select-wrap d-grid gap-2 d-md-flex justify-content-md-start mt-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="home-hero__select-wrap d-grid gap-2 d-md-flex justify-content-md-start mt-4">
                     <?php get_template_part('inc/select-drop-down'); ?>
                 </div>
             </div>
