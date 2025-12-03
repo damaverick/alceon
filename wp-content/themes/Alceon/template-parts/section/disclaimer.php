@@ -3,19 +3,19 @@
 $disclaimer_text = get_field('disclaimer');
 
 // 2. Check if it's not empty
-if ( $disclaimer_text ) : 
-?>
-    <div class="disclaimer-wrapper">
+if ($disclaimer_text) :
+    ?>
+    <div class="disclaimer-wrapper" data-aos="fade-up">
        
 
         <div class="section--grey section--disclaimer">
   <div class="container mx-auto">
     <div class="col-md-12 mx-auto">
 
-     <?php   // 3. Echo the value. 
-        // ACF automatically adds the <p> tags, so no wpautop() is needed.
-        echo $disclaimer_text; 
-        ?>
+     <?php   // 3. Echo the value.
+            // ACF automatically adds the <p> tags, so no wpautop() is needed.
+            echo $disclaimer_text;
+    ?>
     </div>
 
     </div>

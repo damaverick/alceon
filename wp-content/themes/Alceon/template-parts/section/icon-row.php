@@ -40,7 +40,7 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-start text-sm-center tex
     
     <div class="row d-flex justify-content-between align-items-start mb-5">
       <div class="col-md-5">
-       <h2 class="mb-3" data-aos="fade-right"><?php echo esc_html($heading); ?></h2>
+       <h2 data-aos="fade-right"><?php echo esc_html($heading); ?></h2>
       </div>
       <div class="col-lg-6 pe-lg-5" data-aos="fade-left">
         <?php if ($intro !== ''): ?>

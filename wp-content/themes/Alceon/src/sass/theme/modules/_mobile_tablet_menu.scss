@@ -6,7 +6,7 @@ CUSTOM NAVBAR BREAKPOINTS
 
 /* ---
 1. Desktop First (Default state, > 1024px)
---- 
+--- 
 */
 .desktop-menu-container {
   display: block; /* Show desktop menu */
@@ -31,7 +31,7 @@ CUSTOM NAVBAR BREAKPOINTS
   padding-left: rem(5) !important;
 }
 
-/* * *** THIS IS THE FIX FOR YOUR DESKTO'P MENU ***
+/* * *** THIS IS THE FIX FOR YOUR DESKTOP MENU ***
 * Re-creates Bootstrap's "navbar-expand" behavior
 * to make the desktop .navbar-nav horizontal.
 */
@@ -50,7 +50,7 @@ CUSTOM NAVBAR BREAKPOINTS
 
 /* ---
 2. Tablet View (1024px and down)
---- 
+--- 
 */
 @media (max-width: 991px) {
   .desktop-menu-container {
@@ -66,7 +66,7 @@ CUSTOM NAVBAR BREAKPOINTS
 
 /* ---
 3. Mobile View (767px and down)
---- 
+--- 
 */
 @media (max-width: 767px) {
   /* .desktop-menu-container is already hidden from tablet rule */
@@ -112,7 +112,7 @@ CUSTOM NAVBAR BREAKPOINTS
     flex-direction: column;
     width: 100%;
     align-items: start;
-    padding-bottom:3rem;
+    padding-bottom: 3rem;
   }
   // 2. Make it a full-screen fixed overlay
   position: fixed;
@@ -131,7 +131,7 @@ CUSTOM NAVBAR BREAKPOINTS
   .container {
     // This replaces the inline style and applies your padding
     min-height: 100vh;
-    padding-top:0; // Your rem(50) top padding
+    padding-top: 0; // Your rem(50) top padding
     // padding-left: 2rem; // Your 2rem left padding
     // padding-right: 2rem; // Your 2rem right padding
   }
@@ -195,6 +195,11 @@ OFFCANVAS & MOBILE MENU STYLING
     display: flex !important;
   }
 
+  > .menu-item > .sub-menu > .menu-item {
+      margin-top: 1rem;
+  }
+
+
   // General link styling
   a {
     color: #fff !important; // Force white text
@@ -244,76 +249,99 @@ OFFCANVAS & MOBILE MENU STYLING
 
   /*
   ==================================
-  FONT SIZE HIERARCHY (Corrected)
+  FONT SIZE HIERARCHY & SPACING
   ==================================
   */
 
-  // Level 1: 30px (Direct children of the main .mobile-accordion-menu)
+  // Level 1: Items directly in the main menu
   > .menu-item {
-    // Targets the <li>
+    // Spacing for top-level items
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 
-    // ** TWEAK 3: Added margin-bottom **
-    margin-bottom: 1.75rem;
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    // This group targets BOTH links with no children AND links with children
     > a,
     > .menu-item-wrapper > a {
       font-size: 30px;
-      // ** TWEAK 3: Removed padding **
+      font-weight: 300;
     }
   }
 
   // Sub-menu block styling
   .sub-menu {
     padding-left: 0;
-    margin-left: 0;
-    margin-top: 0.5rem;
-    // No border as requested
+    // IMPORTANT: Keep margin on the container to 0 for smooth animation
+    margin: 0 !important;
+    list-style: none;
 
-    &:last-child {
-      margin-top: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
+    // Styling for ALL menu items inside a sub-menu
     .menu-item {
-      // Targets any <li> in a sub-menu
       list-style: none;
-      // ** TWEAK 3: Changed padding to margin-bottom **
       padding: 0;
-      margin-bottom: 0.25rem;
+
+      // --- THIS IS THE FIX FOR VERTICAL SPACE ---
+      // Adds space between items inside the dropdown
+      margin-bottom: 0.5rem;
+
+      // Remove margin from the last item so it doesn't have extra space at the bottom
       &:last-child {
         margin-bottom: 0;
       }
     }
 
-    // Level 2: 24px (Items inside the first .sub-menu)
+    // Level 2: Font size for items in the first sub-menu
     > .menu-item {
-      // Targets <li>
       > a,
       > .menu-item-wrapper > a {
         font-size: 24px;
       }
     }
 
-    // Level 3: 21px (Items inside the second .sub-menu)
+    // Level 3: Font size for items in the second sub-menu
     .sub-menu > .menu-item {
-      // Targets <li>
       > a,
       > .menu-item-wrapper > a {
         font-size: 21px;
       }
     }
 
-    // Level 4: 18px (Items inside the third .sub-menu)
+    > .menu-item > .sub-menu > .menu-item {
+      margin-top: .7rem;
+    }
+
+    // Level 4: Font size for items in the third sub-menu
     .sub-menu .sub-menu > .menu-item {
-      // Targets <li>
       > a,
       > .menu-item-wrapper > a {
         font-size: 18px;
       }
     }
   }
+}
+
+
+
+/* 1. The "Premium" Animation Curve */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 2. Initial State: Blurry, Lower, and Slightly Zoomed In */
+.modern-fade-item {
+  opacity: 0;
+  transform: translateY(40px) scale(1.05); /* Slide up + Scale down effect */
+  filter: blur(10px); /* The "Cinematic" blur */
+  
+  transition: 
+    opacity 0.8s var(--ease-out-expo), 
+    transform 0.8s var(--ease-out-expo), 
+    filter 0.8s var(--ease-out-expo);
+    
+  will-change: opacity, transform, filter; /* Hardware acceleration for smooth mobile FPS */
+}
+
+/* 3. Visible State: Sharp, In Place, Normal Size */
+.modern-fade-item.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }

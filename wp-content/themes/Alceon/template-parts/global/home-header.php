@@ -53,8 +53,8 @@ if ($is_video && $video_url) {
 <header id="wrapper-navbar" class="home-hero home-hero--vbv text-white position-relative">
 
 
-     <div class="home-hero__topbar w-100">
-        <div class="w-100 position-relative z-3">
+
+        <div class="nav-wrapper w-100 position-fixed z-3">
             <div class="container">
                 <div class="row">
                     <div class="col"><?php alceon_navbar(); ?></div>
@@ -63,7 +63,7 @@ if ($is_video && $video_url) {
             <?php get_template_part('template-parts/global/mobile-menus'); ?>
         </div>
         <?php get_template_part('template-parts/global/mega-menu'); ?>
-    </div>
+   
 
     
     

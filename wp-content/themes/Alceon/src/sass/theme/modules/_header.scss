@@ -1,3 +1,40 @@
+/* Container: Relative to hold the absolute images */
+.site-logo {
+  position: relative;
+  display: block;
+  width: rem(150); /* Adjust to match your real logo width */
+  height: 45px; /* Adjust to match your real logo height */
+}
+
+/* Images: Stacked on top of each other */
+.site-logo .logo-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.3s ease; /* Smooth cross-fade */
+}
+
+/* State A: Default (Dark Background) */
+.site-logo .logo-white {
+  opacity: 1;
+  z-index: 2;
+}
+.site-logo .logo-dark {
+  opacity: 0;
+  z-index: 1;
+}
+
+/* State B: Light Background (Active) */
+/* When the header has the class 'on-light-bg', swap opacities */
+#wrapper-navbar.on-light-bg .logo-white {
+  opacity: 0;
+}
+#wrapper-navbar.on-light-bg .logo-dark {
+  opacity: 1;
+}
+
 #wrapper-navbar::after {
   content: '';
   position: absolute;
@@ -7,11 +44,21 @@
   height: 100%;
   background-image: url('../img/lines-wide.svg');
   /* Corrected syntax: X-position (center) Y-position (top -300px) */
-  background-position: center top -320px;
+  background-position: center -100px top -520px;
   background-repeat: no-repeat;
   background-size: 6000px auto;
   z-index: 1;
   pointer-events: none;
+
+  @media (max-width: 767px) {
+    background-position: center bottom -900px;
+    opacity: 0.1;
+  }
+}
+
+.home #wrapper-navbar::after {
+  background-position: center top -320px;
+  opacity: 0.5;
 
   @media (max-width: 767px) {
     background-position: center bottom -800px;
@@ -101,8 +148,8 @@
 
   @media (min-width: 992px) {
     .internal-hero__text {
-      margin-top: rem(0);
-      margin-bottom: rem(220);
+      margin-top: 6rem;
+      // margin-bottom: rem(220);
     }
   }
 
@@ -130,7 +177,8 @@
   &__text {
     // top: rem(-250);
     @media (max-width: 991px) {
-      top: -190px;
+      // top: -190px;
+      margin-top: rem(85);
     }
   }
 
@@ -147,6 +195,9 @@
     color: #fff;
     font-size: rem(40);
     max-width: rem(595);
+    opacity: 0;
+    visibility: hidden;
+
 
     @media (max-width: 991px) {
       font-size: rem(26);
@@ -176,6 +227,13 @@
 .single-post .internal-hero,
 .page-template-template-terms .internal-hero {
   min-height: rem(360);
+
+   @media (max-width: 991px) {
+    min-height: 200px !important;
+  }
+
+
+  
 }
 
 /* Styles for the new full-width bottom image */
@@ -247,7 +305,7 @@
   position: relative;
   height: 100vh; /* full viewport height */
   color: #fff;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 /* Background image layer */
@@ -356,4 +414,30 @@
     z-index: 1;
     pointer-events: none; // Allows clicks to pass through if needed
   }
+}
+
+.internal-hero.header-sm {
+  min-height: 360px !important;
+
+  @media (max-width: 991px) {
+    min-height: 200px !important;
+  }
+
+  .internal-hero__text {
+    top: 0;
+    padding-bottom: 20px;
+  }
+}
+/* Only apply on mobile/tablet (991px and below) */
+@media (max-width: 991px) {
+    /* Target the class that has 'position-fixed' */
+    .nav-wrapper {
+        transition: transform 0.4s ease-in-out;
+        transform: translateY(0);
+    }
+
+    /* The class added by JS to slide it up */
+    .nav-wrapper.nav-hidden {
+        transform: translateY(-120%);
+    }
 }

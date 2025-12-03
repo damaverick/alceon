@@ -1,64 +1,42 @@
 <?php
-global $post;
+/**
+ * Logic Section
+ */
 
-// ---- Basic context for the CURRENT page ----
-$current_id = ($post instanceof WP_Post) ? (int) $post->ID : 0;
-$parent_id  = $current_id ? (int) wp_get_post_parent_id($current_id) : 0;
+// 1. Context (The current page ID, e.g., 27)
 
-// -------------------------------------
-// Heading & top intro from CURRENT page
-// -------------------------------------
+$current_id = get_the_ID();
+$parent_id  = wp_get_post_parent_id($current_id); //
 
-// 1) Heading from ACF text field on this page
-$cap_heading = get_field('capability_source_heading', $current_id);
-if (empty($cap_heading)) {
-    $cap_heading = 'What we offer';
-}
 
-// 2) Top intro from ACF select: convert value -> label
-$top_intro_text = '';
+// 2. Header & Intro Text
+// IMPORTANT: Changed to get_sub_field() because these are inside the Flexible Content row
+$cap_heading = get_sub_field('capability_source_heading') ?: 'What we offer';
 
-// Try as sub field first (if used inside a flexible layout)
-$field_obj = function_exists('get_sub_field_object')
-    ? get_sub_field_object('capability_source_intro_text')
-    : null;
+// Handle the Intro Text Object
+$intro_obj = get_sub_field_object('capability_source_intro_text');
+$intro_val = $intro_obj['value'] ?? '';
 
-// If not a sub field, fall back to normal field object on the page
-if (!$field_obj) {
-    $field_obj = get_field_object('capability_source_intro_text', $current_id);
-}
-
-if (!empty($field_obj)) {
-    $value   = $field_obj['value'] ?? null;
-    $choices = $field_obj['choices'] ?? [];
-
-    if (is_array($value) && isset($value['label'])) {
-        // Return format = "Both"
-        $top_intro_text = $value['label'];
-    } elseif (is_string($value) && isset($choices[$value])) {
-        // Return format = "Value", so look up the label from choices
-        $top_intro_text = $choices[$value];
-    } elseif (is_string($value)) {
-        // Fallback: just use whatever came back
-        $top_intro_text = $value;
-    }
-}
-
-// -------------------------------------
-// cap_source from CURRENT page controls which children to loop
-// -------------------------------------
-$cap_source_raw  = get_field('capability_source', $current_id);
-$cap_source_slug = strtolower(str_replace(' ', '_', trim((string) $cap_source_raw)));
-
-if ($cap_source_slug === 'your_capital') {
-    // Your Capital children live under 308
-    $loop_parent_id = 308;
+// Logic: If it's an array, grab the label. If it's a value, look it up in choices.
+if (is_array($intro_val)) {
+    $top_intro_text = $intro_val['label'];
 } else {
-    // Our Capital children live under 306
-    $loop_parent_id = 306;
+    $top_intro_text = $intro_obj['choices'][ $intro_val ] ?? $intro_val;
 }
 
-// ---- Query children of 306/308 ----
+// 3. Determine which Children to Query (308 vs 306)
+// IMPORTANT: Changed to get_sub_field() to read your selection correctly
+$cap_source_raw = get_sub_field('capability_source');
+
+// We convert to string just in case it returns an array object
+$cap_source_str = is_array($cap_source_raw) ? json_encode($cap_source_raw) : (string) $cap_source_raw;
+
+// Check if 'your_capital' is in the selection string
+$is_your_capital = (stripos($cap_source_str, 'your_capital') !== false);
+
+$loop_parent_id = $is_your_capital ? 308 : 306;
+
+// 4. Query Setup
 $q = new WP_Query([
     'post_type'      => 'page',
     'post_parent'    => $loop_parent_id,
@@ -67,75 +45,71 @@ $q = new WP_Query([
     'order'          => 'ASC',
     'no_found_rows'  => true,
 ]);
+
+// 5. Determine Field Name for Child Items
+// If we are on "Your Capital" (27), we pull 'listing_text'. Otherwise 'listing_text_your_capital'.
+// $child_field_name = ($current_id === 27) ? 'listing_text' : 'listing_text_your_capital';
+
+
+$child_field_name = ($parent_id === 310) ? 'listing_text' : 'listing_text_your_capital';
+
 ?>
+
 <section class="section--grey what-we-offer border-top-0">
-  <div class="container">
+    <div class="container">
 
-    <div class="row d-flex justify-content-between align-items-start mb-lg-5">
-      <div class="col-12 mb-4">
-        <h2 class="mb-1" data-aos="fade-right"  ><?php echo esc_html($cap_heading); ?></h2>
-      </div>
-      <div class="col-12" data-aos="fade-right" >
-        <?php if (!empty($top_intro_text)) : ?>
-          <?php echo wp_kses_post(wpautop($top_intro_text)); ?>
-        <?php endif; ?>
-      </div>
-    </div>
-
-    <?php if ($q->have_posts()) : ?>
-      <?php while ($q->have_posts()) : $q->the_post(); ?>
-        <?php
-          // -------------------------------
-          // Per-row intro text (child pages)
-          // decided by the CONTEXT page
-          // -------------------------------
-         if ($current_id === 27) {
-             // On "Your Capital" (27) page:
-             $intro = get_field('listing_text');
-
-         } elseif ($current_id === 125) {
-             // On "Our Capital" (125) page:
-             $intro = get_field('listing_text_your_capital');
-         } elseif ($parent_id === 310) {
-             // Section is being shown on a page whose parent is 310
-             $intro = get_field('listing_text_your_capital');
-         } else {
-             // Everywhere else, default to listing_text_your_capital
-             $intro = get_field('listing_text_your_capital');
-         }
-
-          $button_text = get_field('button_text');
-          if (empty($button_text)) {
-              $button_text = 'Learn More';
-          }
-          ?>
-        <div class="row align-items-start gx-lg-5 offer-row border-desktop-only border-top border-2 pt-5 pb-0 pb-md-5">
-          <div class="col-12 col-lg-8 pe-lg-5 mb-4 mb-lg-0 mt-4 mt-md-0"  data-aos="fade-right">
-            <h3 class="mb-3"><?php the_title(); ?></h3>
-
-            <?php if (!empty($intro)) : ?>
-              <p class="mb-4 mb-sm-3"><?php echo esc_html($intro); ?></p>
-            <?php endif; ?>
-
-            <a data-aos="fade-up href="<?php the_permalink(); ?>" class="btn btn-outline-primary mt-1 rounded-pill">
-              <?php echo esc_html($button_text); ?>
-            </a>
-          </div>
-          <div class="col-12 col-lg-4">
-            <?php if (has_post_thumbnail()) : ?>
-              <div data-aos="fade-left">
-              <?php the_post_thumbnail('large', ['class' => 'img-fluid rounded-top-right']); ?>
-              </div>
-            <?php else : ?>
-              <img src="https://placehold.co/600x400/eee/ccc?text=No+Image"
-                   alt="Placeholder"
-                   class="img-fluid rounded">
-            <?php endif; ?>
-          </div>
+        <div class="row d-flex justify-content-between align-items-start mb-lg-5">
+            <div class="col-12 mb-4">
+                <h2 class="mb-4" data-aos="fade-right">
+                    <?php echo esc_html($cap_heading); ?>
+                </h2>
+            </div>
+            <div class="col-12" data-aos="fade-right">
+                <?php if (! empty($top_intro_text)) : ?>
+                    <?php echo wp_kses_post(wpautop($top_intro_text)); ?>
+                <?php endif; ?>
+            </div>
         </div>
-      <?php endwhile;
-wp_reset_postdata(); ?>
-    <?php endif; ?>
 
-  </div>
+        <?php if ($q->have_posts()) : ?>
+            <?php while ($q->have_posts()) : $q->the_post(); ?>
+
+                <?php
+                // Note: We keep get_field() here because we are now inside the child page loop,
+                // grabbing data from the child page itself, not the flexible content row.
+                $intro_text  = get_field($child_field_name);
+                $button_text = get_field('button_text') ?: 'Learn More';
+                ?>
+
+                <div class="row align-items-start gx-lg-5 offer-row border-desktop-only border-top border-2 pt-5 pb-0 pb-md-5">
+                    
+                    <div class="col-12 col-lg-8 pe-lg-5 mb-4 mb-lg-0 mt-4 mt-md-0" data-aos="fade-right">
+                        <h3 class="mb-3"><?php the_title(); ?></h3>
+
+                        <?php if (! empty($intro_text)) : ?>
+                            <p class="mb-3 mt-2 mb-sm-3"><?php echo esc_html($intro_text); ?></p>
+                        <?php endif; ?>
+
+                        <a data-aos="fade-up" href="<?php the_permalink(); ?>" class="btn btn-outline-primary mt-2 rounded-pill">
+                            <?php echo esc_html($button_text); ?>
+                        </a>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <?php if (has_post_thumbnail()) : ?>
+                            <div data-aos="fade-left">
+                                <?php the_post_thumbnail('large', ['class' => 'img-fluid rounded-top-right']); ?>
+                            </div>
+                        <?php else : ?>
+                            <img src="https://placehold.co/600x400/eee/ccc?text=No+Image" alt="Placeholder" class="img-fluid rounded">
+                        <?php endif; ?>
+                    </div>
+
+                </div>
+
+            <?php endwhile;
+wp_reset_postdata(); ?>
+        <?php endif; ?>
+
+    </div>
 </section>

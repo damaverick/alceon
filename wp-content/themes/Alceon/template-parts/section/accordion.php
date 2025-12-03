@@ -1,4 +1,4 @@
-<section class="section--accordion">
+<section class="section--accordion section--white">
     <div class="container">
         
         <div class="row mb-4" data-aos="fade-up">

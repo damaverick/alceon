@@ -209,10 +209,11 @@
     z-index: 2;
 
     @media (max-width: 991px) {
-      min-height: rem(200);
+      min-height: rem(300);
       // Ensure mobile focuses on top of image
       .image-section__background {
         background-position: center top;
+        background-size:cover;
       }
     }
   }
@@ -299,7 +300,11 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
 .home-hero--vbv {
   position: relative;
   min-height: 70vh;
-  overflow: hidden;
+  // overflow: hidden;
+
+  @media (max-width:991px) {
+    overflow:hidden;
+  }
 
   > .vbv-hero {
     position: absolute;
@@ -310,15 +315,29 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
   .home-hero__inner {
     position: relative;
     z-index: 5;
-    padding-top: 7rem;
-    padding-bottom: 6rem;
+    padding-top: 12rem;
+
   }
 
-  .home-hero__topbar {
-    position: relative;
-    z-index: 6;
-  }
+
+} 
+
+#page {
+  position:relative
 }
+.admin-bar header#wrapper-navbar .nav-wrapper {
+    // position: fixed;
+    z-index: 6;
+    top: 31px;
+}
+
+header#wrapper-navbar .nav-wrapper {
+    // position: fixed;
+    z-index: 6;
+  top:0;
+  transition:all .5s;
+  }
+
 
 /* ==========================================
    Page Specific & Miscellaneous
@@ -330,7 +349,7 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
     flex-direction: column-reverse;
 
     img {
-      margin-bottom: 1rem;
+      margin-bottom:0;
     }
   }
 }

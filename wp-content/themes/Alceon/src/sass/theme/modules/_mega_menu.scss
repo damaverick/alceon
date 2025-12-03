@@ -7,7 +7,18 @@
 
 }
 
+.scrolled {
+  
+    .mega-menu-wrapper {
+ background-color: $darkerBlue!important;
+}
 
+  .menu-wrapper {
+     background-color:  $mmBlue!important;
+  }
+
+
+}
 .page-id-27 .hero-bg-image,
 .page-id-125  .hero-bg-image {
   
@@ -26,14 +37,15 @@
   font-size: rem(16);
   overflow: hidden;
   animation: fadeIn 0.25s ease-out;
-  z-index: 3 !important;
+  z-index: 7 !important;
+  transition: background-color .5s;
 
   .container-fluid {
     padding: 2rem 3rem;
   }
 
   .mega-heading {
-    font-size: rem(17);
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
     color: #fff;
@@ -57,7 +69,7 @@
         color: #fff;
         text-decoration: none;
 
-        font-size: rem(17);
+        font-size: rem(16);
         opacity: 0.9;
         transition:
           opacity 0.2s ease,
@@ -72,9 +84,14 @@
   }
 
   // White border on last two main columns
-  .col-lg-3 {
-    border-left: 1px solid #fff;
+  .col-lg-4 {
+    border-left: 1px solid #ffffffa6;
     padding-left: 2rem;
+
+    &:first-child {
+    border-left: none;
+    padding-left: 0;
+    }
   }
 
   @media (max-width: 991.98px) {

@@ -1,31 +1,26 @@
 <?php
+// 1. Get the image first
 $banner_image = get_field('header_image');
 
-if (is_page('terms') || (is_singular('post') && empty($banner_image))) : ?>
-    <style>
-        .section--blog-hero.internal-hero {
-            min-height: 360px !important;
-        }
+// 2. Set the base classes
+$hero_classes = 'section--blog-hero internal-hero bg-dark-blue text-white position-relative justify-content-center d-flex flex-column';
 
-        .internal-hero__text {
-            top: 0;
-            padding-bottom: 20px;
-        }
-    </style>
-<?php endif; ?>
+// 3. Check the condition and append the class if true
+if (is_page('terms') || (is_singular('post') && empty($banner_image))) {
+    $hero_classes .= ' header-sm';
+}
+?>
+
+
 
 
 <?php if (is_singular('post')) : ?>
 
-    <?php
-    $banner_image = get_field('header_image');
-    $hero_classes = 'section--blog-hero internal-hero bg-dark-blue text-white position-relative    d-flex flex-column';
-    ?>
+  
 
 
-
-    <header class="<?php echo esc_attr($hero_classes); ?>">
-        <div class="w-100 position-relative z-3">
+    <header id="wrapper-navbar"  class="<?php echo esc_attr($hero_classes); ?>">
+        <div class="nav-wrapper w-100 position-fixed z-3">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -54,39 +49,39 @@ if (is_page('terms') || (is_singular('post') && empty($banner_image))) : ?>
     }
 ?>
 
-        <?php if ($banner_url): ?>
+       
+
+    </header>
+ <?php if ($banner_url): ?>
             <section class="image-section image-section--half" aria-hidden="true">
                 <div class="image-section__background"
 
                     style="background-image:url('<?php echo $banner_url; ?>')"></div>
             </section>
         <?php endif; ?>
-
-    </header>
-
 <?php else : ?>
 
     <?php
     // --- Setup Internal Hero Variables ---
     $hero_bg_image = get_field('hero_bg_image');
-    $banner_image  = get_field('header_image');
-    $hero_classes  = 'internal-hero bg-dark-blue text-white position-relative justify-content-between d-flex flex-column';
-    $hero_style    = '';
+            $banner_image  = get_field('header_image');
+            $hero_classes  = 'internal-hero bg-dark-blue text-white position-relative justify-content-center d-flex flex-column';
+            $hero_style    = '';
 
-    if ($hero_bg_image) {
-        $hero_style = "background-image: url('" . esc_url($hero_bg_image) . "'); "
-            . "background-size: cover; "
-            . "background-position: bottom center; "
-            . "background-repeat: no-repeat;";
-    }
-    ?>
+            if ($hero_bg_image) {
+                $hero_style = "background-image: url('" . esc_url($hero_bg_image) . "'); "
+                    . "background-size: cover; "
+                    . "background-position: bottom center; "
+                    . "background-repeat: no-repeat;";
+            }
+            ?>
 
-    <header class="<?php if ($hero_style) : echo 'hero-bg-image ';
+    <header id="wrapper-navbar"  class="<?php if ($hero_style) : echo 'hero-bg-image ';
     endif;
 echo esc_attr($hero_classes); ?>" <?php if ($hero_style) {
     echo 'style="' . esc_attr($hero_style) . '"';
 } ?>>
-        <div class="w-100 position-relative z-3">
+        <div class="nav-wrapper w-100 position-fixed z-3">
             <div class="container">
                 <div class="row">
                     <div class="col">

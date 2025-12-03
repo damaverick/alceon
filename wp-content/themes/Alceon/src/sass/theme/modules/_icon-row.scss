@@ -4,7 +4,11 @@
   }
 
   &__text.mb-0 {
-    max-width: 290px;
+
+    @media (min-width:500px) {
+       max-width: 290px;
+    }
+   
 }
 
   img {

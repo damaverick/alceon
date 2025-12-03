@@ -14,7 +14,7 @@ get_header();
 // $container = get_theme_mod('understrap_container_type'); // You weren't using this
 ?>
 
-<section class="section--news">
+<section class="section--news section--white">
   <div class="container">
 
     <div class="row mb-4">

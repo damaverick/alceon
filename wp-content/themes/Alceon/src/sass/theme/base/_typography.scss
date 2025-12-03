@@ -99,6 +99,10 @@ h1.h2{
   max-width: unset;
     font-size: rem(40);
   line-height: rem(42);
+
+  @media (max-width:480px) {
+    font-size:2rem;
+  }
 }
 
 .single .content h2 {
@@ -222,12 +226,17 @@ blockquote p {
 
   h2 {
     font-size: 2rem; // Example: 32px
+    // margin-bottom:2.5REM;
   }
 }
 
 /* Your body font size doesn't need to be in a media query */
 p {
   font-size: 1rem; // Stays 16px on all screen sizes
+
+  @media (max-width:991px) {
+    font-size:rem(18);
+  } 
 }
 
 

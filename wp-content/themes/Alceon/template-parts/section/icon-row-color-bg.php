@@ -22,7 +22,7 @@
             <?php if ($heading): ?>
                 <div class="row">
                     <div class="col" data-aos="fade-up">
-                        <h2 class="mb-5"><?php echo wp_kses_post($heading); ?></h2>
+                        <h2><?php echo wp_kses_post($heading); ?></h2>
                         <?php if ($paragraph_text): ?> <p class="mb-5"><?php echo wp_kses_post($paragraph_text); ?></p> <?php endif; ?>
                     </div>
                 </div>

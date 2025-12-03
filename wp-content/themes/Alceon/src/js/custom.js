@@ -1,20 +1,20 @@
 (function () {
   function initVBVBackgroundVideos() {
     // 1. Safety check
-    if (typeof Vimeo === "undefined") {
-      console.error("Vimeo API is missing.");
+    if (typeof Vimeo === 'undefined') {
+      console.error('Vimeo API is missing.');
       return;
     }
 
-    const heroes = document.querySelectorAll(".vbv-hero");
-    console.log("VBV: found", heroes.length, "hero(s)");
+    const heroes = document.querySelectorAll('.vbv-hero');
+    console.log('VBV: found', heroes.length, 'hero(s)');
 
     heroes.forEach(function (hero, index) {
-      const iframe = hero.querySelector(".js-vbv-hero-iframe");
-      const media = hero.querySelector(".vbv-hero__media");
+      const iframe = hero.querySelector('.js-vbv-hero-iframe');
+      const media = hero.querySelector('.vbv-hero__media');
 
       if (!iframe || !media) {
-        console.warn("VBV: hero", index, "missing iframe or media wrapper");
+        console.warn('VBV: hero', index, 'missing iframe or media wrapper');
         return;
       }
 
@@ -22,9 +22,9 @@
 
       // helper – make sure we only do this once
       function markLoaded() {
-        if (!media.classList.contains("video-loaded")) {
-          media.classList.add("video-loaded");
-          console.log("VBV: hero", index, "marked as video-loaded");
+        if (!media.classList.contains('video-loaded')) {
+          media.classList.add('video-loaded');
+          console.log('VBV: hero', index, 'marked as video-loaded');
         }
       }
 
@@ -52,15 +52,15 @@
       // Force mute + play (required for autoplay in most browsers)
       player.setVolume(0);
       player.play().catch(function (err) {
-        console.warn("VBV: autoplay blocked for hero", index, err);
+        console.warn('VBV: autoplay blocked for hero', index, err);
       });
     });
   }
 
   // If DOM is already ready (footer script), run immediately.
   // Otherwise, hook into DOMContentLoaded.
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initVBVBackgroundVideos);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initVBVBackgroundVideos);
   } else {
     initVBVBackgroundVideos();
   }
@@ -68,10 +68,10 @@
 
 //  MEGA MENU
 
-document.addEventListener("DOMContentLoaded", function () {
-  const menuItem = document.querySelector("#menu-item-57");
-  const mainMenu = document.querySelector(".menu-wrapper");
-  const megaMenu = document.getElementById("mega-menu-capital");
+document.addEventListener('DOMContentLoaded', function () {
+  const menuItem = document.querySelector('#menu-item-57');
+  const mainMenu = document.querySelector('.menu-wrapper');
+  const megaMenu = document.getElementById('mega-menu-capital');
 
   if (!menuItem || !mainMenu || !megaMenu) return;
 
@@ -84,10 +84,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const rectMenu = mainMenu.getBoundingClientRect();
     const rectItem = menuItem.getBoundingClientRect();
 
-    megaMenu.style.position = "absolute";
+    megaMenu.style.position = 'absolute';
     megaMenu.style.top = `${rectItem.bottom + window.scrollY}px`;
     megaMenu.style.left = `${rectMenu.left + window.scrollX}px`;
-    megaMenu.style.width = `${rectMenu.width}px`;
   };
 
   const showMenu = () => {
@@ -95,58 +94,58 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.innerWidth < 992) return;
 
     positionMegaMenu();
-    megaMenu.style.display = "block";
+    megaMenu.style.display = 'block';
   };
 
   const hideMenu = () => {
     // 3. Only run on desktop
     if (window.innerWidth < 992) return;
 
-    megaMenu.style.display = "none";
+    megaMenu.style.display = 'none';
   };
 
   // --- MODIFIED EVENTS ---
 
   // Desktop hover (these are now safe because the functions check the width)
-  menuItem.addEventListener("mouseenter", showMenu);
-  menuItem.addEventListener("mouseleave", () => {
+  menuItem.addEventListener('mouseenter', showMenu);
+  menuItem.addEventListener('mouseleave', () => {
     setTimeout(() => {
-      if (!megaMenu.matches(":hover")) hideMenu();
+      if (!megaMenu.matches(':hover')) hideMenu();
     }, 150);
   });
-  megaMenu.addEventListener("mouseleave", hideMenu);
+  megaMenu.addEventListener('mouseleave', hideMenu);
 
   // 4. Mobile click listener has been REMOVED
 
   // 5. Adjust on resize (modified to hide menu if resized to mobile)
-  window.addEventListener("resize", () => {
+  window.addEventListener('resize', () => {
     if (window.innerWidth < 992) {
-      megaMenu.style.display = "none"; // Force hide on mobile
+      megaMenu.style.display = 'none'; // Force hide on mobile
     } else {
       // If it was already open and we're resizing on desktop, reposition it
-      if (megaMenu.style.display === "block") {
+      if (megaMenu.style.display === 'block') {
         positionMegaMenu();
       }
     }
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const menuWrapper = document.getElementById("mega-menu-capital");
+document.addEventListener('DOMContentLoaded', function () {
+  const menuWrapper = document.getElementById('mega-menu-capital');
 
   // Select all items we want to animate in the specific DOM order
   // This order creates the "Left-to-Right, Top-to-Bottom" sweep naturally
-  const animatableItems = menuWrapper.querySelectorAll("h5, h6, li");
+  const animatableItems = menuWrapper.querySelectorAll('h5, h6, li');
 
   // FUNCTION: Call this when you want to OPEN the menu
   window.showMegaMenu = function () {
     // 1. Show the wrapper
-    menuWrapper.style.display = "block";
+    menuWrapper.style.display = 'block';
 
     // 2. Loop through items to add animation with staggered delay
     animatableItems.forEach((item, index) => {
       // Remove class first to reset animation if it was opened previously
-      item.classList.remove("animate-sweep-item");
+      item.classList.remove('animate-sweep-item');
 
       // Force a browser reflow (magic trick to allow animation restart)
       void item.offsetWidth;
@@ -156,18 +155,66 @@ document.addEventListener("DOMContentLoaded", function () {
       item.style.animationDelay = `${index * 40}ms`;
 
       // Add the class to start animation
-      item.classList.add("animate-sweep-item");
+      item.classList.add('animate-sweep-item');
     });
   };
 
   // FUNCTION: Call this when you want to CLOSE the menu
   window.hideMegaMenu = function () {
-    menuWrapper.style.display = "none";
+    menuWrapper.style.display = 'none';
 
     // Optional: Reset opacity instantly so it's clean for next time
     animatableItems.forEach((item) => {
-      item.classList.remove("animate-sweep-item");
-      item.style.opacity = "0";
+      item.classList.remove('animate-sweep-item');
+      item.style.opacity = '0';
     });
   };
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const navbar = document.getElementById('wrapper-navbar');
+  const logo = document.querySelector('.site-logo');
+
+  // Select all sections that should trigger the dark logo
+  const lightSections = document.querySelectorAll(
+    '.section--grey, .section--white'
+  );
+
+  function checkLogoContrast() {
+    if (!logo || !navbar) return;
+
+    // 1. Get the center point of the logo on the screen
+    const logoRect = logo.getBoundingClientRect();
+    const logoCenterY = logoRect.top + logoRect.height / 2;
+    const logoCenterX = logoRect.left + logoRect.width / 2;
+
+    let isOverLight = false;
+
+    // 2. Loop through all light sections to see if logo is inside one
+    lightSections.forEach((section) => {
+      const sectionRect = section.getBoundingClientRect();
+
+      // Check if logo center is vertically and horizontally inside the section
+      if (
+        logoCenterY >= sectionRect.top &&
+        logoCenterY <= sectionRect.bottom &&
+        logoCenterX >= sectionRect.left &&
+        logoCenterX <= sectionRect.right
+      ) {
+        isOverLight = true;
+      }
+    });
+
+    // 3. Toggle the class on the main Header element
+    if (isOverLight) {
+      navbar.classList.add('on-light-bg');
+    } else {
+      navbar.classList.remove('on-light-bg');
+    }
+  }
+
+  // Run on scroll
+  window.addEventListener('scroll', checkLogoContrast);
+  // Run on load (in case page loads halfway down)
+  checkLogoContrast();
 });

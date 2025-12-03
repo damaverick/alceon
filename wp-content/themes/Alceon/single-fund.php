@@ -20,11 +20,27 @@ $container = get_theme_mod('understrap_container_type');
       <div class="row g-5 justify-content-start">
 
         <?php
-            $stat_idx = 0; // Initialize counter for stagger
+        $stat_idx = 0; // Initialize counter for stagger
+
         while (have_rows('statistics')) : the_row();
             $statistic = get_sub_field('statistic');
             $supporting_text = get_sub_field('supporting_text');
-            $aos_delay = $stat_idx * 100; // Calculate delay
+            $aos_delay = $stat_idx * 100;
+
+            // --- 1. PARSING LOGIC (Copied & Improved) ---
+            // Regex to split: Prefix | Number | Suffix
+            preg_match('/^([^\d]*)([\d\.]+)([^\d]*)$/', $statistic, $matches);
+
+            $prefix = isset($matches[1]) ? $matches[1] : '';
+            $number = isset($matches[2]) ? $matches[2] : 0;
+            $suffix = isset($matches[3]) ? $matches[3] : '';
+
+            // Calculate decimals based on the actual length of the string after the dot
+            // This ensures "10.30" gets 2 decimals, while "5" gets 0.
+            $decimals = 0;
+            if (strpos($number, '.') !== false) {
+                $decimals = strlen(substr(strrchr($number, "."), 1));
+            }
             ?>
 
           <div class="col-12 col-md-6 col-lg-3" 
@@ -33,16 +49,26 @@ $container = get_theme_mod('understrap_container_type');
                
             <div class="stat-item">
               <?php if ($statistic): ?>
-                <div class="stat-item__number"><?php echo esc_html($statistic); ?></div>
+                
+                <div class="stat-item__number js-counter"
+                     data-target="<?php echo esc_attr($number); ?>" 
+                     data-decimals="<?php echo esc_attr($decimals); ?>"
+                     data-prefix="<?php echo esc_attr($prefix); ?>"
+                     data-suffix="<?php echo esc_attr($suffix); ?>">
+                     
+                     <?php echo esc_html($statistic); ?>
+                </div>
+
               <?php endif; ?>
-                <?php if ($supporting_text): ?>
+              
+              <?php if ($supporting_text): ?>
                 <p class="stat-item__text"><?php echo wp_kses_post($supporting_text); ?></p>
               <?php endif; ?>
             </div>
           </div>
 
         <?php
-                $stat_idx++;
+            $stat_idx++;
         endwhile;
         ?>
 
@@ -50,13 +76,13 @@ $container = get_theme_mod('understrap_container_type');
     <?php endif; ?>
 
 
-    <div class="row position-relative align-items-center mt-5 pt-5">
+    <div class="row position-relative align-items-center mt-1 mt-lg-5 pt-5">
 
       <div class="col-lg-7 section-feature--overlap-bottom__img-wrap" >
         <?php
         if (has_post_thumbnail()) :
             the_post_thumbnail('full', [
-              'class' => 'img-fluid section-feature__image'
+              'class' => 'img-fluid section-feature__image', 'data-aos' => 'fade-right'
             ]);
         endif;
 ?>
@@ -71,7 +97,7 @@ $referee_title = get_field('referee_title');
 ?>
 
           <?php if ($testimonial): ?>
-            <h3 class="text-white h2 mt-5"><?php echo esc_html($testimonial); ?></h3>
+            <h3 class="text-white h2 mt-1 mt-lg-5"><?php echo esc_html($testimonial); ?></h3>
           <?php endif; ?>
 
           <?php if ($referee_name || $referee_title): ?>
@@ -99,7 +125,7 @@ $referee_title = get_field('referee_title');
 
     <div class="row d-flex justify-content-between align-items-start mb-5">
       <div class="col-md-5" data-aos="fade-right">
-        <h2 class="mb-3">Inside the portfolio</h2>
+        <h2>Inside the portfolio</h2>
       </div>
       <div class="col-md-6 pe-lg-5" data-aos="fade-left">
         <?php
@@ -132,8 +158,8 @@ get_template_part('template-parts/section/icon-row');
 </div>
 
 
-<section class="pt-5 mt-5 pb-5 border-top-0">
-  <div class="container">
+<section class="section--white border-top-0">
+  <div class="container"> 
 
     <div class="row d-flex justify-content-between align-items-start">
       <div class="col-md-5" data-aos="fade-right">
@@ -158,7 +184,7 @@ if ($how_the_fund_works_text) {
 
     <div class="row d-flex justify-content-between align-items-start mb-1">
       <div class="col" data-aos="fade-up">
-        <h2 class="mb-3">Investment Performance</h2>
+        <h2>Investment Performance</h2>
         <p class="mt-4">As at 31 May 2025</p>
       </div>
     </div>
@@ -221,7 +247,7 @@ get_template_part('template-parts/section/disclaimer');
 <div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="false">
   <div class="modal-dialog modal-dialog-centered modal-lg terms-modal">
     <div class="modal-content p-4 p-md-5 text-left">
-      <h2 class="mb-4">Terms of Use</h2>
+      <h2>Terms of Use</h2>
       <div class="terms-content text-start mx-auto">
       <?php echo wp_kses_post($terms_modal); ?>
       </div>
@@ -232,7 +258,7 @@ get_template_part('template-parts/section/disclaimer');
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {

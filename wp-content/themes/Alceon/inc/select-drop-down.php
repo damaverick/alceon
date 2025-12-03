@@ -8,7 +8,7 @@
  */
 ?>
 
-<form class="select-container mt-5 d-none d-lg-flex" id="header-select-form" novalidate data-aos="fade-up">
+<form class="select-container mt-5 d-none d-lg-flex" id="header-select-form" novalidate data-aos="fade-up" data-aos-delay="400">
     <div class="select-wrapper">
         <label for="category" class="visually-hidden">
             <?php echo esc_html(($placeholders['menu_1_placeholder'] ?? 'I am a...')); ?>

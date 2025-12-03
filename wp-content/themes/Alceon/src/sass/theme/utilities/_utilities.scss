@@ -72,3 +72,14 @@
   filter: blur(0);
   transform: scale(1);
 }
+
+/* Apply position:fixed only on screens 992px and wider */
+@media (min-width: 992px) {
+  .position-lg-fixed {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030; /* Ensures it stays on top of other content */
+  }
+}

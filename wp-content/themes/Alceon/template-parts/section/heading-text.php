@@ -44,7 +44,7 @@ if ($stack_vertical) {
 } else {
     // Default behaviour: side-by-side on lg+, stacked on smaller
     $heading_col_class = 'col-lg-5';
-    $text_col_class    = 'col-lg-6 pe-lg-5';
+    $text_col_class    = 'col-lg-7 pe-lg-5';
 }
 
 ?>
@@ -55,7 +55,7 @@ if ($stack_vertical) {
 
             <?php if ($ht_heading) : ?>
                 <div class="<?php echo esc_attr($heading_col_class); ?>" data-aos="fade-right">
-                    <h2 class="mb-3"><?php echo $ht_heading; ?></h2>
+                    <h2><?php echo $ht_heading; ?></h2>
                 </div>
             <?php endif; ?>
 

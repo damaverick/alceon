@@ -50,7 +50,7 @@
               </div>
           </div>
 
-          <div class="flex-grow-0 mt-2 overflow-y-auto">
+          <div class="flex-grow-0 mt-5 overflow-y-auto">
 
               <?php
               wp_nav_menu(array(
@@ -65,7 +65,7 @@
 
           </div>
 
-          <div class="mt-4"> <?php get_template_part('inc/select-drop-down'); ?> </div>
+          <div class="mt-3"> <?php get_template_part('inc/select-drop-down'); ?> </div>
 
       </div>
   </div>

@@ -261,16 +261,22 @@ function alceon_navbar()
 {
     ?>
     <nav class="navbar site-navbar w-100 position-relative navbar-dark" style="z-index: 3;">
-        <div class="w-100 d-flex align-items-center justify-content-between">
-            <a class="navbar-brand site-logo" href="<?php echo esc_url(home_url('/')); ?>">
-                <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img">
+        <div class="w-100 d-flex align-items-center justify-content-between py-0 py-lg-3">
+            <a class="navbar-brand site-logo py-2" href="<?php echo esc_url(home_url('/')); ?>">
+                <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img logo-white">
+                 <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/logo-dark.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img logo-dark">
+                
             </a>
+            <!-- TABLET BTN -->
             <button class="navbar-toggler tablet-toggler rounded-circle border border-white p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#tabletOffcanvasMenu" aria-controls="tabletOffcanvasMenu" aria-label="Toggle tablet menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <button class="navbar-toggler mobile-toggler rounded-circle border border-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#mobileCollapseMenu" aria-controls="mobileCollapseMenu" aria-expanded="false" aria-label="Toggle navigation">
+
+            <!-- MOBILE BTN -->
+             <button class="navbar-toggler mobile-toggler rounded-circle border border-white p-2" type="button" data-bs-toggle="collapse" data-bs-target="#mobileCollapseMenu" aria-controls="mobileCollapseMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="desktop-menu-container navbar-collapse justify-content-end">
                 <?php
                     wp_nav_menu(array(
@@ -284,6 +290,8 @@ function alceon_navbar()
                     ));
     ?>
             </div>
+
+            
         </div>
     </nav>
 <?php
@@ -367,6 +375,7 @@ function enqueue_aos_scripts()
             AOS.init({
                 duration: 1000,      
                 easing: 'ease-out',  
+                disable: 'mobile',
                 
                 // 1. ALLOW RE-ANIMATION
                 once: false, 
@@ -384,24 +393,23 @@ function enqueue_aos_scripts()
 
     wp_add_inline_script('aos-js', $aos_init);
 }
+
+
+
+
 add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
 
 
 
-
-/**
- * Enqueue GSAP and SplitType for Text Animations
- */
 function enqueue_gsap_text_animations()
 {
-
     // 1. Load GSAP Core
     wp_enqueue_script(
         'gsap-js',
         'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
         array(),
         '3.12.2',
-        true // Load in footer
+        true
     );
 
     // 2. Load ScrollTrigger
@@ -413,7 +421,7 @@ function enqueue_gsap_text_animations()
         true
     );
 
-    // 3. Load SplitType (The free alternative to GSAP SplitText)
+    // 3. Load SplitType
     wp_enqueue_script(
         'split-type',
         'https://unpkg.com/split-type',
@@ -423,47 +431,56 @@ function enqueue_gsap_text_animations()
     );
 
     // 4. Initialize the Animation
-    // We use a PHP "Heredoc" (<<<EOD) to write clean JS without worrying about quotes.
     $custom_js = <<<EOD
     document.addEventListener("DOMContentLoaded", function() {
         
-        // Safety check to ensure libraries loaded
         if (typeof gsap !== 'undefined' && typeof SplitType !== 'undefined') {
             
             gsap.registerPlugin(ScrollTrigger);
 
             const targetClass = '.internal-hero__excerpt';
+            const targetElement = document.querySelector(targetClass);
 
-            // Check if element exists before running to avoid errors
-            if(document.querySelector(targetClass)) {
+            if(targetElement) {
 
                 // 1. Split the text
                 const textElement = new SplitType(targetClass, { types: 'lines, words' });
 
-                // 2. Wrap lines for the "masking" effect (using jQuery since your theme uses it)
-                // This hides the word before it slides up
-                jQuery(textElement.lines).wrap('<div class="line-wrapper" style="overflow:hidden;"></div>');
+                // 2. Wrap lines for the "masking" effect
+                // FIX: Added padding-bottom to reveal descenders (g, y, p)
+                // FIX: Added negative margin-bottom to maintain original line spacing
+                jQuery(textElement.lines).wrap('<div class="line-wrapper" style="overflow:hidden; padding-bottom: 0.2em; margin-bottom: -0.2em;"></div>');
 
-                // 3. Animate
+                // 3. REVEAL PARENT: Now that structure is ready, make parent visible.
+                gsap.set(targetClass, { autoAlpha: 1 });
+
+                // 4. Animate the words
+             // 4. Animate the words
                 gsap.from(textElement.words, {
                     scrollTrigger: {
                         trigger: targetClass,
-                        start: 'top 85%', // Start animating when text is near bottom of screen
+                        start: 'top 85%',
                         toggleActions: 'play none none reverse'
                     },
-                    yPercent: 100,    // Move up from 100% down
+                    yPercent: 130, // Changed from 100 to 130 to clear the padding-bottom mask
                     duration: 1.0,
                     ease: 'power4.out',
-                    stagger: 0.02     // 0.02s delay between words
+                    stagger: 0.02
                 });
 
-                // 4. Handle Resize (Reset split on screen resize to fix line breaks)
+                // 5. Handle Resize
                 let windowWidth = window.innerWidth;
                 window.addEventListener('resize', function() {
                     if (windowWidth !== window.innerWidth) {
                         windowWidth = window.innerWidth;
+                        
+                        gsap.set(targetClass, { autoAlpha: 0 }); 
+                        
                         textElement.split(); 
-                        jQuery(textElement.lines).wrap('<div class="line-wrapper" style="overflow:hidden;"></div>');
+                        // Apply the same padding fix on resize
+                        jQuery(textElement.lines).wrap('<div class="line-wrapper" style="overflow:hidden; padding-bottom: 0.2em; margin-bottom: -0.2em;"></div>');
+                        
+                        gsap.set(targetClass, { autoAlpha: 1 });
                     }
                 });
             }
@@ -471,12 +488,11 @@ function enqueue_gsap_text_animations()
     });
 EOD;
 
-    // Inject the JS after the split-type script loads
     wp_add_inline_script('split-type', $custom_js);
 }
 
-// Hook into WordPress
 add_action('wp_enqueue_scripts', 'enqueue_gsap_text_animations');
+
 
 
 

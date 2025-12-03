@@ -22,7 +22,7 @@
     </div>
 <div class="col-md-7" data-aos="fade-left">
     <script charset="utf-8" type="text/javascript" src="//js-ap1.hsforms.net/forms/embed/v2.js"></script>
-    
+  
     <div id="footer-form-container" class="custom-hubspot-form"></div>
 
 
