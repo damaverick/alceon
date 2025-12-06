@@ -1,5 +1,5 @@
 # ---------------------------------
-# WordPress Core (ignore completely)
+# WordPress Core
 # ---------------------------------
 /wp-admin/
 /wp-includes/
@@ -8,37 +8,36 @@
 /license.txt
 /readme.html
 /index.php
-
-# Config
 wp-config.php
 
 # ---------------------------------
-# wp-content rules
+# wp-content Rules
 # ---------------------------------
-
-# Block everything in wp-content except allowed files
+# 1. Ignore everything in wp-content
 wp-content/*
-!wp-content/themes/
+
+# 2. Unlock the directories we need to look inside
 !wp-content/mu-plugins/
+!wp-content/themes/
 
-# Ignore plugins folder entirely
+# 3. Explicitly ignore other wp-content folders
 wp-content/plugins/
-
-# Ignore uploads & generated files
 wp-content/uploads/
 wp-content/cache/
 wp-content/upgrade/
 wp-content/languages/
 wp-content/updraft/
-
 # ---------------------------------
-# Theme Handling — ALLOW ONLY YOUR THEME
+# Theme Rules
 # ---------------------------------
-# Deny all themes by default
+# 4. Ignore all themes by default
 wp-content/themes/*
 
-# ✅ Replace "your-theme-name" with your actual theme folder
+# 5. UNLOCK YOUR SPECIFIC THEME
 !wp-content/themes/Alceon/
+
+# 6. Ignore node_modules inside your theme
+wp-content/themes/Alceon/node_modules/
 
 # ---------------------------------
 # Misc
@@ -50,28 +49,4 @@ wp-content/themes/*
 .env
 /vendor/
 node_modules/
-
-
-# System
-.DS_Store
-
-# IDE
-*.sublime-workspace
-*.sublime-project
-.vscode/
-.idea/
-
-# Node
-node_modules/
-
-# Build outputs
-wp-content/themes/*/css/
-wp-content/themes/*/js/
-*.map
-
-# Zip archives
 *.zip
-
-# Understrap core (if using child theme)
-wp-content/themes/understrap/
-wp-content/themes/Child_Theme/
