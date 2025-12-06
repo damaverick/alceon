@@ -401,22 +401,23 @@ add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
 
 
 
-function enqueue_gsap_text_animations()
+
+function enqueue_gsap_assets()
 {
     // 1. Load GSAP Core
     wp_enqueue_script(
         'gsap-js',
         'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js',
-        array(),
+        array(), // Dependencies
         '3.12.2',
-        true
+        true // Load in footer
     );
 
     // 2. Load ScrollTrigger
     wp_enqueue_script(
         'gsap-scrolltrigger',
         'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js',
-        array('gsap-js'),
+        array('gsap-js'), // Depends on GSAP
         '3.12.2',
         true
     );
@@ -429,69 +430,9 @@ function enqueue_gsap_text_animations()
         '0.3.3',
         true
     );
-
-    // 4. Initialize the Animation
-    $custom_js = <<<EOD
-    document.addEventListener("DOMContentLoaded", function() {
-        
-        if (typeof gsap !== 'undefined' && typeof SplitType !== 'undefined') {
-            
-            gsap.registerPlugin(ScrollTrigger);
-
-            const targetClass = '.internal-hero__excerpt';
-            const targetElement = document.querySelector(targetClass);
-
-            if(targetElement) {
-
-                // 1. Split the text
-                const textElement = new SplitType(targetClass, { types: 'lines, words' });
-
-                // 2. Wrap lines for the "masking" effect
-                // FIX: Added padding-bottom to reveal descenders (g, y, p)
-                // FIX: Added negative margin-bottom to maintain original line spacing
-                jQuery(textElement.lines).wrap('<div class="line-wrapper" style="overflow:hidden; padding-bottom: 0.2em; margin-bottom: -0.2em;"></div>');
-
-                // 3. REVEAL PARENT: Now that structure is ready, make parent visible.
-                gsap.set(targetClass, { autoAlpha: 1 });
-
-                // 4. Animate the words
-             // 4. Animate the words
-                gsap.from(textElement.words, {
-                    scrollTrigger: {
-                        trigger: targetClass,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse'
-                    },
-                    yPercent: 130, // Changed from 100 to 130 to clear the padding-bottom mask
-                    duration: 1.0,
-                    ease: 'power4.out',
-                    stagger: 0.02
-                });
-
-                // 5. Handle Resize
-                let windowWidth = window.innerWidth;
-                window.addEventListener('resize', function() {
-                    if (windowWidth !== window.innerWidth) {
-                        windowWidth = window.innerWidth;
-                        
-                        gsap.set(targetClass, { autoAlpha: 0 }); 
-                        
-                        textElement.split(); 
-                        // Apply the same padding fix on resize
-                        jQuery(textElement.lines).wrap('<div class="line-wrapper" style="overflow:hidden; padding-bottom: 0.2em; margin-bottom: -0.2em;"></div>');
-                        
-                        gsap.set(targetClass, { autoAlpha: 1 });
-                    }
-                });
-            }
-        }
-    });
-EOD;
-
-    wp_add_inline_script('split-type', $custom_js);
 }
+add_action('wp_enqueue_scripts', 'enqueue_gsap_assets');
 
-add_action('wp_enqueue_scripts', 'enqueue_gsap_text_animations');
 
 
 
@@ -504,3 +445,30 @@ function Alceon_register_menus()
     ]);
 }
 add_action('after_setup_theme', 'Alceon_register_menus');
+
+
+
+// WP CODEBOX PLUGIN ADMIN MENU ITEM
+
+
+add_action('admin_bar_menu', 'add_wpcb_to_admin_bar', 100);
+
+function add_wpcb_to_admin_bar($admin_bar)
+{
+
+    // 1. Permission Check
+    // Only show this to users who can manage options (Admins)
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    // 2. Add the Node
+    $admin_bar->add_node(array(
+        'id'    => 'wpcb2-custom-top-link',
+        'title' => '<span class="ab-icon dashicons dashicons-editor-code"></span><span class="ab-label">WPCodeBox</span>',
+        'href'  => admin_url('admin.php?page=wpcodebox2'),
+        'meta'  => array(
+            'title' => 'Open WPCodeBox 2', // Tooltip text
+        ),
+    ));
+}

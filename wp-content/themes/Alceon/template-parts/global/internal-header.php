@@ -125,11 +125,10 @@ if (!empty($banner_image)) {
 ?>
 
     <?php if ($banner_url): ?>
-        <section class="image-section image-section--half" aria-hidden="true">
-            <div class="image-section__background"
-
-                style="background-image:url('<?php echo $banner_url; ?>')" data-aos="blur-in" 
-     data-aos-duration="1500"></div>
+        <section class="image-section image-section--half" aria-hidden="true" 
+        style="background-image:url('<?php echo $banner_url; ?>')" data-aos="blur-in" 
+     data-aos-duration="1500"">
+       
         </section>
     <?php endif; ?>
 

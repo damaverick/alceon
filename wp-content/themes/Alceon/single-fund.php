@@ -17,7 +17,7 @@ $container = get_theme_mod('understrap_container_type');
   <div class="container">
 
     <?php if (have_rows('statistics')): ?>
-      <div class="row g-5 justify-content-start">
+      <div class="row g-lg-5 justify-content-start">
 
         <?php
         $stat_idx = 0; // Initialize counter for stagger
@@ -78,7 +78,7 @@ $container = get_theme_mod('understrap_container_type');
 
     <div class="row position-relative align-items-center mt-1 mt-lg-5 pt-5">
 
-      <div class="col-lg-7 section-feature--overlap-bottom__img-wrap" >
+      <div class="col-lg-7 section-feature--overlap-bottom__img-wrap pb-4 pb-lg-0" >
         <?php
         if (has_post_thumbnail()) :
             the_post_thumbnail('full', [
@@ -258,7 +258,6 @@ get_template_part('template-parts/section/disclaimer');
   </div>
 </div>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {

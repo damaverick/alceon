@@ -46,7 +46,7 @@ if ($cta_btn_txt === '') {
 
          <div class="col-md-4 d-flex justify-content-start justify-content-md-end  align-items-center" data-aos="fade-left">
     <?php if ($cta_url): ?>
-        <a href="<?php echo $cta_url; ?>" class="mt-3 mt-md-0 btn pill btn-outline-white" <?php echo $cta_target; ?>>
+        <a href="<?php echo $cta_url; ?>" class="mt-4 mt-lg-3 mt-md-0 btn pill btn-outline-white" <?php echo $cta_target; ?>>
             <?php echo esc_html($cta_btn_txt); ?>
         </a>
     <?php endif; ?>

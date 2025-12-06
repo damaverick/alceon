@@ -59,8 +59,8 @@ $child_field_name = ($parent_id === 310) ? 'listing_text' : 'listing_text_your_c
     <div class="container">
 
         <div class="row d-flex justify-content-between align-items-start mb-lg-5">
-            <div class="col-12 mb-4">
-                <h2 class="mb-4" data-aos="fade-right">
+            <div class="col-12">
+                <h2 data-aos="fade-right">
                     <?php echo esc_html($cap_heading); ?>
                 </h2>
             </div>

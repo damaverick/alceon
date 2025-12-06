@@ -1,4 +1,4 @@
-<section class="section--icon-widgets pt-0">
+<section class="section--icon-widgets section--white">
     <div class="container">
 
         <div class="row">

@@ -47,11 +47,16 @@
 /* White + white compression */
 .section--white + .section--white {
   padding-top: 0 !important;
+
 }
 
 /* Overlap tweak */
 .section-feature--overlap-bottom + .section--white {
   margin-top: -3.125rem; // rem(-50)
+
+  @media (max-width:1199px) {
+    margin-top:0;
+  }
 }
 
 /* Blog Hero Override */
@@ -176,9 +181,8 @@
   width: 100%;
   height:100%;
   overflow: hidden;
-  background-size: cover;
-    background-position: center;
-  will-change: transform;
+
+
 
   // Background layer (Parallax removed for better fit)
   &__background {
@@ -194,6 +198,7 @@
 
     z-index: 0;
     pointer-events: none;
+
   }
 
   // Any foreground content should stack above the bg
@@ -207,14 +212,12 @@
     min-height: rem(490);
     overflow: hidden;
     z-index: 2;
+transform: scale(1.1);
+ background-size: cover;
 
     @media (max-width: 991px) {
       min-height: rem(300);
-      // Ensure mobile focuses on top of image
-      .image-section__background {
-        background-position: center top;
-        background-size:cover;
-      }
+       
     }
   }
 

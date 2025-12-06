@@ -55,7 +55,7 @@ $image_offset     = get_sub_field('offset_image');
                 ?>
 
                 <!-- This is one row from the repeater -->
-                <div class="row align-items-center <?php echo esc_attr($row_class); ?> mb-5 pb-5 img-txt-section__row">
+                <div class="row align-items-center <?php echo esc_attr($row_class); ?> mb-5 pb-lg-5 img-txt-section__row">
 
                     <!-- IMAGE COLUMN -->
                     <div class="col-12 col-lg-7 img-wrap" data-aos="<?php echo esc_attr($img_aos); ?>">

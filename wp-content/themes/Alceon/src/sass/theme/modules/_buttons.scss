@@ -90,8 +90,8 @@
 .owl-item .btn-outline-white {
   &:hover,
   &:focus {
-    background-color: $white;
+    background-color: $white!important;
     color: $primaryColor !important;
-    border-color: $white;
+    border-color: $white!important;
   }
 }

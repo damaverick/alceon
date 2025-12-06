@@ -441,3 +441,17 @@
         transform: translateY(-120%);
     }
 }
+
+
+@media (max-width: 1199px) {
+    .internal-hero__title {
+        /* Hide initially, GSAP will turn this back on */
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    /* Optional: Fix for clipping if using italic fonts */
+    .internal-hero__title .char {
+        padding-right: 0.05em; 
+    }
+}

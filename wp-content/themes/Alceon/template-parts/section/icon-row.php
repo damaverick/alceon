@@ -38,7 +38,7 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-start text-sm-center tex
 
     <?php if ($heading): ?>
     
-    <div class="row d-flex justify-content-between align-items-start mb-5">
+    <div class="row d-flex justify-content-between align-items-start  mb-lg-5">
       <div class="col-md-5">
        <h2 data-aos="fade-right"><?php echo esc_html($heading); ?></h2>
       </div>
