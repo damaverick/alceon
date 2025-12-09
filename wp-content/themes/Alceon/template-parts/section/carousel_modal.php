@@ -24,9 +24,8 @@ if (!empty($cards) && is_array($cards)) :
           <?php if (get_sub_field('intro_paragraph_image_carousel')) : ?>
             <div class="col-lg-7 pe-lg-5" data-aos="fade-up">
               <?php the_sub_field('intro_paragraph_image_carousel'); ?>
-            <?php endif; ?>
-
             </div>
+             <?php endif; ?>
         </div>
           </div>
       <?php endif; ?>
