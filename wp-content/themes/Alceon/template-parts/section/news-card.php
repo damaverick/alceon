@@ -67,7 +67,7 @@ $category_name_upper = strtoupper($cat_name);
         <div class="news-card__body">
             <p class="news-card__category mb-1"><?php echo esc_html($category_name_upper); ?></p>
             <p class="news-card__date mb-2">
-                <?php echo esc_html(get_the_date('F j, Y')); ?> — <?php echo esc_html(get_the_author()); ?>
+                <?php echo esc_html(get_the_date('F j, Y')); ?> 
             </p>
             <h5 class="news-card__title mb-2"><?php the_title(); ?></h5>
             <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary rounded-pill mt-2 mt-lg-auto">

@@ -68,6 +68,11 @@ $container = get_theme_mod('understrap_container_type');
             get_template_part('template-parts/section/full-width-img-video-flex');
         elseif (get_row_layout() == 'section_call_to_action'):
             get_template_part('template-parts/section/gradient-cta-flex');
+        elseif (get_row_layout() == 'image_carousel_with_modal'):
+
+            get_template_part(
+                'template-parts/section/carousel_modal'
+            );
         elseif (get_row_layout() == 'capability_list') :
 
 

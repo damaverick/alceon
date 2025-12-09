@@ -261,7 +261,7 @@ function alceon_navbar()
 {
     ?>
     <nav class="navbar site-navbar w-100 position-relative navbar-dark" style="z-index: 3;">
-        <div class="w-100 d-flex align-items-center justify-content-between py-0 py-lg-3">
+        <div class="w-100 d-flex align-self-end justify-content-between py-0 py-lg-3">
             <a class="navbar-brand site-logo py-2" href="<?php echo esc_url(home_url('/')); ?>">
                 <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img logo-white">
                  <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/logo-dark.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img logo-dark">
