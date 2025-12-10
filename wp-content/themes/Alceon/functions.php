@@ -472,3 +472,60 @@ function add_wpcb_to_admin_bar($admin_bar)
         ),
     ));
 }
+
+// Enqueue Owl Carousel Assets with Dynamic Data Passing
+
+function my_theme_enqueue_owl_carousel() {
+    // 1. Enqueue Owl Carousel CSS (CDN)
+    wp_enqueue_style( 'owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', [], '2.3.4' );
+    wp_enqueue_style( 'owl-theme', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css', [], '2.3.4' );
+
+    // 2. Enqueue Owl Carousel JS (CDN) - Dependent on jQuery
+    wp_enqueue_script( 'owl-carousel-js', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', ['jquery'], '2.3.4', true );
+
+    // 3. Register your Custom Initialization Script
+    // Assuming you create a file named 'owl-init.js' in your theme's /js/ folder
+    wp_register_script( 'my-owl-init', get_stylesheet_directory_uri() . '/js/owl-init.js', ['owl-carousel-js'], '1.0', true );
+
+    // 4. Pass PHP Data to JS (The Magic Step)
+    // We create a JS object named 'owlParams' accessible in your script
+    wp_localize_script( 'my-owl-init', 'owlParams', array(
+        'themeUrl' => get_stylesheet_directory_uri(),
+        // Note: Passing 'total_cards' here is tricky if it varies per page/template. 
+        // See "My Advice" below for a better JS-only solution.
+    ));
+
+    // 5. Actually Enqueue the Script
+    wp_enqueue_script( 'my-owl-init' );
+}
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_owl_carousel' );
+
+//  Careers Page - Conditional Media Assets
+
+function my_theme_enqueue_media_assets() {
+    // 1. Enqueue CSS (GLightbox + Magnific Popup)
+    // Note: Owl Carousel CSS is likely already loaded by your previous function.
+    wp_enqueue_style( 'glightbox-css', 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css', [], '1.0' );
+    wp_enqueue_style( 'magnific-popup-css', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css', [], '1.1.0' );
+
+    // 2. Enqueue JS Libraries
+    // Note: Owl Carousel JS is likely already loaded.
+    wp_enqueue_script( 'glightbox-js', 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js', [], '1.0', true );
+    wp_enqueue_script( 'magnific-popup-js', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js', ['jquery'], '1.1.0', true );
+
+    // 3. Register your Custom Media Script
+    // Create a file: /js/media-init.js
+    wp_register_script( 'my-media-init', get_stylesheet_directory_uri() . '/js/media-init.js', ['jquery', 'owl-carousel-js', 'glightbox-js', 'magnific-popup-js'], '1.0', true );
+
+    // 4. Localize Data (Reuse the variable name 'owlParams' if consistent, or create new)
+    wp_localize_script( 'my-media-init', 'mediaParams', array(
+        'themeUrl' => get_stylesheet_directory_uri(),
+    ));
+
+    // 5. Conditional Enqueue (CRITICAL)
+    // Only load this on the specific page that has the video/media slider
+    if ( is_page( 'your-career' ) ) { // <--- CHANGE THIS SLUG
+        wp_enqueue_script( 'my-media-init' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_media_assets' );

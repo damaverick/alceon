@@ -19,19 +19,13 @@ if (! have_rows('team_member_vid')) {
 }
 ?>
 
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
-<!-- Owl Carousel JS (jQuery should already be loaded by WordPress) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 <section class="growth_testimonials section--white pt-0" data-aos="fade-up">
     <div class="container-fluid padding-y-top padding-y-btm p-0">
         <div class="row p-0">
             <div class="col-12 bg">
-                <div id="talentCommunity" class="owl-carousel">
+                <div id="mediaCarousel" class="owl-carousel">
 
                     <?php while (have_rows('team_member_vid')) : the_row(); ?>
                         <?php
@@ -105,100 +99,3 @@ if (! have_rows('team_member_vid')) {
         </div>
     </div>
 </section>
-
-<!-- GLightbox CSS -->
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-
-<!-- Magnific Popup CSS (optional; only if still used elsewhere) -->
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" />
-
-<!-- GLightbox JS -->
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-
-<!-- Magnific Popup JS (optional) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-
-<script>
-  // custom nav icons – update paths if needed
-  const prevIcon = '<img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/img/left-arrow.svg" alt="Left">';
-  const nextIcon = '<img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/img/right-arrow.svg" alt="Right">';
-
-  jQuery(document).ready(function ($) {
-
-    if ($("#talentCommunity").length > 0) {
-      $("#talentCommunity").owlCarousel({
-        items: 4,
-        loop: true,
-        dots: true,
-        margin: 0,
-        slideBy: 1,
-        dotsEach: 1,
-        nav: true,
-        navText: [prevIcon, nextIcon],
-        responsive: {
-          0:   { items: 1 },
-          768: { items: 2 },
-          1080:{ items: 4 }
-        },
-        onInitialized: wrapOwlControls
-      });
-    }
-
-    function wrapOwlControls(event) {
-      var carousel = $(event.target);
-      var nav = carousel.find('.owl-nav');
-      var dots = carousel.find('.owl-dots');
-
-      var controlContainer = $(
-        '<div class="container bottom_slider">' +
-          '<div class="row">' +
-            '<div class="col-12"></div>' +
-          '</div>' +
-        '</div>'
-      );
-
-      nav.add(dots).wrapAll(controlContainer);
-    }
-
-    // Desktop hover-to-play behaviour
-    if (window.innerWidth > 1024) {
-      $("#talentCommunity video").each(function () {
-        this.pause();
-      });
-      $("#talentCommunity .item").hover(
-        function () {
-          const v = $(this).find("video")[0];
-          if (v) v.play();
-        },
-        function () {
-          const v = $(this).find("video")[0];
-          if (v) v.pause();
-        }
-      );
-    }
-
-    // Optional: Magnific Popup for any .popup-* links
-    $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-      type: 'iframe',
-      mainClass: 'mfp-fade',
-      removalDelay: 160,
-      preloader: false,
-      fixedContentPos: false
-    });
-
-    // GLightbox for .glightbox links
-    const lightbox = GLightbox({
-      selector: '.glightbox',
-      touchNavigation: true,
-      autoplayVideos: false,
-      closeButton: true,
-      hideControls: false,
-      prevArrow: false,
-      nextArrow: false,
-      preload: true
-    });
-
-  });
-</script>

@@ -389,6 +389,45 @@ document.addEventListener('DOMContentLoaded', function () {
   checkLogoBackground();
 });
 
+// ... existing code ...
+
+// 3. Sub-Menu Hover Logic (For the Split Column)
+const splitColItems = document.querySelectorAll('.mega-split-col .menu-item-has-children');
+
+splitColItems.forEach(item => {
+  const subMenu = item.querySelector('ul');
+  
+  item.addEventListener('mouseenter', () => {
+    // Optional: Close other open sub-menus in the same column if you want strict accordion style
+    // (CSS :hover handles this naturally, but JS allows for delays/fades)
+    
+    if(subMenu) {
+        subMenu.style.display = 'block';
+        // Small delay to allow CSS transition to catch the 'display:block' change
+        requestAnimationFrame(() => {
+            subMenu.style.opacity = '1';
+            subMenu.style.transform = 'translateX(0)';
+        });
+    }
+  });
+
+  item.addEventListener('mouseleave', () => {
+    if(subMenu) {
+        subMenu.style.opacity = '0';
+        subMenu.style.transform = 'translateX(-10px)';
+        
+        // Wait for CSS transition (300ms) before hiding
+        setTimeout(() => {
+             // Check if user came back (fast hover in/out)
+             if (!item.matches(':hover')) {
+                 subMenu.style.display = 'none';
+             }
+        }, 300);
+    }
+  });
+});   
+
+
 // HIDE MOBILE MENU ON SCROLL
 
 document.addEventListener('DOMContentLoaded', function () {
