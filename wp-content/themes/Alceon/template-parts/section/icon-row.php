@@ -106,7 +106,7 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-start text-sm-center tex
 
 if (trim((string) $subtext_raw)):
     ?>
-      <div class="row mt-5">
+      <div class="row mt-5" data-aos="fade-up">
         <div class="col">
           <p class="footnotes"><?php echo wp_kses_post($subtext_raw); ?></p>
         </div>

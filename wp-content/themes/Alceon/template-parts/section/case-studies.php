@@ -46,7 +46,6 @@ $selected_case_studies = get_sub_field('case_studies');
             setup_postdata($post); 
 
             // Get fields from the Case Study CPT
-            // ASSUMPTION: Your CPT fields are named 'listing_image', 'location', 'listing_text'
             $listing_image = get_field('listing_image');
             $location = get_field('location');
             $listing_text = get_field('listing_text');
@@ -74,7 +73,6 @@ $selected_case_studies = get_sub_field('case_studies');
           <?php endif; ?>
 
           <?php 
-          // ASSUMPTION: Your stats repeater is named 'stats'
           if (have_rows('statistic')): 
           ?>
             <div class="case-stats position-absolute">
@@ -83,7 +81,6 @@ $selected_case_studies = get_sub_field('case_studies');
                 <?php 
                 // Loop through each stat
                 while (have_rows('statistic')) : the_row();
-                    // ASSUMPTION: Your stat sub-fields are 'stat' and 'stat_description'
                     $stat_number = get_sub_field('stat_title');
                     $stat_label = get_sub_field('stat_description');
                 ?>

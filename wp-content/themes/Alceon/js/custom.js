@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     runCounterAnimation();
   }
 });
+
 /**
  * ========================================================================
  * MOBILE MENU ACCORDION
@@ -208,111 +209,8 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 // ========================================================================
-// MEGA MENU + SWEEP ANIMATION COMBINED
+// NAVBAR SCROLL & LOGO LOGIC
 // ========================================================================
-
-document.addEventListener('DOMContentLoaded', function () {
-  // 1. Select Elements
-  const menuItem = document.querySelector('#menu-item-57');
-  const mainMenu = document.querySelector('.menu-wrapper');
-  const megaMenu = document.getElementById('mega-menu-capital');
-
-  // Safety check: Exit if elements don't exist
-  if (!menuItem || !mainMenu || !megaMenu) return;
-
-  // 2. Select Animation Items (for the sweep effect)
-  // This selects headers and list items in DOM order for the "wave" effect
-  const animatableItems = megaMenu.querySelectorAll('h5, h6, li');
-
-  // --- FUNCTIONS ---
-
-  const positionMegaMenu = () => {
-    // Only run on desktop
-    if (window.innerWidth < 992) return;
-
-    const rectMenu = mainMenu.getBoundingClientRect();
-
-    // 1. Detect WordPress Admin Bar displacement
-    // WordPress adds 'margin-top' to the <html> tag when logged in. We need to grab that value.
-    const htmlMarginTop =
-      parseFloat(window.getComputedStyle(document.documentElement).marginTop) ||
-      0;
-
-    megaMenu.style.position = 'absolute';
-
-    // 2. Subtract the admin bar height (htmlMarginTop) from the final calculation
-    // Formula: [Menu Bottom] + [Scroll Position] + [20px Gap] - [Admin Bar Offset]
-    megaMenu.style.top = `${rectMenu.bottom + window.scrollY + 20 - htmlMarginTop}px`;
-
-    megaMenu.style.left = `${rectMenu.left + window.scrollX}px`;
-    megaMenu.style.width = `${rectMenu.width}px`;
-  };
-  const showMenu = () => {
-    // Only run on desktop
-    if (window.innerWidth < 992) return;
-
-    // 1. Handle Position and Display
-    positionMegaMenu();
-    megaMenu.style.display = 'block';
-
-    // 2. Trigger Sweep Animation
-    animatableItems.forEach((item, index) => {
-      // Remove class to reset animation
-      item.classList.remove('animate-sweep-item');
-
-      // Force Reflow (Magic trick to restart animation instantly)
-      void item.offsetWidth;
-
-      // Set Staggered Delay (40ms per item)
-      item.style.animationDelay = `${index * 40}ms`;
-
-      // Add class to fade in and slide
-      item.classList.add('animate-sweep-item');
-    });
-  };
-
-  const hideMenu = () => {
-    // Only run on desktop
-    if (window.innerWidth < 992) return;
-
-    megaMenu.style.display = 'none';
-
-    // Reset items to invisible so they don't flash when opened next time
-    animatableItems.forEach((item) => {
-      item.classList.remove('animate-sweep-item');
-      // Ensure they are hidden again (CSS handles this, but this is a safety)
-      item.style.opacity = '0';
-    });
-  };
-
-  // --- EVENT LISTENERS ---
-
-  // Desktop Hover Events
-  menuItem.addEventListener('mouseenter', showMenu);
-
-  menuItem.addEventListener('mouseleave', () => {
-    // Small delay to allow user to move mouse from link into the mega menu
-    setTimeout(() => {
-      if (!megaMenu.matches(':hover')) {
-        hideMenu();
-      }
-    }, 150);
-  });
-
-  megaMenu.addEventListener('mouseleave', hideMenu);
-
-  // Resize Logic
-  window.addEventListener('resize', () => {
-    if (window.innerWidth < 992) {
-      megaMenu.style.display = 'none'; // Force hide on mobile
-    } else {
-      // If it was already open and we're resizing on desktop, reposition it
-      if (megaMenu.style.display === 'block') {
-        positionMegaMenu();
-      }
-    }
-  });
-});
 
 document.addEventListener('DOMContentLoaded', function () {
   const navbar = document.getElementById('wrapper-navbar');
@@ -388,45 +286,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // 7. Run once on load to set initial state
   checkLogoBackground();
 });
-
-// ... existing code ...
-
-// 3. Sub-Menu Hover Logic (For the Split Column)
-const splitColItems = document.querySelectorAll('.mega-split-col .menu-item-has-children');
-
-splitColItems.forEach(item => {
-  const subMenu = item.querySelector('ul');
-  
-  item.addEventListener('mouseenter', () => {
-    // Optional: Close other open sub-menus in the same column if you want strict accordion style
-    // (CSS :hover handles this naturally, but JS allows for delays/fades)
-    
-    if(subMenu) {
-        subMenu.style.display = 'block';
-        // Small delay to allow CSS transition to catch the 'display:block' change
-        requestAnimationFrame(() => {
-            subMenu.style.opacity = '1';
-            subMenu.style.transform = 'translateX(0)';
-        });
-    }
-  });
-
-  item.addEventListener('mouseleave', () => {
-    if(subMenu) {
-        subMenu.style.opacity = '0';
-        subMenu.style.transform = 'translateX(-10px)';
-        
-        // Wait for CSS transition (300ms) before hiding
-        setTimeout(() => {
-             // Check if user came back (fast hover in/out)
-             if (!item.matches(':hover')) {
-                 subMenu.style.display = 'none';
-             }
-        }, 300);
-    }
-  });
-});   
-
 
 // HIDE MOBILE MENU ON SCROLL
 

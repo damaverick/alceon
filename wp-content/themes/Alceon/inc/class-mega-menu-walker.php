@@ -2,117 +2,76 @@
 
 class My_Mega_Menu_Walker extends Walker_Nav_Menu
 {
-    private $top_type = ''; // Options: 'single', 'two-col', 'one-col', 'split'
-    private $top_id   = 0;
+    // 1. Start Level: Wrappers for the lists
+    public function start_lvl( &$output, $depth = 0, $args = [] ) {
+        $indent = str_repeat("\t", $depth);
 
-    public function start_el(&$output, $item, $depth = 0, $args = [], $id = 0)
-    {
-        $title   = apply_filters('the_title', $item->title, $item->ID);
-        $url     = ! empty($item->url) ? $item->url : '';
-        $classes = ! empty($item->classes) ? (array) $item->classes : [];
-        $is_no_link = in_array('no-link', $classes);
+        // DEPTH 0 -> 1: The Main Vertical List inside the column
+        if ( $depth === 0 ) {
+            $output .= "\n$indent<ul class=\"mega-col-nav\">\n";
+        }
+        // DEPTH 1 -> 2: The Flyout List
+        elseif ( $depth === 1 ) {
+            $output .= "\n$indent<ul class=\"mega-flyout-menu\">\n";
+        }
+        else {
+            $output .= "\n$indent<ul class=\"sub-menu\">\n";
+        }
+    }
 
-        // =========================================================
-        // DEPTH 0: Main Columns (Your Capital)
-        // =========================================================
-        if ($depth === 0) {
-            // We force this to be WIDER (col-lg-8) so there is room for the split view
-            // You can adjust 'col-lg-8' to 'col-lg-9' if you need more space
-            $output .= '<div class="col-lg-8 position-relative">'; 
-            
-            $output .= '<h5 class="mega-heading mb-4">';
-            if ($url && !$is_no_link) {
-                $output .= '<a href="' . esc_url($url) . '">' . esc_html($title) . '</a>';
+    // 2. Start Element: The List Items
+    public function start_el( &$output, $item, $depth = 0, $args = [], $id = 0 ) {
+        $indent  = ( $depth ) ? str_repeat("\t", $depth) : '';
+        $classes = empty( $item->classes ) ? [] : (array) $item->classes;
+
+        // Add specific markers for Depth
+        $classes[] = 'menu-item-' . $item->ID;
+        $classes[] = 'mega-depth-' . $depth;
+
+        // Check for children (to add arrows on depth 1)
+        $has_children = ! empty( $args->walker->has_children );
+        if ( $has_children ) {
+            $classes[] = 'has-children';
+        }
+
+        // --- DEPTH 0: Main Columns (Your Capital, Our Capital, etc.) ---
+        if ( $depth === 0 ) {
+            $output .= $indent . '<li class="mega-col ' . esc_attr( implode( ' ', $classes ) ) . '">';
+
+            $title = apply_filters( 'the_title', $item->title, $item->ID );
+            $url   = ! empty( $item->url ) ? esc_url( $item->url ) : '';
+
+            // Heading is now a hyperlink
+            $output .= '<h5 class="mega-col-heading">';
+
+            if ( $url ) {
+                $output .= '<a href="' . $url . '">';
+                $output .= $title;
+                $output .= '</a>';
             } else {
-                $output .= esc_html($title);
+                $output .= $title;
             }
+
             $output .= '</h5>';
-
-        // =========================================================
-        // DEPTH 1: The Trigger Rows (Investor Type, Capabilities...)
-        // =========================================================
-        } elseif ($depth === 1) {
-            
-            // 1. OPEN THE WRAPPER (This keeps the menu open on hover)
-            $output .= '<div class="flyout-row">';
-
-            // 2. THE TRIGGER (The Text/Link on the left)
-            // We check for 'no-link' to decide if it's an H6 or an A tag
-            if ($is_no_link) {
-                $output .= '<h6 class="mega-subheading mb-3 flyout-trigger">' . esc_html($title) . ' <span class="arrow">&rsaquo;</span></h6>';
-            } else {
-                $output .= '<a href="' . esc_url($url) . '" class="mega-subheading mb-3 d-block flyout-trigger">' . esc_html($title) . ' <span class="arrow">&rsaquo;</span></a>';
-            }
-            
-            // Note: We do NOT close the </div> here. 
-            // The UL (children) will be printed next, sitting INSIDE this wrapper.
-        } 
-
-        // =========================================================
-        // DEPTH 2+: The Links (Inside the hidden list)
-        // =========================================================
-        elseif ($depth >= 2) {
-            $output .= '<li class="menu-item">';
-            if ($url && !$is_no_link) {
-                $output .= '<a href="' . esc_url($url) . '">' . esc_html($title) . '</a>';
-            } else {
-                $output .= esc_html($title);
-            }
         }
-    }
 
-    public function end_el(&$output, $item, $depth = 0, $args = [])
-    {
-        // DEPTH 0: Close the main Column
-        if ($depth === 0) {
-            $output .= '</div>'; 
-        } 
-        // DEPTH 1: Close the Wrapper (flyout-row)
-        elseif ($depth === 1) {
-             // Close the <ul> which was opened in start_lvl (handled by WP default usually, but we need to close our custom wrapper)
-             // Note: start_lvl outputs the <ul>. end_lvl outputs </ul>.
-             // So here we just close the div we opened in start_el.
-             $output .= '</div>'; 
-        } 
-        // DEPTH 2: Close the List Item
-        elseif ($depth >= 2) {
-            $output .= '</li>';
-        }
-    }
+        // --- DEPTH 1: The Trigger Rows (with optional arrows) ---
+        elseif ( $depth === 1 ) {
+            $output .= $indent . '<li class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 
-    public function start_lvl(&$output, $depth = 0, $args = [])
-    {
-        // 1. Depth 0 -> 1 Wrappers
-        if ($depth === 0) {
-            if ($this->top_type === 'two-col') {
-                $output .= '<div class="row gx-4">';
-            } elseif ($this->top_type === 'split') {
-                // This UL wraps the Left Column Items
-                $output .= '<ul class="list-unstyled mega-links mega-split-left-nav">';
-            }
+            $arrow = $has_children ? '<span class="arrow">&rsaquo;</span>' : '';
+            $output .= '<a href="' . esc_url( $item->url ) . '" class="flyout-trigger">';
+            $output .= '<span>' . apply_filters( 'the_title', $item->title, $item->ID ) . '</span>';
+            $output .= $arrow;
+            $output .= '</a>';
         }
-        
-        // 2. Depth 1 -> 2 Wrappers (The Flyout Content)
-        elseif ($depth === 1) {
-            if ($this->top_type === 'split') {
-                // This UL is the Right Column (Hidden by default)
-                $output .= '<ul class="list-unstyled mega-links mega-split-content-right">';
-            } else {
-                $output .= '<ul class="list-unstyled mega-links">';
-            }
-        }
-    }
 
-    public function end_lvl(&$output, $depth = 0, $args = [])
-    {
-        if ($depth === 0) {
-            if ($this->top_type === 'two-col') {
-                $output .= '</div>';
-            } elseif ($this->top_type === 'split') {
-                $output .= '</ul>';
-            }
-        } elseif ($depth === 1) {
-            $output .= '</ul>';
+        // --- DEPTH 2: Flyout Items ---
+        else {
+            $output .= $indent . '<li class="' . esc_attr( implode( ' ', $classes ) ) . '">';
+            $output .= '<a href="' . esc_url( $item->url ) . '" class="flyout-link">';
+            $output .= apply_filters( 'the_title', $item->title, $item->ID );
+            $output .= '</a>';
         }
     }
 }

@@ -1,202 +1,256 @@
-.home-hero,
-.hero-bg-image {
+// ========================================================================
+// VARIABLES
+// ========================================================================
+$darkBlue:    #002b55;
+$lighterBlue: #004080;
+$widgetBg:    #155CD5;
+$white:       #ffffff;
+$borderColor: rgba(255, 255, 255, 0.15);
 
-  .mega-menu-wrapper {
- background: $trannyBlue2;
-}
+// ========================================================================
+// 1. MEGA MENU WRAPPER
+// ========================================================================
+#mega-menu-capital {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 500px;
 
-}
+    background-color: $darkBlue;
+    color: $white;
+    z-index: 3;
 
-.scrolled {
-  
-    .mega-menu-wrapper {
- background-color: $darkerBlue!important;
-}
+    padding-top: 130px;
+    padding-bottom: 3rem;
 
-  .menu-wrapper {
-     background-color:  $mmBlue!important;
-  }
-
-
-}
-.page-id-27 .hero-bg-image,
-.page-id-125  .hero-bg-image {
-  
-    .mega-menu-wrapper {
- background: $trannyBlue3;
-}
-  
-}
-.mega-menu-wrapper {
-  display: none;
-   background:#003c70;
-  color: #fff;
-  border-radius: rem(10);
-  z-index: 999;
-  box-shadow: none;
-  font-size: rem(16);
-  overflow: hidden;
-  animation: fadeIn 0.25s ease-out;
-  z-index: 7 !important;
-  transition: background-color .5s;
-
-  .container-fluid {
-    padding: 2rem 3rem;
-  }
-
-  .mega-heading {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: #fff;
-
-    > a {
-      color: #fff;
-    }
-  }
-
-  .mega-subheading {
-    font-size: rem(16);
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: #fff;
-  }
-
-  .mega-links {
-    li {
-      margin-bottom: 0.5rem;
-      a {
-        color: #fff;
-        text-decoration: none;
-
-        font-size: rem(16);
-        opacity: 0.9;
-        transition:
-          opacity 0.2s ease,
-          text-decoration 0.2s ease;
-
-        &:hover {
-          opacity: 1;
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-
-  // White border on last two main columns
-  .col-lg-4 {
-    border-left: 1px solid #ffffffa6;
-    padding-left: 2rem;
-
-    &:first-child {
-    border-left: none;
-    padding-left: 0;
-    }
-  }
-
-  @media (max-width: 991.98px) {
-    position: relative !important;
-    left: 0 !important;
-    width: 100% !important;
-    border-radius: 0;
-    box-shadow: none;
-  }
-}
-
-@keyframes fadeIn {
-  from {
+    display: none;
     opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    transition: opacity 0.3s ease;
+
+    &.is-visible {
+        display: block;
+        opacity: 1;
+    }
 }
 
-@media (max-width: 991px) {
-  #mega-menu-capital {
-    display: none !important;
-  }
-}
-
-//  SWEEP
-
-/* 1. Define the Keyframe Animation */
-@keyframes sweepInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-20px); /* Starts slightly to the left */
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0); /* Ends in original position */
-  }
-}
-
-/* 2. Set Initial State of Items */
-/* We target headers and list items inside your wrapper */
-#mega-menu-capital h5,
-#mega-menu-capital h6,
-#mega-menu-capital li {
-  opacity: 0; /* Hidden by default so they don't flash before animating */
-  will-change: transform, opacity; /* Performance optimization */
-}
-
-/* 3. The Active Class */
-/* JS will add this class. 'forwards' keeps the element visible after animation ends */
-.animate-sweep-item {
-  animation: sweepInFromLeft 0.4s ease-out forwards;
-}
-
-
-
-
-
-// NEW CSS FOR MEGA MENU UPDATE
-
-/* 1. The Wrapper (Holds the Title + The Hidden List) */
-.flyout-row {
-    position: static; /* Important: Allows the absolute child to position relative to the main column */
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-/* 2. The Trigger (The Text "Investor Type") */
-.flyout-trigger {
+.mega-menu-inner {
     position: relative;
-    padding: 10px 15px;
+}
+
+// ========================================================================
+// 2. THE FLEX GRID
+// ========================================================================
+.mega-menu-grid {
+    display: flex;
+    width: 100%;
+    position: relative;
+    height: 100%;
+}
+
+// ========================================================================
+// 2a. MAIN NAV COLUMNS
+// ========================================================================
+.mega-menu-columns {
+    display: flex;
+    list-style: none;
+    padding: 0;
     margin: 0;
-    transition: color 0.2s, background 0.2s;
-    border-radius: 4px;
+
+    > li.mega-col {
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 12.5rem;
+        position: relative;
+        padding-right: 2rem;
+        padding-left: 2rem;
+        border-right: 1px solid $borderColor;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+
+        .mega-col-heading {
+            font-size: 0.9rem;
+            // removed uppercase to allow sentence case from WP label
+            // text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            color: $white;         // white text
+            font-weight: 600;      // weight 600
+
+            a {
+                color: inherit;   
+                letter-spacing:0; // use the white from parent
+                text-decoration: none;
+                display: inline-block;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }
 
-/* Optional: Hover style for the text itself */
-.flyout-row:hover .flyout-trigger {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
+// ========================================================================
+// 3. NAV ITEMS (DEPTH 1) & TRIGGERS
+// ========================================================================
+.mega-col-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    > li {
+        margin-bottom: 0.25rem;
+        position: static;
+
+        > .flyout-trigger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $white;
+            text-decoration: none;
+            letter-spacing: 0;
+            padding: 10px 15px;
+ padding: 5px 0;
+            border-radius: 4px;
+            font-size: rem(16);
+            font-weight: 500;
+      
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+
+            .arrow {
+                font-size: 1.2em;
+                line-height: 1;
+                opacity: 0.5;
+                transition: transform 0.2s, opacity 0.2s;
+            }
+        }
+
+        &:hover > .flyout-trigger {
+            // background-color: $lighterBlue;
+
+            .arrow {
+                opacity: 1;
+                transform: translateX(4px);
+            }
+        }
+    }
 }
 
-/* 3. The List (The Hidden Content) */
-/* Note: We target the UL that comes immediately after the trigger inside the row */
-.flyout-row .mega-links {
-    display: none;        /* Hidden by default */
-    position: absolute;   /* Take it out of flow */
-    top: 60px;            /* Align with top of content area (adjust as needed) */
-    left: 35%;            /* Move to the right side (Adjust based on left-col width) */
-    width: 60%;           /* Width of the right panel */
-    padding-left: 30px;
-    border-left: 1px solid rgba(255,255,255,0.2); /* The divider line */
-    
-    /* Animation */
+// ========================================================================
+// 4. FLYOUT COLUMN (NEW COLUMN THAT PUSHES LAYOUT)
+// ========================================================================
+.mega-flyout-column {
+    // Starts collapsed so it doesn’t affect layout
+    flex: 0 0 0;
     opacity: 0;
-    transform: translateX(-10px);
-    transition: all 0.3s ease;
+    overflow: hidden;
+    padding-left: 0;
+    border-left: 0;
+    transition:
+        flex-basis 0.2s ease-out,
+        opacity 0.2s ease-out,
+        padding-left 0.2s ease-out,
+        border-left-color 0.2s ease-out;
+
+    &.is-active {
+        flex: 0 0 12.5rem; // same as a main column width
+        opacity: 1;
+        padding-left: 2rem;
+        border-left: 1px solid $borderColor;
+    }
+
+    .mega-flyout-menu {
+        display: block;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin-bottom: 8px;
+
+            a {
+                color: rgba($white, 0.8);
+                text-decoration: none;
+                font-size: 1rem;
+                display: block;
+                padding: 5px 0;
+                  font-size: rem(16);
+
+                &:hover {
+                    color: $white;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }
 
-/* 4. THE MAGIC: Show List on Wrapper Hover */
-.flyout-row:hover .mega-links {
+// Make sure nested flyouts are hidden by default when still inside li
+.mega-flyout-menu {
+    display: none;
+}
+
+// When a submenu is moved into .mega-flyout-column, it becomes visible
+.mega-flyout-column .mega-flyout-menu {
     display: block;
-    opacity: 1;
-    transform: translateX(0);
+}
+
+// ========================================================================
+// 5. WIDGET COLUMN (LAST COLUMN)
+// ========================================================================
+.mega-widget-col {
+    flex: 1;
+    padding-left: 2rem;
+    border-left: 1px solid $borderColor;
+    min-width: 300px;
+
+    .widget-content {
+        background: $widgetBg;
+        padding: 2rem;
+        border-radius: 8px;
+        height: 100%;
+        max-width: 20rem;
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: $white;
+        }
+
+        p {
+            color: rgba($white, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            // background-color: $white;
+            // color: $darkBlue;
+            // padding: 0.8rem 1.5rem;
+            // font-weight: 700;
+            // border-radius: 4px;
+            // display: inline-block;
+            // text-decoration: none;
+
+            // &:hover {
+            //     background-color: rgba($white, 0.9);
+            // }
+        }
+    }
+}
+
+// ========================================================================
+// 6. MOBILE
+// ========================================================================
+@media (max-width: 991.98px) {
+    #mega-menu-capital {
+        display: none !important;
+    }
 }

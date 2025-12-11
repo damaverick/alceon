@@ -28,48 +28,56 @@ require get_stylesheet_directory() . '/inc/class-mega-menu-walker.php';
 /**
  * 2. Enqueue Child Assets & Global Scripts
  */
+/**
+ * 2. Enqueue Child Assets & Global Scripts
+ */
 function theme_enqueue_styles()
 {
-    // Paths
     $dir_path = get_stylesheet_directory();
     $dir_uri  = get_stylesheet_directory_uri();
-    $suffix   = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+    
+    // Helper to get version based on file modification time (Cache Busting)
+    $get_ver = function($rel_path) use ($dir_path) {
+        return file_exists($dir_path . $rel_path) ? filemtime($dir_path . $rel_path) : '1.0.0';
+    };
 
-    // Files
-    $css_rel = "/css/child-theme{$suffix}.css";
-    $js_rel  = "/js/child-theme{$suffix}.js";
+    // --- STYLES ---
+    
+    // Main Child Theme CSS
+    $css_rel = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '/css/child-theme.css' : '/css/child-theme.min.css';
+    wp_enqueue_style('child-understrap-styles', $dir_uri . $css_rel, [], $get_ver($css_rel));
 
-    // Versions (Time-based)
-    $css_ver = file_exists($dir_path . $css_rel) ? filemtime($dir_path . $css_rel) : '1.0.0';
-    $js_ver  = file_exists($dir_path . $js_rel) ? filemtime($dir_path . $js_rel) : '1.0.0';
+    // External CSS (Bootstrap Icons & Google Fonts)
+    wp_enqueue_style('bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', [], '1.11.3');
+    wp_enqueue_style('alceon-google-fonts', 'https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap', [], null);
 
-    // Main Styles
-    wp_enqueue_style('child-understrap-styles', $dir_uri . $css_rel, array(), $css_ver);
-    wp_enqueue_style('bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', array(), '1.11.3');
 
-    // Google Fonts (Onest)
-    wp_enqueue_style('alceon-google-fonts', 'https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap', array(), null);
+    // --- SCRIPTS ---
 
-    // Scripts
+    // jQuery & Child Theme JS
+    $js_rel = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '/js/child-theme.js' : '/js/child-theme.min.js';
     wp_enqueue_script('jquery');
-    wp_enqueue_script('child-understrap-scripts', $dir_uri . $js_rel, array(), $js_ver, true);
+    wp_enqueue_script('child-understrap-scripts', $dir_uri . $js_rel, [], $get_ver($js_rel), true);
 
     // Vimeo API
-    wp_enqueue_script('vimeo-player', 'https://player.vimeo.com/api/player.js', array(), null, true);
+    wp_enqueue_script('vimeo-player', 'https://player.vimeo.com/api/player.js', [], null, true);
 
-    // Custom JS (Depends on Vimeo) - using time-based version
-    $custom_js_rel = '/js/custom.js';
-    $custom_js_ver = file_exists($dir_path . $custom_js_rel) ? filemtime($dir_path . $custom_js_rel) : '1.0.0';
-    wp_enqueue_script('custom-js', $dir_uri . $custom_js_rel, array('vimeo-player'), $custom_js_ver, true);
+    // Custom JS (Project Specific)
+    $custom_js = '/js/custom.js';
+    wp_enqueue_script('custom-js', $dir_uri . $custom_js, ['vimeo-player'], $get_ver($custom_js), true);
 
-    // Header Select Logic (Moved from separate action)
-    // --------------------------------------------------
-    $header_js_rel = '/js/header-select.js';
-    $header_js_ver = file_exists($dir_path . $header_js_rel) ? filemtime($dir_path . $header_js_rel) : '1.0.0';
+    // Mega Menu JS (New Addition)
+    $mega_js = '/js/mega-menu.js';
+    wp_enqueue_script('mega-menu-js', $dir_uri . $mega_js, ['jquery'], $get_ver($mega_js), true);
 
-    wp_register_script('header-selects', $dir_uri . $header_js_rel, [], $header_js_ver, true);
 
-    // Build Header Data
+    // --- HEADER SELECT LOGIC ---
+    // (Kept separate as it has complex localization)
+    
+    $header_js = '/js/header-select.js';
+    wp_register_script('header-selects', $dir_uri . $header_js, [], $get_ver($header_js), true);
+
+    // Build Data for Header Selects
     $menu_one_labels = [];
     $menu_two_lists  = [];
 
@@ -77,12 +85,11 @@ function theme_enqueue_styles()
         while (have_rows('menu_1', 'option')) {
             the_row();
             $label = trim((string) get_sub_field('label'));
-            if (!$label) {
-                continue;
-            }
+            if (!$label) continue;
+            
             $menu_one_labels[] = $label;
-
             $children = [];
+            
             if (have_rows('menu_2')) {
                 while (have_rows('menu_2')) {
                     the_row();
@@ -113,8 +120,8 @@ function theme_enqueue_styles()
     ]);
 
     wp_enqueue_script('header-selects');
-    // --------------------------------------------------
 
+    // Standard Comments Script
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }

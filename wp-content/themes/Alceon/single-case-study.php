@@ -1,17 +1,9 @@
 <?php
 
-/**
-
-
- * @package Understrap
- */
-
-// Exit if accessed directly.
 defined('ABSPATH') || exit;
 
 get_header();
 
-$container = get_theme_mod('understrap_container_type');
 
 ?>
 
@@ -125,7 +117,7 @@ if ($asset_highlights) {
 
 
 <?php
-get_template_part('template-parts/section/section-full-width-img-video');
+get_template_part('template-parts/section/full-width-img-video');
 ?>
 
 <?php

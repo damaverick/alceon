@@ -312,7 +312,7 @@ OFFCANVAS & MOBILE MENU STYLING
     .sub-menu .sub-menu > .menu-item {
       > a,
       > .menu-item-wrapper > a {
-        font-size: 18px;
+        font-size: rem(18);
       }
     }
   }
