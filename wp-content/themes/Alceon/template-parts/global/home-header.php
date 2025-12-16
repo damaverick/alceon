@@ -1,6 +1,6 @@
 <?php
 /**
- * Home Page Header
+ * Home Page Header.
  */
 
 // 1. Context & ID Setup
@@ -54,7 +54,7 @@ if ($is_video && $video_url) {
 
 
 
-        <div class="nav-wrapper w-100 position-fixed z-3">
+        <div class="nav-wrapper w-100 z-3">
             <div class="container">
                 <div class="row">
                     <div class="col"><?php alceon_navbar(); ?></div>

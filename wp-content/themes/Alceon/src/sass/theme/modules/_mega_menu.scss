@@ -1,256 +1,266 @@
 // ========================================================================
 // VARIABLES
 // ========================================================================
-$darkBlue:    #002b55;
+$darkBlue: #002b55;
 $lighterBlue: #004080;
-$widgetBg:    #155CD5;
-$white:       #ffffff;
+$widgetBg: #155cd5;
+$white: #ffffff;
 $borderColor: rgba(255, 255, 255, 0.15);
 
 // ========================================================================
 // 1. MEGA MENU WRAPPER
 // ========================================================================
 #mega-menu-capital {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 500px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 500px;
 
-    background-color: $darkBlue;
-    color: $white;
-    z-index: 3;
+  background-color: $primaryColor;
+  color: $white;
+  z-index: 3;
 
-    padding-top: 130px;
-    padding-bottom: 3rem;
+  padding-top: 130px;
+  padding-bottom: 3rem;
 
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 
-    &.is-visible {
-        display: block;
-        opacity: 1;
-    }
+  &.is-visible {
+    display: block;
+    opacity: 1;
+  }
 }
 
 .mega-menu-inner {
-    position: relative;
+  position: relative;
 }
 
 // ========================================================================
 // 2. THE FLEX GRID
 // ========================================================================
 .mega-menu-grid {
-    display: flex;
-    width: 100%;
-    position: relative;
-    height: 100%;
+  display: flex;
+  width: 100%;
+  position: relative;
+  height: 100%;
 }
 
 // ========================================================================
 // 2a. MAIN NAV COLUMNS
 // ========================================================================
 .mega-menu-columns {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0 0 0;
 
-    > li.mega-col {
-        flex: 0 0 auto;
-        width: auto;
-        min-width: 12.5rem;
-        position: relative;
-        padding-right: 2rem;
-        padding-left: 2rem;
-        border-right: 1px solid $borderColor;
+  > li.mega-col {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 12.5rem;
+    position: relative;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    border-right: 1px solid $borderColor;
 
-        &:first-child {
-            padding-left: 0;
-        }
-
-        &:last-child {
-            border-right: none;
-        }
-
-        .mega-col-heading {
-            font-size: 0.9rem;
-            // removed uppercase to allow sentence case from WP label
-            // text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 1.5rem;
-            color: $white;         // white text
-            font-weight: 600;      // weight 600
-
-            a {
-                color: inherit;   
-                letter-spacing:0; // use the white from parent
-                text-decoration: none;
-                display: inline-block;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
+    &:first-child {
+      padding-left: 0;
     }
+
+    &:last-child {
+      border-right: none;
+    }
+
+    .mega-col-heading {
+      font-size: 0.9rem;
+      // removed uppercase to allow sentence case from WP label
+      // text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 1.5rem;
+      color: $white; // white text
+      font-weight: 600; // weight 600
+
+      a {
+        color: inherit;
+        letter-spacing: 0; // use the white from parent
+        text-decoration: none;
+        display: inline-block;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }
 
 // ========================================================================
 // 3. NAV ITEMS (DEPTH 1) & TRIGGERS
 // ========================================================================
 .mega-col-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
-    > li {
-        margin-bottom: 0.25rem;
-        position: static;
+  > li {
+    margin-bottom: 0.25rem;
+    position: static;
 
-        > .flyout-trigger {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: $white;
-            text-decoration: none;
-            letter-spacing: 0;
-            padding: 10px 15px;
- padding: 5px 0;
-            border-radius: 4px;
-            font-size: rem(16);
-            font-weight: 500;
-      
-            transition: background-color 0.2s ease;
-            cursor: pointer;
+    > .flyout-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: $white;
+      text-decoration: none;
+      letter-spacing: 0;
+      padding: 10px 15px;
+      padding: 5px 0;
+      border-radius: 4px;
+      font-size: rem(16);
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
 
-            .arrow {
-                font-size: 1.2em;
-                line-height: 1;
-                opacity: 0.5;
-                transition: transform 0.2s, opacity 0.2s;
-            }
-        }
-
-        &:hover > .flyout-trigger {
-            // background-color: $lighterBlue;
-
-            .arrow {
-                opacity: 1;
-                transform: translateX(4px);
-            }
-        }
+      .arrow {
+        width: 10px;
+        height: 10px;
+        background-image: url('../img/right-arrow-mm.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.5;
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
+      }
     }
+
+    &:hover > .flyout-trigger {
+      // background-color: $lighterBlue;
+
+      .arrow {
+        opacity: 1;
+        transform: translateX(4px);
+      }
+    }
+  }
 }
 
 // ========================================================================
 // 4. FLYOUT COLUMN (NEW COLUMN THAT PUSHES LAYOUT)
 // ========================================================================
 .mega-flyout-column {
-    // Starts collapsed so it doesn’t affect layout
-    flex: 0 0 0;
-    opacity: 0;
-    overflow: hidden;
-    padding-left: 0;
-    border-left: 0;
-    transition:
-        flex-basis 0.2s ease-out,
-        opacity 0.2s ease-out,
-        padding-left 0.2s ease-out,
-        border-left-color 0.2s ease-out;
+  // Starts collapsed so it doesn’t affect layout
+  flex: 0 0 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-left: 0;
+  border-left: 0;
+  transition:
+    flex-basis 0.2s ease-out,
+    opacity 0.2s ease-out,
+    padding-left 0.2s ease-out,
+    border-left-color 0.2s ease-out;
 
-    &.is-active {
-        flex: 0 0 12.5rem; // same as a main column width
-        opacity: 1;
-        padding-left: 2rem;
-        border-left: 1px solid $borderColor;
-    }
+  &.is-active {
+    flex: 0 0 12.5rem; // same as a main column width
+    opacity: 1;
+    padding-left: 2rem;
+    border-left: 1px solid $borderColor;
+  }
 
-    .mega-flyout-menu {
+  .mega-flyout-menu {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-bottom: 8px;
+
+      a {
+        color: rgba($white, 0.8);
+        text-decoration: none;
+        font-size: 1rem;
         display: block;
-        list-style: none;
-        margin: 0;
-        padding: 0;
+        padding: 5px 0;
+        font-size: rem(16);
 
-        li {
-            margin-bottom: 8px;
-
-            a {
-                color: rgba($white, 0.8);
-                text-decoration: none;
-                font-size: 1rem;
-                display: block;
-                padding: 5px 0;
-                  font-size: rem(16);
-
-                &:hover {
-                    color: $white;
-                    text-decoration: underline;
-                }
-            }
+        &:hover {
+          color: $white;
+          text-decoration: underline;
         }
+      }
     }
+  }
 }
 
 // Make sure nested flyouts are hidden by default when still inside li
 .mega-flyout-menu {
-    display: none;
+  display: none;
 }
 
 // When a submenu is moved into .mega-flyout-column, it becomes visible
 .mega-flyout-column .mega-flyout-menu {
-    display: block;
+  display: block;
 }
 
 // ========================================================================
 // 5. WIDGET COLUMN (LAST COLUMN)
 // ========================================================================
 .mega-widget-col {
-    flex: 1;
-    padding-left: 2rem;
-    border-left: 1px solid $borderColor;
-    min-width: 300px;
+  flex: 1;
+  padding-left: 2rem;
 
-    .widget-content {
-        background: $widgetBg;
-        padding: 2rem;
-        border-radius: 8px;
-        height: 100%;
-        max-width: 20rem;
+  min-width: 300px;
 
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: $white;
-        }
+  .widget-content {
+    background: $widgetBg;
+    background-image: url('../img/lines-cta.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 2rem;
+    border-radius: rem(16);
+    height: 100%;
+    max-width: 20rem;
 
-        p {
-            color: rgba($white, 0.8);
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            // background-color: $white;
-            // color: $darkBlue;
-            // padding: 0.8rem 1.5rem;
-            // font-weight: 700;
-            // border-radius: 4px;
-            // display: inline-block;
-            // text-decoration: none;
-
-            // &:hover {
-            //     background-color: rgba($white, 0.9);
-            // }
-        }
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: $white;
     }
+
+    p {
+      color: rgba($white, 1);
+      margin-bottom: 2rem;
+      font-size: rem(16);
+    }
+
+    .btn {
+      // background-color: $white;
+      // color: $darkBlue;
+      // padding: 0.8rem 1.5rem;
+      // font-weight: 700;
+      // border-radius: 4px;
+      // display: inline-block;
+      // text-decoration: none;
+
+      // &:hover {
+      //     background-color: rgba($white, 0.9);
+      // }
+    }
+  }
 }
 
 // ========================================================================
 // 6. MOBILE
 // ========================================================================
 @media (max-width: 991.98px) {
-    #mega-menu-capital {
-        display: none !important;
-    }
+  #mega-menu-capital {
+    display: none !important;
+  }
 }

@@ -47,15 +47,14 @@
 /* White + white compression */
 .section--white + .section--white {
   padding-top: 0 !important;
-
 }
 
 /* Overlap tweak */
 .section-feature--overlap-bottom + .section--white {
   margin-top: -3.125rem; // rem(-50)
 
-  @media (max-width:1199px) {
-    margin-top:0;
+  @media (max-width: 1199px) {
+    margin-top: 0;
   }
 }
 
@@ -179,10 +178,8 @@
 .image-section {
   position: relative;
   width: 100%;
-  height:100%;
+  height: 100%;
   overflow: hidden;
-
-
 
   // Background layer (Parallax removed for better fit)
   &__background {
@@ -198,7 +195,6 @@
 
     z-index: 0;
     pointer-events: none;
-
   }
 
   // Any foreground content should stack above the bg
@@ -212,12 +208,11 @@
     min-height: rem(490);
     overflow: hidden;
     z-index: 2;
-transform: scale(1.1);
- background-size: cover;
+    transform: scale(1.1);
+    background-size: cover;
 
     @media (max-width: 991px) {
       min-height: rem(300);
-       
     }
   }
 
@@ -305,8 +300,8 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
   min-height: 70vh;
   // overflow: hidden;
 
-  @media (max-width:991px) {
-    overflow:hidden;
+  @media (max-width: 991px) {
+    overflow: hidden;
   }
 
   > .vbv-hero {
@@ -319,28 +314,71 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
     position: relative;
     z-index: 0;
     padding-top: 12rem;
-
   }
-
-
-} 
+}
 
 #page {
-  position:relative
-}
-.admin-bar header#wrapper-navbar .nav-wrapper {
-    // position: fixed;
-    z-index: 6;
-    top: 31px;
+  position: relative;
 }
 
+// Default state: not sticky, scrolls naturally with page
 header#wrapper-navbar .nav-wrapper {
-    // position: fixed;
-    z-index: 6;
-  top:0;
-  transition:all .5s;
-  }
+  position: relative;
+  z-index: 6;
+}
 
+// Admin bar adjustment
+.admin-bar header#wrapper-navbar .nav-wrapper.scrolled-up,
+.admin-bar header#wrapper-navbar .nav-wrapper.sliding-out {
+  top: 31px;
+}
+
+// Only add fixed positioning and dark background when scrolled up
+header#wrapper-navbar .nav-wrapper.scrolled-up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $primaryColor;
+  padding: 0.5rem 0;
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s ease-out;
+  animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+// Slide out animation when returning to top
+header#wrapper-navbar .nav-wrapper.sliding-out {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $mmBlue;
+  padding: 0.5rem 0;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+header#wrapper-navbar .nav-wrapper.nav-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
 
 /* ==========================================
    Page Specific & Miscellaneous
@@ -352,7 +390,7 @@ header#wrapper-navbar .nav-wrapper {
     flex-direction: column-reverse;
 
     img {
-      margin-bottom:0;
+      margin-bottom: 0;
     }
   }
 }

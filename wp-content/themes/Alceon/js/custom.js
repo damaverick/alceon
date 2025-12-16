@@ -209,82 +209,64 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 // ========================================================================
-// NAVBAR SCROLL & LOGO LOGIC
+// NAVBAR SCROLL LOGIC - Show on Scroll Up Only
 // ========================================================================
 
 document.addEventListener('DOMContentLoaded', function () {
-  const navbar = document.getElementById('wrapper-navbar');
+  const navWrapper = document.querySelector('.nav-wrapper');
   const breakpoint = 992; // 992px
-  const scrollThreshold = 50; // Add class after scrolling 50px
+  const scrollThreshold = 100; // Start tracking after 100px
+  let lastScrollTop = 0;
+  let slideUpTimeout = null;
+
+  if (!navWrapper) return;
 
   function handleScroll() {
-    // 1. Check if screen is wide enough
-    if (window.innerWidth >= breakpoint) {
-      // 2. Check vertical scroll position
-      if (window.scrollY > scrollThreshold) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    } else {
-      // Optional: Ensure class is removed on mobile
-      navbar.classList.remove('scrolled');
+    // Only apply on desktop
+    if (window.innerWidth < breakpoint) {
+      navWrapper.classList.remove('nav-hidden');
+      navWrapper.classList.remove('scrolled-up');
+      navWrapper.classList.remove('sliding-out');
+      return;
     }
+
+    const currentScroll = window.scrollY || document.documentElement.scrollTop;
+
+    // If at the very top, smoothly slide out
+    if (currentScroll <= scrollThreshold) {
+      if (navWrapper.classList.contains('scrolled-up')) {
+        navWrapper.classList.add('sliding-out');
+        navWrapper.classList.remove('scrolled-up');
+
+        // Wait for animation to finish before removing sliding-out
+        clearTimeout(slideUpTimeout);
+        slideUpTimeout = setTimeout(() => {
+          navWrapper.classList.remove('sliding-out');
+        }, 500);
+      }
+      navWrapper.classList.remove('nav-hidden');
+    }
+    // If we're scrolling down and past threshold, hide the nav
+    else if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
+      navWrapper.classList.add('nav-hidden');
+      navWrapper.classList.remove('scrolled-up');
+      navWrapper.classList.remove('sliding-out');
+    }
+    // If we're scrolling up, show the nav with dark background
+    else if (currentScroll < lastScrollTop) {
+      navWrapper.classList.remove('nav-hidden');
+      navWrapper.classList.remove('sliding-out');
+      navWrapper.classList.add('scrolled-up');
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
   // Run on scroll
-  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', handleScroll, { passive: true });
 
-  // Run on resize (in case user resizes window from mobile to desktop)
+  // Run on resize
   window.addEventListener('resize', handleScroll);
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-  // 1. Select Elements
-  const navbar = document.getElementById('wrapper-navbar');
-  const logo = document.querySelector('.site-logo');
-
-  // Safety check
-  if (!logo || !navbar) {
-    console.warn('Logo swapper: Elements not found');
-    return;
-  }
-
-  function checkLogoBackground() {
-    // 2. Get the specific coordinate of the center of the logo
-    const rect = logo.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    // 3. Get ALL elements underneath that specific pixel
-    // This returns an array of elements (Navbar, Header, Section, Body, HTML)
-    const elementsUnderLogo = document.elementsFromPoint(centerX, centerY);
-
-    // 4. Check if ANY element in that stack has your light background classes
-    // We use .closest() to ensure we catch it even if the logo is over a <p> or <h2> inside the section
-    const isOverLight = elementsUnderLogo.some((el) => {
-      return (
-        el.classList.contains('section--white') ||
-        el.classList.contains('section--grey') ||
-        el.closest('.section--white') ||
-        el.closest('.section--grey')
-      );
-    });
-
-    // 5. Toggle the class on the ID wrapper
-    if (isOverLight) {
-      navbar.classList.add('on-light-bg');
-    } else {
-      navbar.classList.remove('on-light-bg');
-    }
-  }
-
-  // 6. Run on Scroll and Resize
-  window.addEventListener('scroll', checkLogoBackground, { passive: true });
-  window.addEventListener('resize', checkLogoBackground);
-
-  // 7. Run once on load to set initial state
-  checkLogoBackground();
 });
 
 // HIDE MOBILE MENU ON SCROLL

@@ -4,11 +4,17 @@ body {
   width: 100%;
 }
 
-
 body .home-hero,
-.hero-bg-image{
+.hero-bg-image {
   .menu-wrapper {
-background-color:$trannyBlue;
+    background-color: $trannyBlue;
+  }
+}
+
+// Remove background when scrolled up
+header#wrapper-navbar .nav-wrapper.scrolled-up {
+  .menu-wrapper {
+    background-color: transparent;
   }
 }
 
@@ -44,18 +50,12 @@ background-color:$trannyBlue;
   }
 }
 
-
 .menu-wrapper {
- 
   background-color: $mmBlue;
-transition: background .5s;
-  margin-top:rem(10);
-  
-  
+  transition: background 0.5s;
+  margin-top: rem(10);
   background-blend-mode: multiply;
   min-width: rem(800);
-
-  background-blend-mode: multiply;
   justify-content: space-between;
   padding: 0.5rem 1rem;
   border-radius: 100px;
@@ -100,13 +100,12 @@ transition: background .5s;
       color: #fff;
       margin: 0;
       transition: color 0.3s ease;
-      padding-top: rem(8)!Important;
-      padding-bottom: rem(8)!Important;
-      border-radius: rem(100)!Important;
+      padding-top: rem(8) !important;
+      padding-bottom: rem(8) !important;
+      border-radius: rem(100) !important;
       display: block;
 
-      &:hover,
-      {
+      &:hover {
         background-color: rgba(0, 0, 0, 0.2);
         text-decoration: none;
         color: $white;
@@ -116,10 +115,9 @@ transition: background .5s;
   }
 }
 
-body .navbar-nav  li.current-menu-item  .nav-link {
-background-color: rgba(0, 0, 0, 0.2)!important;
+body .navbar-nav li.current-menu-item .nav-link {
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
-
 
 body li.nav-item {
   margin-bottom: 0 !important;

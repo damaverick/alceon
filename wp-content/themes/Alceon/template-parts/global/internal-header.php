@@ -3,7 +3,7 @@
 $banner_image = get_field('header_image');
 
 // 2. Set the base classes
-$hero_classes = 'section--blog-hero internal-hero bg-dark-blue text-white position-relative justify-content-center d-flex flex-column';
+$hero_classes = 'section--blog-hero internal-hero bg-dark-blue text-white position-relative justify-content-between d-flex flex-column';
 
 // 3. Check the condition and append the class if true
 if (is_page('terms') || (is_singular('post') && empty($banner_image))) {
@@ -20,7 +20,7 @@ if (is_page('terms') || (is_singular('post') && empty($banner_image))) {
 
 
     <header id="wrapper-navbar"  class="<?php echo esc_attr($hero_classes); ?>">
-        <div class="nav-wrapper w-100 position-fixed z-3">
+        <div class="nav-wrapper w-100 z-3">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -41,10 +41,10 @@ if (is_page('terms') || (is_singular('post') && empty($banner_image))) {
         if (is_array($banner_image) && !empty($banner_image['url'])) {
             $banner_url = esc_url($banner_image['url']);
         } elseif (is_numeric($banner_image)) {
-            $maybe = wp_get_attachment_image_url((int)$banner_image, 'full');
+            $maybe = wp_get_attachment_image_url((int) $banner_image, 'full');
             $banner_url = $maybe ? esc_url($maybe) : '';
         } else {
-            $banner_url = esc_url((string)$banner_image);
+            $banner_url = esc_url((string) $banner_image);
         }
     }
 ?>
@@ -65,14 +65,14 @@ if (is_page('terms') || (is_singular('post') && empty($banner_image))) {
     // --- Setup Internal Hero Variables ---
     $hero_bg_image = get_field('hero_bg_image');
             $banner_image  = get_field('header_image');
-            $hero_classes  = 'internal-hero bg-dark-blue text-white position-relative justify-content-center d-flex flex-column';
+            $hero_classes  = 'internal-hero bg-dark-blue text-white position-relative justify-content-between d-flex flex-column';
             $hero_style    = '';
 
             if ($hero_bg_image) {
                 $hero_style = "background-image: url('" . esc_url($hero_bg_image) . "'); "
-                    . "background-size: cover; "
-                    . "background-position: bottom center; "
-                    . "background-repeat: no-repeat;";
+                    . 'background-size: cover; '
+                    . 'background-position: bottom center; '
+                    . 'background-repeat: no-repeat;';
             }
             ?>
 
@@ -81,7 +81,7 @@ if (is_page('terms') || (is_singular('post') && empty($banner_image))) {
 echo esc_attr($hero_classes); ?>" <?php if ($hero_style) {
     echo 'style="' . esc_attr($hero_style) . '"';
 } ?>>
-        <div class="nav-wrapper w-100 position-fixed z-3">
+        <div class="nav-wrapper w-100   z-3">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -116,10 +116,10 @@ if (!empty($banner_image)) {
     if (is_array($banner_image) && !empty($banner_image['url'])) {
         $banner_url = esc_url($banner_image['url']);
     } elseif (is_numeric($banner_image)) {
-        $maybe = wp_get_attachment_image_url((int)$banner_image, 'full');
+        $maybe = wp_get_attachment_image_url((int) $banner_image, 'full');
         $banner_url = $maybe ? esc_url($maybe) : '';
     } else {
-        $banner_url = esc_url((string)$banner_image);
+        $banner_url = esc_url((string) $banner_image);
     }
 }
 ?>

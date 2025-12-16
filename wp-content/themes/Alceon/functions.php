@@ -1,15 +1,13 @@
 <?php
 /**
- * Understrap Child Theme functions and definitions
- *
- * @package UnderstrapChild
+ * Understrap Child Theme functions and definitions.
  */
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
 /**
- * 1. Remove Parent Assets
+ * 1. Remove Parent Assets.
  */
 function understrap_remove_scripts()
 {
@@ -20,29 +18,26 @@ function understrap_remove_scripts()
 }
 add_action('wp_enqueue_scripts', 'understrap_remove_scripts', 20);
 
-
-
 require get_stylesheet_directory() . '/inc/class-mega-menu-walker.php';
 
-
 /**
- * 2. Enqueue Child Assets & Global Scripts
+ * 2. Enqueue Child Assets & Global Scripts.
  */
 /**
- * 2. Enqueue Child Assets & Global Scripts
+ * 2. Enqueue Child Assets & Global Scripts.
  */
 function theme_enqueue_styles()
 {
     $dir_path = get_stylesheet_directory();
     $dir_uri  = get_stylesheet_directory_uri();
-    
+
     // Helper to get version based on file modification time (Cache Busting)
-    $get_ver = function($rel_path) use ($dir_path) {
+    $get_ver = function ($rel_path) use ($dir_path) {
         return file_exists($dir_path . $rel_path) ? filemtime($dir_path . $rel_path) : '1.0.0';
     };
 
     // --- STYLES ---
-    
+
     // Main Child Theme CSS
     $css_rel = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '/css/child-theme.css' : '/css/child-theme.min.css';
     wp_enqueue_style('child-understrap-styles', $dir_uri . $css_rel, [], $get_ver($css_rel));
@@ -50,7 +45,6 @@ function theme_enqueue_styles()
     // External CSS (Bootstrap Icons & Google Fonts)
     wp_enqueue_style('bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', [], '1.11.3');
     wp_enqueue_style('alceon-google-fonts', 'https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap', [], null);
-
 
     // --- SCRIPTS ---
 
@@ -70,10 +64,9 @@ function theme_enqueue_styles()
     $mega_js = '/js/mega-menu.js';
     wp_enqueue_script('mega-menu-js', $dir_uri . $mega_js, ['jquery'], $get_ver($mega_js), true);
 
-
     // --- HEADER SELECT LOGIC ---
     // (Kept separate as it has complex localization)
-    
+
     $header_js = '/js/header-select.js';
     wp_register_script('header-selects', $dir_uri . $header_js, [], $get_ver($header_js), true);
 
@@ -85,11 +78,13 @@ function theme_enqueue_styles()
         while (have_rows('menu_1', 'option')) {
             the_row();
             $label = trim((string) get_sub_field('label'));
-            if (!$label) continue;
-            
+            if (!$label) {
+                continue;
+            }
+
             $menu_one_labels[] = $label;
             $children = [];
-            
+
             if (have_rows('menu_2')) {
                 while (have_rows('menu_2')) {
                     the_row();
@@ -129,7 +124,7 @@ function theme_enqueue_styles()
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
 /**
- * 3. Google Fonts Preconnect
+ * 3. Google Fonts Preconnect.
  */
 function alceon_add_google_fonts_preconnect($hints, $relation_type)
 {
@@ -137,11 +132,12 @@ function alceon_add_google_fonts_preconnect($hints, $relation_type)
         $hints[] = ['href' => 'https://fonts.googleapis.com'];
         $hints[] = ['href' => 'https://fonts.gstatic.com', 'crossorigin' => 'anonymous'];
     }
+
     return $hints;
 }
 add_filter('wp_resource_hints', 'alceon_add_google_fonts_preconnect', 10, 2);
 
-/**
+/*
  * 4. AJAX News Filter (Conditional Loading)
  */
 add_action('wp_enqueue_scripts', function () {
@@ -243,7 +239,7 @@ function my_load_news_filter_callback()
 add_action('wp_ajax_load_news_filter', 'my_load_news_filter_callback');
 add_action('wp_ajax_nopriv_load_news_filter', 'my_load_news_filter_callback');
 
-/**
+/*
  * 5. Theme Setup & Menus
  */
 add_action('after_setup_theme', function () {
@@ -262,7 +258,7 @@ add_action('customize_controls_enqueue_scripts', function () {
 });
 
 /**
- * 6. Navbar Component
+ * 6. Navbar Component.
  */
 function alceon_navbar()
 {
@@ -304,7 +300,7 @@ function alceon_navbar()
 <?php
 }
 
-/**
+/*
  * 7. ACF Options & Fields (Header Selects)
  */
 add_action('acf/init', function () {
@@ -332,9 +328,9 @@ add_action('acf/init', function () {
                             'sub_fields' => [
                                 ['key' => 'field_menu_2_label', 'label' => 'Option Label', 'name' => 'label', 'type' => 'text', 'required' => 1],
                                 ['key' => 'field_menu_2_url', 'label' => 'Page', 'name' => 'url', 'type' => 'page_link', 'post_type' => ['page'], 'allow_archives' => 1, 'return_format' => 'url'],
-                            ]
-                        ]
-                    ]
+                            ],
+                        ],
+                    ],
                 ],
                 [
                     'key' => 'field_menu_placeholders', 'label' => 'Placeholders', 'name' => 'placeholders', 'type' => 'group',
@@ -342,7 +338,7 @@ add_action('acf/init', function () {
                         ['key' => 'field_menu_1_placeholder', 'label' => 'Menu One Placeholder', 'name' => 'menu_1_placeholder', 'type' => 'text', 'default_value' => 'I am a...'],
                         ['key' => 'field_menu_2_placeholder', 'label' => 'Menu Two Placeholder', 'name' => 'menu_2_placeholder', 'type' => 'text', 'default_value' => 'I’m looking to...'],
                         ['key' => 'field_go_label', 'label' => 'Go Button Label', 'name' => 'go_label', 'type' => 'text', 'default_value' => 'Go'],
-                    ]
+                    ],
                 ],
             ],
             'location' => [[['param' => 'options_page', 'operator' => '==', 'value' => 'header-select-menus']]],
@@ -350,15 +346,11 @@ add_action('acf/init', function () {
     }
 });
 
-
-
-
 /**
- * Enqueue AOS (Animate On Scroll) with Mirroring enabled
+ * Enqueue AOS (Animate On Scroll) with Mirroring enabled.
  */
 function enqueue_aos_scripts()
 {
-
     // 1. Load AOS CSS
     wp_enqueue_style(
         'aos-css',
@@ -385,7 +377,7 @@ function enqueue_aos_scripts()
                 disable: 'mobile',
                 
                 // 1. ALLOW RE-ANIMATION
-                once: false, 
+                once: true, 
 
                 // 2. REVERSE ANIMATION ON SCROLL UP
                 // This makes elements fade out/slide back when you scroll past them
@@ -401,13 +393,7 @@ function enqueue_aos_scripts()
     wp_add_inline_script('aos-js', $aos_init);
 }
 
-
-
-
 add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
-
-
-
 
 function enqueue_gsap_assets()
 {
@@ -440,10 +426,6 @@ function enqueue_gsap_assets()
 }
 add_action('wp_enqueue_scripts', 'enqueue_gsap_assets');
 
-
-
-
-
 // In functions.php
 function Alceon_register_menus()
 {
@@ -453,16 +435,12 @@ function Alceon_register_menus()
 }
 add_action('after_setup_theme', 'Alceon_register_menus');
 
-
-
 // WP CODEBOX PLUGIN ADMIN MENU ITEM
-
 
 add_action('admin_bar_menu', 'add_wpcb_to_admin_bar', 100);
 
 function add_wpcb_to_admin_bar($admin_bar)
 {
-
     // 1. Permission Check
     // Only show this to users who can manage options (Admins)
     if (!current_user_can('manage_options')) {
@@ -482,57 +460,59 @@ function add_wpcb_to_admin_bar($admin_bar)
 
 // Enqueue Owl Carousel Assets with Dynamic Data Passing
 
-function my_theme_enqueue_owl_carousel() {
+function my_theme_enqueue_owl_carousel()
+{
     // 1. Enqueue Owl Carousel CSS (CDN)
-    wp_enqueue_style( 'owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', [], '2.3.4' );
-    wp_enqueue_style( 'owl-theme', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css', [], '2.3.4' );
+    wp_enqueue_style('owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', [], '2.3.4');
+    wp_enqueue_style('owl-theme', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css', [], '2.3.4');
 
     // 2. Enqueue Owl Carousel JS (CDN) - Dependent on jQuery
-    wp_enqueue_script( 'owl-carousel-js', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', ['jquery'], '2.3.4', true );
+    wp_enqueue_script('owl-carousel-js', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js', ['jquery'], '2.3.4', true);
 
     // 3. Register your Custom Initialization Script
     // Assuming you create a file named 'owl-init.js' in your theme's /js/ folder
-    wp_register_script( 'my-owl-init', get_stylesheet_directory_uri() . '/js/owl-init.js', ['owl-carousel-js'], '1.0', true );
+    wp_register_script('my-owl-init', get_stylesheet_directory_uri() . '/js/owl-init.js', ['owl-carousel-js'], '1.0', true);
 
     // 4. Pass PHP Data to JS (The Magic Step)
     // We create a JS object named 'owlParams' accessible in your script
-    wp_localize_script( 'my-owl-init', 'owlParams', array(
+    wp_localize_script('my-owl-init', 'owlParams', array(
         'themeUrl' => get_stylesheet_directory_uri(),
-        // Note: Passing 'total_cards' here is tricky if it varies per page/template. 
+        // Note: Passing 'total_cards' here is tricky if it varies per page/template.
         // See "My Advice" below for a better JS-only solution.
     ));
 
     // 5. Actually Enqueue the Script
-    wp_enqueue_script( 'my-owl-init' );
+    wp_enqueue_script('my-owl-init');
 }
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_owl_carousel' );
+add_action('wp_enqueue_scripts', 'my_theme_enqueue_owl_carousel');
 
 //  Careers Page - Conditional Media Assets
 
-function my_theme_enqueue_media_assets() {
+function my_theme_enqueue_media_assets()
+{
     // 1. Enqueue CSS (GLightbox + Magnific Popup)
     // Note: Owl Carousel CSS is likely already loaded by your previous function.
-    wp_enqueue_style( 'glightbox-css', 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css', [], '1.0' );
-    wp_enqueue_style( 'magnific-popup-css', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css', [], '1.1.0' );
+    wp_enqueue_style('glightbox-css', 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css', [], '1.0');
+    wp_enqueue_style('magnific-popup-css', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css', [], '1.1.0');
 
     // 2. Enqueue JS Libraries
     // Note: Owl Carousel JS is likely already loaded.
-    wp_enqueue_script( 'glightbox-js', 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js', [], '1.0', true );
-    wp_enqueue_script( 'magnific-popup-js', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js', ['jquery'], '1.1.0', true );
+    wp_enqueue_script('glightbox-js', 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js', [], '1.0', true);
+    wp_enqueue_script('magnific-popup-js', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js', ['jquery'], '1.1.0', true);
 
     // 3. Register your Custom Media Script
     // Create a file: /js/media-init.js
-    wp_register_script( 'my-media-init', get_stylesheet_directory_uri() . '/js/media-init.js', ['jquery', 'owl-carousel-js', 'glightbox-js', 'magnific-popup-js'], '1.0', true );
+    wp_register_script('my-media-init', get_stylesheet_directory_uri() . '/js/media-init.js', ['jquery', 'owl-carousel-js', 'glightbox-js', 'magnific-popup-js'], '1.0', true);
 
     // 4. Localize Data (Reuse the variable name 'owlParams' if consistent, or create new)
-    wp_localize_script( 'my-media-init', 'mediaParams', array(
+    wp_localize_script('my-media-init', 'mediaParams', array(
         'themeUrl' => get_stylesheet_directory_uri(),
     ));
 
     // 5. Conditional Enqueue (CRITICAL)
     // Only load this on the specific page that has the video/media slider
-    if ( is_page( 'your-career' ) ) { // <--- CHANGE THIS SLUG
-        wp_enqueue_script( 'my-media-init' );
+    if (is_page('your-career')) { // <--- CHANGE THIS SLUG
+        wp_enqueue_script('my-media-init');
     }
 }
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_media_assets' );
+add_action('wp_enqueue_scripts', 'my_theme_enqueue_media_assets');

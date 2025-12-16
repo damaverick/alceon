@@ -149,7 +149,7 @@
   @media (min-width: 992px) {
     .internal-hero__text {
       margin-top: 6rem;
-      // margin-bottom: rem(220);
+      margin-bottom: rem(230);
     }
   }
 
@@ -198,7 +198,6 @@
     opacity: 0;
     visibility: hidden;
 
-
     @media (max-width: 991px) {
       font-size: rem(26);
       line-height: 1.1;
@@ -228,12 +227,9 @@
 .page-template-template-terms .internal-hero {
   min-height: rem(360);
 
-   @media (max-width: 991px) {
+  @media (max-width: 991px) {
     min-height: 200px !important;
   }
-
-
-  
 }
 
 /* Styles for the new full-width bottom image */
@@ -428,30 +424,23 @@
     padding-bottom: 20px;
   }
 }
-/* Only apply on mobile/tablet (991px and below) */
+/* Mobile nav-hidden styles handled in _section.scss */
 @media (max-width: 991px) {
-    /* Target the class that has 'position-fixed' */
-    .nav-wrapper {
-        transition: transform 0.4s ease-in-out;
-        transform: translateY(0);
-    }
-
-    /* The class added by JS to slide it up */
-    .nav-wrapper.nav-hidden {
-        transform: translateY(-120%);
-    }
+  .nav-wrapper {
+    position: relative;
+    background-color: transparent;
+  }
 }
 
-
 @media (max-width: 1199px) {
-    .internal-hero__title {
-        /* Hide initially, GSAP will turn this back on */
-        opacity: 0;
-        visibility: hidden;
-    }
-    
-    /* Optional: Fix for clipping if using italic fonts */
-    .internal-hero__title .char {
-        padding-right: 0.05em; 
-    }
+  .internal-hero__title {
+    /* Hide initially, GSAP will turn this back on */
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* Optional: Fix for clipping if using italic fonts */
+  .internal-hero__title .char {
+    padding-right: 0.05em;
+  }
 }
