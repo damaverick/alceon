@@ -325,6 +325,10 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
 header#wrapper-navbar .nav-wrapper {
   position: relative;
   z-index: 6;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.3s ease,
+    border-bottom-color 0.3s ease;
 }
 
 // Admin bar adjustment
@@ -339,7 +343,7 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
   top: 0;
   left: 0;
   right: 0;
-  background-color: $primaryColor;
+  background-color: $mmBlue;
   padding: 0.5rem 0;
   transform: translateY(0);
   opacity: 1;

@@ -1,21 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
   // 1. CONFIGURATION
   // ==========================
-  const triggerSelector = '#menu-item-57';      // The Nav Link (Investments)
-  const menuID          = 'mega-menu-capital';  // The Mega Menu Wrapper
-  const activeClass     = 'is-visible';         // Class added to wrapper
-  const animationClass  = 'animate-sweep-item'; // Class added to items
-  const breakpoint      = 992;                  // Mobile breakpoint
-  const leaveDelay      = 200;                  // Delay before closing (ms)
+  const triggerSelector = '#menu-item-57'; // The Nav Link (Investments)
+  const menuID = 'mega-menu-capital'; // The Mega Menu Wrapper
+  const activeClass = 'is-visible'; // Class added to wrapper
+  const animationClass = 'animate-sweep-item'; // Class added to items
+  const breakpoint = 992; // Mobile breakpoint
+  const leaveDelay = 200; // Delay before closing (ms)
 
   // 2. SELECT ELEMENTS
   // ==========================
   const triggerBtn = document.querySelector(triggerSelector);
-  const megaMenu   = document.getElementById(menuID);
+  const megaMenu = document.getElementById(menuID);
+  const navWrapper = document.querySelector('.nav-wrapper');
 
   if (!triggerBtn || !megaMenu) return;
 
-  const grid        = megaMenu.querySelector('.mega-menu-grid');
+  const grid = megaMenu.querySelector('.mega-menu-grid');
   const columnsList = megaMenu.querySelector('.mega-menu-columns');
 
   // 2a. CREATE FLYOUT COLUMN & INSERT AFTER FIRST MAIN COLUMN
@@ -118,7 +119,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // 5. FLYOUT COLUMN BEHAVIOUR
   // ==========================
 
-  const flyoutTriggers = megaMenu.querySelectorAll('.mega-col-nav > li.has-children');
+  const flyoutTriggers = megaMenu.querySelectorAll(
+    '.mega-col-nav > li.has-children'
+  );
 
   if (flyoutTriggers.length) {
     flyoutTriggers.forEach((li) => {

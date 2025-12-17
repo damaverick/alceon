@@ -1,41 +1,52 @@
 // ========================================================================
-// VARIABLES
-// ========================================================================
-$darkBlue: #002b55;
-$lighterBlue: #004080;
-$widgetBg: #155cd5;
-$white: #ffffff;
-$borderColor: rgba(255, 255, 255, 0.15);
-
-// ========================================================================
 // 1. MEGA MENU WRAPPER
 // ========================================================================
+
+.admin-bar {
+  #mega-menu-capital {
+    padding-top: rem(40);
+  }
+}
 #mega-menu-capital {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: auto;
   min-height: 500px;
 
-  background-color: $primaryColor;
+  background-color: $mmBlue;
   color: $white;
   z-index: 3;
 
-  padding-top: 130px;
+  padding-top: 0;
   padding-bottom: 3rem;
 
-  display: none;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    visibility 0s 0.3s;
 
   &.is-visible {
-    display: block;
+    visibility: visible;
     opacity: 1;
+    pointer-events: auto;
+    transition:
+      opacity 0.3s ease,
+      visibility 0s 0s;
   }
+}
+
+// Show nav-wrapper border when mega menu is visible
+body:has(#mega-menu-capital.is-visible) header#wrapper-navbar .nav-wrapper {
+  border-bottom-color: $borderColor;
 }
 
 .mega-menu-inner {
   position: relative;
+  padding-top: 130px;
 }
 
 // ========================================================================
@@ -65,9 +76,15 @@ $borderColor: rgba(255, 255, 255, 0.15);
     padding-right: 2rem;
     padding-left: 2rem;
     border-right: 1px solid $borderColor;
+    transition: border-right-color 0.2s ease-out;
 
     &:first-child {
       padding-left: 0;
+
+      // Hide first column border when flyout is active
+      &:has(~ .mega-flyout-column.is-active) {
+        border-right-color: transparent;
+      }
     }
 
     &:last-child {
@@ -75,7 +92,7 @@ $borderColor: rgba(255, 255, 255, 0.15);
     }
 
     .mega-col-heading {
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       // removed uppercase to allow sentence case from WP label
       // text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -125,13 +142,13 @@ $borderColor: rgba(255, 255, 255, 0.15);
       cursor: pointer;
 
       .arrow {
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
         background-image: url('../img/right-arrow-mm.svg');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        opacity: 0.5;
+        opacity: 1;
         transition:
           transform 0.2s,
           opacity 0.2s;
@@ -158,18 +175,23 @@ $borderColor: rgba(255, 255, 255, 0.15);
   opacity: 0;
   overflow: hidden;
   padding-left: 0;
+  padding-right: 0;
   border-left: 0;
+  border-right: 0;
   transition:
     flex-basis 0.2s ease-out,
     opacity 0.2s ease-out,
     padding-left 0.2s ease-out,
-    border-left-color 0.2s ease-out;
+    padding-right 0.2s ease-out,
+    border-left-color 0.2s ease-out,
+    border-right-color 0.2s ease-out;
 
   &.is-active {
     flex: 0 0 12.5rem; // same as a main column width
     opacity: 1;
     padding-left: 2rem;
-    border-left: 1px solid $borderColor;
+    padding-right: 2rem;
+    border-right: 1px solid $borderColor;
   }
 
   .mega-flyout-menu {
@@ -232,6 +254,7 @@ $borderColor: rgba(255, 255, 255, 0.15);
       font-size: 1.5rem;
       margin-bottom: 1rem;
       color: $white;
+      max-width: rem(260);
     }
 
     p {
