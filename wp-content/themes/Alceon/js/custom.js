@@ -216,6 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const navWrapper = document.querySelector('.nav-wrapper');
   const breakpoint = 992; // 992px
   const scrollThreshold = 100; // Start tracking after 100px
+  const slideOutThreshold = 175; // Start sliding out at 175px from top
   let lastScrollTop = 0;
   let slideUpTimeout = null;
 
@@ -232,22 +233,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const currentScroll = window.scrollY || document.documentElement.scrollTop;
 
-    // If at the very top, smoothly slide out
-    if (currentScroll <= scrollThreshold) {
+    // If approaching the top (between 100px and 175px), start transition
+    if (currentScroll <= slideOutThreshold && currentScroll > scrollThreshold) {
       if (navWrapper.classList.contains('scrolled-up')) {
+        // Remove scrolled-up class and start sliding out
         navWrapper.classList.add('sliding-out');
         navWrapper.classList.remove('scrolled-up');
 
-        // Wait for animation to finish before removing sliding-out
+        // Wait for animation to finish, then remove sliding-out
         clearTimeout(slideUpTimeout);
+
         slideUpTimeout = setTimeout(() => {
           navWrapper.classList.remove('sliding-out');
-        }, 500);
+        }, 300);
       }
       navWrapper.classList.remove('nav-hidden');
     }
+    // If at the very top
+    else if (currentScroll <= scrollThreshold) {
+      navWrapper.classList.remove('nav-hidden');
+      navWrapper.classList.remove('scrolled-up');
+      navWrapper.classList.remove('sliding-out');
+    }
     // If we're scrolling down and past threshold, hide the nav
-    else if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
+    else if (
+      currentScroll > lastScrollTop &&
+      currentScroll > slideOutThreshold
+    ) {
       navWrapper.classList.add('nav-hidden');
       navWrapper.classList.remove('scrolled-up');
       navWrapper.classList.remove('sliding-out');

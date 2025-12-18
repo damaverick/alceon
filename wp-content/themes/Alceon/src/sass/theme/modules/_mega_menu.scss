@@ -7,6 +7,10 @@
     padding-top: rem(40);
   }
 }
+
+.scrolled-up + #mega-menu-capital {
+    padding-top: rem(30);
+  }
 #mega-menu-capital {
   position: fixed;
   top: 0;
