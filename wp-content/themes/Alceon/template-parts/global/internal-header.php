@@ -81,7 +81,7 @@ if (is_page('terms') || (is_singular('post') && empty($banner_image))) {
 echo esc_attr($hero_classes); ?>" <?php if ($hero_style) {
     echo 'style="' . esc_attr($hero_style) . '"';
 } ?>>
-        <div class="nav-wrapper w-100   z-3">
+        <div class="nav-wrapper w-100 z-3">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -89,9 +89,11 @@ echo esc_attr($hero_classes); ?>" <?php if ($hero_style) {
                     </div>
                 </div>
             </div>
+            <?php get_template_part('template-parts/global/mobile-menus'); ?>
+
         </div>
 
-        <?php get_template_part('template-parts/global/mobile-menus'); ?>
+        
         <?php get_template_part('template-parts/global/mega-menu'); ?>
 
 

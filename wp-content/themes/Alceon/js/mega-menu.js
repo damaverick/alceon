@@ -139,4 +139,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+
+  // Hide flyout column when mouse leaves it
+  flyoutSlot.addEventListener('mouseleave', () => {
+    flyoutSlot.classList.remove('is-active');
+    flyoutSlot.innerHTML = '';
+  });
 });

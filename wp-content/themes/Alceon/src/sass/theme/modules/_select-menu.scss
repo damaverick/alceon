@@ -14,7 +14,7 @@
 /* 3. The SVG Arrow Icon */
 /* We add the white Font Awesome icon as a pseudo-element */
 .select-wrapper::after {
-  content: "";
+  content: '';
   position: absolute;
   right: 1rem;
   top: 50%;
@@ -52,9 +52,16 @@
   font-size: rem(16);
   cursor: pointer;
 
-  @media (max-width:991px) {
-      padding: rem(8) rem(20); /* Right padding to avoid text overlapping the arrow */
+  /* Remove default browser outline/border on focus */
+  outline: none;
 
+  /* Add subtle background on focus */
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  @media (max-width: 991px) {
+    padding: rem(8) rem(20); /* Right padding to avoid text overlapping the arrow */
   }
 }
 
@@ -70,7 +77,7 @@
   text-transform: uppercase;
   line-height: 1;
   padding: rem(8) rem(21);
-  height:rem(43);
+  height: rem(43);
   border: 3px solid $brightBlue;
   background-color: $brightBlue;
   color: #fff; /* Matches the body background */
@@ -82,10 +89,8 @@
     background-color 0.2s,
     color 0.2s;
 
-  
-  @media (max-width:991px) {
-      padding: rem(5) rem(20); /* Right padding to avoid text overlapping the arrow */
-
+  @media (max-width: 991px) {
+    padding: rem(5) rem(20); /* Right padding to avoid text overlapping the arrow */
   }
 }
 
