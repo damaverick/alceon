@@ -26,11 +26,27 @@
       border-radius: 50rem;
       padding: 0.5rem 1.25rem;
       transition: all 0.3s ease;
-      font-size: 0.95rem; 
+      font-size: 0.95rem;
+      position: relative;
 
       &.active {
         background-color: $brightBlue;
         color: #fff;
+        padding-left: 2.25rem; // Add space for icon
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 14px;
+          height: 10px;
+          background-image: url('../img/tick.svg');
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
       }
 
       &:hover:not(.active) {
@@ -55,12 +71,11 @@
     }
 
     &__img {
+      width: 100%;
 
-          width: 100%;
-
-    object-fit: cover;
-    display: flex;
-    min-height: 240px;
+      object-fit: cover;
+      display: flex;
+      min-height: 240px;
     }
 
     &__body {
@@ -89,12 +104,12 @@
       font-weight: 400;
       color: #000;
       margin-top: 0.25rem;
-      margin-bottom: .5rem!important;
+      margin-bottom: 0.5rem !important;
       max-width: rem(330);
     }
 
     .btn {
- // margin-top: 1rem!Important;
+      // margin-top: 1rem!Important;
       align-self: flex-start;
     }
   }
@@ -111,14 +126,13 @@
       &:first-child a {
         padding-left: 0;
       }
- 
-      .next.page-link,
-      .prev.page-link{
-       border:none;
-        padding:0;
-        width:unset;
 
-      } 
+      .next.page-link,
+      .prev.page-link {
+        border: none;
+        padding: 0;
+        width: unset;
+      }
 
       .page-link {
         width: 42px;

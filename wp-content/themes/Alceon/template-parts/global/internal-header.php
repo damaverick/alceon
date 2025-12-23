@@ -58,23 +58,23 @@ if (is_page('terms') || (is_singular('post') && empty($banner_image))) {
 
                     style="background-image:url('<?php echo $banner_url; ?>')"></div>
             </section>
-        <?php endif; ?>
+<?php endif; ?>
 <?php else : ?>
 
     <?php
     // --- Setup Internal Hero Variables ---
     $hero_bg_image = get_field('hero_bg_image');
-            $banner_image  = get_field('header_image');
-            $hero_classes  = 'internal-hero bg-dark-blue text-white position-relative justify-content-between d-flex flex-column';
-            $hero_style    = '';
+    $banner_image  = get_field('header_image');
+    $hero_classes  = 'internal-hero bg-dark-blue text-white position-relative justify-content-between d-flex flex-column';
+    $hero_style    = '';
 
-            if ($hero_bg_image) {
-                $hero_style = "background-image: url('" . esc_url($hero_bg_image) . "'); "
-                    . 'background-size: cover; '
-                    . 'background-position: bottom center; '
-                    . 'background-repeat: no-repeat;';
-            }
-            ?>
+    if ($hero_bg_image) {
+        $hero_style = "background-image: url('" . esc_url($hero_bg_image) . "'); "
+            . 'background-size: cover; '
+            . 'background-position: bottom center; '
+            . 'background-repeat: no-repeat;';
+    }
+    ?>
 
     <header id="wrapper-navbar"  class="<?php if ($hero_style) : echo 'hero-bg-image ';
     endif;

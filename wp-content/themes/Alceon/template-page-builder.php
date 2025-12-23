@@ -23,42 +23,33 @@ $container = get_theme_mod('understrap_container_type');
       <?php
 
             get_template_part('template-parts/section/heading-text', null, [
-                'is_flexible' => true
+                'is_flexible' => true,
             ]);
         elseif (get_row_layout() == 'section_icon_row'):
 
-
-
             get_template_part('template-parts/section/icon-row', null, [
-                'is_flexible' => true
+                'is_flexible' => true,
             ]);
         elseif (get_row_layout() == 'include_team_video'):
 
-
-
-
             get_template_part('template-parts/section/team-video', null, [
-                'is_flexible' => true
+                'is_flexible' => true,
             ]);
         elseif (get_row_layout() == 'icon_row_section_coloured_background'):
 
             get_template_part('template-parts/section/icon-row-color-bg');
         elseif (get_row_layout() == 'case_studies_section'):
 
-
             get_template_part('template-parts/section/case-studies');
         elseif (get_row_layout() == 'accordion'):
-
 
             get_template_part('template-parts/section/accordion');
         elseif (get_row_layout() == 'section_image_text'):
 
-
             get_template_part('template-parts/section/row-img-text-flex', null, [
-                'is_flexible' => true
+                'is_flexible' => true,
             ]);
         elseif (get_row_layout() == 'section_logos'):
-
 
             get_template_part('template-parts/section/logos-section');
         elseif (get_row_layout() == 'statistics'):
@@ -75,21 +66,22 @@ $container = get_theme_mod('understrap_container_type');
             );
         elseif (get_row_layout() == 'capability_list') :
 
-
-
             get_template_part(
                 'template-parts/section/fund-list-flex'
             );
 
-
         endif;
 
         ?>
+
+
  
     <?php endwhile; ?>
 <?php endif; ?>
-
-
-
+<?php
+if (is_page('your-career')) :
+    get_template_part('template-parts/section/employment-hero-jobs');
+endif;
+?>
 <?php
 get_footer();

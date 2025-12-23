@@ -64,6 +64,10 @@ function theme_enqueue_styles()
     $mega_js = '/js/mega-menu.js';
     wp_enqueue_script('mega-menu-js', $dir_uri . $mega_js, ['jquery'], $get_ver($mega_js), true);
 
+    // Select Menu Tracking for GTM
+    $tracking_js = '/js/select-tracking.js';
+    wp_enqueue_script('select-tracking-js', $dir_uri . $tracking_js, [], $get_ver($tracking_js), true);
+
     // --- HEADER SELECT LOGIC ---
     // (Kept separate as it has complex localization)
 
@@ -238,6 +242,239 @@ function my_load_news_filter_callback()
 }
 add_action('wp_ajax_load_news_filter', 'my_load_news_filter_callback');
 add_action('wp_ajax_nopriv_load_news_filter', 'my_load_news_filter_callback');
+
+/*
+ * 4b. AJAX Jobs Filter (Employment Hero)
+ */
+// Load Employment Hero API files
+require_once get_stylesheet_directory() . '/inc/employment-hero-config.php';
+require_once get_stylesheet_directory() . '/inc/employment-hero-api.php';
+
+// Enqueue jobs filter script
+add_action('wp_enqueue_scripts', function () {
+    // Only skip on admin pages
+    if (is_admin()) {
+        return;
+    }
+
+    $js_path = '/js/jobs-filter.js';
+    $version = file_exists(get_stylesheet_directory() . $js_path) ? filemtime(get_stylesheet_directory() . $js_path) : '1.0.0';
+
+    wp_enqueue_script('jobs-filter', get_stylesheet_directory_uri() . $js_path, array('jquery'), $version, true);
+
+    wp_localize_script('jobs-filter', 'jobsFilter', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce'    => wp_create_nonce('jobs_filter_nonce'),
+    ));
+});
+
+function alceon_load_jobs_filter_callback()
+{
+    if (empty($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'jobs_filter_nonce')) {
+        wp_send_json_error(array('message' => 'Nonce failed'));
+    }
+
+    $location = isset($_POST['location']) ? sanitize_text_field($_POST['location']) : 'all';
+    $page = isset($_POST['page']) ? max(1, intval($_POST['page'])) : 1;
+    $per_page = 12;
+
+    // Get jobs from API
+    $result = Alceon_Employment_Hero_API::get_jobs($location, $page, $per_page);
+
+    if (!$result || !isset($result['jobs'])) {
+        wp_send_json_error(array('message' => 'No jobs found'));
+    }
+
+    ob_start();
+
+    if (!empty($result['jobs'])) {
+        echo '<div class="row g-4">';
+        foreach ($result['jobs'] as $job) {
+            include get_stylesheet_directory() . '/template-parts/section/job-card.php';
+        }
+        echo '</div>';
+
+        // Pagination
+        if ($result['total_pages'] > 1) {
+            echo '<div class="row mt-5"><div class="col-12">';
+            echo '<nav aria-label="Jobs pagination"><ul class="pagination">';
+
+            for ($i = 1; $i <= $result['total_pages']; $i++) {
+                $active_class = ($i == $page) ? 'active' : '';
+                $page_url = add_query_arg('page', $i, '');
+
+                echo '<li class="page-item ' . $active_class . '">';
+                if ($i == $page) {
+                    echo '<span class="page-link">' . esc_html($i) . '</span>';
+                } else {
+                    echo '<a class="page-link" href="' . esc_url($page_url) . '">' . esc_html($i) . '</a>';
+                }
+                echo '</li>';
+            }
+
+            echo '</ul></nav>';
+            echo '</div></div>';
+        }
+    } else {
+        echo '<div class="row g-4"><div class="col-12"><p>No jobs found for this location.</p></div></div>';
+    }
+
+    wp_send_json_success(ob_get_clean());
+}
+add_action('wp_ajax_load_jobs_filter', 'alceon_load_jobs_filter_callback');
+add_action('wp_ajax_nopriv_load_jobs_filter', 'alceon_load_jobs_filter_callback');
+
+/*
+ * 4c. Job Detail Page Rewrite Rules
+ */
+// Add custom query var for job slug
+add_filter('query_vars', function ($vars) {
+    $vars[] = 'job_slug';
+
+    return $vars;
+});
+
+// Add rewrite rule for job detail pages
+add_action('init', function () {
+    add_rewrite_rule('^job/([^/]+)/?$', 'index.php?job_slug=$matches[1]', 'top');
+
+    // TEMPORARY: Flush rewrite rules (remove after visiting site once)
+    if (get_option('alceon_jobs_rewrite_flushed') !== 'yes') {
+        flush_rewrite_rules();
+        update_option('alceon_jobs_rewrite_flushed', 'yes');
+    }
+});
+
+// Template redirect to load job detail template
+add_action('template_redirect', function () {
+    $job_slug = get_query_var('job_slug', '');
+
+    if ($job_slug) {
+        // Load the job detail template
+        $template = get_stylesheet_directory() . '/template-job-detail.php';
+        if (file_exists($template)) {
+            include $template;
+            exit;
+        }
+    }
+});
+
+/*
+ * 4d. Job Application Form Handler
+ */
+add_action('admin_post_submit_job_application', 'alceon_handle_job_application');
+add_action('admin_post_nopriv_submit_job_application', 'alceon_handle_job_application');
+
+function alceon_handle_job_application()
+{
+    // Verify nonce
+    if (!isset($_POST['job_application_nonce']) || !wp_verify_nonce($_POST['job_application_nonce'], 'job_application_submit')) {
+        wp_redirect(add_query_arg('application_sent', 'error', wp_get_referer()));
+        exit;
+    }
+
+    // Get form data
+    $job_slug = sanitize_text_field($_POST['job_slug'] ?? '');
+    $job_title = sanitize_text_field($_POST['job_title'] ?? '');
+    $applicant_name = sanitize_text_field($_POST['applicant_name'] ?? '');
+    $applicant_email = sanitize_email($_POST['applicant_email'] ?? '');
+    $applicant_phone = sanitize_text_field($_POST['applicant_phone'] ?? '');
+    $applicant_linkedin = esc_url_raw($_POST['applicant_linkedin'] ?? '');
+    $applicant_cover_letter = sanitize_textarea_field($_POST['applicant_cover_letter'] ?? '');
+
+    // Validate required fields
+    if (empty($applicant_name) || empty($applicant_email)) {
+        wp_redirect(add_query_arg('application_sent', 'error', wp_get_referer()));
+        exit;
+    }
+
+    // Handle file upload
+    $resume_attachment_id = 0;
+    if (!empty($_FILES['applicant_resume']['name'])) {
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+        // Validate file size (5MB max)
+        if ($_FILES['applicant_resume']['size'] > 5242880) {
+            wp_redirect(add_query_arg('application_sent', 'error', wp_get_referer()));
+            exit;
+        }
+
+        $resume_attachment_id = media_handle_upload('applicant_resume', 0);
+
+        if (is_wp_error($resume_attachment_id)) {
+            wp_redirect(add_query_arg('application_sent', 'error', wp_get_referer()));
+            exit;
+        }
+    }
+
+    // Check if we're in demo mode or live API mode
+    if (EMPLOYMENT_HERO_DEMO_MODE || EMPLOYMENT_HERO_ORG_ID === 'demo') {
+        // DEMO MODE: Email notification to admin
+        $to = get_option('admin_email');
+        $subject = 'New Job Application: ' . $job_title;
+
+        $message = "New job application received:\n\n";
+        $message .= 'Position: ' . $job_title . "\n";
+        $message .= 'Applicant: ' . $applicant_name . "\n";
+        $message .= 'Email: ' . $applicant_email . "\n";
+        $message .= 'Phone: ' . $applicant_phone . "\n";
+        $message .= 'LinkedIn: ' . $applicant_linkedin . "\n\n";
+        $message .= "Cover Letter:\n" . $applicant_cover_letter . "\n\n";
+
+        if ($resume_attachment_id) {
+            $resume_url = wp_get_attachment_url($resume_attachment_id);
+            $message .= 'Resume: ' . $resume_url . "\n";
+        }
+
+        $headers = array('Content-Type: text/plain; charset=UTF-8');
+        wp_mail($to, $subject, $message, $headers);
+    } else {
+        // LIVE MODE: Submit to Employment Hero API
+        // This will be implemented when you have the API access
+        $endpoint = EMPLOYMENT_HERO_API_BASE . '/organisations/' . EMPLOYMENT_HERO_ORG_ID . '/job_applications';
+
+        $resume_url = $resume_attachment_id ? wp_get_attachment_url($resume_attachment_id) : '';
+
+        $application_data = array(
+            'name' => $applicant_name,
+            'email' => $applicant_email,
+            'phone' => $applicant_phone,
+            'linkedin_url' => $applicant_linkedin,
+            'cover_letter' => $applicant_cover_letter,
+            'resume_url' => $resume_url,
+        );
+
+        $args = array(
+            'headers' => array(
+                'Authorization' => 'Bearer ' . EMPLOYMENT_HERO_ACCESS_TOKEN,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ),
+            'body' => json_encode($application_data),
+            'method' => 'POST',
+            'timeout' => 15,
+        );
+
+        $response = wp_remote_post($endpoint, $args);
+
+        // If API fails, fallback to email
+        if (is_wp_error($response)) {
+            $to = get_option('admin_email');
+            $subject = 'New Job Application: ' . $job_title;
+            $message = "New job application received (API submission failed):\n\n";
+            $message .= 'Position: ' . $job_title . "\n";
+            $message .= 'Applicant: ' . $applicant_name . "\n";
+            $message .= 'Email: ' . $applicant_email . "\n";
+            wp_mail($to, $subject, $message);
+        }
+    }
+
+    // Redirect back with success message
+    wp_redirect(add_query_arg('application_sent', 'success', wp_get_referer()));
+    exit;
+}
 
 /*
  * 5. Theme Setup & Menus

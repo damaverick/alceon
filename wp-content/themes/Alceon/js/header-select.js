@@ -64,7 +64,13 @@
       resetLookup();
 
       function onCategoryChange() {
-        var idx = parseInt(categorySelect.value, 10);
+        // Get the data-index attribute instead of the value
+        var selectedOption =
+          categorySelect.options[categorySelect.selectedIndex];
+        var idx = selectedOption
+          ? parseInt(selectedOption.getAttribute('data-index'), 10)
+          : NaN;
+
         if (Number.isNaN(idx)) {
           resetLookup();
           return;

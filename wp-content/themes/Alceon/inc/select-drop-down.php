@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Select Drop Down Component
+ * Select Drop Down Component.
  *
  * This file contains the HTML, CSS, and JS for the
  * custom-styled dependent dropdown menus.
@@ -20,8 +20,11 @@
                 $label = trim($row['label'] ?? '');
                 if (!$label) {
                     continue;
-                } ?>
-                <option value="<?php echo esc_attr($i); ?>"><?php echo esc_html($label); ?></option>
+                }
+                // Create a slug from the label for better tracking
+                $slug = sanitize_title($label);
+                ?>
+                <option value="<?php echo esc_attr($slug); ?>" data-index="<?php echo esc_attr($i); ?>"><?php echo esc_html($label); ?></option>
             <?php endforeach; ?>
         </select>
     </div>

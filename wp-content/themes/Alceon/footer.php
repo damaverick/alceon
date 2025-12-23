@@ -1,16 +1,12 @@
 <?php
 
-
 /**
- * The template for displaying the footer
+ * The template for displaying the footer.
  *
  * Custom footer for Alceon Understrap child theme.
- *
- * @package Understrap Child
  */
 
 defined('ABSPATH') || exit;
-
 
 if (
     is_singular('case-study') &&
@@ -29,6 +25,7 @@ if (
     ! is_front_page() &&
     ! is_page('contact') &&
     ! is_page('terms') &&
+    ! is_page('your-career') &&
     ! is_singular('case-study') &&
     ! is_post_type_archive('case-study')
 ) : ?>
@@ -50,9 +47,6 @@ if (
 
 
 <?php
-
-
-
 
 $container = get_theme_mod('understrap_container_type');
 ?>
@@ -87,14 +81,14 @@ $container = get_theme_mod('understrap_container_type');
               wp_nav_menu(
 
                   array(
-                    'menu_id'        => 'footer',
-                    'container'      => false,
-                    'menu_class'     => 'site-footer__nav-list list-unstyled d-flex align-items-center mb-0',
-                    'fallback_cb'    => '',
+                      'menu_id'        => 'footer',
+                      'container'      => false,
+                      'menu_class'     => 'site-footer__nav-list list-unstyled d-flex align-items-center mb-0',
+                      'fallback_cb'    => '',
 
-                    'depth'          => 1,
+                      'depth'          => 1,
 
-                    'walker'         => new understrap_WP_Bootstrap_Navwalker(),
+                      'walker'         => new understrap_WP_Bootstrap_Navwalker(),
 
                   )
 

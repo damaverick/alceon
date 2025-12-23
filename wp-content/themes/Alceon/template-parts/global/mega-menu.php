@@ -14,13 +14,15 @@
                 ?>
             </ul>
 
-            <!-- <div class="mega-col mega-widget-col">
+            <?php if (get_field('include_mega_menu_cta', 'option') === 'yes') : ?>
+            <div class="mega-col mega-widget-col">
                 <div class="widget-content">
                     <h3>Interested in investing with us?</h3>
-                    <p>We’re here to share insights, answer questions, and explore what’s possible together.</p>
+                    <p>We're here to share insights, answer questions, and explore what's possible together.</p>
                     <a href="/contact" class="mt-4 mt-lg-3 mt-md-0 btn pill btn-outline-white">Submit request</a>
                 </div>
-            </div> -->
+            </div>
+            <?php endif; ?>
 
         </div>
     </div>
