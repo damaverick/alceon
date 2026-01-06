@@ -9,7 +9,7 @@ defined('ABSPATH') || exit;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <?php wp_head(); ?>
-  <!-- <script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=phqcvhw2bpw7dtsvvgekbw" async="true"></script> -->
+  <script type="text/javascript" src="https://www.bugherd.com/sidebarv2.js?apikey=phqcvhw2bpw7dtsvvgekbw" async="true"></script>
 </head>
 
 <body <?php body_class(); ?> <?php understrap_body_attributes(); ?>>

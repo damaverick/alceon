@@ -37,7 +37,7 @@ if (
 <?php endif; ?>
 
 <?php if (is_page(92)) : ?>
-  <?php get_template_part('template-parts/global/disclaimer'); ?>
+  <?php // get_template_part('template-parts/global/disclaimer');?>
 <?php endif; ?>
 
 
@@ -111,11 +111,11 @@ $container = get_theme_mod('understrap_container_type');
       =============================== -->
       <div class="row" data-aos="fade-up">
         <div class="col-12 col-lg-9 offset-lg-3">
+          <div class="site-footer__disclaimer mb-4">
 
-          <p class="site-footer__disclaimer mb-4">
-            <?php echo nl2br(esc_html(get_field('terms_paragraph', 'option'))); ?>
-            
-          </p>
+            <?php echo  get_field('terms_paragraph', 'option'); ?>
+
+          </div>
 
          
 
@@ -127,7 +127,7 @@ $container = get_theme_mod('understrap_container_type');
               </p>
             </div>
             <div class="col-12 col-md-6 text-md-end mt-2 mt-md-0">
-              <a href="<?php get_bloginfo('url'); ?>terms/" class="site-footer__important-link text-white">Important Information</a>
+              <a href="<?php get_bloginfo('url'); ?>/terms/" class="site-footer__important-link text-white">Important Information</a>
             </div>
           </div>
         </div>

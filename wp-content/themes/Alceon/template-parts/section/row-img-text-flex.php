@@ -63,7 +63,7 @@ $image_offset     = get_sub_field('offset_image');
                         if ($image) :
                             echo wp_get_attachment_image($image['ID'], 'large', false, [
                                 'class' => 'img-fluid w-100 rounded-right',
-                                'alt'   => $image['alt']
+                                'alt'   => $image['alt'],
                             ]);
                         else :
                             echo '<img src="https://placehold.co/800x600/eee/ccc?text=No+Image" alt="Placeholder" class="img-fluid rounded w-100">';

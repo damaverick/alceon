@@ -103,7 +103,7 @@ echo esc_attr($hero_classes); ?>" <?php if ($hero_style) {
                     <h1 class="internal-hero__title mb-3"><?php the_title(); ?></h1>
                 </div>
                 <div class="col-12 col-lg-7 pe-lg-5" >
-                    <?php if (get_field('hero_paragraph')) : ?><h3 class="internal-hero__excerpt h2 mb-0"><span class="me-4">/</span><?php the_field('hero_paragraph'); ?></h3><?php endif; ?>
+                    <?php if (get_field('hero_paragraph')) : ?><h3 class="internal-hero__excerpt h2 mb-0"><?php the_field('hero_paragraph'); ?></h3><?php endif; ?>
                 </div>
             </div>
         </div>
