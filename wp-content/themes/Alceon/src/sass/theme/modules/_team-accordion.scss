@@ -1,0 +1,222 @@
+// Team Accordion Section
+.section--team-accordion {
+  .intro-text {
+    margin-top: 1rem;
+    max-width: 800px;
+  }
+}
+
+.accordion--team {
+  .accordion-item {
+    border: none;
+    border-top: 2px solid rgba(17, 17, 17, 0.1);
+    margin-bottom: 0;
+    background: transparent;
+
+    &:last-child {
+      border-bottom: 2px solid rgba(17, 17, 17, 0.1);
+    }
+
+    .accordion-header {
+      h3 {
+        margin: 0;
+      }
+    }
+
+    .accordion-button,
+    &:last-child .accordion-button {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 1.5rem 0;
+      font-weight: inherit !important;
+      font-size: inherit !important;
+      color: $primaryColor;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &:not(.collapsed) {
+        background: transparent;
+        color: $primaryColor;
+      }
+
+      &:focus {
+        box-shadow: none;
+        border: none;
+      }
+
+      &::after {
+        display: none;
+      }
+
+      .accordion-icon {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          background-color: #155cd5;
+          transition: transform 0.25s ease;
+        }
+
+        &::before {
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          transform: translateY(-50%);
+        }
+
+        &::after {
+          top: 0;
+          left: 50%;
+          width: 2px;
+          height: 100%;
+          transform: translateX(-50%);
+        }
+      }
+
+      &[aria-expanded='true'] .accordion-icon::after {
+        transform: translateX(-50%) scaleY(0);
+      }
+
+      &:hover {
+        color: #155cd5;
+      }
+    }
+
+    .accordion-body {
+      padding: 0 0 rem(30);
+    }
+  }
+}
+
+// Team Grid
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  row-gap: rem(45);
+
+  @media (max-width: 1199.98px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 991.98px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 575.98px) {
+    grid-template-columns: 1fr;
+  }
+
+  // Team member items using carousel card structure
+  .video_item {
+    position: relative;
+    margin-bottom: -8px;
+    z-index: 0;
+
+    video,
+    img {
+      width: 100%;
+      opacity: 1;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .item {
+    max-height: 600px;
+    position: relative;
+    background: #444;
+    margin-bottom: -6px;
+    overflow: hidden;
+
+    // Gradient overlay
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 70%;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          207.35deg,
+          rgba(0, 0, 0, 0) 64.03%,
+          rgba(0, 0, 0, 0.65) 96.33%
+        ),
+        linear-gradient(0deg, #e6e6e600, #e6e6e600);
+    }
+
+    h4 {
+      font-size: rem(22);
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    &:hover {
+      .current {
+        opacity: 0;
+      }
+
+      .hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 0;
+    padding: rem(36);
+    min-width: 100%;
+    z-index: 2;
+
+    p,
+    h3,
+    h4,
+    .text-white {
+      color: #fff;
+      text-shadow: none !important;
+    }
+
+    p {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .animation_container {
+    position: relative;
+
+    .current,
+    .hover {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .current {
+      min-height: 99px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .hover {
+    opacity: 0;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+}

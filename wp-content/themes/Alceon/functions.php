@@ -19,6 +19,7 @@ function understrap_remove_scripts()
 add_action('wp_enqueue_scripts', 'understrap_remove_scripts', 20);
 
 require get_stylesheet_directory() . '/inc/class-mega-menu-walker.php';
+require get_stylesheet_directory() . '/inc/acf-team-accordion-fields.php';
 
 /**
  * 2. Enqueue Child Assets & Global Scripts.
