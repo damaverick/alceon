@@ -72,6 +72,9 @@ elseif (get_row_layout() == 'capability_list') :
 elseif (get_row_layout() == 'team_accordion_section'):
 
     get_template_part('template-parts/section/team-accordion');
+elseif (get_row_layout() == 'team_list'):
+
+    get_template_part('template-parts/section/team-list');
 
 endif;
 

@@ -9,23 +9,23 @@ $modals_html = '';
 $global_index = 0;
 ?>
 
-<section class="section--team-accordion section--white" data-aos="fade-up">
+<section class="section--team-accordion section--grey" data-aos="fade-up">
 
-    <?php if (get_sub_field('team_accordion_heading')) : ?>
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-12">
-                <h2><?php the_sub_field('team_accordion_heading'); ?>
-                </h2>
-                <?php if (get_sub_field('team_accordion_intro')) : ?>
-                <div class="intro-text">
-                    <?php the_sub_field('team_accordion_intro'); ?>
-                </div>
-                <?php endif; ?>
+<?php if (get_sub_field('team_accordion_heading')) : ?>
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <h2><?php the_sub_field('team_accordion_heading'); ?>
+            </h2>
+            <?php if (get_sub_field('team_accordion_intro')) : ?>
+            <div class="intro-text">
+                <?php the_sub_field('team_accordion_intro'); ?>
             </div>
+            <?php endif; ?>
         </div>
     </div>
-    <?php endif; ?>
+</div>
+<?php endif; ?>
 
     <?php if (have_rows('team_locations')) : ?>
     <div class="container">

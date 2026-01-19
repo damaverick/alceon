@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
     const controlsEnabled = () => window.innerWidth < 1080 || totalItems > 4;
 
     $carousel.owlCarousel({
-      items: 5,
+      items: 6,
       loop: false,
       dots: true,
       margin: 0,
@@ -44,6 +44,10 @@ jQuery(document).ready(function ($) {
           //   touchDrag: false,
           //   pullDrag: false,
           //   freeDrag: false,
+        },
+
+        1435: {
+          items: 6,
         },
       },
       onInitialized: wrapOwlControls,

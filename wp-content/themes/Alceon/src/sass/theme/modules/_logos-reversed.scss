@@ -78,7 +78,7 @@
 
 // Institutions logos (SCSS)
 $gap: 30px;
-$border-color: #E6E6E6;
+$border-color: #e6e6e6;
 $bg: #ffffff;
 $radius: rem(20);
 $box-height: rem(80);
@@ -98,7 +98,7 @@ $breakpoint-sm: 767.98px;
     max-width: $third-width;
     box-sizing: border-box;
     display: flex;
-    max-height:rem(130);
+    max-height: rem(130);
   }
 
   @media (max-width: $breakpoint-sm) {
@@ -112,7 +112,7 @@ $breakpoint-sm: 767.98px;
 
   .logo-box {
     background: $bg;
-    border: 2px solid #E6E6E6;
+    border: 2px solid #e6e6e6;
     border-radius: $radius;
     padding: 10px; // kept for backward compatibility with original
     padding: $padding-box;
