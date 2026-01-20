@@ -10,7 +10,7 @@
 defined('ABSPATH') || exit;
 
 // API Configuration
-define('EMPLOYMENT_HERO_ACCESS_TOKEN', 'your_access_token_here'); // Replace with your actual access token
+define('EMPLOYMENT_HERO_ACCESS_TOKEN', 'EAY_ykhq2TL4kkgtNWAoSw'); // Replace with your actual access token
 define('EMPLOYMENT_HERO_ORG_ID', 'demo'); // Replace with actual org ID when available (e.g., '12345')
 
 // API Endpoints

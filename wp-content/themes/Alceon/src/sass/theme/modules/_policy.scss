@@ -23,6 +23,10 @@
 
 .policy-content {
   animation: fadeIn 0.3s ease;
+
+  p {
+    max-width: unset;
+  }
 }
 
 @keyframes fadeIn {

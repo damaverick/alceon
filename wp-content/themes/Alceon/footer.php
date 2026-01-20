@@ -36,9 +36,11 @@ if (
 
 <?php endif; ?>
 
-<?php if (is_page(92)) : ?>
-  <?php // get_template_part('template-parts/global/disclaimer');?>
+    <?php if (get_field('include_disclaimer') == 'yes') : ?>
+
+  <?php   get_template_part('template-parts/global/disclaimer'); ?>
 <?php endif; ?>
+
 
 
 

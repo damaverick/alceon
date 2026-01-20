@@ -1,8 +1,6 @@
 <?php
 /**
- * The template for displaying a single Fund CPT
- *
- * @package Understrap
+ * The template for displaying a single Fund CPT.
  */
 
 // Exit if accessed directly.
@@ -13,6 +11,7 @@ get_header();
 $container = get_theme_mod('understrap_container_type');
 ?>
 
+<!-- START NEW MODULE-->
 <section class="section-feature section--gradient section--stats section-feature--overlap-bottom">
   <div class="container">
 
@@ -39,7 +38,7 @@ $container = get_theme_mod('understrap_container_type');
             // This ensures "10.30" gets 2 decimals, while "5" gets 0.
             $decimals = 0;
             if (strpos($number, '.') !== false) {
-                $decimals = strlen(substr(strrchr($number, "."), 1));
+                $decimals = strlen(substr(strrchr($number, '.'), 1));
             }
             ?>
 
@@ -82,7 +81,7 @@ $container = get_theme_mod('understrap_container_type');
         <?php
         if (has_post_thumbnail()) :
             the_post_thumbnail('full', [
-              'class' => 'img-fluid section-feature__image', 'data-aos' => 'fade-right'
+                'class' => 'img-fluid section-feature__image', 'data-aos' => 'fade-right',
             ]);
         endif;
 ?>
@@ -145,6 +144,8 @@ if ($inside_portfolio_text) {
   </div>
 </section>
 
+<!-- END NEW MODULE-->
+
 
 <?php
 // Inside a non-flexible template (e.g., page-about.php)
@@ -157,7 +158,7 @@ get_template_part('template-parts/section/icon-row');
     </div>
 </div>
 
-
+<!-- START MODULE -->
 <section class="section--white border-top-0">
   <div class="container"> 
 
@@ -179,6 +180,10 @@ if ($how_the_fund_works_text) {
 </section>
 
 
+
+<!-- END MODULE -->
+
+<!-- START NEW MODULE -->
 <section class="section--performance-table section--white pt-4">
   <div class="container">
 
@@ -230,16 +235,13 @@ if ($how_the_fund_works_text) {
 
   </div>
 </section>
-
+<!-- END NEW MODULE -->
 <?php
 // Include modular sections
 get_template_part('template-parts/section/icon-row-color-bg-resources');
 ?>
 
-<?php
-// Inside a non-flexible template (e.g., page-about.php)
-get_template_part('template-parts/section/disclaimer');
-?>
+
 
 <?php $terms_modal = get_field('terms_modal', 'option'); ?>
 <?php if ($terms_modal) : ?>
@@ -266,38 +268,46 @@ get_template_part('template-parts/section/disclaimer');
     if (!modalEl || !acceptBtn) return;
 
     // bump this if you change the terms text
-    const STORAGE_KEY = 'termsAccepted_v1';
+    const SESSION_KEY = 'termsShown_v1';
 
-    // Always show the modal (no consent check)
-    if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-      const modal = new bootstrap.Modal(modalEl, {
-        backdrop: 'static',
-        keyboard: false
-      });
+    // Check if modal was already shown in this session
+    let alreadyShown = false;
+    try {
+      alreadyShown = sessionStorage.getItem(SESSION_KEY) === 'true';
+    } catch (e) {}
 
-      modal.show();
+    // Only show if not already shown in this session
+    if (!alreadyShown) {
+      if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const modal = new bootstrap.Modal(modalEl, {
+          backdrop: 'static',
+          keyboard: false
+        });
 
-      acceptBtn.addEventListener('click', function () {
-        try { localStorage.setItem(STORAGE_KEY, 'true'); } catch (e) {}
-        modal.hide();
-      }, { once: true });
-    } else {
-      // Fallback if bootstrap JS isn't loaded: force visible modal + backdrop
-      modalEl.classList.add('show');
-      modalEl.style.display = 'block';
-      modalEl.setAttribute('aria-modal', 'true');
-      modalEl.removeAttribute('aria-hidden');
+        modal.show();
 
-      const backdrop = document.createElement('div');
-      backdrop.className = 'modal-backdrop fade show';
-      document.body.appendChild(backdrop);
+        acceptBtn.addEventListener('click', function () {
+          try { sessionStorage.setItem(SESSION_KEY, 'true'); } catch (e) {}
+          modal.hide();
+        }, { once: true });
+      } else {
+        // Fallback if bootstrap JS isn't loaded: force visible modal + backdrop
+        modalEl.classList.add('show');
+        modalEl.style.display = 'block';
+        modalEl.setAttribute('aria-modal', 'true');
+        modalEl.removeAttribute('aria-hidden');
 
-      acceptBtn.addEventListener('click', function () {
-        try { localStorage.setItem(STORAGE_KEY, 'true'); } catch (e) {}
-        modalEl.classList.remove('show');
-        modalEl.style.display = 'none';
-        if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
-      }, { once: true });
+        const backdrop = document.createElement('div');
+        backdrop.className = 'modal-backdrop fade show';
+        document.body.appendChild(backdrop);
+
+        acceptBtn.addEventListener('click', function () {
+          try { sessionStorage.setItem(SESSION_KEY, 'true'); } catch (e) {}
+          modalEl.classList.remove('show');
+          modalEl.style.display = 'none';
+          if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop);
+        }, { once: true });
+      }
     }
   });
 </script>
