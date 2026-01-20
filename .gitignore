@@ -40,6 +40,9 @@ wp-content/themes/*
 # 6. Ignore node_modules inside your theme
 wp-content/themes/Alceon/node_modules/
 
+# 7. Ignore sensitive config files
+wp-content/themes/Alceon/inc/employment-hero-config.php
+
 # ---------------------------------
 # Misc
 # ---------------------------------
