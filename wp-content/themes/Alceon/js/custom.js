@@ -40,14 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 complete: function () {
                   $el.text(prefix + this.countNum.toFixed(decimals) + suffix);
                 },
-              }
+              },
             );
 
             observer.unobserve(el);
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     // Attach Observer
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
       // Update position for next scroll event, prevent negative numbers
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     },
-    { passive: true }
+    { passive: true },
   );
 });
 
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function () {
         () => {
           item.classList.add('is-visible');
         },
-        50 + index * 35
+        50 + index * 35,
       );
     });
   });
@@ -402,9 +402,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         window.h3SplitInstance = new SplitType(h3Target, {
           types: 'lines, words',
+          tagName: 'span',
         });
         jQuery(window.h3SplitInstance.lines).wrap(
-          '<div class="line-wrapper" style="overflow:hidden; padding-bottom: 0.2em; margin-bottom: -0.2em;"></div>'
+          '<div class="line-wrapper" style="overflow:hidden; padding-bottom: 0.2em; margin-bottom: -0.2em;"></div>',
         );
         gsap.set(h3Target, { autoAlpha: 1 });
       }
@@ -416,9 +417,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Matches H3 style: Lines & Words
         window.h1SplitInstance = new SplitType(h1Target, {
           types: 'lines, words',
+          tagName: 'span',
         });
         jQuery(window.h1SplitInstance.lines).wrap(
-          '<div class="line-wrapper" style="overflow:hidden; padding-bottom: 0.2em; margin-bottom: -0.2em;"></div>'
+          '<div class="line-wrapper" style="overflow:hidden; padding-bottom: 0.2em; margin-bottom: -0.2em;"></div>',
         );
       }
     };
@@ -427,14 +429,19 @@ document.addEventListener('DOMContentLoaded', function () {
     setupSplits();
 
     // Handle Resize (Re-split text to fix line breaks)
+    // Using debounce to prevent excessive re-splitting
+    let resizeTimer;
     let windowWidth = window.innerWidth;
     window.addEventListener('resize', function () {
-      if (windowWidth !== window.innerWidth) {
-        windowWidth = window.innerWidth;
-        setupSplits();
-        // Refresh ScrollTrigger to recalculate start/end positions
-        ScrollTrigger.refresh();
-      }
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (windowWidth !== window.innerWidth) {
+          windowWidth = window.innerWidth;
+          setupSplits();
+          // Refresh ScrollTrigger to recalculate start/end positions
+          ScrollTrigger.refresh();
+        }
+      }, 250);
     });
 
     // 3. ANIMATION LOGIC (Responsive)
@@ -475,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ease: 'power4.out',
             stagger: 0.02,
           },
-          '-=0.6'
+          '-=0.6',
         );
       }
     });

@@ -179,7 +179,7 @@
     @media (max-width: 991px) {
       // top: -190px;
       margin-top: auto;
-      margin-bottom:9rem;
+      margin-bottom: 9rem;
     }
   }
 
@@ -425,6 +425,31 @@
     padding-bottom: 20px;
   }
 }
+
+// Hero excerpt width modifiers
+.internal-hero__excerpt {
+  // Better text wrapping for split animations
+  .word {
+    white-space: nowrap;
+  }
+
+  .line {
+    hyphens: none;
+  }
+
+  &--small {
+    max-width: rem(500) !important;
+  }
+
+  &--medium {
+    max-width: rem(600) !important;
+  }
+
+  &--large {
+    max-width: rem(750) !important;
+  }
+}
+
 /* Mobile nav-hidden styles handled in _section.scss */
 @media (max-width: 991px) {
   .nav-wrapper {

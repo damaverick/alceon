@@ -15,8 +15,12 @@ jQuery(document).ready(function ($) {
     // 3. Logic to toggle controls
     const controlsEnabled = () => window.innerWidth < 1080 || totalItems > 4;
 
+    // 4. Determine max items to show based on total items available
+    const maxItems1080 = Math.min(5, totalItems);
+    const maxItems1435 = Math.min(6, totalItems);
+
     $carousel.owlCarousel({
-      items: 6,
+      items: maxItems1435,
       loop: false,
       dots: true,
       margin: 0,
@@ -37,9 +41,9 @@ jQuery(document).ready(function ($) {
           dots: true,
         },
         1080: {
-          items: 5,
-          nav: true,
-          dots: true,
+          items: maxItems1080,
+          nav: totalItems > maxItems1080,
+          dots: totalItems > maxItems1080,
           //   mouseDrag: false,
           //   touchDrag: false,
           //   pullDrag: false,
@@ -47,7 +51,9 @@ jQuery(document).ready(function ($) {
         },
 
         1435: {
-          items: 6,
+          items: maxItems1435,
+          nav: totalItems > maxItems1435,
+          dots: totalItems > maxItems1435,
         },
       },
       onInitialized: wrapOwlControls,
@@ -60,17 +66,43 @@ jQuery(document).ready(function ($) {
     var nav = carousel.find('.owl-nav');
     var dots = carousel.find('.owl-dots');
 
-    if (nav.length === 0 && dots.length === 0) return;
+    // Check if nav/dots are disabled (not needed)
+    var navDisabled = nav.hasClass('disabled');
+    var dotsDisabled = dots.hasClass('disabled');
+    var bothDisabled = navDisabled && dotsDisabled;
+
+    // Find the parent section
+    var section = carousel.closest('.growth_testimonials');
+
+    if (nav.length === 0 && dots.length === 0) {
+      // No controls at all - remove padding
+      if (section.length) {
+        section.addClass('no-controls');
+      }
+      return;
+    }
 
     // Only wrap if not already wrapped
     if (carousel.parent().find('.bottom_slider').length === 0) {
       var controlContainer = $(
-        '<div class="container bottom_slider"><div class="row"><div class="col-12"></div></div></div>'
+        '<div class="container bottom_slider"><div class="row"><div class="col-12"></div></div></div>',
       );
       nav.add(dots).wrapAll(controlContainer);
     }
 
-    // Always ensure controls are visible
-    carousel.parent().find('.bottom_slider').css('display', 'block');
+    var bottomSlider = carousel.parent().find('.bottom_slider');
+
+    // Toggle visibility and padding based on control state
+    if (bothDisabled) {
+      bottomSlider.hide();
+      if (section.length) {
+        section.addClass('no-controls');
+      }
+    } else {
+      bottomSlider.show();
+      if (section.length) {
+        section.removeClass('no-controls');
+      }
+    }
   }
 });

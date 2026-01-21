@@ -2,6 +2,12 @@
   // .container.bottom_slider {
   //   padding-bottom: 3rem;
   // }
+
+  // Remove padding when there are no controls to show
+  // Using !important to override the section-- base styles
+  &.no-controls {
+    padding-bottom: 0 !important;
+  }
   .video_item {
     position: relative;
     margin-bottom: -8px;
@@ -230,5 +236,3 @@
     display: none !important;
   }
 }
-
-
