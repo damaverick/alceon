@@ -1,12 +1,18 @@
-<section class="section--accordion section--white">
+<?php
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
+?>
+<section class="section--accordion section--white" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
     <div class="container">
         
         <div class="row mb-4" data-aos="fade-up">
             <div class="col-12 col-lg-8">
                 <?php
                 $section_heading = get_sub_field('section_heading');
-                $intro_text = get_sub_field('intro_text');
-                ?>
+$intro_text = get_sub_field('intro_text');
+?>
 
                 <?php if ($section_heading): ?>
                     <h2><?php echo esc_html($section_heading); ?></h2>
@@ -102,7 +108,7 @@
                 $acc_index++;
                 endwhile; // End the accordion_item loop
             endif; // End if( have_rows('accordion_item') )
-                ?>
+?>
 
 
         </div>

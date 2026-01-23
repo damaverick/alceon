@@ -244,7 +244,17 @@ add_action('wp_ajax_load_news_filter', 'my_load_news_filter_callback');
 add_action('wp_ajax_nopriv_load_news_filter', 'my_load_news_filter_callback');
 
 /*
- * 4b. AJAX Jobs Filter (Employment Hero)
+ * 4b. Redirect News Category Pages to Main News Page
+ */
+add_action('template_redirect', function () {
+    if (is_category()) {
+        wp_redirect(home_url('/news-insights/'), 301);
+        exit;
+    }
+});
+
+/*
+ * 4c. AJAX Jobs Filter (Employment Hero)
  */
 // Load Employment Hero API files
 require_once get_stylesheet_directory() . '/inc/employment-hero-config.php';
@@ -280,6 +290,10 @@ function alceon_load_jobs_filter_callback()
 
     // Get jobs from API
     $result = Alceon_Employment_Hero_API::get_jobs($location, $page, $per_page);
+
+    // Get total job count (unfiltered) to determine if we should show the filter
+    $all_jobs_result = Alceon_Employment_Hero_API::get_jobs('all', 1, 9999);
+    $total_jobs_count = isset($all_jobs_result['total']) ? $all_jobs_result['total'] : 0;
 
     if (!$result || !isset($result['jobs'])) {
         wp_send_json_error(array('message' => 'No jobs found'));
@@ -319,7 +333,13 @@ function alceon_load_jobs_filter_callback()
         echo '<div class="row g-4"><div class="col-12"><p>No jobs found for this location.</p></div></div>';
     }
 
-    wp_send_json_success(ob_get_clean());
+    $html = ob_get_clean();
+
+    // Send response with total unfiltered job count
+    wp_send_json_success(array(
+        'html' => $html,
+        'total_jobs' => $total_jobs_count,
+    ));
 }
 add_action('wp_ajax_load_jobs_filter', 'alceon_load_jobs_filter_callback');
 add_action('wp_ajax_nopriv_load_jobs_filter', 'alceon_load_jobs_filter_callback');
@@ -526,7 +546,7 @@ function alceon_navbar()
                         'menu_class'     => 'navbar-nav site-menu align-items-lg-center',
                         'fallback_cb'    => '',
                         'walker'         => new understrap_WP_Bootstrap_Navwalker(),
-                        'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><a href="https://dynamo.dynamosoftware.com/tenant/dynamo3.netagesolutions.com/alceon/RE-Portal" target="_blank" class="btn btn--login btn-primary rounded-pill ms-lg-3">Login</a>',
+                        'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><a href="https://dynamo.dynamosoftware.com/tenant/dynamo3.netagesolutions.com/alceon/RE-Portal" target="_blank" class="btn btn--login btn-primary rounded-pill ms-lg-3">Investor Login</a>',
                     ));
     ?>
             </div>
@@ -753,3 +773,13 @@ function my_theme_enqueue_media_assets()
     }
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_media_assets');
+
+// Add to functions.php
+function redirect_author_pages()
+{
+    if (is_author()) {
+        wp_redirect(home_url('/about-us/'), 301);
+        exit;
+    }
+}
+add_action('template_redirect', 'redirect_author_pages');

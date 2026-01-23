@@ -3,9 +3,14 @@
   // Get fields for the layout
   $title_1 = get_sub_field('title_1');
     $title_2 = get_sub_field('title_2');
+
+    // Get anchor ID from args if provided
+    $anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
     ?>
 
-  <section class="section--gradient-dark-blue text-white">
+  <section class="section--gradient-dark-blue text-white" <?php if (!empty($anchor_id)) {
+      echo 'id="' . esc_attr($anchor_id) . '"';
+  } ?>>
     <div class="container">
 
       <?php // ===== First Logo Row (Exited Investments) =====

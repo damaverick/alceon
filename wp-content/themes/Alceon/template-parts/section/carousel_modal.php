@@ -2,6 +2,9 @@
 // Get all cards
 $cards = get_sub_field('card_item_repeater');
 
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
+
 if (!empty($cards) && is_array($cards)) :
     // --- NEW: Count the total items ---
     $total_cards = count($cards);
@@ -11,7 +14,9 @@ if (!empty($cards) && is_array($cards)) :
     $index = 0;
     ?>
 
-  <section class="growth_testimonials section--white" id="modalCarouselSection" data-aos="fade-up">
+  <section class="growth_testimonials section--white" <?php if (!empty($anchor_id)) {
+      echo 'id="' . esc_attr($anchor_id) . '"';
+  } ?> data-aos="fade-up">
 
     <?php if (get_sub_field('heading_image_carousel')) : ?>
       <div class="container">

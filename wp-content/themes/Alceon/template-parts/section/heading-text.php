@@ -1,18 +1,20 @@
 <?php
 
-
 /**
- * Reusable Text Intro Section
+ * Reusable Text Intro Section.
  *
  * Checks for 'is_flexible' arg to determine context.
  *
  * @param array $args {
  * @type bool $is_flexible Is this loaded inside a Flexible Content loop?
- * }
+ *            }
  */
 
 // 1. Check for flexible content context
 $is_flexible = isset($args['is_flexible']) && $args['is_flexible'];
+
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
 
 // 2. Set variables using the correct ACF function
 $ht_heading = $is_flexible ? get_sub_field('heading') : get_field('intro_heading');
@@ -49,7 +51,9 @@ if ($stack_vertical) {
 
 ?>
 
-<section class="section--heading-text section--<?php echo esc_attr($bg_class); ?>  border-top-0">
+<section class="section--heading-text section--<?php echo esc_attr($bg_class); ?>  border-top-0" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
     <div class="container">
         <div class="row d-flex justify-content-between align-items-start ">
 

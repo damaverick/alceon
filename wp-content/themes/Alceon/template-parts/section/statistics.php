@@ -2,6 +2,9 @@
 // --- Get the column count ---
 $column_count = get_sub_field('column_count');
 
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
+
 // --- Set the Bootstrap class ---
 $lg_class = '';
 if ($column_count == '2') {
@@ -17,7 +20,9 @@ if ($column_count == '2') {
 $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-center text-lg-start';
 ?>
 
-<section class="section--dark-blue text-white">
+<section class="section--dark-blue text-white" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
   <div class="container">
     
     <div class="row align-items-start">
@@ -71,7 +76,7 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-center text-lg-start';
 
               <?php if ($description): ?>
                 <div class="stat-text w-75">
-                  <p> <?php echo wp_kses_post($description);  ?></p>
+                  <p> <?php echo wp_kses_post($description); ?></p>
                 </div>
               <?php endif; ?>
             </div>

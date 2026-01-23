@@ -36,14 +36,28 @@ class Alceon_Employment_Hero_API
         if (is_wp_error($response)) {
             error_log('Employment Hero API Error: ' . $response->get_error_message());
 
-            return self::get_demo_jobs($location, $page, $per_page);
+            return array(
+                'jobs' => array(),
+                'total' => 0,
+                'page' => $page,
+                'per_page' => $per_page,
+                'total_pages' => 0,
+            );
         }
 
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
 
         if (!$data || !isset($data['jobs'])) {
-            return self::get_demo_jobs($location, $page, $per_page);
+            error_log('Employment Hero API: Invalid response structure');
+
+            return array(
+                'jobs' => array(),
+                'total' => 0,
+                'page' => $page,
+                'per_page' => $per_page,
+                'total_pages' => 0,
+            );
         }
 
         // Filter by location if specified
@@ -76,7 +90,7 @@ class Alceon_Employment_Hero_API
         }
 
         // Make real API call
-        $endpoint = EMPLOYMENT_HERO_API_BASE . '/organisations/' . EMPLOYMENT_HERO_ORG_ID . '/jobs/' . $job_id;
+        $endpoint = EMPLOYMENT_HERO_API_BASE . '/organisations/' . EMPLOYMENT_HERO_ORG_ID . '/jobs/' . $job_identifier;
 
         $args = array(
             'headers' => array(

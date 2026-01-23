@@ -1,11 +1,14 @@
 <?php
 
 /**
- * Reusable Icon Row Section
+ * Reusable Icon Row Section.
  */
 
 // Check if we are in a flexible content context
 $is_flexible = isset($args['is_flexible']) && $args['is_flexible'];
+
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
 
 // Use get_sub_field() if flexible, otherwise use get_field()
 $heading = $is_flexible ? get_sub_field('heading') : get_field('heading');
@@ -33,7 +36,9 @@ if ($column_count == '2') {
 $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-start text-sm-center text-lg-start';
 
 ?>
-<section class="section--white icon-row">
+<section class="section--white icon-row" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
   <div class="container">
 
     <?php if ($heading): ?>

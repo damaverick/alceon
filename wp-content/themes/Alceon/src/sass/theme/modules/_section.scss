@@ -214,6 +214,22 @@
     @media (max-width: 991px) {
       min-height: rem(300);
     }
+
+    // Modifier for group photos - shows entire image without cropping
+    &.preserve-full-image {
+      background-size: contain;
+      background-position: center center;
+      transform: none;
+      background-color: var(
+        --darkBlue,
+        #0a1f44
+      ); // Fallback color for letterboxing
+
+      .image-section__background {
+        background-size: contain;
+        background-position: center center;
+      }
+    }
   }
 
   // Full-bleed variant
@@ -269,6 +285,23 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
     inset: 0;
     overflow: hidden;
     z-index: 0;
+  }
+
+  &__poster {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+    pointer-events: none;
+
+    // Hide poster when video is loaded
+    .video-loaded & {
+      opacity: 0;
+    }
   }
 
   &__iframe {

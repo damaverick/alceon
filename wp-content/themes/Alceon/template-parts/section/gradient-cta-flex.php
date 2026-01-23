@@ -34,9 +34,14 @@ if ($cta_btn_txt === '') {
     // Prefer Link title if provided; else default
     $cta_btn_txt = $cta_title !== '' ? $cta_title : 'Find out more';
 }
+
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
 ?>
 
-<section class="section--cta section--gradient-purple text-white mb-0">
+<section class="section--cta section--gradient-purple text-white mb-0" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
     <div class="container">
         <div class="row">
             <div class="col-md-8 align-items-start" data-aos="fade-right">

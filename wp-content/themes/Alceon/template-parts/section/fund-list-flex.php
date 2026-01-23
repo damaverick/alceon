@@ -1,13 +1,12 @@
 <?php
 /**
- * Logic Section
+ * Logic Section.
  */
 
 // 1. Context (The current page ID, e.g., 27)
 
 $current_id = get_the_ID();
 $parent_id  = wp_get_post_parent_id($current_id); //
-
 
 // 2. Header & Intro Text
 // IMPORTANT: Changed to get_sub_field() because these are inside the Flexible Content row
@@ -21,7 +20,7 @@ $intro_val = $intro_obj['value'] ?? '';
 if (is_array($intro_val)) {
     $top_intro_text = $intro_val['label'];
 } else {
-    $top_intro_text = $intro_obj['choices'][ $intro_val ] ?? $intro_val;
+    $top_intro_text = $intro_obj['choices'][$intro_val] ?? $intro_val;
 }
 
 // 3. Determine which Children to Query (308 vs 306)
@@ -50,12 +49,16 @@ $q = new WP_Query([
 // If we are on "Your Capital" (27), we pull 'listing_text'. Otherwise 'listing_text_your_capital'.
 // $child_field_name = ($current_id === 27) ? 'listing_text' : 'listing_text_your_capital';
 
-
 $child_field_name = ($parent_id === 310) ? 'listing_text' : 'listing_text_your_capital';
+
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
 
 ?>
 
-<section class="section--grey what-we-offer border-top-0">
+<section class="section--grey what-we-offer border-top-0" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
     <div class="container">
 
         <div class="row d-flex justify-content-between align-items-start mb-lg-5">

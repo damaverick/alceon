@@ -1,11 +1,33 @@
 <?php
 
 /**
- * Template Name: Contact
+ * Template Name: Contact.
  */
 
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
+
+/**
+ * Auto-link phone numbers in content
+ * Finds patterns like "Tel: +61 2 8023 4000" or "Fax: +61 2 8023 4001".
+ */
+function alceon_autolink_phones($content)
+{
+    // Pattern matches Tel: or Fax: followed by phone number with international format
+    // Captures country code (+XX) and the rest of the number with spaces/dashes
+    $pattern = '/\b(Tel|Fax):\s*([\+\d][\d\s\-\(\)]+\d)/i';
+
+    return preg_replace_callback($pattern, function ($matches) {
+        $label = $matches[1]; // Tel or Fax
+        $number = $matches[2]; // The actual phone number
+
+        // Create clean tel: link (remove spaces, dashes, parentheses)
+        $clean_number = preg_replace('/[\s\-\(\)]/', '', $number);
+
+        // Return linked version
+        return $label . ': <a href="tel:' . esc_attr($clean_number) . '" class="text-white text-decoration-underline">' . esc_html($number) . '</a>';
+    }, $content);
+}
 
 get_header();
 
@@ -150,7 +172,7 @@ $container = get_theme_mod('understrap_container_type');
                             
                             <?php if ($details): ?>
                                 <div class="location-details">
-                                    <?php echo wpautop($details); ?>
+                                    <?php echo alceon_autolink_phones(wpautop($details)); ?>
                                 </div>
                             <?php endif; ?>
 

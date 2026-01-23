@@ -508,3 +508,65 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+// ========================================================================
+// CLOSE MENUS WHEN ANCHOR LINKS ARE CLICKED
+// ========================================================================
+document.addEventListener('DOMContentLoaded', function () {
+  // Get all anchor links in the navigation menus
+  const anchorLinks = document.querySelectorAll('a[href*="#"]');
+
+  anchorLinks.forEach((link) => {
+    link.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+
+      // Check if it's a hash link (anchor link) and not just "#"
+      if (href && href.includes('#') && href !== '#') {
+        const hashPart = href.split('#')[1];
+
+        // Make sure there's an actual hash value
+        if (hashPart) {
+          // Close tablet offcanvas menu (Bootstrap 5)
+          const tabletOffcanvas = document.getElementById(
+            'tabletOffcanvasMenu',
+          );
+          if (tabletOffcanvas) {
+            const bsOffcanvas =
+              bootstrap.Offcanvas.getInstance(tabletOffcanvas);
+            if (bsOffcanvas) {
+              bsOffcanvas.hide();
+            }
+          }
+
+          // Close mobile collapse menu (Bootstrap 5)
+          const mobileCollapse = document.getElementById('mobileCollapseMenu');
+          if (mobileCollapse && mobileCollapse.classList.contains('show')) {
+            const bsCollapse = bootstrap.Collapse.getInstance(mobileCollapse);
+            if (bsCollapse) {
+              bsCollapse.hide();
+            } else {
+              // If no instance exists, create one and hide it
+              const collapse = new bootstrap.Collapse(mobileCollapse, {
+                toggle: false,
+              });
+              collapse.hide();
+            }
+          }
+
+          // Close desktop mega menu if it's open
+          const megaMenu = document.getElementById('mega-menu-capital');
+          if (megaMenu && megaMenu.classList.contains('is-visible')) {
+            megaMenu.classList.remove('is-visible');
+            // Remove any animation classes
+            const animatableItems = megaMenu.querySelectorAll(
+              '.animate-sweep-item',
+            );
+            animatableItems.forEach((item) => {
+              item.classList.remove('animate-sweep-item');
+            });
+          }
+        }
+      }
+    });
+  });
+});

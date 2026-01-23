@@ -1,8 +1,11 @@
 <?php
 /**
  * Content Section (Image or Video)
- * Uses get_sub_field for Flexible Content contexts
+ * Uses get_sub_field for Flexible Content contexts.
  */
+
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
 
 // 1. Get ACF Fields
 $type     = strtolower((string) get_sub_field('image_or_video_background'));
@@ -22,7 +25,7 @@ if ($is_video && $video_url) {
     if (preg_match('/vimeo\.com\/(?:video\/)?(\d+)/', $video_url, $matches)) {
         $params = [
             'background' => '1', 'autoplay' => '1', 'muted' => '1', 'loop' => '1',
-            'autopause' => '0', 'controls' => '0', 'dnt' => '1'
+            'autopause' => '0', 'controls' => '0', 'dnt' => '1',
         ];
         $vimeo_src = 'https://player.vimeo.com/video/' . $matches[1] . '?' . http_build_query($params);
     } else {
@@ -33,7 +36,9 @@ if ($is_video && $video_url) {
 
 <?php if ($is_video) : ?>
     
-    <section class="vbv-hero vbv-hero--bleed" aria-hidden="true">
+    <section class="vbv-hero vbv-hero--bleed" aria-hidden="true" <?php if (!empty($anchor_id)) {
+        echo 'id="' . esc_attr($anchor_id) . '"';
+    } ?>>
         <div class="vbv-hero__media">
             <?php if ($poster_url) : ?>
                 <div class="vbv-hero__poster" style="background-image:url('<?php echo esc_url($poster_url); ?>');"></div>
@@ -49,7 +54,9 @@ if ($is_video && $video_url) {
 
 <?php else : ?>
 
-    <section class="image-section image-section--full" aria-hidden="true">
+    <section class="image-section image-section--full" aria-hidden="true" <?php if (!empty($anchor_id)) {
+        echo 'id="' . esc_attr($anchor_id) . '"';
+    } ?>>
         <?php if ($bg_url) : ?>
             <div class="image-section__background"
                  style="background-image:url('<?php echo esc_url($bg_url); ?>');"

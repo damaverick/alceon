@@ -7,9 +7,14 @@
 // Initialize modals HTML buffer
 $modals_html = '';
 $global_index = 0;
+
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
 ?>
 
-<section class="section--team-list section--grey" data-aos="fade-up">
+<section class="section--team-list section--grey" data-aos="fade-up" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
 
     <?php if (get_sub_field('team_list_heading')) : ?>
     <div class="container">

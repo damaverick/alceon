@@ -15,7 +15,7 @@ jQuery(function ($) {
   function loadJobs(location, page, updateHash = true) {
     // Loading state
     contentArea.html(
-      '<div class="row"><div class="col-12 text-center"><p>Loading jobs...</p></div></div>'
+      '<div class="row"><div class="col-12 text-center"><p>Loading jobs...</p></div></div>',
     );
 
     // Update state
@@ -33,7 +33,7 @@ jQuery(function ($) {
     // Update active filter button
     $('.filter-btn').removeClass('active');
     $('.filter-btn[data-location="' + currentLocation + '"]').addClass(
-      'active'
+      'active',
     );
 
     // AJAX payload
@@ -51,16 +51,32 @@ jQuery(function ($) {
       data: data,
       success: function (response) {
         if (response && response.success) {
-          contentArea.html(response.data);
+          // Handle both old format (string) and new format (object)
+          var html =
+            typeof response.data === 'object'
+              ? response.data.html
+              : response.data;
+          var totalJobs =
+            typeof response.data === 'object' ? response.data.total_jobs : 0;
+
+          contentArea.html(html);
+
+          // Hide filter if 0 or 1 job exists in total (across all locations)
+          if (totalJobs <= 1) {
+            $('.jobs-filter').parent().hide();
+          } else {
+            $('.jobs-filter').parent().show();
+          }
         } else {
           contentArea.html(
-            '<div class="row"><div class="col-12"><p>No jobs found.</p></div></div>'
+            '<div class="row"><div class="col-12"><p>No jobs found.</p></div></div>',
           );
+          $('.jobs-filter').parent().hide();
         }
       },
       error: function () {
         contentArea.html(
-          '<div class="row"><div class="col-12"><p>An error occurred. Please try again.</p></div></div>'
+          '<div class="row"><div class="col-12"><p>An error occurred. Please try again.</p></div></div>',
         );
       },
     });

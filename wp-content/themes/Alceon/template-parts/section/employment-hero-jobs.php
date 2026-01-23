@@ -11,7 +11,7 @@ defined('ABSPATH') || exit;
         <!-- Heading -->
         <div class="row mb-4" data-aos="fade-up">
             <div class="col-12">
-                <h2>Job Openings</h2>
+                <h2>Interested in working at Alceon?</h2>
             </div>
         </div>
 

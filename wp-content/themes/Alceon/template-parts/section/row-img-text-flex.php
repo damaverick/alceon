@@ -4,9 +4,33 @@ $section_bg_color = get_sub_field('section_image_text__bg_color');
 $section_heading  = get_sub_field('section_image_text__heading');
 $section_intro    = get_sub_field('section_image_text__intro');
 $image_offset     = get_sub_field('offset_image');
+$column_ratio     = get_sub_field('column_width_ratio') ?: 'default';
+$order_override   = get_sub_field('order_override') ?: 'alternating';
+
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
+
+// Determine column classes based on ratio
+switch ($column_ratio) {
+    case 'equal':
+        $img_col_class = 'col-lg-6';
+        $text_col_class = 'col-lg-6';
+        break;
+    case 'text_larger':
+        $img_col_class = 'col-lg-5';
+        $text_col_class = 'col-lg-7';
+        break;
+    case 'default':
+    default:
+        $img_col_class = 'col-lg-7';
+        $text_col_class = 'col-lg-5';
+        break;
+}
 ?>
 
-<section class="section--<?php echo esc_attr($section_bg_color); ?> img-txt-section<?php echo ($image_offset === 'yes') ? ' section-feature--overlap-bottom' : ''; ?>">
+<section class="section--<?php echo esc_attr($section_bg_color); ?> img-txt-section<?php echo ($image_offset === 'yes') ? ' section-feature--overlap-bottom' : ''; ?>" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
     <div class="container">
 
         <?php if ($section_heading) : ?>
@@ -38,8 +62,18 @@ $image_offset     = get_sub_field('offset_image');
                 $button_url  = get_sub_field('image_text_row__button_url');
 
                 // --- 2. Logic for Orientation & Animations ---
-                // If row index is even (2, 4, 6), it is reversed (Image on Right)
-                $is_reversed = ($row_index % 2 == 0);
+                // Check if order override is set
+                if ($order_override === 'image_left') {
+                    // Force image left, text right
+                    $is_reversed = false;
+                } elseif ($order_override === 'text_left') {
+                    // Force text left, image right
+                    $is_reversed = true;
+                } else {
+                    // Default: alternate based on row index
+                    // If row index is even (2, 4, 6), it is reversed (Image on Right)
+                    $is_reversed = ($row_index % 2 == 0);
+                }
 
                 if ($is_reversed) {
                     // REVERSED: Image on Right, Text on Left
@@ -58,7 +92,7 @@ $image_offset     = get_sub_field('offset_image');
                 <div class="row align-items-center <?php echo esc_attr($row_class); ?> mb-5 pb-lg-5 img-txt-section__row">
 
                     <!-- IMAGE COLUMN -->
-                    <div class="col-12 col-lg-7 img-wrap" data-aos="<?php echo esc_attr($img_aos); ?>">
+                    <div class="col-12 <?php echo esc_attr($img_col_class); ?> img-wrap" data-aos="<?php echo esc_attr($img_aos); ?>">
                         <?php
                         if ($image) :
                             echo wp_get_attachment_image($image['ID'], 'large', false, [
@@ -72,7 +106,7 @@ $image_offset     = get_sub_field('offset_image');
                     </div>
 
                     <!-- TEXT COLUMN -->
-                    <div class="col-12 col-lg-5 mt-4 mt-lg-0" data-aos="<?php echo esc_attr($text_aos); ?>">
+                    <div class="col-12 <?php echo esc_attr($text_col_class); ?> mt-4 mt-lg-0" data-aos="<?php echo esc_attr($text_aos); ?>">
 
                         <?php if ($title) : ?>
                             <h3 class="mb-3"><?php echo esc_html($title); ?></h3>

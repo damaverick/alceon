@@ -3,6 +3,7 @@
 $banner_url = get_field('header_image');
 $hero_bg_image = get_field('hero_bg_image');
 $hero_paragraph = get_field('hero_paragraph');
+$paragraph_width = get_field('hero_paragraph_width'); // ACF select field: small, medium, large
 
 // Build hero classes
 $hero_classes = 'internal-hero bg-dark-blue text-white position-relative justify-content-between d-flex flex-column';
@@ -45,8 +46,13 @@ if ($hero_bg_image && !is_singular('post')) {
                     <h1 class="internal-hero__title mb-3"><?php the_title(); ?></h1>
                 </div>
                 <div class="col-12 col-lg-7 pe-lg-5">
-                    <?php if ($hero_paragraph) : ?>
-                        <h3 class="internal-hero__excerpt h2 mb-0"><?php echo esc_html($hero_paragraph); ?></h3>
+                    <?php if ($hero_paragraph) :
+                        $width_class = '';
+                        if ($paragraph_width) {
+                            $width_class = ' internal-hero__excerpt--' . esc_attr($paragraph_width);
+                        }
+                        ?>
+                        <h3 class="internal-hero__excerpt h2 mb-0<?php echo $width_class; ?>"><?php echo esc_html($hero_paragraph); ?></h3>
                     <?php endif; ?>
                 </div>
             </div>
@@ -54,10 +60,13 @@ if ($hero_bg_image && !is_singular('post')) {
     <?php endif; ?>
 </header>
 
-<?php if ($banner_url) : ?>
-    <section class="image-section image-section--half" aria-hidden="true" <?php echo is_singular('post') ? '' : 'style="background-image:url(\'' . $banner_url . '\')" data-aos="blur-in" data-aos-duration="1500"'; ?>>
+<?php if ($banner_url) :
+    $preserve_full = get_field('preserve_full_banner_image'); // ACF true/false field
+    $section_class = $preserve_full ? 'image-section image-section--half preserve-full-image' : 'image-section image-section--half';
+    ?>
+    <section class="<?php echo esc_attr($section_class); ?>" aria-hidden="true" <?php echo is_singular('post') ? '' : 'style="background-image:url(\'' . esc_url($banner_url) . '\')" data-aos="blur-in" data-aos-duration="1500"'; ?>>
         <?php if (is_singular('post')) : ?>
-            <div class="image-section__background" style="background-image:url('<?php echo $banner_url; ?>')"></div>
+            <div class="image-section__background" style="background-image:url('<?php echo esc_url($banner_url); ?>')"></div>
         <?php endif; ?>
     </section>
 <?php endif; ?>

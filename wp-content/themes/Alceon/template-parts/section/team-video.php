@@ -1,6 +1,6 @@
 <?php
 /**
- * Team Video Carousel
+ * Team Video Carousel.
  *
  * Flexible layout: include_team_video
  * Repeater: team_member_vid
@@ -13,6 +13,9 @@
 
 $is_flexible = isset($args['is_flexible']) && $args['is_flexible'];
 
+// Get anchor ID from args if provided
+$anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
+
 // If no rows, bail out early
 if (! have_rows('team_member_vid')) {
     return;
@@ -21,7 +24,9 @@ if (! have_rows('team_member_vid')) {
 
 
 
-<section class="growth_testimonials section--white pt-0" data-aos="fade-up">
+<section class="growth_testimonials section--white pt-0" data-aos="fade-up" <?php if (!empty($anchor_id)) {
+    echo 'id="' . esc_attr($anchor_id) . '"';
+} ?>>
     <div class="container-fluid padding-y-top padding-y-btm p-0">
         <div class="row p-0">
             <div class="col-12 bg">

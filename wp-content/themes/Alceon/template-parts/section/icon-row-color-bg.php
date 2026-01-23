@@ -9,14 +9,24 @@
         'icon-widget--blue',
         'icon-widget--lightblue',
         'icon-widget--purple',
-        'icon-widget--violet'
+        'icon-widget--violet',
+
+        'icon-widget--pac-blue',
+
+        'icon-widget--bronze',
+
     ];
 
     // Counter to track which icon we're on
     $icon_index = 0;
+
+    // Get anchor ID from args if provided
+    $anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
     ?>
 
-    <section class="section--icon-widgets section--white">
+    <section class="section--icon-widgets section--white" <?php if (!empty($anchor_id)) {
+        echo 'id="' . esc_attr($anchor_id) . '"';
+    } ?>>
         <div class="container">
 
             <?php if ($heading): ?>
@@ -43,6 +53,7 @@
                             $icon = get_sub_field('icon');
                             $icon_text = get_sub_field('icon_text');
                             $subtext = get_sub_field('subtext');
+                            $include_default_icon = get_sub_field('include_default_icon');
 
                             // Get the correct class for this item from the array
                             $current_class = $color_classes[$icon_index % count($color_classes)];
@@ -67,13 +78,13 @@
                                 <?php endif; ?>
 
 
-                                <?php if ($icon): // Check if user uploaded an icon
+                                <?php if ($icon): // Check if user uploaded a custom icon
                                     ?>
                                     <div class="icon-widget__icon">
                                         <img src="<?php echo esc_url($icon['url']); ?>"
                                             alt="<?php echo esc_attr($icon['alt']); ?>">
                                     </div>
-                                <?php else: // Otherwise, use the default shield icon
+                                <?php elseif ($include_default_icon): // Check if default icon option is selected
                                     ?>
                                     <div class="icon-widget__icon">
                                         <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/icons/shield.svg'); ?>" alt="">
