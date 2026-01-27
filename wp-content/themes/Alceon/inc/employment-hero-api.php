@@ -20,14 +20,13 @@ class Alceon_Employment_Hero_API
             return self::get_demo_jobs($location, $page, $per_page);
         }
 
-        // Make real API call
+        // Make real API call to ATS endpoint
         $endpoint = EMPLOYMENT_HERO_API_BASE . '/organisations/' . EMPLOYMENT_HERO_ORG_ID . '/jobs';
 
         $args = array(
             'headers' => array(
-                'Authorization' => 'Bearer ' . trim(EMPLOYMENT_HERO_ACCESS_TOKEN),
+                'X_ATS_TOKEN' => trim(EMPLOYMENT_HERO_ACCESS_TOKEN),
                 'Accept' => 'application/json',
-                'Content-Type'  => 'application/json',
             ),
             'timeout' => 15,
         );
@@ -55,7 +54,7 @@ class Alceon_Employment_Hero_API
 
         $data = json_decode($body, true);
 
-        if (!$data || !isset($data['jobs'])) {
+        if (!$data || !isset($data['data']['items'])) {
             error_log('Employment Hero API: Invalid response structure. Full body: ' . $body);
 
             return array(
@@ -67,11 +66,70 @@ class Alceon_Employment_Hero_API
             );
         }
 
+        // Parse ATS API response
+        $jobs = self::parse_ats_jobs($data['data']['items']);
+        $total_items = isset($data['data']['total_items']) ? $data['data']['total_items'] : count($jobs);
+
         // Log the number of jobs found
-        error_log('Employment Hero API: Found ' . count($data['jobs']) . ' jobs');
+        error_log('Employment Hero API: Found ' . count($jobs) . ' jobs');
 
         // Filter by location if specified
-        $jobs = $data['jobs'];
+        if ($location !== 'all') {
+            $jobs = array_filter($jobs, function ($job) use ($location) {
+                return isset($job['location']) && stripos($job['location'], $location) !== false;
+            });
+        }
+
+        return array(
+            'jobs' => $jobs,
+            'total' => $total_items,
+            'page' => $page,
+            'per_page' => $per_page,
+            'total_pages' => ceil($total_items / $per_page),
+        );
+    }
+
+    /**
+     * Parse ATS API job data into our standard format.
+     */
+    private static function parse_ats_jobs($ats_jobs)
+    {
+        $parsed_jobs = array();
+
+        foreach ($ats_jobs as $job) {
+            $parsed_jobs[] = array(
+                'id' => isset($job['application_url']) ? basename($job['application_url']) : uniqid(),
+                'title' => $job['title'] ?? '',
+                'location' => $job['city'] ?? ($job['country_name'] ?? 'Remote'),
+                'country' => $job['country_name'] ?? '',
+                'country_code' => $job['country_code'] ?? '',
+                'department' => $job['department'] ?? '',
+                'employment_type' => $job['employment_type_name'] ?? 'Full-time',
+                'employment_term' => $job['employment_term_name'] ?? 'Permanent',
+                'experience_level' => $job['experience_level_name'] ?? '',
+                'description' => $job['description'] ?? '',
+                'salary_min' => $job['salary_min'] ?? null,
+                'salary_max' => $job['salary_max'] ?? null,
+                'salary_currency' => $job['salary_currency'] ?? 'AUD',
+                'salary_rate' => $job['salary_rate_name'] ?? 'Annum',
+                'hide_salary' => $job['hide_pay_rate'] ?? 0,
+                'application_url' => $job['application_url'] ?? '',
+                'created_at' => $job['created_at'] ?? '',
+                'logo' => $job['recruitment_logo'] ?? '',
+                'slug' => sanitize_title($job['title'] ?? 'job'),
+            );
+        }
+
+        return $parsed_jobs;
+    }
+
+    /**
+     * Legacy method - now handled in get_jobs.
+     */
+    private static function old_filter_code()
+    {
+        // Filter by location if specified
+        $jobs = array();
         if ($location !== 'all') {
             $jobs = array_filter($jobs, function ($job) use ($location) {
                 return isset($job['location']) && stripos($job['location'], $location) !== false;
@@ -99,28 +157,19 @@ class Alceon_Employment_Hero_API
             return null;
         }
 
-        // Make real API call
-        $endpoint = EMPLOYMENT_HERO_API_BASE . '/organisations/' . EMPLOYMENT_HERO_ORG_ID . '/jobs/' . $job_identifier;
+        // ATS API doesn't have single job endpoint, so fetch all jobs and find the match
+        $all_jobs_response = self::get_jobs('all', 1, 100); // Get up to 100 jobs
 
-        $args = array(
-            'headers' => array(
-                'Authorization' => 'Bearer ' . trim(EMPLOYMENT_HERO_ACCESS_TOKEN),
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ),
-            'timeout' => 15,
-        );
-
-        $response = wp_remote_get($endpoint, $args);
-
-        if (is_wp_error($response)) {
-            return null;
+        if (!empty($all_jobs_response['jobs'])) {
+            foreach ($all_jobs_response['jobs'] as $job) {
+                // Check both ID and slug
+                if ($job['id'] == $job_identifier || (isset($job['slug']) && $job['slug'] === $job_identifier)) {
+                    return $job;
+                }
+            }
         }
 
-        $body = wp_remote_retrieve_body($response);
-        $data = json_decode($body, true);
-
-        return isset($data['job']) ? $data['job'] : null;
+        return null;
     }
 
     /**
