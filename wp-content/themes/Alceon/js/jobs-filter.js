@@ -69,14 +69,20 @@ jQuery(function ($) {
           }
         } else {
           contentArea.html(
-            '<div class="row"><div class="col-12"><p>No jobs found.</p></div></div>',
+            '<div class="row"><div class="col-12 text-center">' +
+              '<p>No current job openings available.</p>' +
+              '<p>Interested in joining our team? <a href="/contact" class="btn btn-primary">Express Your Interest</a></p>' +
+              '</div></div>',
           );
           $('.jobs-filter').parent().hide();
         }
       },
       error: function () {
         contentArea.html(
-          '<div class="row"><div class="col-12"><p>An error occurred. Please try again.</p></div></div>',
+          '<div class="row"><div class="col-12 text-center">' +
+            '<p>Unable to load jobs at the moment.</p>' +
+            '<p>Interested in joining our team? <a href="/contact" class="btn btn-primary">Express Your Interest</a></p>' +
+            '</div></div>',
         );
       },
     });

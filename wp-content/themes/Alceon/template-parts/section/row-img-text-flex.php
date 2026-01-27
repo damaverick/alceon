@@ -7,7 +7,7 @@ $image_offset     = get_sub_field('offset_image');
 $column_ratio     = get_sub_field('column_width_ratio') ?: 'default';
 $order_override   = get_sub_field('order_override') ?: 'alternating';
 
-// Get anchor ID from args if provided
+// Get anchor ID from args if provided (passed from page builder)
 $anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
 
 // Determine column classes based on ratio

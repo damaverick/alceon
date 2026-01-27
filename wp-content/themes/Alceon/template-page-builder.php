@@ -137,6 +137,11 @@ elseif (get_row_layout() == 'logos_section'):
     get_template_part('template-parts/section/logos', null, [
         'anchor_id' => $anchor_id,
     ]);
+elseif (get_row_layout() == 'team_member'):
+
+    get_template_part('template-parts/section/team-member', null, [
+        'anchor_id' => $anchor_id,
+    ]);
 
 endif;
 

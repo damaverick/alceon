@@ -25,8 +25,9 @@ class Alceon_Employment_Hero_API
 
         $args = array(
             'headers' => array(
-                'Authorization' => 'Bearer ' . EMPLOYMENT_HERO_ACCESS_TOKEN,
+                'Authorization' => 'Bearer ' . trim(EMPLOYMENT_HERO_ACCESS_TOKEN),
                 'Accept' => 'application/json',
+                'Content-Type'  => 'application/json',
             ),
             'timeout' => 15,
         );
@@ -45,11 +46,17 @@ class Alceon_Employment_Hero_API
             );
         }
 
+        $status_code = wp_remote_retrieve_response_code($response);
         $body = wp_remote_retrieve_body($response);
+
+        // Log API response for debugging
+        error_log('Employment Hero API Response Status: ' . $status_code);
+        error_log('Employment Hero API Response Body: ' . substr($body, 0, 500)); // Log first 500 chars
+
         $data = json_decode($body, true);
 
         if (!$data || !isset($data['jobs'])) {
-            error_log('Employment Hero API: Invalid response structure');
+            error_log('Employment Hero API: Invalid response structure. Full body: ' . $body);
 
             return array(
                 'jobs' => array(),
@@ -59,6 +66,9 @@ class Alceon_Employment_Hero_API
                 'total_pages' => 0,
             );
         }
+
+        // Log the number of jobs found
+        error_log('Employment Hero API: Found ' . count($data['jobs']) . ' jobs');
 
         // Filter by location if specified
         $jobs = $data['jobs'];
@@ -94,8 +104,9 @@ class Alceon_Employment_Hero_API
 
         $args = array(
             'headers' => array(
-                'Authorization' => 'Bearer ' . EMPLOYMENT_HERO_ACCESS_TOKEN,
+                'Authorization' => 'Bearer ' . trim(EMPLOYMENT_HERO_ACCESS_TOKEN),
                 'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
             ),
             'timeout' => 15,
         );

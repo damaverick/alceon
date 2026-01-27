@@ -330,7 +330,10 @@ function alceon_load_jobs_filter_callback()
             echo '</div></div>';
         }
     } else {
-        echo '<div class="row g-4"><div class="col-12"><p>No jobs found for this location.</p></div></div>';
+        echo '<div class="row g-4"><div class="col-12 text-left">';
+        echo '<p>No current job openings for this location.</p>';
+        echo '<p>Interested in joining our team? <a href="/contact" class="btn btn-primary">Express Your Interest</a></p>';
+        echo '</div></div>';
     }
 
     $html = ob_get_clean();
@@ -468,7 +471,7 @@ function alceon_handle_job_application()
 
         $args = array(
             'headers' => array(
-                'Authorization' => 'Bearer ' . EMPLOYMENT_HERO_ACCESS_TOKEN,
+                'Authorization' => 'Bearer ' . trim(EMPLOYMENT_HERO_ACCESS_TOKEN),
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ),
@@ -783,3 +786,19 @@ function redirect_author_pages()
     }
 }
 add_action('template_redirect', 'redirect_author_pages');
+
+// Fix ACF fields not saving on posts
+add_filter('acf/settings/remove_wp_meta_box', '__return_false');
+
+// Ensure ACF saves correctly for posts
+add_action('acf/save_post', function ($post_id) {
+    // Skip revisions and autosaves
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
+    }
+
+    // Log for debugging - check wp-content/debug.log
+    if (get_post_type($post_id) === 'post') {
+        error_log('ACF save_post fired for post ID: ' . $post_id);
+    }
+}, 20);
