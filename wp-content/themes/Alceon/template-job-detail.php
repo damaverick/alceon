@@ -52,7 +52,7 @@ if ($job_slug) {
 </header>
 
 <?php
-
+// Handle job not found
 if (!$job): ?>
     <div class="container section--white py-5">
         <div class="row">
@@ -78,14 +78,35 @@ endif;
 // Extract job details
 $title = isset($job['title']) ? $job['title'] : '';
 $department = isset($job['department']) ? $job['department'] : '';
+$industry = isset($job['industry']) ? $job['industry'] : '';
 $location = isset($job['location']) ? $job['location'] : '';
-$posted_date = isset($job['posted_date']) ? date('F j, Y', strtotime($job['posted_date'])) : '';
-$description = isset($job['description']) ? $job['description'] : '';
+$country = isset($job['country']) ? $job['country'] : '';
+$remote = isset($job['remote']) ? $job['remote'] : '';
 $employment_type = isset($job['employment_type']) ? $job['employment_type'] : '';
-$salary_range = isset($job['salary_range']) ? $job['salary_range'] : '';
+$employment_term = isset($job['employment_term']) ? $job['employment_term'] : '';
+$experience_level = isset($job['experience_level']) ? $job['experience_level'] : '';
+$description = isset($job['description']) ? $job['description'] : '';
+$application_url = isset($job['application_url']) ? $job['application_url'] : '';
+
+// Format salary range
+$salary_range = '';
+if (!empty($job['hide_salary']) && $job['hide_salary'] == 1) {
+    $salary_range = '';
+} elseif (!empty($job['salary_min']) && !empty($job['salary_max'])) {
+    $currency = isset($job['salary_currency']) ? $job['salary_currency'] : 'AUD';
+    $rate = isset($job['salary_rate']) ? $job['salary_rate'] : 'Annum';
+    $salary_range = '$' . number_format($job['salary_min']) . ' – $' . number_format($job['salary_max']) . ' ' . $currency . ' per ' . strtolower($rate);
+}
+
+// Format posted date
+$posted_date = '';
+if (!empty($job['created_at'])) {
+    $created = strtotime($job['created_at']);
+    $posted_date = 'Posted ' . date('d M Y', $created);
+}
 ?>
 
-<section class="section--job-detail section--white" >
+<section class="section--job-detail section--white">
     <div class="container">
         
         <!-- Back Button -->
@@ -97,141 +118,136 @@ $salary_range = isset($job['salary_range']) ? $job['salary_range'] : '';
             </div>
         </div>
         
-        <!-- Job Header -->
-        <div class="row mb-4">
-            <div class="col-12">
+        <!-- Main 2-Column Layout -->
+        <div class="row">
+            
+            <!-- LEFT COLUMN: Job Details -->
+            <div class="col-12 col-lg-8">
+                
+                <!-- Job Header -->
                 <?php if ($department): ?>
-                    <p class="job-detail__department text-uppercase mb-2"><?php echo esc_html($department); ?></p>
+                    <p class="job-detail__department text-uppercase text-muted mb-2"><?php echo esc_html($department); ?></p>
                 <?php endif; ?>
                 
                 <?php if ($title): ?>
                     <h1 class="job-detail__title mb-3"><?php echo esc_html($title); ?></h1>
                 <?php endif; ?>
                 
-                <div class="job-detail__meta d-flex flex-wrap gap-3 mb-4">
-                    <?php if ($location): ?>
-                        <span class="d-flex align-items-center">
-                            <strong>Location:</strong>&nbsp;<?php echo esc_html($location); ?>
-                        </span>
-                    <?php endif; ?>
-                    
+                <!-- Job Meta Badges -->
+                <div class="job-detail__meta d-flex flex-wrap gap-2 mb-3">
                     <?php if ($employment_type): ?>
-                        <span class="d-flex align-items-center">
-                            <strong>Type:</strong>&nbsp;<?php echo esc_html($employment_type); ?>
+                        <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-normal" style="font-size: .875rem;">
+                            <?php echo esc_html($employment_type); ?>
                         </span>
                     <?php endif; ?>
                     
-                    <?php if ($salary_range): ?>
-                        <span class="d-flex align-items-center">
-                            <strong>Salary:</strong>&nbsp;<?php echo esc_html($salary_range); ?>
+                    <?php if ($location): ?>
+                        <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-normal" style="font-size: .875rem;">
+                            <?php echo esc_html($location); ?>
                         </span>
                     <?php endif; ?>
                     
-                    <?php if ($posted_date): ?>
-                        <span class="d-flex align-items-center">
-                            <strong>Posted:</strong>&nbsp;<?php echo esc_html($posted_date); ?>
+                    <?php if ($employment_term): ?>
+                        <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-normal" style="font-size: .875rem;">
+                            <?php echo esc_html($employment_term); ?>
+                        </span>
+                    <?php endif; ?>
+                    
+                    <?php if ($experience_level): ?>
+                        <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-normal" style="font-size: .875rem;">
+                            <?php echo esc_html($experience_level); ?>
+                        </span>
+                    <?php endif; ?>
+                    
+                    <?php if ($industry): ?>
+                        <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-normal" style="font-size: .875rem;">
+                            <?php echo esc_html($industry); ?>
+                        </span>
+                    <?php endif; ?>
+                    
+                    <?php if ($remote): ?>
+                        <span class="badge bg-light text-dark px-3 py-2 rounded-pill fw-normal" style="font-size: .875rem;">
+                            Remote
                         </span>
                     <?php endif; ?>
                 </div>
                 
-                <a href="#apply" class="btn btn-primary rounded-pill">Apply Now</a>
-            </div>
-        </div>
-        
-        <!-- Job Description -->
-        <div class="row">
-            <div class="col-12 col-lg-8">
-                <div class="job-detail__description">
+                <!-- Posted Date & Salary -->
+                <?php if ($posted_date): ?>
+                    <p class="text-muted mb-2" style="font-size: .875rem;"><?php echo esc_html($posted_date); ?></p>
+                <?php endif; ?>
+                
+                <?php if ($salary_range): ?>
+                    <p class="text-muted mb-4"><?php echo esc_html($salary_range); ?></p>
+                <?php endif; ?>
+                
+            
+                
+                <!-- Job Description -->
+                <div class="job-detail__description mt-4 mb-5">
                     <?php if ($description): ?>
                         <?php echo wp_kses_post($description); ?>
+                    <?php else: ?>
+                        <p>No job description available.</p>
                     <?php endif; ?>
                 </div>
                 
-                <!-- Apply Section -->
-                <div id="apply" class="job-detail__apply mt-5 bg-light">
-                    <h3>Apply for this position</h3>
+                <!-- Ready to Apply CTA (Bottom of left column) -->
+                <div class="job-detail__apply-cta p-4 bg-light rounded">
+                    <h3 class="h4 mb-3">Ready to apply?</h3>
+                    <p class="mb-3">Click the button below to submit your application through Employment Hero.</p>
                     
-                    <?php if (isset($_GET['application_sent']) && $_GET['application_sent'] === 'success'): ?>
-                        <div class="alert alert-success">
-                            <strong>Thank you!</strong> Your application has been submitted successfully. We'll be in touch soon.
-                        </div>
-                    <?php elseif (isset($_GET['application_sent']) && $_GET['application_sent'] === 'error'): ?>
-                        <div class="alert alert-danger">
-                            <strong>Error!</strong> There was a problem submitting your application. Please try again or email us directly.
-                        </div>
+                    <?php if ($application_url): ?>
+                        <a href="<?php echo esc_url($application_url); ?>" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="btn btn-primary rounded-pill px-4 py-2 text-white">
+                            Apply Now 
+                        </a>
+                    <?php else: ?>
+                        <p class="text-muted mb-3">Application link not available. Please contact us directly.</p>
+                        <a href="<?php echo home_url('/contact'); ?>" class="btn btn-primary rounded-pill px-4 py-2 text-white">
+                            Contact Us
+                        </a>
                     <?php endif; ?>
-                    
-                    <form id="job-application-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data" class="job-application-form">
-                        <input type="hidden" name="action" value="submit_job_application">
-                        <input type="hidden" name="job_id" value="<?php echo esc_attr($job['id'] ?? ''); ?>">
-                        <input type="hidden" name="job_title" value="<?php echo esc_attr($title); ?>">
-                        <input type="hidden" name="job_slug" value="<?php echo esc_attr($job_slug); ?>">
-                        <?php wp_nonce_field('job_application_submit', 'job_application_nonce'); ?>
-                        
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="applicant_name" class="form-label">Full Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="applicant_name" name="applicant_name" required>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="applicant_email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" id="applicant_email" name="applicant_email" required>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="applicant_phone" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" id="applicant_phone" name="applicant_phone">
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="applicant_linkedin" class="form-label">LinkedIn Profile</label>
-                                <input type="url" class="form-control" id="applicant_linkedin" name="applicant_linkedin" placeholder="https://linkedin.com/in/yourprofile">
-                            </div>
-                            
-                            <div class="col-12">
-                                <label for="applicant_resume" class="form-label">Resume/CV <span class="text-danger">*</span></label>
-                                <input type="file" class="form-control" id="applicant_resume" name="applicant_resume" accept=".pdf,.doc,.docx" required>
-                                <small class="form-text text-muted">Accepted formats: PDF, DOC, DOCX (Max 5MB)</small>
-                            </div>
-                            
-                            <div class="col-12">
-                                <label for="applicant_cover_letter" class="form-label">Cover Letter</label>
-                                <textarea class="form-control" id="applicant_cover_letter" name="applicant_cover_letter" rows="5" placeholder="Tell us why you're a great fit for this role..."></textarea>
-                            </div>
-                            
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary rounded-pill px-4">
-                                    Submit Application
-                                </button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+                
             </div>
             
-            <!-- Sidebar -->
+            <!-- RIGHT COLUMN: Sticky Sidebar -->
             <div class="col-12 col-lg-4">
-                <div class="job-detail__sidebar mt-0">
+                <div class="job-detail__sidebar mt-4 mt-lg-0 position-sticky" style="top: 2rem;">
                     <div class="card border-0 bg-light p-4">
                         <h4 class="h5 mb-3">Quick Apply</h4>
-                        <a href="#apply" class="btn btn-primary rounded-pill w-100 mb-3">
-                            Apply for this Role
-                        </a>
-                        <a href="<?php echo home_url('/your-career#jobs'); ?>" class="btn btn-outline-primary rounded-pill w-100">
+                        
+                        <?php if ($application_url): ?>
+                            <a href="<?php echo esc_url($application_url); ?>" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="btn btn-primary rounded-pill w-100 mb-3 text-white">
+                                Apply Now
+                            </a>
+                        <?php else: ?>
+                            <a href="<?php echo home_url('/contact'); ?>" 
+                               class="btn btn-primary rounded-pill w-100 mb-3 text-white">
+                                Contact Us
+                            </a>
+                        <?php endif; ?>
+                        
+                        <a href="<?php echo home_url('/your-career#jobs'); ?>" 
+                           class="btn btn-outline-primary rounded-pill w-100">
                             View All Jobs
                         </a>
                     </div>
                 </div>
             </div>
+            
         </div>
         
     </div>
 </section>
 
-<div id="wrapper-footer-full">
-    <?php get_footer(); ?>
-</div>
+<?php get_footer(); ?>
 
 <?php wp_footer(); ?>
 </body>

@@ -2,6 +2,39 @@
    Custom HubSpot Form Styles
    ======================================================================== */
 
+.hsfc-NavigationRow__Buttons {
+  justify-content: flex-start !important;
+}
+
+.custom-hubspot-form {
+  [data-hsfc-id='Renderer'] .hsfc-Step .hsfc-Step__Content {
+    padding-top: 0;
+  }
+
+  [data-hsfc-id='Renderer'] .hsfc-Row {
+    row-gap: 10px;
+    column-gap: 15px;
+  }
+
+  [data-hsfc-id='Renderer'] .hsfc-TextareaInput {
+    border-radius: rem(20) !important;
+  }
+
+  [data-hsfc-id='Renderer'] .hsfc-PhoneInput {
+    display: flex;
+    background: #fff;
+    border-radius: 100px;
+  }
+
+  [data-hsfc-id='Renderer'] .hsfc-NavigationRow {
+    margin-top: rem(-15);
+  }
+}
+
+[data-hsfc-id='Renderer'] .hsfc-NavigationRow__Buttons:has(> *:only-child) {
+  justify-content: start !important;
+}
+
 // --- 1. Gradient Background Variant ---
 // Styles for the form when it's inside a .section--gradient
 body .section--gradient {
@@ -46,14 +79,15 @@ body .section--gradient {
   align-items: flex-end;
   // margin-top: -1rem;
 
-  .hbspt-form {
+  .hbspt-form,
+  .hs-form-html {
     width: 100%;
     // max-width: 670px;
   }
 
   // Hide labels in favor of placeholders
   label {
-    display: none;
+    display: none !important;
   }
 
   label.hs-error-msg.hs-main-font-element {
@@ -73,10 +107,10 @@ body .section--gradient {
   select,
   textarea {
     width: 100%;
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1rem !important;
     font-size: rem(16);
     border: none !important;
-    border-radius: rem(100);
+    border-radius: rem(100) !important;
     background: #fff !important;
     color: hsla(0, 0%, 20%, 1) !important;
     box-shadow: none !important;
@@ -160,6 +194,22 @@ body .section--gradient {
     margin-top: 0;
   }
 
+  // --- Rich Text Paragraph Styles ---
+  .hsfc-RichText p {
+    font-size: 1rem !important;
+    line-height: 1.5;
+    max-width: 100%;
+
+    // Form submitted heading (with strong tag)
+    strong {
+      font-size: rem(40) !important;
+      line-height: rem(42) !important;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      display: block;
+    }
+  }
+
   fieldset.form-columns-1,
   fieldset.form-columns-2 {
     max-width: none !important;
@@ -202,4 +252,64 @@ body .custom-hubspot-form.form-white-bg {
   .hs-error-msg {
     color: $darkGrey !important; // Error color for light backgrounds
   }
+}
+
+// --- Rich Text Paragraph Styles ---
+.text-white {
+  [data-hsfc-id='Renderer']
+    .hsfc-PhoneInput:not(.hsfc-PhoneInput--rtl)
+    .hsfc-PhoneInput__FlagAndCaret {
+    border-color: #fff !important;
+  }
+
+  [data-hsfc-id='Renderer'] .hsfc-ErrorAlert {
+    color: #fff;
+
+    font-size: 0.875rem;
+    padding-top: 5px;
+  }
+
+  .hsfc-RichText {
+    p,
+    a,
+    li {
+      color: #fff !important;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  button[type='submit'] {
+    /* Your button styles */
+    background-color: transparent;
+    color: white;
+    padding: 8px 30px;
+    border: none;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: rem(100);
+
+    &:hover {
+      background-color: $darkerBlue !important;
+      border-color: $darkerBlue !important;
+    }
+  }
+}
+
+.hsfc-NavigationRow {
+  margin-top: -15px;
+}
+
+[data-hsfc-id='Renderer'] .hsfc-ErrorAlert {
+  font-size: 0.875rem;
+  padding-top: 10px;
+}
+
+[data-hsfc-id='Renderer']
+  .hsfc-PhoneInput:not(.hsfc-PhoneInput--rtl)
+  .hsfc-PhoneInput__FlagAndCaret {
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
 }

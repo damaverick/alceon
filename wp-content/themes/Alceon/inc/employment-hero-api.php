@@ -104,6 +104,8 @@ class Alceon_Employment_Hero_API
                 'country' => $job['country_name'] ?? '',
                 'country_code' => $job['country_code'] ?? '',
                 'department' => $job['department'] ?? '',
+                'industry' => $job['industry'] ?? '',
+                'remote' => $job['remote'] ?? '',
                 'employment_type' => $job['employment_type_name'] ?? 'Full-time',
                 'employment_term' => $job['employment_term_name'] ?? 'Permanent',
                 'experience_level' => $job['experience_level_name'] ?? '',

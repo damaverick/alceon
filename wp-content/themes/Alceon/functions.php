@@ -396,8 +396,25 @@ function alceon_handle_job_application()
         exit;
     }
 
-    // Get form data
+    // Get job slug
     $job_slug = sanitize_text_field($_POST['job_slug'] ?? '');
+
+    // Load API files if not already loaded
+    if (!class_exists('Alceon_Employment_Hero_API')) {
+        require_once get_stylesheet_directory() . '/inc/employment-hero-config.php';
+        require_once get_stylesheet_directory() . '/inc/employment-hero-api.php';
+    }
+
+    // Get the job to retrieve the application_url
+    $job = Alceon_Employment_Hero_API::get_job($job_slug);
+
+    // If job has an application_url, redirect to Employment Hero's hosted form
+    if ($job && !empty($job['application_url'])) {
+        wp_redirect($job['application_url']);
+        exit;
+    }
+
+    // Fallback: If no application URL, send email notification to admin
     $job_title = sanitize_text_field($_POST['job_title'] ?? '');
     $applicant_name = sanitize_text_field($_POST['applicant_name'] ?? '');
     $applicant_email = sanitize_email($_POST['applicant_email'] ?? '');
@@ -432,67 +449,25 @@ function alceon_handle_job_application()
         }
     }
 
-    // Check if we're in demo mode or live API mode
-    if (EMPLOYMENT_HERO_DEMO_MODE || EMPLOYMENT_HERO_ORG_ID === 'demo') {
-        // DEMO MODE: Email notification to admin
-        $to = get_option('admin_email');
-        $subject = 'New Job Application: ' . $job_title;
+    // Email notification to admin as fallback
+    $to = get_option('admin_email');
+    $subject = 'New Job Application: ' . $job_title;
 
-        $message = "New job application received:\n\n";
-        $message .= 'Position: ' . $job_title . "\n";
-        $message .= 'Applicant: ' . $applicant_name . "\n";
-        $message .= 'Email: ' . $applicant_email . "\n";
-        $message .= 'Phone: ' . $applicant_phone . "\n";
-        $message .= 'LinkedIn: ' . $applicant_linkedin . "\n\n";
-        $message .= "Cover Letter:\n" . $applicant_cover_letter . "\n\n";
+    $message = "New job application received:\n\n";
+    $message .= 'Position: ' . $job_title . "\n";
+    $message .= 'Applicant: ' . $applicant_name . "\n";
+    $message .= 'Email: ' . $applicant_email . "\n";
+    $message .= 'Phone: ' . $applicant_phone . "\n";
+    $message .= 'LinkedIn: ' . $applicant_linkedin . "\n\n";
+    $message .= "Cover Letter:\n" . $applicant_cover_letter . "\n\n";
 
-        if ($resume_attachment_id) {
-            $resume_url = wp_get_attachment_url($resume_attachment_id);
-            $message .= 'Resume: ' . $resume_url . "\n";
-        }
-
-        $headers = array('Content-Type: text/plain; charset=UTF-8');
-        wp_mail($to, $subject, $message, $headers);
-    } else {
-        // LIVE MODE: Submit to Employment Hero API
-        // This will be implemented when you have the API access
-        $endpoint = EMPLOYMENT_HERO_API_BASE . '/organisations/' . EMPLOYMENT_HERO_ORG_ID . '/job_applications';
-
-        $resume_url = $resume_attachment_id ? wp_get_attachment_url($resume_attachment_id) : '';
-
-        $application_data = array(
-            'name' => $applicant_name,
-            'email' => $applicant_email,
-            'phone' => $applicant_phone,
-            'linkedin_url' => $applicant_linkedin,
-            'cover_letter' => $applicant_cover_letter,
-            'resume_url' => $resume_url,
-        );
-
-        $args = array(
-            'headers' => array(
-                'Authorization' => 'Bearer ' . trim(EMPLOYMENT_HERO_ACCESS_TOKEN),
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ),
-            'body' => json_encode($application_data),
-            'method' => 'POST',
-            'timeout' => 15,
-        );
-
-        $response = wp_remote_post($endpoint, $args);
-
-        // If API fails, fallback to email
-        if (is_wp_error($response)) {
-            $to = get_option('admin_email');
-            $subject = 'New Job Application: ' . $job_title;
-            $message = "New job application received (API submission failed):\n\n";
-            $message .= 'Position: ' . $job_title . "\n";
-            $message .= 'Applicant: ' . $applicant_name . "\n";
-            $message .= 'Email: ' . $applicant_email . "\n";
-            wp_mail($to, $subject, $message);
-        }
+    if ($resume_attachment_id) {
+        $resume_url = wp_get_attachment_url($resume_attachment_id);
+        $message .= 'Resume: ' . $resume_url . "\n";
     }
+
+    $headers = array('Content-Type: text/plain; charset=UTF-8');
+    wp_mail($to, $subject, $message, $headers);
 
     // Redirect back with success message
     wp_redirect(add_query_arg('application_sent', 'success', wp_get_referer()));
