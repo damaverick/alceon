@@ -55,47 +55,17 @@ $container = get_theme_mod('understrap_container_type');
 
       <div class="col-lg-6 pe-lg-5" data-aos="fade-left">
 
-          <script charset="utf-8" type="text/javascript" src="//js-ap1.hsforms.net/forms/embed/v2.js"></script>
-      <div class="custom-hubspot-form form-white-bg">
-<script>
-  window.hbspt.forms.create({
-    portalId: "4264043",
-    formId: "42189065-a810-4835-9d7e-2072a2d6eaf7",
-    region: "ap1",
-        
-              // 2. Updated the target to look for that specific ID
-              target: '.form-white-bg', 
-    /* This function runs once the form is loaded */
-    onFormReady: function($form) {
-        
-        // 1. First Name
-        $form.find('input[name="firstname"]').attr('placeholder', 'First Name');
-        
-        // 2. Last Name
-        $form.find('input[name="lastname"]').attr('placeholder', 'Last Name');
-        
-        // 3. Email
-        $form.find('input[name="email"]').attr('placeholder', 'name@company.com');
-        
-        // 4. Message (Textarea)
-        $form.find('textarea[name="message"]').attr('placeholder', 'How can we help?');
+        <div class="custom-hubspot-form form-white-bg">
+<script src="https://js-ap1.hsforms.net/forms/embed/developer/4264043.js" defer></script>
 
-        // 5. Company (Example of a custom field)
-        $form.find('input[name="company"]').attr('placeholder', 'Company');
+              <div class="hs-form-html" 
+             data-region="ap1" 
+             data-form-id="bc2f5af0-8f49-493c-8eb5-d10f689ee450" 
+             data-portal-id="4264043">
+        </div>
 
-        // 6. Mobile  (Example of a custom field)
-        $form.find('input[name="mobilephone"]').attr('placeholder', 'Mobile Phone');
 
-        // 7. Change Submit Button Text
-        // We target the class .hs-button and change the value
-        $form.find('.hs-button').val('Submit Request');
-    }
-  });
-</script>
- 
-    
-      </div>
-
+    </div>      
 
 
       </div>

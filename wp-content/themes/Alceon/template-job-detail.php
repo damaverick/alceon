@@ -192,25 +192,25 @@ if (!empty($job['created_at'])) {
                     <?php endif; ?>
                 </div>
                 
-                <!-- Ready to Apply CTA (Bottom of left column) -->
+                <!-- Ready to Apply CTA (Bottom of left column)
                 <div class="job-detail__apply-cta p-4 bg-light rounded">
                     <h3 class="h4 mb-3">Ready to apply?</h3>
                     <p class="mb-3">Click the button below to submit your application through Employment Hero.</p>
                     
-                    <?php if ($application_url): ?>
-                        <a href="<?php echo esc_url($application_url); ?>" 
+                    <?php // if ($application_url):?>
+                        <a href="<?php // echo esc_url($application_url);?>" 
                            target="_blank" 
                            rel="noopener noreferrer" 
                            class="btn btn-primary rounded-pill px-4 py-2 text-white">
                             Apply Now 
                         </a>
-                    <?php else: ?>
+                    <?php // else:?>
                         <p class="text-muted mb-3">Application link not available. Please contact us directly.</p>
-                        <a href="<?php echo home_url('/contact'); ?>" class="btn btn-primary rounded-pill px-4 py-2 text-white">
+                        <a href="<?php // echo home_url('/contact');?>" class="btn btn-primary rounded-pill px-4 py-2 text-white">
                             Contact Us
                         </a>
-                    <?php endif; ?>
-                </div>
+                    <?php // endif;?>
+                </div> -->
                 
             </div>
             

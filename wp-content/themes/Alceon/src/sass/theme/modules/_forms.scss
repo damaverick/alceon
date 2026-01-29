@@ -256,6 +256,16 @@ body .custom-hubspot-form.form-white-bg {
 
 // --- Rich Text Paragraph Styles ---
 .text-white {
+  .hsfc-CheckboxField label {
+    color: #fff !important;
+  }
+
+  .hsfc-Heading {
+    color: #fff !important;
+    font-size: 38px;
+    font-weight: normal;
+  }
+
   [data-hsfc-id='Renderer']
     .hsfc-PhoneInput:not(.hsfc-PhoneInput--rtl)
     .hsfc-PhoneInput__FlagAndCaret {
@@ -312,4 +322,27 @@ body .custom-hubspot-form.form-white-bg {
   .hsfc-PhoneInput__FlagAndCaret {
   border-top-left-radius: 100px;
   border-bottom-left-radius: 100px;
+}
+
+.hsfc-CheckboxField label {
+  display: flex !important;
+  color: #fff !important;
+}
+
+[data-hsfc-id='Renderer'] .hsfc-CheckboxField label > input {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin-right: 5px;
+}
+
+[data-hsfc-id='Renderer'] .hsfc-Step .hsfc-Step__Content {
+  padding: 0 !important;
+}
+
+.hsfc-Heading {
+  font-size: 38px;
+  font-weight: normal;
 }
