@@ -363,6 +363,7 @@ header#wrapper-navbar .nav-wrapper {
   transition:
     background-color 0s,
     border-bottom-color 0.3s ease;
+  background-color: $darkerBlue2;
 }
 
 // Admin bar adjustment
@@ -377,7 +378,7 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
   top: 0;
   left: 0;
   right: 0;
-  background-color: $mmBlue;
+  background-color:$darkerBlue2;
   padding: 0.5rem 0;
   transform: translateY(0);
   opacity: 1;

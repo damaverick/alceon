@@ -4,17 +4,24 @@ body {
   width: 100%;
 }
 
-body .home-hero,
-.hero-bg-image {
-  .menu-wrapper {
-    background-color: $trannyBlue;
-  }
-}
-
 // Remove background when scrolled up
 header#wrapper-navbar .nav-wrapper.scrolled-up {
   .menu-wrapper {
     background-color: transparent;
+  }
+}
+
+// Center logo within nav-wrapper
+.nav-wrapper {
+  .navbar-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // Also center the container content
+  .container .row {
+    justify-content: center;
   }
 }
 
@@ -51,13 +58,11 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
 }
 
 .menu-wrapper {
-  background-color: $mmBlue;
-  transition: background 0.5s;
-  margin-top: rem(10);
+  margin-top: rem(0);
   background-blend-mode: multiply;
   min-width: rem(800);
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: .5rem 1rem 1rem;
   border-radius: 100px;
 }
 
@@ -77,8 +82,8 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
         width: 10px;
         height: 10px;
         box-sizing: border-box; // ✅ borders included in 10x10
-        border-right: 1px solid currentColor; // use 1px to avoid sub-pixel wobble
-        border-bottom: 1px solid currentColor;
+        border-right: 1px solid $brightBlue2; // use 1px to avoid sub-pixel wobble
+        border-bottom: 1px solid $brightBlue2;
 
         transform-origin: 50% 50%;
         transform: translateY(-50%) rotate(45deg); // closed
@@ -106,10 +111,11 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
       display: block;
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.2);
+        // background-color: rgba(0, 0, 0, 0.2);
         text-decoration: none;
-        color: $white;
+        // color: $white;
         text-decoration: none;
+        color:$brightBlue2;
       }
     }
   }

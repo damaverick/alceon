@@ -6,6 +6,19 @@
   justify-content: flex-start !important;
 }
 
+// --- Hide reCAPTCHA Badge and Container ---
+.grecaptcha-badge,
+.hsfc-ReCaptchaV2,
+.hsfc-Row:has(.hsfc-ReCaptchaV2) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
 .custom-hubspot-form {
   [data-hsfc-id='Renderer'] .hsfc-Step .hsfc-Step__Content {
     padding-top: 0;
@@ -196,7 +209,7 @@ body .section--gradient {
 
   // --- Rich Text Paragraph Styles ---
   .hsfc-RichText p {
-    font-size: 1rem !important;
+    font-size: 0.75rem !important;
     line-height: 1.5;
     max-width: 100%;
 

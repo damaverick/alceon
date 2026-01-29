@@ -38,6 +38,8 @@
   font-size: rem(14);
   text-transform: uppercase;
   font-weight: 600;
+  background-color:$primaryColor;
+  border-color:$primaryColor;
 }
 // Solid white (for dark backgrounds)
 .btn-solid-white {

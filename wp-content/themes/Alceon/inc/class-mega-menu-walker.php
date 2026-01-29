@@ -60,17 +60,29 @@ class My_Mega_Menu_Walker extends Walker_Nav_Menu
         elseif ($depth === 1) {
             $output .= $indent . '<li class="' . esc_attr(implode(' ', $classes)) . '">';
 
+            $url   = ! empty($item->url) ? esc_url($item->url) : '';
+            $title = apply_filters('the_title', $item->title, $item->ID);
+
             if ($has_children) {
-                // Has children: not clickable, use span
-                $arrow = '<span class="arrow"></span>';
-                $output .= '<span class="flyout-trigger">';
-                $output .= '<span>' . apply_filters('the_title', $item->title, $item->ID) . '</span>';
-                $output .= $arrow;
-                $output .= '</span>';
+                // Has children with URL: clickable link with arrow
+                if ($url && $url !== '#') {
+                    $arrow = '<span class="arrow"></span>';
+                    $output .= '<a href="' . $url . '" class="flyout-trigger">';
+                    $output .= '<span>' . $title . '</span>';
+                    $output .= $arrow;
+                    $output .= '</a>';
+                } else {
+                    // Has children but no URL: use span as before
+                    $arrow = '<span class="arrow"></span>';
+                    $output .= '<span class="flyout-trigger">';
+                    $output .= '<span>' . $title . '</span>';
+                    $output .= $arrow;
+                    $output .= '</span>';
+                }
             } else {
-                // No children: clickable, use anchor
-                $output .= '<a href="' . esc_url($item->url) . '" class="flyout-trigger">';
-                $output .= '<span>' . apply_filters('the_title', $item->title, $item->ID) . '</span>';
+                // No children: clickable link, no arrow
+                $output .= '<a href="' . $url . '" class="flyout-trigger">';
+                $output .= '<span>' . $title . '</span>';
                 $output .= '</a>';
             }
         }
