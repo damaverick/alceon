@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const slideOutThreshold = 175; // Start sliding out at 175px from top
   let lastScrollTop = 0;
   let slideUpTimeout = null;
+  let scrollStopTimeout = null;
 
   if (!navWrapper) return;
 
@@ -232,6 +233,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const currentScroll = window.scrollY || document.documentElement.scrollTop;
+
+    // Clear the scroll stop timeout
+    clearTimeout(scrollStopTimeout);
 
     // If approaching the top (between 100px and 175px), start transition
     if (currentScroll <= slideOutThreshold && currentScroll > scrollThreshold) {
@@ -272,6 +276,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+
+    // Set timeout to show nav when scrolling stops
+    scrollStopTimeout = setTimeout(() => {
+      if (currentScroll > slideOutThreshold) {
+        navWrapper.classList.remove('nav-hidden');
+        navWrapper.classList.remove('sliding-out');
+        navWrapper.classList.add('scrolled-up');
+      }
+    }, 150); // Show nav 150ms after scrolling stops
   }
 
   // Run on scroll
@@ -569,4 +582,45 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+});
+
+/**
+ * ========================================================================
+ * STRIP BASE URL FROM MEGA MENU LINKS (EXACT PATH ONLY)
+ * ========================================================================
+ */
+document.addEventListener('DOMContentLoaded', function () {
+  // Get the current path and remove trailing slashes for a strict comparison
+  const currentPath = window.location.pathname.replace(/\/$/, '');
+  const targetPath = '/your-capital';
+
+  // Strict check: Only run if the path is exactly '/your-capital'
+  if (currentPath === targetPath) {
+    const megaMenuLinks = document.querySelectorAll('#mega-menu-capital a');
+
+    megaMenuLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+
+      if (href && href.includes('#')) {
+        try {
+          // Create URL object relative to the current site
+          const url = new URL(href, window.location.origin);
+
+          // Clean the link's pathname for comparison
+          const linkPath = url.pathname.replace(/\/$/, '');
+
+          // Only strip the URL if the link points exactly to this page
+          if (linkPath === targetPath) {
+            // Set href to just the hash (e.g., "#growth")
+            link.setAttribute('href', url.hash);
+          }
+        } catch (e) {
+          // Fallback logic for older browsers or malformed URLs
+          if (href.includes('/your-capital/#')) {
+            link.setAttribute('href', '#' + href.split('#')[1]);
+          }
+        }
+      }
+    });
+  }
 });

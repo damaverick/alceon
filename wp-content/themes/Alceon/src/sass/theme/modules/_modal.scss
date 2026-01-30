@@ -15,6 +15,7 @@
     font-size: rem(40);
     font-weight: 300;
     color: $primaryColor;
+    max-width: rem(650);
   }
 
   .terms-content {
@@ -130,17 +131,21 @@
   min-height: 600px !important; /* Forces it open */
 }
 
-
 .item {
   /* 2. Fix the Close Button Color if it's invisible */
-.btn-outline-white {
-  border-color: $white;
-  color: $white;
-}
-.btn-outline-white:hover {
-  border-color: $white!Important;
-  background-color: $white!Important;
-  color: #000!Important;
+  .btn-outline-white {
+    border-color: $white;
+    color: $white;
+  }
+  .btn-outline-white:hover {
+    border-color: $white !important;
+    background-color: $white !important;
+    color: #000 !important;
+  }
 }
 
+.modal {
+  h2 {
+    max-width: 35rem;
+  }
 }

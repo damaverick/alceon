@@ -3,7 +3,7 @@
   --accordion-icon-color: #155cd5; // brand color
 
   .accordion-item:first-of-type {
-    border-top: 2px solid rgba(17, 17, 17, 0.1);
+    border-top: rem(1.75) solid rgba(17, 17, 17, 0.1);
     margin-top: 3rem;
     border-radius: 0;
   }
@@ -13,7 +13,7 @@
     background: transparent;
     margin-bottom: 0;
     border-radius: 0;
-    border-bottom: 2px solid rgba(17, 17, 17, 0.1);
+    border-bottom: rem(1.75) solid rgba(17, 17, 17, 0.1);
     padding:.5rem 0;
 
     // Optional: remove the last divider if you don't want one at the bottom

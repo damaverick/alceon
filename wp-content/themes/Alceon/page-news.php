@@ -25,8 +25,8 @@ get_header();
           <button class="filter-btn" data-slug="news">News</button>
           <button class="filter-btn" data-slug="insights">Insights</button>
           <button class="filter-btn" data-slug="podcasts">Podcasts</button>
-          <button class="filter-btn" data-slug="other-media">Other Media</button>
-          <button class="filter-btn" data-slug="video">Video</button>
+          <button class="filter-btn" data-slug="video">Videos</button>
+          <button class="filter-btn" data-slug="press-releases">Press Releases</button>
         </div>
       </div>
     </div>

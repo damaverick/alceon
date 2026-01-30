@@ -7,7 +7,8 @@ body {
 // Remove background when scrolled up
 header#wrapper-navbar .nav-wrapper.scrolled-up {
   .menu-wrapper {
-    background-color: transparent;
+    background-color:rgb(128 148 163 / 9%);
+    
   }
 }
 
@@ -30,9 +31,18 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
   width: auto;
 }
 
+// Default state: white hover color
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus {
-  color: #0d6efd; // Bootstrap primary blue or your brand color
+  color: white;
+}
+
+// Scrolled state: brightBlue2 hover color
+header#wrapper-navbar .nav-wrapper.scrolled-up {
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link:focus {
+    color: $brightBlue2;
+  }
 }
 
 /* Last menu item as a pill button */
@@ -59,14 +69,29 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
 
 .menu-wrapper {
   margin-top: rem(0);
+  background-color: rgba(0, 69, 124, 0.15);
   background-blend-mode: multiply;
   min-width: rem(800);
   justify-content: space-between;
-  padding: .5rem 1rem 1rem;
-  border-radius: 100px;
+  padding: 0.5rem 1rem;
+    border-radius: 100px;
+    background-color:  rgb(0 4 8 / 15%)
+
 }
 
 @media (min-width: 992px) {
+
+
+body .scrolled-up   .navbar-nav li.mega-menu>.nav-link::after{
+
+   
+       border-right: 1px solid $brightBlue2; // use 1px to avoid sub-pixel wobble
+        border-bottom: 1px solid $brightBlue2;
+    
+
+      
+  }
+
   body .navbar-nav {
     // target the "Partner with us" item (has .mega-menu on the <li>)
     li.mega-menu > .nav-link {
@@ -82,8 +107,8 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
         width: 10px;
         height: 10px;
         box-sizing: border-box; // ✅ borders included in 10x10
-        border-right: 1px solid $brightBlue2; // use 1px to avoid sub-pixel wobble
-        border-bottom: 1px solid $brightBlue2;
+        border-right: 1px solid $white; // use 1px to avoid sub-pixel wobble
+        border-bottom: 1px solid $white;
 
         transform-origin: 50% 50%;
         transform: translateY(-50%) rotate(45deg); // closed
@@ -111,12 +136,14 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
       display: block;
 
       &:hover {
-        // background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.2);
         text-decoration: none;
-        // color: $white;
+        color: $white;
         text-decoration: none;
-        color:$brightBlue2;
+        // color: $brightBlue2;
       }
+
+      
     }
   }
 }

@@ -498,9 +498,9 @@ add_action('customize_controls_enqueue_scripts', function () {
  */
 function alceon_navbar()
 {
-    ?>
+    ?>  
     <nav class="navbar p-0 site-navbar w-100 position-relative navbar-dark" style="z-index: 3;">
-        <div class="w-100 d-flex align-self-end justify-content-between py-0 mb-lg-2 mt-lg-4">
+        <div class="w-100 d-flex align-self-end justify-content-between py-0 my-lg-2">
             <a class="navbar-brand site-logo py-2" href="<?php echo esc_url(home_url('/')); ?>">
                 <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img logo-white">
                  <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/logo-dark.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img logo-dark">

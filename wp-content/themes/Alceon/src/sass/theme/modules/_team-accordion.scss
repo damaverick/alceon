@@ -55,6 +55,8 @@
         width: 18px;
         height: 18px;
         flex-shrink: 0;
+        border: none;
+        outline: none;
 
         &::before,
         &::after {

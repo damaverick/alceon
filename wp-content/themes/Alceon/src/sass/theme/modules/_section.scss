@@ -144,6 +144,12 @@
   padding-top: 6rem;
   padding-bottom: 5rem;
 
+  .border-2 {
+      border-width:rem(1.75)!important;
+  }
+
+
+
   .border-top {
     border-color: $lightGrey !important;
 
@@ -360,10 +366,10 @@ header#wrapper-navbar .nav-wrapper {
   z-index: 6;
   border-bottom: 1px solid transparent;
   background-color: transparent;
+  padding: 0.5rem 0;
   transition:
-    background-color 0s,
+    background-color 0.3s ease,
     border-bottom-color 0.3s ease;
-  background-color: $darkerBlue2;
 }
 
 // Admin bar adjustment
@@ -378,7 +384,7 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
   top: 0;
   left: 0;
   right: 0;
-  background-color:$darkerBlue2;
+  background-color: $darkerBlue2;
   padding: 0.5rem 0;
   transform: translateY(0);
   opacity: 1;

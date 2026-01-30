@@ -42,12 +42,12 @@
   -moz-appearance: none;
 
   /* Your custom styles */
-  border: 2px solid white;
+  border: rem(1.75) solid white;
   color: white;
   background-color: transparent;
 
   /* Sizing and Spacing */
-  padding: rem(5) rem(20); /* Right padding to avoid text overlapping the arrow */
+  padding: rem(7) rem(20); /* Right padding to avoid text overlapping the arrow */
   border-radius: 100px;
   font-size: rem(16);
   cursor: pointer;

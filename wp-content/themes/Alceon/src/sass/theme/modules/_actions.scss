@@ -1,8 +1,8 @@
 .actions {
-  border-top: 2px solid $lightGrey !important;
+  border-top: rem(1.75) solid $lightGrey !important;
 
   .action-row {
-    border-bottom: 2px solid $lightGrey !important;
+    border-bottom: rem(1.75) solid $lightGrey !important;
     padding-bottom: 2rem;
     padding-bottom: 1.5rem;
     padding-top: 1.5rem;

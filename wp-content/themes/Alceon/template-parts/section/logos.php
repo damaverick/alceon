@@ -17,7 +17,7 @@ $text = get_sub_field('logos_text');
 } ?>>
   <div class="container">
     <div class="row d-flex justify-content-between">
-      <div class="col-md-3" data-aos="fade-right">
+      <div class="col-xl-3" data-aos="fade-right">
         <?php if ($heading): ?>
           <h2><?php echo esc_html($heading); ?></h2>
         <?php endif; ?>
@@ -27,7 +27,7 @@ $text = get_sub_field('logos_text');
         <?php endif; ?>
       </div>
 
-      <div class="col-md-9 pt-2 pt-md-0 ps-md-5" data-aos="fade-left">
+      <div class="col-xl-9 pt-2 pt-xl-0 ps-xl-5" data-aos="fade-left">
         <?php
         // Render a logos grid
         if (have_rows('logo_items')):

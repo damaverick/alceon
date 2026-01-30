@@ -27,6 +27,7 @@
   [data-hsfc-id='Renderer'] .hsfc-Row {
     row-gap: 10px;
     column-gap: 15px;
+    margin-bottom: rem(15);
   }
 
   [data-hsfc-id='Renderer'] .hsfc-TextareaInput {
@@ -40,7 +41,7 @@
   }
 
   [data-hsfc-id='Renderer'] .hsfc-NavigationRow {
-    margin-top: rem(-15);
+    margin-top: rem(-12);
   }
 }
 
@@ -115,19 +116,26 @@ body .section--gradient {
     // max-width: 670px;
   }
 
+  [data-hsfc-id='Renderer'] .hsfc-ErrorAlert {
+    font-family: $bodyCopy;
+    font-size: rem(12);
+    color: $brightBlue;
+  }
+
   // --- Fields (Base) ---
   input,
   select,
   textarea {
     width: 100%;
-    padding: 0.5rem 1rem !important;
-    font-size: rem(16);
+    padding: 0.4rem 1rem !important;
     border: none !important;
     border-radius: rem(100) !important;
     background: #fff !important;
     color: hsla(0, 0%, 20%, 1) !important;
     box-shadow: none !important;
     appearance: none;
+    font-family: $bodyCopy!important;
+    font-size: rem(16) !important;
 
     // --- Comprehensive Placeholder Styles ---
     &::placeholder {
@@ -210,8 +218,9 @@ body .section--gradient {
   // --- Rich Text Paragraph Styles ---
   .hsfc-RichText p {
     font-size: 0.75rem !important;
-    line-height: 1.5;
+    line-height: 1.35;
     max-width: 100%;
+    font-family: $bodyCopy !important;
 
     // Form submitted heading (with strong tag)
     strong {
@@ -237,19 +246,56 @@ body .section--gradient {
 body .custom-hubspot-form.form-white-bg {
   justify-content: flex-start;
 
+  [data-hsfc-id='Renderer']
+    .hsfc-PhoneInput:not(.hsfc-PhoneInput--rtl)
+    > .hsfc-TextInput {
+    border-left: none;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-left: none !important;
+  }
+
+  [data-hsfc-id='Renderer']
+    .hsfc-PhoneInput:not(.hsfc-PhoneInput--rtl)
+    .hsfc-PhoneInput__FlagAndCaret {
+    border: rem(1.75) solid $brightBlue;
+    background-color: #fff;
+    border-right: none;
+  }
+
   // --- Fields (White BG) ---
   input,
   select,
   textarea {
-    border: 2px solid $brightBlue !important;
+    border: rem(1.75) solid $brightBlue !important;
+    font-family: $bodyCopy;
   }
 
-  // --- Select (White BG) ---
-  // No override needed, it inherits the blue arrow from the base style.
+  // --- Select Dropdown Arrow (White BG) ---
+  .hsfc-DropdownInput__Caret {
+    span {
+      display: none;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      box-sizing: border-box;
+      border-right: 2px solid $brightBlue;
+      border-bottom: 2px solid $brightBlue;
+      transform: translateY(-50%) rotate(45deg);
+      transition: transform 0.18s ease;
+    }
+  }
 
   // --- Button (White BG) ---
   .hs-button,
-  input[type='submit'] {
+  input[type='submit'],
+  [data-hsfc-id='Renderer'] .hsfc-Button {
     @extend .btn-outline-primary;
     color: $brightBlue !important;
     border-color: $brightBlue !important;
@@ -269,6 +315,27 @@ body .custom-hubspot-form.form-white-bg {
 
 // --- Rich Text Paragraph Styles ---
 .text-white {
+  // --- Select Dropdown Arrow (Text White) ---
+  .hsfc-DropdownInput__Caret {
+    span {
+      display: none!important;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 1.75rem;
+      top: 45%;
+      width: 10px;
+      height: 10px;
+      box-sizing: border-box;
+      border-right: 2px solid $brightBlue;
+      border-bottom: 2px solid $brightBlue;;
+      transform: translateY(-50%) rotate(45deg);
+      transition: transform 0.18s ease;
+    }
+  }
+
   .hsfc-CheckboxField label {
     color: #fff !important;
   }
@@ -308,10 +375,10 @@ body .custom-hubspot-form.form-white-bg {
     /* Your button styles */
     background-color: transparent;
     color: white;
-    padding: 8px 30px;
+    padding: 0.26rem 1.25rem;
     border: none;
     cursor: pointer;
-    border: 2px solid #fff;
+    border: rem(1.75) solid #fff;
     border-radius: rem(100);
 
     &:hover {

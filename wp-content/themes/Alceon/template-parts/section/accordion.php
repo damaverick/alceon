@@ -87,15 +87,34 @@ $intro_text = get_sub_field('intro_text');
                                         <?php echo wpautop(wp_kses_post($text)); ?>
                                     <?php endif; ?>
 
-                                    <?php if ($link_url && $button_text): ?>
+                                    <?php
+                                    $enable_modal = get_sub_field('enable_modal');
+                    $modal_heading = get_sub_field('modal_heading');
+                    $hubspot_form_id = get_sub_field('hubspot_form_id');
+                    $modal_id = 'accordionModal' . $index;
+
+                    if ($button_text):
+                        if ($enable_modal && $hubspot_form_id):
+                            ?>
+                                        <button
+                                            type="button"
+                                            class="btn btn-outline-primary fw-bold rounded-pill"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#<?php echo esc_attr($modal_id); ?>"
+                                        >
+                                            <?php echo esc_html($button_text); ?>
+                                        </button>
+                                    <?php elseif ($link_url): ?>
                                         <a
                                             href="<?php echo esc_url($link_url); ?>"
                                             class="btn btn-outline-primary fw-bold rounded-pill"
-                                    
                                         >
                                             <?php echo esc_html($button_text); ?>
                                         </a>
-                                    <?php endif; ?>
+                                    <?php
+                                    endif;
+                    endif;
+                    ?>
 
                                 </div>
                             </div>
@@ -107,10 +126,68 @@ $intro_text = get_sub_field('intro_text');
                 // 5. Increment Counter
                 $acc_index++;
                 endwhile; // End the accordion_item loop
-            endif; // End if( have_rows('accordion_item') )
+endif; // End if( have_rows('accordion_item') )
 ?>
 
 
         </div>
     </div>
 </section>
+
+<?php
+// Output modals after accordion
+if (have_rows('accordion_item')):
+    while (have_rows('accordion_item')) : the_row();
+        $enable_modal = get_sub_field('enable_modal');
+        $modal_heading = get_sub_field('modal_heading');
+        $hubspot_form_id = get_sub_field('hubspot_form_id');
+        $index = get_row_index();
+        $modal_id = 'accordionModal' . $index;
+
+        if ($enable_modal && $hubspot_form_id):
+            ?>
+
+<div class="modal fade" id="<?php echo esc_attr($modal_id); ?>" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content section--gradient text-white" style="border:none; overflow:hidden;">
+      
+      <div class="modal-body p-4 p-md-5 position-relative">
+        
+        <button type="button" 
+                class="btn btn-light btn-outline-white" 
+                data-bs-dismiss="modal" 
+                aria-label="Close"
+                style="position:absolute; top: 2rem; right: 2rem; z-index: 10;">
+          Close
+        </button>
+
+        <div class="row" style="margin-top: 3.5rem;"> 
+          <div class="col-12 mb-md-5 text-start">
+            <?php if ($modal_heading): ?>
+              <h2 class="text-white mb-4"><?php echo esc_html($modal_heading); ?></h2>
+            <?php endif; ?>
+          </div>
+
+          <div class="col-12 text-start">
+            <div class="custom-hubspot-form" data-hs-forms-root="true">
+              <div class="hs-form-html" 
+                   data-region="ap1" 
+                   data-form-id="<?php echo esc_attr($hubspot_form_id); ?>" 
+                   data-portal-id="4264043">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<?php
+        endif;
+    endwhile;
+endif;
+?>

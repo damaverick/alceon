@@ -20,6 +20,11 @@ if (
 
 <?php endif; ?>
 
+  <?php if (get_field('include_disclaimer') == 'yes') : ?>
+
+  <?php   get_template_part('template-parts/global/disclaimer'); ?>
+<?php endif; ?>
+
 
 <?php if (
     ! is_front_page() &&
@@ -36,10 +41,7 @@ if (
 
 <?php endif; ?>
 
-    <?php if (get_field('include_disclaimer') == 'yes') : ?>
-
-  <?php   get_template_part('template-parts/global/disclaimer'); ?>
-<?php endif; ?>
+  
 
 
 
@@ -144,6 +146,9 @@ $container = get_theme_mod('understrap_container_type');
 ?>
 </div><!-- #page -->
 </div><!-- .site-content-contain -->
+
+<!-- HubSpot Forms Script - Loaded once globally -->
+<script src="https://js-ap1.hsforms.net/forms/embed/developer/4264043.js" defer></script>
 
 <?php wp_footer(); ?>
 

@@ -57,8 +57,6 @@ $container = get_theme_mod('understrap_container_type');
 
         <div class="custom-hubspot-form form-white-bg">
 
-          <script src="https://js-ap1.hsforms.net/forms/embed/developer/4264043.js" defer></script>
-
           <?php if (isset($_GET['arecsmf']) && $_GET['arecsmf'] === 'true') : ?>
             <!-- ARECS MF Form -->
             <div class="hs-form-html" 

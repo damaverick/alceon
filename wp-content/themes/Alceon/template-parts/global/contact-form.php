@@ -22,7 +22,6 @@
     </div>
 <div class="col-md-7" data-aos="fade-left">
  <!-- HubSpot Form - Developer Embed -->
-<script src="https://js-ap1.hsforms.net/forms/embed/developer/4264043.js" defer></script>
 
 <div id="footer-form-container" class="custom-hubspot-form">
 <?php
