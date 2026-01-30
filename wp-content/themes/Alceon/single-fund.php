@@ -23,25 +23,25 @@ $container = get_theme_mod('understrap_container_type');
         $stat_idx = 0; // Initialize counter for stagger
 
         while (have_rows('statistics')) : the_row();
-          $statistic = get_sub_field('statistic');
-          $supporting_text = get_sub_field('supporting_text');
-          $aos_delay = $stat_idx * 100;
+            $statistic = get_sub_field('statistic');
+            $supporting_text = get_sub_field('supporting_text');
+            $aos_delay = $stat_idx * 100;
 
-          // --- 1. PARSING LOGIC (Copied & Improved) ---
-          // Regex to split: Prefix | Number | Suffix
-          preg_match('/^([^\d]*)([\d\.]+)([^\d]*)$/', $statistic, $matches);
+            // --- 1. PARSING LOGIC (Copied & Improved) ---
+            // Regex to split: Prefix | Number | Suffix
+            preg_match('/^([^\d]*)([\d\.]+)([^\d]*)$/', $statistic, $matches);
 
-          $prefix = isset($matches[1]) ? $matches[1] : '';
-          $number = isset($matches[2]) ? $matches[2] : 0;
-          $suffix = isset($matches[3]) ? $matches[3] : '';
+            $prefix = isset($matches[1]) ? $matches[1] : '';
+            $number = isset($matches[2]) ? $matches[2] : 0;
+            $suffix = isset($matches[3]) ? $matches[3] : '';
 
-          // Calculate decimals based on the actual length of the string after the dot
-          // This ensures "10.30" gets 2 decimals, while "5" gets 0.
-          $decimals = 0;
-          if (strpos($number, '.') !== false) {
-            $decimals = strlen(substr(strrchr($number, '.'), 1));
-          }
-        ?>
+            // Calculate decimals based on the actual length of the string after the dot
+            // This ensures "10.30" gets 2 decimals, while "5" gets 0.
+            $decimals = 0;
+            if (strpos($number, '.') !== false) {
+                $decimals = strlen(substr(strrchr($number, '.'), 1));
+            }
+            ?>
 
           <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="<?php echo intval($aos_delay); ?>">
 
@@ -62,7 +62,7 @@ $container = get_theme_mod('understrap_container_type');
           </div>
 
         <?php
-          $stat_idx++;
+              $stat_idx++;
         endwhile;
         ?>
 
@@ -75,20 +75,20 @@ $container = get_theme_mod('understrap_container_type');
       <div class="col-lg-7 section-feature--overlap-bottom__img-wrap pb-4 pb-lg-0">
         <?php
         if (has_post_thumbnail()) :
-          the_post_thumbnail('full', [
-            'class' => 'img-fluid section-feature__image', 'data-aos' => 'fade-right',
-          ]);
+            the_post_thumbnail('full', [
+                'class' => 'img-fluid section-feature__image', 'data-aos' => 'fade-right',
+            ]);
         endif;
-        ?>
+?>
       </div>
 
       <div class="col-lg-5" data-aos="fade-left">
         <div class="section-feature__content">
           <?php
-          $testimonial = get_field('testimonial');
-          $referee_name = get_field('referee_name');
-          $referee_title = get_field('referee_title');
-          ?>
+  $testimonial = get_field('testimonial');
+$referee_name = get_field('referee_name');
+$referee_title = get_field('referee_title');
+?>
 
           <?php if ($testimonial) : ?>
             <h3 class="text-white h2 mt-1 mt-lg-5"><?php echo esc_html($testimonial); ?></h3>
@@ -124,10 +124,10 @@ $container = get_theme_mod('understrap_container_type');
       <div class="col-md-6 pe-lg-5" data-aos="fade-left">
         <?php
         $inside_portfolio_text = get_field('inside_portfolio_text');
-        if ($inside_portfolio_text) {
-          echo wp_kses_post($inside_portfolio_text);
-        }
-        ?>
+if ($inside_portfolio_text) {
+    echo wp_kses_post($inside_portfolio_text);
+}
+?>
       </div>
     </div>
 
@@ -168,10 +168,10 @@ get_template_part('template-parts/section/icon-row');
       <div class="col-md-6 pe-lg-5" data-aos="fade-left">
         <?php
         $how_the_fund_works_text = get_field('how_the_fund_works_text');
-        if ($how_the_fund_works_text) {
-          echo wp_kses_post($how_the_fund_works_text);
-        }
-        ?>
+if ($how_the_fund_works_text) {
+    echo wp_kses_post($how_the_fund_works_text);
+}
+?>
       </div>
     </div>
 
@@ -191,14 +191,14 @@ get_template_part('template-parts/section/icon-row');
         <div class="col" data-aos="fade-up">
           <h2>Investment Performance</h2>
           <?php
-          $getData = getData();
-          $data_date = '';
-          if ($type == 'ADIF') {
-            $data_date = date('d F Y', $getData['date_debt']->value);
-          } elseif ($type == 'AAPF') {
-            $data_date = date('d F Y', $getData['date_property']->value);
-          }
-          ?>
+  $getData = getData();
+    $data_date = '';
+    if ($type == 'ADIF') {
+        $data_date = date('d F Y', $getData['date_debt']->value);
+    } elseif ($type == 'AAPF') {
+        $data_date = date('d F Y', $getData['date_property']->value);
+    }
+?>
           <?php if ($data_date) : ?>
             <p class="mt-4">As at <?php echo $data_date; ?></p>
           <?php endif; ?>
@@ -208,8 +208,8 @@ get_template_part('template-parts/section/icon-row');
       <div class="table-responsive" data-aos="fade-up" data-aos-delay="100">
         <?php
         switch ($type) {
-          case 'ADIF':
-        ?>
+            case 'ADIF':
+                ?>
             <table class="table performance-table mb-0">
               <thead>
                 <tr>
@@ -247,11 +247,11 @@ get_template_part('template-parts/section/icon-row');
               </tbody>
             </table>
           <?php
-            # code...
-            break;
+                    # code...
+                    break;
 
-          case 'AAPF':
-          ?>
+            case 'AAPF':
+                ?>
             <table class="table performance-table mb-0">
               <thead>
                 <tr>
@@ -295,13 +295,13 @@ get_template_part('template-parts/section/icon-row');
               </tbody>
             </table>
         <?php
-            break;
+                  break;
 
-          default:
-            # code...
-            break;
+            default:
+                # code...
+                break;
         }
-        ?>
+?>
       </div>
 
     </div>

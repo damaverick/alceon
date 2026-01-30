@@ -56,16 +56,26 @@ $container = get_theme_mod('understrap_container_type');
       <div class="col-lg-6 pe-lg-5" data-aos="fade-left">
 
         <div class="custom-hubspot-form form-white-bg">
-<script src="https://js-ap1.hsforms.net/forms/embed/developer/4264043.js" defer></script>
 
-              <div class="hs-form-html" 
-             data-region="ap1" 
-             data-form-id="bc2f5af0-8f49-493c-8eb5-d10f689ee450" 
-             data-portal-id="4264043">
-        </div>
+          <script src="https://js-ap1.hsforms.net/forms/embed/developer/4264043.js" defer></script>
 
+          <?php if (isset($_GET['arecsmf']) && $_GET['arecsmf'] === 'true') : ?>
+            <!-- ARECS MF Form -->
+            <div class="hs-form-html" 
+                 data-region="ap1" 
+                 data-form-id="c2e45b23-dc02-481c-aacc-0b3b2281cc3a" 
+                 data-portal-id="4264043">
+            </div>
+          <?php else : ?>
+            <!-- Default Contact Form -->
+            <div class="hs-form-html" 
+                 data-region="ap1" 
+                 data-form-id="bc2f5af0-8f49-493c-8eb5-d10f689ee450" 
+                 data-portal-id="4264043">
+            </div>
+          <?php endif; ?>
 
-    </div>      
+        </div>      
 
 
       </div>

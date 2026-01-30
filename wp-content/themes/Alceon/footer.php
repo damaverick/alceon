@@ -101,7 +101,7 @@ $container = get_theme_mod('understrap_container_type');
             <!-- Login Button (right-aligned) -->
             <a href="https://dynamo.dynamosoftware.com/tenant/dynamo3.netagesolutions.com/alceon/RE-Portal"
               target="_blank" class="btn  site-footer__login-btn ms-auto pill btn-outline-white">
-              Login
+              Investor Login
             </a>
 
           </div>
