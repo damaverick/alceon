@@ -8,16 +8,17 @@
 
     <div class="col-md-5" data-aos="fade-right">
       
-      <h2 class="text-white"><?php echo nl2br(esc_html(get_field('contact_heading') ?: 'Let’s start the conversation.')); ?></h2>
-  
-     <?php if (get_field('contact_text')) :
-         ?>
-        <p class="text-white">
-            <?php
-               // Get, escape, and format the contact text field
-               echo nl2br(esc_html(get_field('contact_text')));
-         ?>
-        </p>
+      <?php if (is_single() && get_post_type() === 'post') : ?>
+        <h2 class="text-white">Don't want to miss a thing?</h2>
+        <p class="text-white">Leave your email address and you'll be notified of the latest insights</p>
+      <?php else : ?>
+        <h2 class="text-white"><?php echo nl2br(esc_html(get_field('contact_heading') ?: 'Let\'s start the conversation.')); ?></h2>
+        
+        <?php if (get_field('contact_text')) : ?>
+          <p class="text-white">
+            <?php echo nl2br(esc_html(get_field('contact_text'))); ?>
+          </p>
+        <?php endif; ?>
       <?php endif; ?>
     </div>
 <div class="col-md-7" data-aos="fade-left">

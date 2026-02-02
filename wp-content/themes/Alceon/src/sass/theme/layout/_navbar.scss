@@ -2,6 +2,9 @@ html,
 body {
   overflow-x: hidden;
   width: 100%;
+  @media (min-width:4000px) {
+    background-color:#eee;
+  }
 }
 
 // Remove background when scrolled up

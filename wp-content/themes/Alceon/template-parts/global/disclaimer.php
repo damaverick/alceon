@@ -1,5 +1,6 @@
 <?php
-$disclaimer_option = get_field('include_disclaimer');
+$current_id = get_queried_object_id();
+$disclaimer_option = get_field('include_disclaimer', $current_id);
 $footer_disclaimer = '';
 
 if ($disclaimer_option === 'yes') {
@@ -7,7 +8,7 @@ if ($disclaimer_option === 'yes') {
     $footer_disclaimer = trim((string) get_field('footer_disclaimer', 'option'));
 } elseif ($disclaimer_option === 'custom') {
     // Load custom disclaimer
-    $footer_disclaimer = trim((string) get_field('custom_disclaimer'));
+    $footer_disclaimer = trim((string) get_field('custom_disclaimer', $current_id));
 }
 // If 'no', $footer_disclaimer remains empty and nothing displays
 ?>

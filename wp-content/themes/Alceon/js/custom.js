@@ -224,19 +224,18 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!navWrapper) return;
 
   function handleScroll() {
-    // Only apply on desktop
-    if (window.innerWidth < breakpoint) {
-      navWrapper.classList.remove('nav-hidden');
-      navWrapper.classList.remove('scrolled-up');
-      navWrapper.classList.remove('sliding-out');
-      return;
-    }
-
     const currentScroll = window.scrollY || document.documentElement.scrollTop;
 
     // Clear the scroll stop timeout
     clearTimeout(scrollStopTimeout);
 
+    // ONLY RUN ON DESKTOP (992px and above)
+    if (window.innerWidth < breakpoint) {
+      // On mobile, do nothing - let the other handler manage it
+      return;
+    }
+
+    // DESKTOP BEHAVIOR (992px and above)
     // If approaching the top (between 100px and 175px), start transition
     if (currentScroll <= slideOutThreshold && currentScroll > scrollThreshold) {
       if (navWrapper.classList.contains('scrolled-up')) {
@@ -294,12 +293,11 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', handleScroll);
 });
 
-// HIDE MOBILE MENU ON SCROLL
+// MOBILE NAV SCROLL BEHAVIOR - ADD BACKGROUND ON SCROLL
 
 document.addEventListener('DOMContentLoaded', function () {
   const navbar = document.querySelector('.nav-wrapper');
-  let lastScrollTop = 0;
-  const hideThreshold = 170; // 1. Start hiding after 170px
+  const bgThreshold = 100; // Add background after 100px
   const mobileBreakpoint = 991;
 
   if (!navbar) return;
@@ -307,27 +305,21 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener(
     'scroll',
     function () {
-      // Stop if we are on desktop
+      // Only apply on mobile
       if (window.innerWidth > mobileBreakpoint) {
-        navbar.classList.remove('nav-hidden');
+        navbar.classList.remove('scrolled-up'); // Remove mobile background on desktop
         return;
       }
 
       const currentScroll =
         window.scrollY || document.documentElement.scrollTop;
 
-      // 2. Logic:
-      // A. If we are scrolling DOWN AND have passed the 170px threshold
-      if (currentScroll > lastScrollTop && currentScroll > hideThreshold) {
-        navbar.classList.add('nav-hidden'); // Slide Up (Hide)
+      // Simple logic: Add background when scrolled past threshold
+      if (currentScroll > bgThreshold) {
+        navbar.classList.add('scrolled-up');
+      } else {
+        navbar.classList.remove('scrolled-up');
       }
-      // B. If we are scrolling UP OR we are at the very top (less than 170px)
-      else {
-        navbar.classList.remove('nav-hidden'); // Slide Down (Show)
-      }
-
-      // Update position for next scroll event, prevent negative numbers
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     },
     { passive: true },
   );
@@ -539,30 +531,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Make sure there's an actual hash value
         if (hashPart) {
-          // Close tablet offcanvas menu (Bootstrap 5)
-          const tabletOffcanvas = document.getElementById(
-            'tabletOffcanvasMenu',
-          );
-          if (tabletOffcanvas) {
-            const bsOffcanvas =
-              bootstrap.Offcanvas.getInstance(tabletOffcanvas);
-            if (bsOffcanvas) {
-              bsOffcanvas.hide();
+          // Close mobile collapse menu - simpler approach
+          const mobileCollapse = document.getElementById('mobileCollapseMenu');
+          if (mobileCollapse && mobileCollapse.classList.contains('show')) {
+            // Find and click the close button
+            const closeButton = mobileCollapse.querySelector('.btn-close');
+            if (closeButton) {
+              closeButton.click();
             }
           }
 
-          // Close mobile collapse menu (Bootstrap 5)
-          const mobileCollapse = document.getElementById('mobileCollapseMenu');
-          if (mobileCollapse && mobileCollapse.classList.contains('show')) {
-            const bsCollapse = bootstrap.Collapse.getInstance(mobileCollapse);
-            if (bsCollapse) {
-              bsCollapse.hide();
-            } else {
-              // If no instance exists, create one and hide it
-              const collapse = new bootstrap.Collapse(mobileCollapse, {
-                toggle: false,
-              });
-              collapse.hide();
+          // Close tablet offcanvas menu (Bootstrap 5)
+          if (typeof bootstrap !== 'undefined') {
+            const tabletOffcanvas = document.getElementById(
+              'tabletOffcanvasMenu',
+            );
+            if (tabletOffcanvas) {
+              const bsOffcanvas =
+                bootstrap.Offcanvas.getInstance(tabletOffcanvas);
+              if (bsOffcanvas) {
+                bsOffcanvas.hide();
+              }
             }
           }
 
@@ -622,5 +611,72 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
     });
+  }
+});
+
+/**
+ * ========================================================================
+ * SMOOTH SCROLL WITH STICKY HEADER OFFSET
+ * ========================================================================
+ */
+document.addEventListener('DOMContentLoaded', function () {
+  // Handle smooth scrolling for all anchor links
+  document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+
+      // Ignore empty hashes or just "#"
+      if (!href || href === '#') return;
+
+      // Extract the hash part
+      let hash = '';
+      if (href.startsWith('#')) {
+        hash = href;
+      } else if (href.includes('#')) {
+        hash = '#' + href.split('#')[1];
+      } else {
+        return; // No hash found
+      }
+
+      const targetElement = document.querySelector(hash);
+
+      if (targetElement) {
+        e.preventDefault();
+
+        // Calculate offset - 150px for all screen sizes
+        let offset = 150;
+
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+
+        // Update URL hash without jumping
+        if (history.pushState) {
+          history.pushState(null, null, hash);
+        }
+      }
+    });
+  });
+
+  // Handle direct navigation to hash on page load
+  if (window.location.hash) {
+    setTimeout(function () {
+      const targetElement = document.querySelector(window.location.hash);
+      if (targetElement) {
+        let offset = 150; // 150px offset for all screen sizes
+
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'auto',
+        });
+      }
+    }, 100);
   }
 });

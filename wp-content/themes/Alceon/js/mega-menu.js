@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Elements to animate when opening
   const animatableItems = megaMenu.querySelectorAll(
-    'h5, h6, .mega-col-nav > li, .widget-content'
+    'h5, h6, .mega-col-nav > li, .widget-content',
   );
 
   let closeTimeout = null;
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==========================
 
   const flyoutTriggers = megaMenu.querySelectorAll(
-    '.mega-col-nav > li.has-children'
+    '.mega-col-nav > li.has-children',
   );
 
   if (flyoutTriggers.length) {
@@ -145,4 +145,26 @@ document.addEventListener('DOMContentLoaded', function () {
     flyoutSlot.classList.remove('is-active');
     flyoutSlot.innerHTML = '';
   });
+
+  // 6. CLOSE MENU ON SCROLL
+  // ==========================
+  let lastScrollTop = 0;
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (window.innerWidth < breakpoint) return;
+
+      const currentScrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      // Close mega menu on any scroll (up or down)
+      if (megaMenu.classList.contains(activeClass)) {
+        closeMenu();
+      }
+
+      lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+    },
+    false,
+  );
 });

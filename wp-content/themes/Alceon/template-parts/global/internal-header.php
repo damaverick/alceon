@@ -2,6 +2,7 @@
 // Get ACF fields
 $banner_url = get_field('header_image');
 $hero_bg_image = get_field('hero_bg_image');
+$hero_bg_mobile_image = get_field('hero_bg_mobile_image');
 $hero_paragraph = get_field('hero_paragraph');
 $paragraph_width = get_field('hero_paragraph_width'); // ACF select field: small, medium, large
 
@@ -17,11 +18,24 @@ if (is_singular('post')) {
 // Build hero background style
 $hero_style = '';
 if ($hero_bg_image && !is_singular('post')) {
+    // Use mobile image if set, otherwise fall back to desktop
+    $bg_image_url = $hero_bg_mobile_image ? $hero_bg_mobile_image : $hero_bg_image;
+
     $hero_style = sprintf(
-        "background-image: url('%s'); background-size: cover; background-position: bottom center; background-repeat: no-repeat;",
-        esc_url($hero_bg_image)
+        "background-image: url('%s'); background-size: cover; background-position: center center; background-repeat: no-repeat;",
+        esc_url($bg_image_url)
     );
     $hero_classes = 'hero-bg-image ' . $hero_classes;
+
+    // If both desktop and mobile images exist, add responsive styles
+    if ($hero_bg_mobile_image && $hero_bg_image !== $hero_bg_mobile_image) {
+        $hero_style .= sprintf(
+            " --hero-bg-desktop: url('%s'); --hero-bg-mobile: url('%s');",
+            esc_url($hero_bg_image),
+            esc_url($hero_bg_mobile_image)
+        );
+        $hero_classes .= ' has-mobile-bg';
+    }
 }
 ?>
 

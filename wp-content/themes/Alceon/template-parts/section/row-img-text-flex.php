@@ -11,19 +11,20 @@ $order_override   = get_sub_field('order_override') ?: 'alternating';
 $anchor_id = isset($args['anchor_id']) ? $args['anchor_id'] : '';
 
 // Determine column classes based on ratio
+// 992-1200px: 50/50, 1200px+: custom ratios
 switch ($column_ratio) {
     case 'equal':
-        $img_col_class = 'col-lg-6';
-        $text_col_class = 'col-lg-6';
+        $img_col_class = 'col-lg-6 col-xl-6';
+        $text_col_class = 'col-lg-6 col-xl-6';
         break;
     case 'text_larger':
-        $img_col_class = 'col-lg-5';
-        $text_col_class = 'col-lg-7';
+        $img_col_class = 'col-lg-6 col-xl-5';
+        $text_col_class = 'col-lg-6 col-xl-7';
         break;
     case 'default':
     default:
-        $img_col_class = 'col-lg-7';
-        $text_col_class = 'col-lg-5';
+        $img_col_class = 'col-lg-6 col-xl-7';
+        $text_col_class = 'col-lg-6 col-xl-5';
         break;
 }
 ?>
@@ -61,7 +62,11 @@ switch ($column_ratio) {
                 $button_text = get_sub_field('image_text_row__button_text');
                 $button_url  = get_sub_field('image_text_row__button_url');
 
-                // --- 2. Logic for Orientation & Animations ---
+                // --- 2. Determine alignment based on text length ---
+                $text_length = strlen(strip_tags($text));
+                $align_class = ($text_length > 1235) ? 'align-items-lg-start' : 'align-items-center';
+
+                // --- 3. Logic for Orientation & Animations ---
                 // Check if order override is set
                 if ($order_override === 'image_left') {
                     // Force image left, text right
@@ -89,10 +94,10 @@ switch ($column_ratio) {
                 ?>
 
                 <!-- This is one row from the repeater -->
-                <div class="row align-items-center <?php echo esc_attr($row_class); ?> mb-5 pb-lg-5 img-txt-section__row">
+                <div class="row <?php echo esc_attr($align_class); ?> <?php echo esc_attr($row_class); ?> mb-5 pb-lg-5 img-txt-section__row">
 
                     <!-- IMAGE COLUMN -->
-                    <div class="col-12 <?php echo esc_attr($img_col_class); ?> img-wrap" data-aos="<?php echo esc_attr($img_aos); ?>">
+                    <div class="col-12 <?php echo esc_attr($img_col_class); ?> img-wrap <?php echo $is_reversed ? 'text-lg-end' : ''; ?>" data-aos="<?php echo esc_attr($img_aos); ?>">
                         <?php
                         if ($image) :
                             echo wp_get_attachment_image($image['ID'], 'large', false, [

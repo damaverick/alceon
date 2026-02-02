@@ -17,13 +17,13 @@ $text = get_sub_field('actions_text');
 } ?>>
   <div class="container">
     <div class="row d-flex justify-content-between">
-      <div class="col-md-5" data-aos="fade-right">
+      <div class="col-12 col-xl-5" data-aos="fade-right">
         <?php if ($heading): ?>
           <h2><?php echo wp_kses_post($heading); ?></h2>
         <?php endif; ?>
       </div>
       
-      <div class="col-md-7 d-flex flex-column" data-aos="fade-left">
+      <div class="col-12 col-xl-7 d-flex flex-column mt-4 mt-xl-0" data-aos="fade-left">
         <?php if ($text): ?>
           <?php echo wp_kses_post($text); ?>
         <?php endif; ?>

@@ -90,9 +90,9 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-center text-lg-start';
 
     </div> 
 
-    <?php if (get_sub_field('stats_subtext')): ?>
+    <?php if (get_sub_field('icon_row_subtext')): ?>
       <p class="mt-5 footnotes" data-aos="fade-up" data-aos-delay="200">
-          <?php echo esc_html(get_sub_field('stats_subtext')); ?>
+          <?php echo get_sub_field('icon_row_subtext'); ?>
       </p>
     <?php endif; ?>
   </div>

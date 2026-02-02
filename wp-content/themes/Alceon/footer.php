@@ -20,9 +20,32 @@ if (
 
 <?php endif; ?>
 
-  <?php if (get_field('include_disclaimer') == 'yes') : ?>
+<?php
+// Get the current page ID for ACF field
+$current_id = get_queried_object_id();
+$disclaimer_option = get_field('include_disclaimer', $current_id);
+$footer_disclaimer = '';
 
-  <?php   get_template_part('template-parts/global/disclaimer'); ?>
+if ($disclaimer_option === 'yes') {
+    // Load default disclaimer from options
+    $footer_disclaimer = trim((string) get_field('footer_disclaimer', 'option'));
+} elseif ($disclaimer_option === 'custom') {
+    // Load custom disclaimer
+    $footer_disclaimer = trim((string) get_field('custom_disclaimer', $current_id));
+}
+
+// Debug: uncomment to troubleshoot
+// echo '<!-- Disclaimer Debug: ID=' . $current_id . ', Option=' . $disclaimer_option . ', Content Length=' . strlen($footer_disclaimer) . ' -->';
+
+// Display disclaimer if content exists
+if ($footer_disclaimer !== '') : ?>
+  <div class="section--grey section--disclaimer">
+    <div class="container mx-auto">
+      <div class="col-md-12 mx-auto">
+        <?php echo $footer_disclaimer; ?>
+      </div>
+    </div>
+  </div>
 <?php endif; ?>
 
 

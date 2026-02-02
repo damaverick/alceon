@@ -145,10 +145,8 @@
   padding-bottom: 5rem;
 
   .border-2 {
-      border-width:rem(1.75)!important;
+    border-width: rem(1.75) !important;
   }
-
-
 
   .border-top {
     border-color: $lightGrey !important;
@@ -245,6 +243,10 @@
     margin-right: calc(50% - 50vw);
     min-height: rem(733);
     overflow: hidden;
+
+    @media (max-width: 991px) {
+      min-height: rem(350);
+    }
   }
 
   // Optional: fixed aspect ratio variant
@@ -358,6 +360,12 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
 
 #page {
   position: relative;
+  max-width: 4000px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow:
+    0 0 10px rgb(0 0 0 / 11%),
+    0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 // Default state: not sticky, scrolls naturally with page
@@ -366,10 +374,20 @@ header#wrapper-navbar .nav-wrapper {
   z-index: 6;
   border-bottom: 1px solid transparent;
   background-color: transparent;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
   transition:
     background-color 0.3s ease,
     border-bottom-color 0.3s ease;
+
+  @media (max-width: 991px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 0;
+    transition: all .5s;
+    // No background on initial load - transparent
+  }
 }
 
 // Admin bar adjustment
@@ -392,6 +410,13 @@ header#wrapper-navbar .nav-wrapper.scrolled-up {
     transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.4s ease-out;
   animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+  @media (max-width: 991px) {
+    background-color: #03457c;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem 0;
+  }
 }
 
 // Slide out animation when returning to top
