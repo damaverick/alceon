@@ -5,9 +5,13 @@
   width: rem(100); /* Adjust to match your real logo width */
   height: auto;
 
-  @media (max-width:992px) {
-    padding-top:0;
-    padding-bottom:0;
+  @media (min-width:400px) {
+    width: rem(140); /* Adjust to match your real logo width */
+  }
+
+  @media (max-width: 992px) {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 
@@ -234,7 +238,12 @@
   min-height: rem(360);
 
   @media (max-width: 991px) {
-    min-height: 200px !important;
+    min-height: rem(300) !important;
+
+    .internal-hero__text {
+      margin-top: auto;
+      margin-bottom: 0;
+    }
   }
 }
 

@@ -10,7 +10,8 @@ body {
 // Remove background when scrolled up
 header#wrapper-navbar .nav-wrapper.scrolled-up {
   .menu-wrapper {
-    background-color:rgb(128 148 163 / 9%);
+    // background-color:rgb(128 148 163 / 9%);
+        background-color: transparent;
     
   }
 }
@@ -122,7 +123,10 @@ body .scrolled-up   .navbar-nav li.mega-menu>.nav-link::after{
 
       &:hover::after,
       &:focus-within::after {
+  
         transform: translateY(-50%) rotate(225deg); // open
+        border-right: 1px solid #009de6; // use 1px to avoid sub-pixel wobble
+        border-bottom: 1px solid #009de6;
       }
     }
     .nav-link {

@@ -680,3 +680,57 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 100);
   }
 });
+
+// ========================================================================
+// EQUAL HEIGHT FOR ICON ROW HEADINGS (992px+)
+// ========================================================================
+document.addEventListener('DOMContentLoaded', function () {
+  function equalizeIconRowHeadings() {
+    // Only run on screens 992px and above
+    if (window.innerWidth < 992) {
+      // Reset heights on mobile
+      document.querySelectorAll('.icon-row__heading').forEach((heading) => {
+        heading.style.height = '';
+      });
+      return;
+    }
+
+    // Get all icon row sections
+    const iconRowSections = document.querySelectorAll('.icon-row');
+
+    iconRowSections.forEach((section) => {
+      const headings = section.querySelectorAll('.icon-row__heading');
+
+      if (headings.length === 0) return;
+
+      // Reset heights first
+      headings.forEach((heading) => {
+        heading.style.height = '';
+      });
+
+      // Get the tallest heading
+      let maxHeight = 0;
+      headings.forEach((heading) => {
+        const height = heading.offsetHeight;
+        if (height > maxHeight) {
+          maxHeight = height;
+        }
+      });
+
+      // Apply max height to all headings in this section
+      headings.forEach((heading) => {
+        heading.style.height = maxHeight + 'px';
+      });
+    });
+  }
+
+  // Run on load
+  equalizeIconRowHeadings();
+
+  // Run on resize (debounced)
+  let resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(equalizeIconRowHeadings, 250);
+  });
+});

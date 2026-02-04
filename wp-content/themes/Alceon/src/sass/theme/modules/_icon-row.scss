@@ -4,16 +4,13 @@
   }
 
   &__text.mb-0 {
-
-    @media (min-width:500px) {
-       max-width: 290px;
+    @media (min-width: 500px) {
+      max-width: 290px;
     }
-   
-}
+  }
 
   img {
-    height:75px;
-    width:auto;
+    height: 75px;
+    width: auto;
   }
-  
 }
