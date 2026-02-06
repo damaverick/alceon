@@ -219,6 +219,13 @@
       min-height: rem(300);
     }
 
+    // Mobile banner image switcher
+    &.has-mobile-banner {
+      @media (max-width: 600px) {
+        background-image: var(--banner-mobile) !important;
+      }
+    }
+
     // Modifier for group photos - shows entire image without cropping
     &.preserve-full-image {
       background-size: contain;
@@ -269,6 +276,11 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
   min-height: $vbv-hero-min-height;
   overflow: hidden;
   isolation: isolate;
+  background-color: #000; // Prevent white gaps
+
+  @media (max-width: 500px) {
+    min-height: 40rem !important;
+  }
 
   // fallback still image
   background-size: cover;
@@ -281,6 +293,33 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
     left: 50% !important;
     margin-left: -50vw;
     margin-right: -50vw;
+  }
+
+  // Mobile height variants (desktop stays at 70vh)
+  &--mobile-standard {
+    @media (max-width: 500px) {
+      min-height: 40rem !important;
+    }
+  }
+
+  &--mobile-compact {
+    @media (max-width: 991px) {
+      min-height: 25rem !important;
+    }
+  }
+
+  &--mobile-medium {
+    @media (max-width: 991px) {
+      min-height: 30rem !important;
+    }
+  }
+
+  &--mobile-auto {
+    @media (max-width: 991px) {
+      min-height: auto !important;
+      height: auto !important;
+      aspect-ratio: 16 / 9;
+    }
   }
 
   :where(iframe, div, noscript) {
@@ -325,6 +364,21 @@ $vbv-overlay-color: rgba(0, 0, 0, 0.25) !default;
     display: block;
     border: 0;
     z-index: 0;
+
+    // Scale iframe on smaller screens for reduced-height variants
+    @media (max-width: 991px) {
+      .vbv-hero--mobile-compact &,
+      .vbv-hero--mobile-medium &,
+      .vbv-hero--mobile-auto & {
+        top: 0;
+        left: 0;
+        transform: none;
+        min-height: 0;
+        min-width: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 
   &__overlay {
@@ -385,7 +439,7 @@ header#wrapper-navbar .nav-wrapper {
     left: 0;
     right: 0;
     padding: 2rem 0;
-    transition: all .5s;
+    transition: all 0.5s;
     // No background on initial load - transparent
   }
 }

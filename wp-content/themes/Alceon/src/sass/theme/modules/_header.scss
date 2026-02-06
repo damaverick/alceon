@@ -2,12 +2,14 @@
 .site-logo {
   position: relative;
   display: block;
-  width: rem(100); /* Adjust to match your real logo width */
+  width: rem(90); /* Adjust to match your real logo width */
   height: auto;
 
   @media (min-width:400px) {
     width: rem(140); /* Adjust to match your real logo width */
   }
+
+ 
 
   @media (max-width: 992px) {
     padding-top: 0;

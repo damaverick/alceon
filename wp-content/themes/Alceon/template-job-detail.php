@@ -239,6 +239,11 @@ if (!empty($job['created_at'])) {
                             View All Jobs
                         </a>
                     </div>
+                    <div class="mt-3" style="text-align:left;">
+                  <p style="font-size: .875rem; text-align: left;">     Your information will be kept private and used in accordance with our  <a  href="<?php echo esc_url(get_bloginfo('url') . '/terms/#privacy-policy'); ?>"  class="text-decoration-none" style="font-size: .875rem; text-align: right;">
+                            Privacy Policy
+                        </a></p>
+                    </div>
                 </div>
             </div>
             

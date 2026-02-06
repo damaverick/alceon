@@ -1,6 +1,7 @@
 <?php
 // Get ACF fields
 $banner_url = get_field('header_image');
+$banner_mobile_url = get_field('header_image_mobile');
 $hero_bg_image = get_field('hero_bg_image');
 $hero_bg_mobile_image = get_field('hero_bg_mobile_image');
 $hero_paragraph = get_field('hero_paragraph');
@@ -77,8 +78,22 @@ if ($hero_bg_image && !is_singular('post')) {
 <?php if ($banner_url) :
     $preserve_full = get_field('preserve_full_banner_image'); // ACF true/false field
     $section_class = $preserve_full ? 'image-section image-section--half preserve-full-image' : 'image-section image-section--half';
+
+    // Add class if mobile image exists
+    if ($banner_mobile_url) {
+        $section_class .= ' has-mobile-banner';
+    }
+
+    // Build inline style with CSS custom properties for responsive images
+    $banner_style = '';
+    if (!is_singular('post')) {
+        $banner_style = 'background-image:url(\'' . esc_url($banner_url) . '\')';
+        if ($banner_mobile_url) {
+            $banner_style .= '; --banner-desktop: url(\'' . esc_url($banner_url) . '\'); --banner-mobile: url(\'' . esc_url($banner_mobile_url) . '\')';
+        }
+    }
     ?>
-    <section class="<?php echo esc_attr($section_class); ?>" aria-hidden="true" <?php echo is_singular('post') ? '' : 'style="background-image:url(\'' . esc_url($banner_url) . '\')" data-aos="blur-in" data-aos-duration="1500"'; ?>>
+    <section class="<?php echo esc_attr($section_class); ?>" aria-hidden="true" <?php echo is_singular('post') ? '' : 'style="' . $banner_style . '" data-aos="blur-in" data-aos-duration="1500"'; ?>>
         <?php if (is_singular('post')) : ?>
             <div class="image-section__background" style="background-image:url('<?php echo esc_url($banner_url); ?>')"></div>
         <?php endif; ?>

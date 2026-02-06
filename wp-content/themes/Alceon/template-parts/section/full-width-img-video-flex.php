@@ -15,6 +15,9 @@ $img_array  = get_sub_field('full_width_image'); // Array
 $video_url  = get_sub_field('full_width_video');
 $img_poster = get_sub_field('full_width_video_poster_image'); // Array
 
+// Get mobile height option (default to 'standard' if not set)
+$mobile_height = get_sub_field('mobile_video_height') ?: 'standard';
+
 // 2. Resolve URLs
 $bg_url     = $img_array['url'] ?? '';
 $poster_url = $img_poster['url'] ?? $bg_url;
@@ -36,7 +39,7 @@ if ($is_video && $video_url) {
 
 <?php if ($is_video) : ?>
     
-    <section class="vbv-hero vbv-hero--bleed" aria-hidden="true" <?php if (!empty($anchor_id)) {
+    <section class="vbv-hero vbv-hero--bleed vbv-hero--mobile-<?php echo esc_attr($mobile_height); ?>" aria-hidden="true" <?php if (!empty($anchor_id)) {
         echo 'id="' . esc_attr($anchor_id) . '"';
     } ?>>
         <div class="vbv-hero__media">

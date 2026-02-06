@@ -45,7 +45,7 @@
                   <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/img/logo.svg'); ?>" alt="<?php bloginfo('name'); ?>" class="logo-img">
               </a>
               <div class="d-flex align-items-center">
-                  <a href="https://dynamo.dynamosoftware.com/tenant/dynamo3.netagesolutions.com/alceon/RE-Portal" target="_blank" class="btn btn-outline-primary rounded-pill me-3">Investor Login</a>
+                  <a href="https://dynamo.dynamosoftware.com/tenant/dynamo3.netagesolutions.com/alceon/RE-Portal" target="_blank" class="btn btn-outline-primary rounded-pill me-2">Investor Login</a>
                   <button type="button" class="btn-close" data-bs-toggle="collapse" data-bs-target="#mobileCollapseMenu" aria-label="Close"></button>
               </div>
           </div>

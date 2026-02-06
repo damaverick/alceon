@@ -91,7 +91,7 @@ CUSTOM NAVBAR BREAKPOINTS
     border: 2px solid $brightBlue !important;
     background-color: $brightBlue !important;
     font-weight: 600;
-    font-size: rem(14);
+    font-size: rem(13);
     text-transform: uppercase;
   }
 
@@ -132,6 +132,7 @@ CUSTOM NAVBAR BREAKPOINTS
     // This replaces the inline style and applies your padding
     min-height: 100vh;
     padding-top: 0; // Your rem(50) top padding
+        --bs-gutter-x: 35px;
     // padding-left: 2rem; // Your 2rem left padding
     // padding-right: 2rem; // Your 2rem right padding
   }
