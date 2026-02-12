@@ -90,11 +90,11 @@ if (is_array($image) && !empty($image['url'])) {
         <div class="modal-content" style="overflow:hidden;">
             <div class="modal-body p-0">
                 <div class="row g-0">
-                    <div class="col-12 col-md-6"
+                    <div class="col-12 col-lg-6"
                         style="padding:0; background-size:cover; background-position:center; background-repeat:no-repeat; min-height:300px;
                             <?php if ($image_url) : ?>background-image:url('<?php echo esc_url($image_url); ?>');<?php endif; ?>">
                     </div>
-                    <div class="col-12 col-md-6 model-text-content p-4 p-md-5">
+                    <div class="col-12 col-lg-6 model-text-content p-4 p-md-5">
                         <button type="button" class="btn btn-light btn-outline-white" data-bs-dismiss="modal" style="position:absolute;">Close</button>
                         <div style="margin-top:1.5rem;">
                             <?php if ($name) : ?>

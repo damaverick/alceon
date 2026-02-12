@@ -154,7 +154,7 @@
   // overflow:visible;
 
   @media (max-width: 991px) {
-    min-height: 75vh;
+    min-height: 90vh;
   }
 
   @media (min-width: 992px) {
@@ -189,8 +189,8 @@
     // top: rem(-250);
     @media (max-width: 991px) {
       // top: -190px;
-      margin-top: auto;
-      margin-bottom: 9rem;
+           margin-top: auto;
+        margin-bottom: auto;
     }
   }
 
