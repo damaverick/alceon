@@ -23,8 +23,12 @@
     position: absolute;
     inset: 0; /* top:0, right:0, bottom:0, left:0 */
     background: url('../img/lines.svg') center/cover no-repeat;
-    opacity: 0.65; /* control visibility of SVG lines */
+    opacity: 0.55; /* control visibility of SVG lines */
     z-index: 0; /* stays behind content */
+
+    @media (max-width:991px) {
+        opacity:.2
+    }
   }
 
   /* Ensure content stays above both layers */

@@ -778,3 +778,25 @@ add_action('acf/save_post', function ($post_id) {
         error_log('ACF save_post fired for post ID: ' . $post_id);
     }
 }, 20);
+
+/*
+ * Prevent Redirection plugin from logging 404s for source files
+ */
+add_filter('redirection_log_404', function ($log, $url = '', $path = '') {
+    // List of file extensions to ignore
+    $ignored_extensions = ['.scss', '.sass', '.map', '.ts', '.jsx', '.tsx', '.less'];
+
+    // Check if the URL ends with any of these extensions
+    foreach ($ignored_extensions as $ext) {
+        if (substr($path, -strlen($ext)) === $ext) {
+            return false; // Don't log this 404
+        }
+    }
+
+    // Also ignore anything in /src/ directories (common for source files)
+    if (strpos($path, '/src/') !== false) {
+        return false;
+    }
+
+    return $log; // Log other 404s normally
+}, 10, 3);

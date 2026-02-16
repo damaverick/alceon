@@ -686,6 +686,10 @@ document.addEventListener('DOMContentLoaded', function () {
 // ========================================================================
 document.addEventListener('DOMContentLoaded', function () {
   function equalizeIconRowHeadings() {
+    // Check if icon rows exist on this page
+    const iconRowSections = document.querySelectorAll('.icon-row');
+    if (iconRowSections.length === 0) return;
+
     // Only run on screens 992px and above
     if (window.innerWidth < 992) {
       // Reset heights on mobile
@@ -694,9 +698,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       return;
     }
-
-    // Get all icon row sections
-    const iconRowSections = document.querySelectorAll('.icon-row');
 
     iconRowSections.forEach((section) => {
       const headings = section.querySelectorAll('.icon-row__heading');

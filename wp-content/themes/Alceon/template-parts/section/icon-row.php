@@ -83,7 +83,7 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-start text-sm-center tex
             <?php endif; ?>
 
             <?php if ($icon_heading): ?>
-              <h4 class="icon-row__heading mb-1">
+              <h4 class="icon-row__heading mb-2">
                 <?php echo wp_kses_post($icon_heading); ?>
               </h4>
             <?php endif; ?>

@@ -150,7 +150,7 @@ $container = get_theme_mod('understrap_container_type');
           <div class="row align-items-center" >
             <div class="col-12 col-md-6">
               <p class="site-footer__copyright mb-0">
-                Copyright © <?php echo esc_html(date('Y')); ?> Alceon AFS License No: 345692
+               <?php echo get_field('copyright_text', 'option'); ?>
               </p>
             </div>
             <div class="col-12 col-md-6 text-md-end mt-2 mt-md-0">

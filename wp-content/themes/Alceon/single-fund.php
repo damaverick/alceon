@@ -17,33 +17,57 @@ $container = get_theme_mod('understrap_container_type');
   <div class="container">
 
     <?php if (have_rows('statistics')) : ?>
+      <?php
+        // --- Count the actual number of statistics items ---
+        $column_count = count(get_field('statistics'));
+
+        // --- Set the Bootstrap class based on the count ---
+        $md_class = '';
+        $lg_class = '';
+        if ($column_count == 2) {
+            $md_class = 'col-md-6';
+            $lg_class = 'col-lg-6';
+        } elseif ($column_count == 3) {
+            $md_class = 'col-md-4';
+            $lg_class = 'col-lg-4';
+        } elseif ($column_count == 5) {
+            $md_class = 'col-md-6';
+            $lg_class = 'col-lg-5th';
+        } else {
+            // Default for 4 or any other count
+            $md_class = 'col-md-3';
+            $lg_class = 'col-lg-3';
+        }
+
+$column_class = 'col-12 ' . $md_class . ' ' . $lg_class;
+?>
       <div class="row g-lg-5 justify-content-start">
 
         <?php
-        $stat_idx = 0; // Initialize counter for stagger
+  $stat_idx = 0; // Initialize counter for stagger
 
-        while (have_rows('statistics')) : the_row();
-            $statistic = get_sub_field('statistic');
-            $supporting_text = get_sub_field('supporting_text');
-            $aos_delay = $stat_idx * 100;
+while (have_rows('statistics')) : the_row();
+    $statistic = get_sub_field('statistic');
+    $supporting_text = get_sub_field('supporting_text');
+    $aos_delay = $stat_idx * 100;
 
-            // --- 1. PARSING LOGIC (Copied & Improved) ---
-            // Regex to split: Prefix | Number | Suffix
-            preg_match('/^([^\d]*)([\d\.]+)([^\d]*)$/', $statistic, $matches);
+    // --- 1. PARSING LOGIC (Copied & Improved) ---
+    // Regex to split: Prefix | Number | Suffix
+    preg_match('/^([^\d]*)([\d\.]+)([^\d]*)$/', $statistic, $matches);
 
-            $prefix = isset($matches[1]) ? $matches[1] : '';
-            $number = isset($matches[2]) ? $matches[2] : 0;
-            $suffix = isset($matches[3]) ? $matches[3] : '';
+    $prefix = isset($matches[1]) ? $matches[1] : '';
+    $number = isset($matches[2]) ? $matches[2] : 0;
+    $suffix = isset($matches[3]) ? $matches[3] : '';
 
-            // Calculate decimals based on the actual length of the string after the dot
-            // This ensures "10.30" gets 2 decimals, while "5" gets 0.
-            $decimals = 0;
-            if (strpos($number, '.') !== false) {
-                $decimals = strlen(substr(strrchr($number, '.'), 1));
-            }
-            ?>
+    // Calculate decimals based on the actual length of the string after the dot
+    // This ensures "10.30" gets 2 decimals, while "5" gets 0.
+    $decimals = 0;
+    if (strpos($number, '.') !== false) {
+        $decimals = strlen(substr(strrchr($number, '.'), 1));
+    }
+    ?>
 
-          <div class="col-12 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="<?php echo intval($aos_delay); ?>">
+          <div class="<?php echo esc_attr($column_class); ?>" data-aos="fade-up" data-aos-delay="<?php echo intval($aos_delay); ?>">
 
             <div class="stat-item">
               <?php if ($statistic) : ?>
@@ -62,9 +86,9 @@ $container = get_theme_mod('understrap_container_type');
           </div>
 
         <?php
-              $stat_idx++;
-        endwhile;
-        ?>
+      $stat_idx++;
+endwhile;
+?>
 
       </div>
     <?php endif; ?>
@@ -74,11 +98,11 @@ $container = get_theme_mod('understrap_container_type');
 
       <div class="col-lg-7 section-feature--overlap-bottom__img-wrap pb-4 pb-lg-0">
         <?php
-        if (has_post_thumbnail()) :
-            the_post_thumbnail('full', [
-                'class' => 'img-fluid section-feature__image', 'data-aos' => 'fade-right',
-            ]);
-        endif;
+if (has_post_thumbnail()) :
+    the_post_thumbnail('full', [
+        'class' => 'img-fluid section-feature__image', 'data-aos' => 'fade-right',
+    ]);
+endif;
 ?>
       </div>
 
