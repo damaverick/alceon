@@ -69,23 +69,26 @@ if ($is_video && $video_url) {
     
     <?php if ($fallback_desktop) : ?>
         <style>
-            #<?php echo esc_attr($unique_id); ?> {
+            #vbv1 {
                 background-image: url('<?php echo esc_url($fallback_desktop); ?>');
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
             }
             @media (max-width: 767px) {
-                #<?php echo esc_attr($unique_id); ?> {
+                #vbv1 {
                     background-image: url('<?php echo esc_url($fallback_mobile); ?>') !important;
                 }
             }
         </style>
     <?php endif; ?>
 
-    <div id="<?php echo esc_attr($unique_id); ?>" class="vbv-hero vbv-hero--bleed" aria-hidden="true">
+    <div id="vbv1" class="vbv-hero vbv-hero--bleed" aria-hidden="true">
         <div class="vbv-hero__media">
             <?php if ($is_video && $vimeo_src) : ?>
+                <?php if ($fallback_desktop) : ?>
+                    <div class="vbv-hero__poster" style="background-image:url('<?php echo esc_url($fallback_desktop); ?>');"></div>
+                <?php endif; ?>
                 <iframe class="vbv-hero__iframe js-vbv-hero-iframe"
                         src="<?php echo esc_url($vimeo_src); ?>"
                         title="Background video"

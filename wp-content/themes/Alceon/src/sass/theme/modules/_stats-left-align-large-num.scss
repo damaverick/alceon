@@ -2,6 +2,11 @@
   background: linear-gradient(135deg, #00457c 0%, #155cd5 50%, #0a2e5a 100%);
   color: #fff;
 
+  @media (max-width:480px) {
+  background: linear-gradient(135deg, #00457c 0%, #114baf 50%, #0a2e5a 100%);
+    padding-bottom: 0!Important;
+  }
+
   .stat-item {
     text-align: left;
     color: #fff;

@@ -47,6 +47,9 @@ function theme_enqueue_styles()
     wp_enqueue_style('bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', [], '1.11.3');
     wp_enqueue_style('alceon-google-fonts', 'https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap', [], null);
 
+    // Mark Bootstrap Icons as non-critical for PageSpeed optimization
+    wp_style_add_data('bootstrap-icons', 'defer', true);
+
     // --- SCRIPTS ---
 
     // jQuery & Child Theme JS
@@ -127,6 +130,32 @@ function theme_enqueue_styles()
     }
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
+
+/**
+ * Add resource hints for external domains to improve loading performance.
+ */
+function add_resource_hints($urls, $relation_type)
+{
+    if ('preconnect' === $relation_type) {
+        // Preconnect to critical third-party domains
+        $urls[] = array(
+            'href' => 'https://fonts.gstatic.com',
+            'crossorigin' => 'anonymous',
+        );
+        $urls[] = 'https://player.vimeo.com';
+    }
+
+    if ('dns-prefetch' === $relation_type) {
+        // DNS prefetch for other external resources
+        $urls[] = 'https://cdn.jsdelivr.net';
+        $urls[] = 'https://unpkg.com';
+        $urls[] = 'https://cdnjs.cloudflare.com';
+        $urls[] = 'https://www.googletagmanager.com';
+    }
+
+    return $urls;
+}
+add_filter('wp_resource_hints', 'add_resource_hints', 10, 2);
 
 /**
  * 3. Google Fonts Preconnect.
@@ -587,15 +616,16 @@ add_action('acf/init', function () {
  */
 function enqueue_aos_scripts()
 {
-    // 1. Load AOS CSS
+    // 1. Load AOS CSS - Non-critical, defer loading
     wp_enqueue_style(
         'aos-css',
         'https://unpkg.com/aos@2.3.1/dist/aos.css',
         array(),
         '2.3.1'
     );
+    wp_style_add_data('aos-css', 'defer', true);
 
-    // 2. Load AOS JS
+    // 2. Load AOS JS - Already in footer
     wp_enqueue_script(
         'aos-js',
         'https://unpkg.com/aos@2.3.1/dist/aos.js',
@@ -800,3 +830,48 @@ add_filter('redirection_log_404', function ($log, $url = '', $path = '') {
 
     return $log; // Log other 404s normally
 }, 10, 3);
+
+/*
+ * Add fetchpriority="high" to hero images for LCP optimization
+ */
+add_filter('wp_get_attachment_image_attributes', function ($attr, $attachment, $size) {
+    // Only add to large images (likely hero images)
+    if (in_array($size, ['full', 'large', '2048x2048'])) {
+        $attr['fetchpriority'] = 'high';
+    }
+
+    return $attr;
+}, 10, 3);
+
+/**
+ * Remove unnecessary WordPress features for performance.
+ */
+function remove_wp_bloat()
+{
+    // Remove emoji scripts and styles
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_print_styles', 'print_emoji_styles');
+
+    // Remove WordPress version number for security
+    remove_action('wp_head', 'wp_generator');
+
+    // Remove Windows Live Writer manifest
+    remove_action('wp_head', 'wlwmanifest_link');
+
+    // Remove Really Simple Discovery link
+    remove_action('wp_head', 'rsd_link');
+
+    // Remove shortlink
+    remove_action('wp_head', 'wp_shortlink_wp_head');
+}
+add_action('init', 'remove_wp_bloat');
+
+/**
+ * Disable embeds for performance (if not needed).
+ */
+function disable_embeds()
+{
+    // Remove embed script
+    wp_deregister_script('wp-embed');
+}
+add_action('wp_footer', 'disable_embeds');

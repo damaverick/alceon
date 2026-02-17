@@ -142,9 +142,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 (function () {
   function initVBVBackgroundVideos() {
-    // 1. Safety check
+    // 1. Safety check - Wait for Vimeo API if not yet loaded
     if (typeof Vimeo === 'undefined') {
-      console.error('Vimeo API is missing.');
+      console.log('VBV: Waiting for Vimeo API to load...');
+      // Retry every 100ms for up to 10 seconds
+      var retries = 0;
+      var maxRetries = 100;
+      var checkVimeo = setInterval(function () {
+        retries++;
+        if (typeof Vimeo !== 'undefined') {
+          clearInterval(checkVimeo);
+          console.log('VBV: Vimeo API loaded, initializing videos');
+          initVBVBackgroundVideos();
+        } else if (retries >= maxRetries) {
+          clearInterval(checkVimeo);
+          console.error('VBV: Vimeo API failed to load after 10 seconds');
+        }
+      }, 100);
       return;
     }
 
@@ -160,42 +174,140 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const player = new Vimeo.Player(iframe);
-
-      // helper – make sure we only do this once
-      function markLoaded() {
-        if (!media.classList.contains('video-loaded')) {
-          media.classList.add('video-loaded');
-          console.log('VBV: hero', index, 'marked as video-loaded');
+      // Helper function to initialize the player
+      function initPlayer() {
+        // Check if iframe has a valid src (not about:blank)
+        const currentSrc = iframe.getAttribute('src');
+        if (!currentSrc || currentSrc === 'about:blank') {
+          // Check if there's a data-lazy-src attribute
+          const lazySrc = iframe.getAttribute('data-lazy-src');
+          if (lazySrc) {
+            console.log(
+              'VBV: Setting iframe src from data-lazy-src for hero',
+              index,
+            );
+            iframe.setAttribute('src', lazySrc);
+            iframe.removeAttribute('data-lazy-src');
+          } else {
+            console.warn(
+              'VBV: hero',
+              index,
+              'has invalid src and no data-lazy-src',
+            );
+            return;
+          }
         }
+
+        const player = new Vimeo.Player(iframe);
+
+        // Track if video actually played successfully
+        let videoPlaying = false;
+
+        // helper – make sure we only do this once
+        function markLoaded() {
+          if (!media.classList.contains('video-loaded')) {
+            media.classList.add('video-loaded');
+            console.log('VBV: hero', index, 'marked as video-loaded');
+          }
+        }
+
+        // Listen for Vimeo errors - keep poster visible if video fails
+        player.on('error', function (err) {
+          console.warn('VBV: Vimeo error for hero', index, err);
+          // Don't mark as loaded - keep poster image visible
+          clearInterval(checkPlayStatus);
+        });
+
+        // Poll every 250ms until the video time advances
+        const checkPlayStatus = setInterval(function () {
+          player
+            .getCurrentTime()
+            .then(function (seconds) {
+              if (seconds > 0.1) {
+                videoPlaying = true;
+                markLoaded();
+                clearInterval(checkPlayStatus);
+              }
+            })
+            .catch(function () {
+              // Ignore until the player is ready
+            });
+        }, 250);
+
+        // Safety fallback after 6s - only hide poster if video is actually playing
+        setTimeout(function () {
+          clearInterval(checkPlayStatus);
+          if (videoPlaying) {
+            markLoaded();
+          } else {
+            // Video didn't play (bot, blocked, etc.) - check one more time
+            player
+              .getCurrentTime()
+              .then(function (seconds) {
+                if (seconds > 0) {
+                  markLoaded();
+                } else {
+                  console.log(
+                    'VBV: hero',
+                    index,
+                    'video not playing, keeping poster visible',
+                  );
+                }
+              })
+              .catch(function () {
+                console.log(
+                  'VBV: hero',
+                  index,
+                  'video failed, keeping poster visible',
+                );
+              });
+          }
+        }, 6000);
+
+        // Force mute + play (required for autoplay in most browsers)
+        player.setVolume(0);
+        player.play().catch(function (err) {
+          console.warn('VBV: autoplay blocked for hero', index, err);
+        });
       }
 
-      // Poll every 250ms until the video time advances
-      const checkPlayStatus = setInterval(function () {
-        player
-          .getCurrentTime()
-          .then(function (seconds) {
-            if (seconds > 0.1) {
-              markLoaded();
-              clearInterval(checkPlayStatus);
+      // Check if iframe is already loaded or wait for LazyLoad
+      if (
+        iframe.classList.contains('lazyloaded') ||
+        (!iframe.hasAttribute('data-lazy-src') &&
+          iframe.getAttribute('src') !== 'about:blank')
+      ) {
+        // Already loaded, init immediately
+        initPlayer();
+      } else {
+        // Wait for LazyLoad to complete
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (
+              mutation.type === 'attributes' &&
+              (mutation.attributeName === 'src' ||
+                mutation.attributeName === 'class')
+            ) {
+              const currentSrc = iframe.getAttribute('src');
+              if (currentSrc && currentSrc !== 'about:blank') {
+                observer.disconnect();
+                initPlayer();
+              }
             }
-          })
-          .catch(function () {
-            // Ignore until the player is ready
           });
-      }, 250);
+        });
 
-      // Safety fallback after 6s
-      setTimeout(function () {
-        markLoaded();
-        clearInterval(checkPlayStatus);
-      }, 6000);
+        observer.observe(iframe, {
+          attributes: true,
+          attributeFilter: ['src', 'class'],
+        });
 
-      // Force mute + play (required for autoplay in most browsers)
-      player.setVolume(0);
-      player.play().catch(function (err) {
-        console.warn('VBV: autoplay blocked for hero', index, err);
-      });
+        // Fallback: If LazyLoad hasn't triggered after 2 seconds, force initialization
+        setTimeout(function () {
+          observer.disconnect();
+          initPlayer();
+        }, 2000);
+      }
     });
   }
 
@@ -206,6 +318,15 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     initVBVBackgroundVideos();
   }
+
+  // Also listen for WP Rocket's LazyLoad callback in case videos are lazy loaded
+  window.addEventListener('LazyLoad::Initialized', function (e) {
+    var lazyLoadInstance = e.detail.instance;
+    if (lazyLoadInstance) {
+      // Re-initialize videos when LazyLoad completes
+      setTimeout(initVBVBackgroundVideos, 500);
+    }
+  });
 })();
 
 // ========================================================================

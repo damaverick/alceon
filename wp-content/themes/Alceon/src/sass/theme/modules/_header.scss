@@ -5,15 +5,14 @@
   width: rem(90); /* Adjust to match your real logo width */
   height: auto;
 
-  @media (min-width:400px) {
+  @media (min-width: 400px) {
     width: rem(140); /* Adjust to match your real logo width */
   }
-
- 
 
   @media (max-width: 992px) {
     padding-top: 0;
     padding-bottom: 0;
+    width: 5.75rem;
   }
 }
 
@@ -189,8 +188,8 @@
     // top: rem(-250);
     @media (max-width: 991px) {
       // top: -190px;
-           margin-top: auto;
-        margin-bottom: auto;
+      margin-top: auto;
+      margin-bottom: auto;
     }
   }
 
@@ -211,7 +210,7 @@
     visibility: hidden;
 
     @media (max-width: 991px) {
-      font-size: rem(26);
+      font-size: rem(26) !important;
       line-height: 1.1;
     }
   }
