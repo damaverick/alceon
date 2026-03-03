@@ -616,6 +616,11 @@ add_action('acf/init', function () {
  */
 function enqueue_aos_scripts()
 {
+    // Don't load animation libraries on 404 pages
+    if (is_404()) {
+        return;
+    }
+
     // 1. Load AOS CSS - Non-critical, defer loading
     wp_enqueue_style(
         'aos-css',
@@ -663,6 +668,11 @@ add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
 
 function enqueue_gsap_assets()
 {
+    // Don't load animation libraries on 404 pages
+    if (is_404()) {
+        return;
+    }
+
     // 1. Load GSAP Core
     wp_enqueue_script(
         'gsap-js',
@@ -728,6 +738,11 @@ function add_wpcb_to_admin_bar($admin_bar)
 
 function my_theme_enqueue_owl_carousel()
 {
+    // Don't load carousel on 404 pages
+    if (is_404()) {
+        return;
+    }
+
     // 1. Enqueue Owl Carousel CSS (CDN)
     wp_enqueue_style('owl-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', [], '2.3.4');
     wp_enqueue_style('owl-theme', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css', [], '2.3.4');
@@ -756,6 +771,11 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_owl_carousel');
 
 function my_theme_enqueue_media_assets()
 {
+    // Don't load media assets on 404 pages
+    if (is_404()) {
+        return;
+    }
+
     // 1. Enqueue CSS (GLightbox + Magnific Popup)
     // Note: Owl Carousel CSS is likely already loaded by your previous function.
     wp_enqueue_style('glightbox-css', 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css', [], '1.0');
@@ -808,28 +828,6 @@ add_action('acf/save_post', function ($post_id) {
         error_log('ACF save_post fired for post ID: ' . $post_id);
     }
 }, 20);
-
-/*
- * Prevent Redirection plugin from logging 404s for source files
- */
-add_filter('redirection_log_404', function ($log, $url = '', $path = '') {
-    // List of file extensions to ignore
-    $ignored_extensions = ['.scss', '.sass', '.map', '.ts', '.jsx', '.tsx', '.less'];
-
-    // Check if the URL ends with any of these extensions
-    foreach ($ignored_extensions as $ext) {
-        if (substr($path, -strlen($ext)) === $ext) {
-            return false; // Don't log this 404
-        }
-    }
-
-    // Also ignore anything in /src/ directories (common for source files)
-    if (strpos($path, '/src/') !== false) {
-        return false;
-    }
-
-    return $log; // Log other 404s normally
-}, 10, 3);
 
 /*
  * Add fetchpriority="high" to hero images for LCP optimization

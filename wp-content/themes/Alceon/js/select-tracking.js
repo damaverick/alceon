@@ -31,7 +31,7 @@
           '🎯 User Type Selected:',
           selectedText,
           '| Value:',
-          selectedValue
+          selectedValue,
         );
 
         // Push to dataLayer for GTM
@@ -62,7 +62,7 @@
           '🎯 User Interest Selected:',
           selectedText,
           '| URL:',
-          selectedUrl
+          selectedUrl,
         );
 
         // Push to dataLayer for GTM

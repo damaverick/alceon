@@ -42,21 +42,24 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-center text-lg-start';
           $stat_index = 0;
 
           while (have_rows('statistic_item')) : the_row();
-              $stat_text = get_sub_field('statistic'); // e.g. "$1.5B"
-              $description = get_sub_field('statistic_text');
+              $stat_text = do_shortcode(get_sub_field('statistic')); // e.g. "$1.5B" or [stat key="..."]
+              $description = do_shortcode(get_sub_field('statistic_text')); // Also supports shortcodes
               $aos_delay = $stat_index * 100;
 
               // --- ROBUST PARSING ---
               // Split the string into: Prefix (non-digits), Number, Suffix (non-digits)
-              // Example: "$1.5B" -> Prefix: "$", Num: "1.5", Suffix: "B"
-              preg_match('/^([^\d]*)([\d\.]+)([^\d]*)$/', $stat_text, $matches);
+              // Handles: "A$5.5b", "A$13.2 billion", "80+", "16.70%", "40 years", "4.25 Stars"
+              preg_match('/^([^\d]*)([\d\.]+)(.*)$/', $stat_text, $matches);
 
               $prefix = isset($matches[1]) ? $matches[1] : '';
               $number = isset($matches[2]) ? $matches[2] : 0;
               $suffix = isset($matches[3]) ? $matches[3] : '';
 
-              // Determine decimals (if dot exists)
-              $decimals = (strpos($number, '.') !== false) ? 1 : 0;
+              // Determine decimal places from the actual value
+              $decimals = 0;
+              if (strpos($number, '.') !== false) {
+                  $decimals = strlen(substr(strrchr($number, '.'), 1));
+              }
               ?>
 
           <div class="<?php echo esc_attr($column_class); ?>" 
