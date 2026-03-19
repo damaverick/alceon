@@ -67,7 +67,7 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-center text-lg-start';
                data-aos-delay="<?php echo intval($aos_delay); ?>">
                
             <div class="stat-item">
-              <?php if ($stat_text): ?>
+              <?php if ($stat_text !== ''): ?>
                 <h2 class="stat-number js-counter" 
                     data-target="<?php echo esc_attr($number); ?>" 
                     data-decimals="<?php echo esc_attr($decimals); ?>"
@@ -95,7 +95,7 @@ $column_class = 'col-12 col-sm-6 ' . $lg_class . ' text-center text-lg-start';
 
     <?php if (get_sub_field('icon_row_subtext')): ?>
       <p class="mt-5 footnotes" data-aos="fade-up" data-aos-delay="200">
-          <?php echo get_sub_field('icon_row_subtext'); ?>
+          <?php echo do_shortcode(get_sub_field('icon_row_subtext')); ?>
       </p>
     <?php endif; ?>
   </div>

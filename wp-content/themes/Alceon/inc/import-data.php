@@ -36,7 +36,13 @@ function import_file_shortcode($atts)
             $url_file = 'https://www.dropbox.com/scl/fi/47hyhpvpwiwiv8fiml4tg/Alceon-Real-Estate-Website-Date-File-AAPF-ADIF_NEW.csv?rlkey=am43l97dqnc0f0cjop9gp1le9&e=1&st=13tbjsdu&dl=1';
 
             /* $rows = migrateCSV(fopen($url_file, 'r'), $file['filename']); */
-            $rows = migrateCSV(fopen($url_file, 'r'));
+            $csv_data = alc_fetch_csv($url_file);
+            if ($csv_data === false) {
+                error_log('CSV Import FAILED: Could not fetch CSV from Dropbox (full)');
+
+                return;
+            }
+            $rows = migrateCSV($csv_data);
 
             // Temporary debug: log total rows and key facts rows
             error_log('CSV Import: Total rows = ' . count($rows));
@@ -116,6 +122,9 @@ function import_file_shortcode($atts)
                 'keyfact_staff_owned_text' => $rows[34][1],
                 'keyfact_sqm_rating' => alc_abbreviate_large_numbers($rows[35][0]),
                 'keyfact_sqm_rating_text' => $rows[35][1],
+
+                // Timestamp of when the CSV was last imported
+                'keyfact_date' => time(),
             );
 
             foreach ($data as $key => $value) {
@@ -128,7 +137,13 @@ function import_file_shortcode($atts)
             //$url_file = get_attached_file($file['ID']);
             $url_file = 'https://www.dropbox.com/scl/fi/vvidti92pmk2600r1hsyt/Alceon-Real-Estate-Website-Date-File-AAPF-ADIF.csv?rlkey=74gbe0e8fuhd5wa8p4a2tugaf&dl=1';
 
-            $rows = migrateCSV(fopen($url_file, 'r'), $file['filename']);
+            $csv_data = alc_fetch_csv($url_file);
+            if ($csv_data === false) {
+                error_log('CSV Import FAILED: Could not fetch CSV from Dropbox (debt-income)');
+
+                return;
+            }
+            $rows = migrateCSV($csv_data);
 
             list($day, $month, $year) = explode('/', $rows[18][0]);
             $date_time = mktime(0, 0, 0, $month, $day, $year);
@@ -194,7 +209,13 @@ function import_file_shortcode($atts)
             //$url_file = 'https://www.dropbox.com/s/0md55su8m49pfbh/Alceon%20Real%20Estate%20Website%20Date%20File-AAPF%20ADIF.csv?dl=1';
             $url_file = 'https://www.dropbox.com/scl/fi/vvidti92pmk2600r1hsyt/Alceon-Real-Estate-Website-Date-File-AAPF-ADIF.csv?rlkey=74gbe0e8fuhd5wa8p4a2tugaf&dl=1';
 
-            $rows = migrateCSV(fopen($url_file, 'r'), $file['filename']);
+            $csv_data = alc_fetch_csv($url_file);
+            if ($csv_data === false) {
+                error_log('CSV Import FAILED: Could not fetch CSV from Dropbox (property)');
+
+                return;
+            }
+            $rows = migrateCSV($csv_data);
 
             list($day, $month, $year) = explode('/', $rows[1][0]);
             $date_time = mktime(0, 0, 0, $month, $day, $year);
@@ -243,14 +264,57 @@ function import_file_shortcode($atts)
     return;
 }
 
-function migrateCSV($csv, $file_name = '')
+/**
+ * Fetch a remote CSV file using wp_remote_get() (works on WP Engine & all hosts).
+ * Falls back to fopen() if wp_remote_get is unavailable.
+ *
+ * @param string $url The remote CSV URL.
+ * @return string|false The CSV body as a string, or false on failure.
+ */
+function alc_fetch_csv($url)
 {
-    //$first_row = fgetcsv($csv, 0, ',', '"');
+    // Prefer wp_remote_get — works even when allow_url_fopen is disabled
+    $response = wp_remote_get($url, [
+        'timeout'   => 60,
+        'sslverify' => false,
+    ]);
+
+    if (is_wp_error($response)) {
+        error_log('alc_fetch_csv error: ' . $response->get_error_message());
+
+        return false;
+    }
+
+    $code = wp_remote_retrieve_response_code($response);
+    if ($code !== 200) {
+        error_log('alc_fetch_csv HTTP ' . $code . ' for URL: ' . $url);
+
+        return false;
+    }
+
+    return wp_remote_retrieve_body($response);
+}
+
+/**
+ * Parse CSV data from a string into an array of rows.
+ *
+ * @param string $csv_data Raw CSV string.
+ * @return array Array of rows, each row an array of columns.
+ */
+function migrateCSV($csv_data, $file_name = '')
+{
     $result = array();
 
-    while ($row = fgetcsv($csv, 0, ',', '"')) {
+    // Open a temporary in-memory stream to parse the CSV string
+    $stream = fopen('php://temp', 'r+');
+    fwrite($stream, $csv_data);
+    rewind($stream);
+
+    while ($row = fgetcsv($stream, 0, ',', '"')) {
         $result[] = $row;
     }
+
+    fclose($stream);
 
     return $result;
 }
@@ -316,7 +380,9 @@ function getData()
 add_action('wpb_custom_cron_import_file', 'cron_import_file');
 function cron_import_file()
 {
+    error_log('CSV Cron Import: Starting import at ' . date('Y-m-d H:i:s'));
     import_file_shortcode('full');
+    error_log('CSV Cron Import: Finished import at ' . date('Y-m-d H:i:s'));
 
     return;
 }
@@ -434,13 +500,9 @@ function alc_real_estate_table_content()
 function alc_csv_debug_dump()
 {
     $url_file = 'https://www.dropbox.com/scl/fi/47hyhpvpwiwiv8fiml4tg/Alceon-Real-Estate-Website-Date-File-AAPF-ADIF_NEW.csv?rlkey=am43l97dqnc0f0cjop9gp1le9&e=1&st=13tbjsdu&dl=1';
-    $csv_handle = @fopen($url_file, 'r');
-    if ($csv_handle) {
-        $rows = [];
-        while ($row = fgetcsv($csv_handle, 0, ',', '"')) {
-            $rows[] = $row;
-        }
-        fclose($csv_handle);
+    $csv_body = alc_fetch_csv($url_file);
+    if ($csv_body !== false) {
+        $rows = migrateCSV($csv_body);
         $max_cols = 0;
         foreach ($rows as $row) {
             $max_cols = max($max_cols, count($row));
@@ -488,6 +550,19 @@ function alc_stat_callback($atts)
     $val = getField($key);
 
     return ($val === false) ? '0' : $prefix . $val;
+}
+
+// Output the keyfact import date formatted as "d F Y"
+// Usage: [stat_date] → "19 March 2026"
+add_shortcode('stat_date', 'alc_stat_date_callback');
+function alc_stat_date_callback()
+{
+    $val = getField('keyfact_date');
+    if ($val === false || empty($val)) {
+        return '';
+    }
+
+    return date('d F Y', intval($val));
 }
 
 // Calculate years in operation from an inception date passed as a shortcode parameter
